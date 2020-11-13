@@ -23,7 +23,7 @@ class HomeController extends Controller
     {
         $str = 'admin_to_operator_65';
         //substr($str, 0, strrpos($str, '_'));
-        dd(substr($str, strrpos($str, '_')+1, strlen($str)-1));
+        //dd(substr($str, strrpos($str, '_')+1, strlen($str)-1));
         return view('dashboard');
     }
 }
