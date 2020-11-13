@@ -36,7 +36,7 @@
                                 <div class="form-group">
                                     <label for="course" class="form-control-label">Курс</label>
                                     <div class="input-group">
-                                        <input name="course" class="form-control" type="number" value="{{ old('course') ?? $exchanger->course }}" id="telegram-course-input" min="0" step="1">
+                                        <input name="course" class="form-control" type="number" value="{{ old('course') ?? $exchanger->course ?? '' }}" id="telegram-course-input" min="0" step="1">
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2">руб.</span>
                                         </div>
