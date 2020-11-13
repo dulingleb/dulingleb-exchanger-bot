@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = DB::table('users')->insert([
+        $user = \http\Client\Curl\User::create([
             'name' => 'Dulin Hleb',
             'email' => 'dulingleb@gmail.com',
             'email_verified_at' => now(),
