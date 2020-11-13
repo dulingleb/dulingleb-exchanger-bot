@@ -36,7 +36,11 @@ class UserController extends Controller
         ]);
 
         Exchanger::create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'status' => \App\Models\Exchanger::STATUS_CLOSED,
+            'course' => 40000,
+            'min_exchange' => '0.001',
+            'max_exchange' => '0.1',
         ]);
 
         return redirect()->route('user.index')->with(['success' => 'Пользователь успешно добавлен']);

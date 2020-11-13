@@ -22,7 +22,11 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('exchangers')->insert([
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'status' => \App\Models\Exchanger::STATUS_CLOSED,
+            'course' => 40000,
+            'min_exchange' => '0.001',
+            'max_exchange' => '0.1',
         ]);
     }
 }
