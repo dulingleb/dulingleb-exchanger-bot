@@ -408,6 +408,10 @@ class TelegramController extends Controller
     {
         $transaction = TelegramUserSetting::getTransaction($this->exchanger->id, $this->chat_id);
         $operation = Operation::where('id', $transaction['id'])->first();
+        $this->telegram->deleteMessage([
+            'chat_id' => $this->chat_id,
+            'message_id' => $this->message_id
+        ]);
         $this->admin_messageOperation($operation);
     }
 
