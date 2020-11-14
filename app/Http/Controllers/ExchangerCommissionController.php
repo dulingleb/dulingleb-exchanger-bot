@@ -51,7 +51,7 @@ class ExchangerCommissionController extends Controller
 
     public function update(Request $request, ExchangerCommission $commission)
     {
-        $this->check();
+        $this->check($commission);
 
         $request->validate([
             'from' => ['required', 'numeric', 'min:0', function($a, $value, $fail) use ($commission) {
@@ -77,7 +77,7 @@ class ExchangerCommissionController extends Controller
 
     public function destroy(ExchangerCommission $commission)
     {
-        $this->check();
+        $this->check($commission);
 
         $commission->delete();
 
