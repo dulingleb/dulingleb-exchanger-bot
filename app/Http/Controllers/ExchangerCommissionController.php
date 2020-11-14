@@ -18,7 +18,7 @@ class ExchangerCommissionController extends Controller
         return view('commissions.create');
     }
 
-    public function store(Request $request, ExchangerCommission  $commission)
+    public function store(Request $request)
     {
         $request->validate([
             'from' => ['required', 'numeric', 'min:0', function($a, $value, $fail) {
@@ -51,6 +51,8 @@ class ExchangerCommissionController extends Controller
 
     public function update(Request $request, ExchangerCommission $commission)
     {
+        $this->check();
+
         $request->validate([
             'from' => ['required', 'numeric', 'min:0', function($a, $value, $fail) use ($commission) {
                 if (ExchangerCommission::where('from', '<=', $value)->where('to', '>', $value)->where('id', '!=', $commission->id)->exists()) {
@@ -65,11 +67,6 @@ class ExchangerCommissionController extends Controller
             'percent' => 'required|numeric|min:0|max:99'
         ]);
 
-        if ($commission->exchanger_id !== auth()->exchanger->id)
-        {
-            return redirect()->route('commission.index')->withErrors(['auth' => 'Ошибка авторизации']);
-        }
-
         $commission->from = $request->from;
         $commission->to = $request->to;
         $commission->percent = $request->percent;
@@ -80,13 +77,18 @@ class ExchangerCommissionController extends Controller
 
     public function destroy(ExchangerCommission $commission)
     {
-        if ($commission->exchanger_id !== auth()->id()) {
-            return redirect()->route('commission.index')->withErrors(['auth' => 'Ошибка авторизации']);
-        }
+        $this->check();
 
         $commission->delete();
 
         return redirect()->route('commission.index')->with(['success' => 'Комиссия успешно удалена']);
+    }
+
+    private function check(ExchangerCommission $commission)
+    {
+        if ($commission->exchanger_id !== auth()->user()->id()) {
+            abort(404);
+        }
     }
 
 }
