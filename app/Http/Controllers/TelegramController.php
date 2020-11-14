@@ -152,7 +152,7 @@ class TelegramController extends Controller
             'message_id' => $this->message_id,
             'text' => ExchangerMessage::getMessage($this->exchanger->id, 'start'),
             'parse_mode' => 'html',
-            'reply_markup' => \App\Models\Telegram::mainMenu()
+            'reply_markup' => \App\Models\Telegram::mainMenu($this->exchanger->id)
         ]);
     }
 
