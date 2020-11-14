@@ -47,7 +47,7 @@ class OperationController extends Controller
 
     public function addComment(Request $request, Operation $operation)
     {
-        if (auth()->user()->exchanger->id !== $operation->exchanger_id) {
+        if (auth()->user()->exchanger->id != $operation->exchanger_id) {
             abort(404);
         }
 
