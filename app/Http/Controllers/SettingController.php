@@ -52,7 +52,7 @@ class SettingController extends Controller
         $exchanger->coinbase_secret = $request->coinbase_secret;
         $exchanger->save();
 
-        return redirect()->route('settings.keys.index')->with(['success' => 'Ключ успещно сохранен']);
+        return redirect()->route('settings.index')->with(['success' => 'Ключ успещно сохранен']);
     }
 
     public function startStop()
