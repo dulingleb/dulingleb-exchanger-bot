@@ -65,7 +65,7 @@ class ExchangerCommissionController extends Controller
             'percent' => 'required|numeric|min:0|max:99'
         ]);
 
-        if ($commission->exchanger_id !== auth()->id())
+        if ($commission->exchanger_id !== auth()->exchanger->id)
         {
             return redirect()->route('commission.index')->withErrors(['auth' => 'Ошибка авторизации']);
         }

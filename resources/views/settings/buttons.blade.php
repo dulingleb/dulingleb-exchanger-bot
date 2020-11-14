@@ -56,7 +56,7 @@
                                                 <input type="text" class="form-control" name="button[{{ $key }}][text]" value="{{ $button->text }}">
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control" name="button[{{ $key }}][link]" value="{{ $button->url }}">
+                                                <input type="url" class="form-control" name="button[{{ $key }}][link]" value="{{ $button->url }}">
                                             </td>
                                             <td class="text-right">
                                                 <button type="button" class="btn btn-danger button-delete"><i class="ni ni-fat-delete"></i></button>
@@ -96,7 +96,7 @@
                 '                                    <input type="text" class="form-control" name="button[' + num + '][text]">' +
                 '                                </td>' +
                 '                                <td>' +
-                '                                    <input type="text" class="form-control" name="button[' + num + '][link]">' +
+                '                                    <input type="url" class="form-control" name="button[' + num + '][link]">' +
                 '                                 </td>' +
                 '                                 <td class="text-right">' +
                 '                                     <button type="button" class="btn btn-danger button-delete"><i class="ni ni-fat-delete"></i></button>' +
