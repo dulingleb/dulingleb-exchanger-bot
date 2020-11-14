@@ -49,6 +49,7 @@
                                     <th></th>
                                 </thead>
                                 <tbody>
+                                @if($buttons)
                                     @foreach($buttons as $key => $button)
                                         <tr>
                                             <td>
@@ -62,6 +63,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                @endif
                                 </tbody>
                                 <tfoot>
                                     <tr>
