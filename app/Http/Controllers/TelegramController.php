@@ -715,7 +715,7 @@ class TelegramController extends Controller
 
     private function work()
     {
-         if ($this->exchanger->status !== Exchanger::STATUS_ACTIVE) {
+         if ($this->exchanger->status != Exchanger::STATUS_ACTIVE) {
             $message = ExchangerMessage::getMessage($this->exchanger->id, 'dont-work');
 
             $this->telegram->sendMessage([
