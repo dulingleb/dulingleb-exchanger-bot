@@ -85,7 +85,7 @@ class OperationController extends Controller
     private function checkOperation(Operation $operation)
     {
         if (auth()->user()->exchanger->id != $operation->exchanger_id ||
-            $operation->status !== Operation::STATUS_CHECKING) {
+            $operation->status != Operation::STATUS_CHECKING) {
             abort(404);
         }
     }

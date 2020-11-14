@@ -733,7 +733,7 @@ class TelegramController extends Controller
 
     private function admin_CheckOperationSuccess(Operation $operation)
     {
-        if ($operation->status !== Operation::STATUS_CHECKING) {
+        if ($operation->status != Operation::STATUS_CHECKING) {
             $this->telegram->sendMessage([
                 'chat_id' => $this->chat_id,
                 'text' => 'Данная сделка уже проверена!',
@@ -771,7 +771,7 @@ class TelegramController extends Controller
     private function checkOperation(Operation $operation)
     {
         if ($this->exchanger->id != $operation->exchanger_id ||
-            $operation->status !== Operation::STATUS_CHECKING) {
+            $operation->status != Operation::STATUS_CHECKING) {
             return false;
         }
 
