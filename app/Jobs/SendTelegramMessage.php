@@ -50,8 +50,8 @@ class SendTelegramMessage implements ShouldQueue
                 'reply_markup' => \App\Models\Telegram::goStart()
             ]);
 
-            if ($key % 1 == 0) {
-                sleep(10);
+            if ($key % 25 == 0) {
+                sleep(2);
             }
         }
     }
