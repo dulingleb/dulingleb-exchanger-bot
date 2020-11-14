@@ -86,7 +86,7 @@ class ExchangerCommissionController extends Controller
 
     private function check(ExchangerCommission $commission)
     {
-        if ($commission->exchanger_id !== auth()->user()->exchanger->id) {
+        if ($commission->exchanger_id != auth()->user()->exchanger->id) {
             abort(404);
         }
     }

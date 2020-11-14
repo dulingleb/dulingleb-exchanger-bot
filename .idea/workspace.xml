@@ -21,7 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="448bdef4-fa30-4bf2-a6e1-ee3d22623842" name="Default Changelist" comment="fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TelegramController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TelegramController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ExchangerCommissionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ExchangerCommissionController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,7 +233,7 @@
       <workItem from="1605186204799" duration="3664000" />
       <workItem from="1605209869597" duration="12312000" />
       <workItem from="1605262606907" duration="9347000" />
-      <workItem from="1605362252032" duration="5858000" />
+      <workItem from="1605362252032" duration="7203000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1605293630763</created>
@@ -326,7 +326,35 @@
       <option name="project" value="LOCAL" />
       <updated>1605379604150</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="fix">
+      <created>1605379993327</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1605379993327</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fix">
+      <created>1605380821138</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1605380821138</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fix">
+      <created>1605381188240</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1605381188240</updated>
+    </task>
+    <task id="LOCAL-00017" summary="fix">
+      <created>1605381227068</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1605381227068</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -408,10 +436,10 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="1114" y="443" key="NewPhpFileDialog/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1604176184771" />
-    <state x="872" y="253" key="Vcs.Push.Dialog.v2" timestamp="1605379606679">
+    <state x="872" y="253" key="Vcs.Push.Dialog.v2" timestamp="1605381229838">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="872" y="253" key="Vcs.Push.Dialog.v2/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605379606679" />
+    <state x="872" y="253" key="Vcs.Push.Dialog.v2/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605381229838" />
     <state x="907" y="236" width="585" height="534" key="find.popup" timestamp="1605379940857">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
