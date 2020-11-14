@@ -31,9 +31,7 @@ class TelegramUserController extends Controller
 
     public function update(Request $request, TelegramUser $user)
     {
-        if ($user->setting->exchanger_id !== auth()->user()->exchanger->id) {
-            abort(404);
-        }
+        $this->checkUser($user);
 
         if ($user->setting->discount != $request->discount) {
             $user->setting->discount = floatval($request->discount);
@@ -77,9 +75,7 @@ class TelegramUserController extends Controller
 
     public function setAdmin(Request $request, TelegramUser $user)
     {
-        if ($user->setting->exchanger_id !== auth()->user()->exchanger->id) {
-            abort(404);
-        }
+        $this->checkUser($user);
 
         if ($request->role == 'admin' && TelegramUserSetting::where('exchanger_id', auth()->user()->exchanger->id)->where('role', 'admin')->exists()) {
             return redirect()->route('telegramUser.show', $user)->withErrors(['role' => 'В вашем обменнике уже есть админ']);
@@ -89,5 +85,12 @@ class TelegramUserController extends Controller
         $user->setting->save();
 
         return redirect()->route('telegramUser.show', $user)->with(['success' => 'Пользователь назначен админом']);
+    }
+
+    private function checkUser(TelegramUser $user) {
+        $set = TelegramUserSetting::where('telegram_user_id', $user->id)->where('exchanger_id', auth()->user()->exchanger->id)->first();
+        if (!$set) {
+            abort(404);
+        }
     }
 }
