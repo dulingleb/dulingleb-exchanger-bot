@@ -21,7 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="448bdef4-fa30-4bf2-a6e1-ee3d22623842" name="Default Changelist" comment="fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Func/Coinbase.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Func/Coinbase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Operation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Operation.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +164,7 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../localbit" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -233,7 +233,8 @@
       <workItem from="1605209869597" duration="12312000" />
       <workItem from="1605262606907" duration="9347000" />
       <workItem from="1605362252032" duration="9247000" />
-      <workItem from="1605538838691" duration="6003000" />
+      <workItem from="1605538838691" duration="6768000" />
+      <workItem from="1605553388255" duration="1365000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1605293630763</created>
@@ -438,7 +439,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605547645576</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="fix">
+      <created>1605548602319</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1605548602319</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -484,10 +492,10 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="1010" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605129277828" />
-    <state x="1060" y="275" key="FileChooserDialogImpl" timestamp="1605290930003">
+    <state x="1060" y="275" key="FileChooserDialogImpl" timestamp="1605552654143">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="1060" y="275" key="FileChooserDialogImpl/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605290930003" />
+    <state x="1060" y="275" key="FileChooserDialogImpl/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605552654143" />
     <state x="1060" y="275" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1599816325989" />
     <state x="1119" y="418" key="Github.ShareDialog" timestamp="1605266881943">
       <screen x="0" y="0" width="2560" height="1040" />
@@ -521,10 +529,10 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="1114" y="443" key="NewPhpFileDialog/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1604176184771" />
-    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2" timestamp="1605547647818">
+    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2" timestamp="1605548634163">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605547647818" />
+    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605548634163" />
     <state x="907" y="236" width="585" height="534" key="find.popup" timestamp="1605379940857">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
