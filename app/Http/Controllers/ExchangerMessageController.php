@@ -38,7 +38,7 @@ class ExchangerMessageController extends Controller
 
     public function update(Request $request, ExchangerMessage $message)
     {
-        if ($message->exchanger_id !== auth()->user()->exchanger->id) {
+        if ($message->exchanger_id != auth()->user()->exchanger->id) {
             return redirect(404);
         }
 
