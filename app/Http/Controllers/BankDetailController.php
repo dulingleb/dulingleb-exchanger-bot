@@ -59,7 +59,7 @@ class BankDetailController extends Controller
      */
     public function edit(BankDetail $bankDetail)
     {
-        if ($bankDetail->exchanger_id !== auth()->user()->exchanger->id) {
+        if ($bankDetail->exchanger_id != auth()->user()->exchanger->id) {
             return redirect()->route('bankDetail.index')->withErrors(['auth' => 'Ошибка авторизации']);
         }
         return view('bankDetails.edit', compact('bankDetail'));
@@ -74,7 +74,7 @@ class BankDetailController extends Controller
      */
     public function update(Request $request, BankDetail $bankDetail)
     {
-        if ($bankDetail->exchanger_id !== auth()->user()->exchanger->id) {
+        if ($bankDetail->exchanger_id != auth()->user()->exchanger->id) {
             return redirect()->route('bankDetail.index')->withErrors(['auth' => 'Ошибка авторизации']);
         }
 
@@ -99,7 +99,7 @@ class BankDetailController extends Controller
      */
     public function destroy(BankDetail $bankDetail)
     {
-        if ($bankDetail->exchanger_id !== auth()->user()->exchanger->id) {
+        if ($bankDetail->exchanger_id != auth()->user()->exchanger->id) {
             return redirect()->route('bankDetail.index')->withErrors(['auth' => 'Ошибка авторизации']);
         }
 
