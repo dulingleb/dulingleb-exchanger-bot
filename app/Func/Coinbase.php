@@ -82,6 +82,13 @@ class Coinbase
             return $e->getMessage();
         }
 
-        return json_decode($res->getBody()->getContents());
+        $res = json_decode($res->getBody()->getContents());
+
+        if (!isset($res->data) || !isset($res->errors)) {
+            $res = new \stdClass();
+            $res->errors = ['message' => 'Нет ответа от коинбаза. Возможно невенрые ключи'];
+        }
+
+        return $res;
     }
 }

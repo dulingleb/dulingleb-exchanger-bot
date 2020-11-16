@@ -20,9 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="448bdef4-fa30-4bf2-a6e1-ee3d22623842" name="Default Changelist" comment="fix">
+      <change beforePath="$PROJECT_DIR$/.idea/dulingleb-exchanger-bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dulingleb-exchanger-bot.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ExchangerMessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ExchangerMessageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/TelegramUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TelegramUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Func/Coinbase.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Func/Coinbase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +155,6 @@
       <path value="$PROJECT_DIR$/vendor/laravel-frontend-presets/argon" />
       <path value="$PROJECT_DIR$/vendor/league/event" />
       <path value="$PROJECT_DIR$/vendor/irazasyed/telegram-bot-sdk" />
-      <path value="$PROJECT_DIR$/vendor/coinbase/coinbase" />
       <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
     </include_path>
   </component>
@@ -235,7 +237,7 @@
       <workItem from="1605209869597" duration="12312000" />
       <workItem from="1605262606907" duration="9347000" />
       <workItem from="1605362252032" duration="9247000" />
-      <workItem from="1605538838691" duration="1401000" />
+      <workItem from="1605538838691" duration="4746000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1605293630763</created>
@@ -391,7 +393,35 @@
       <option name="project" value="LOCAL" />
       <updated>1605540011331</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="fix">
+      <created>1605540325186</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1605540325186</updated>
+    </task>
+    <task id="LOCAL-00024" summary="fix">
+      <created>1605540635436</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1605540635436</updated>
+    </task>
+    <task id="LOCAL-00025" summary="fix">
+      <created>1605540963202</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1605540963202</updated>
+    </task>
+    <task id="LOCAL-00026" summary="fix">
+      <created>1605541244071</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1605541244071</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -474,10 +504,10 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="1114" y="443" key="NewPhpFileDialog/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1604176184771" />
-    <state x="872" y="253" key="Vcs.Push.Dialog.v2" timestamp="1605540012312">
+    <state x="872" y="253" key="Vcs.Push.Dialog.v2" timestamp="1605541885795">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="872" y="253" key="Vcs.Push.Dialog.v2/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605540012312" />
+    <state x="872" y="253" key="Vcs.Push.Dialog.v2/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605541885795" />
     <state x="907" y="236" width="585" height="534" key="find.popup" timestamp="1605379940857">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
