@@ -66,7 +66,7 @@
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->username ?? ($user->first_name ?? '' . $user->last_name ?? '') }}</td>
                                     <td>{{ $user->operations_count }}</td>
-                                    <td>{{ $user->setting->discount }}%</td>
+                                    <td>{{ $user->setting->discount ?? 0 }}%</td>
                                 </tr>
                             @endforeach
                             </tbody>
