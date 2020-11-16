@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Func\Coinbase;
+
 class HomeController extends Controller
 {
     /**
@@ -21,9 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $str = 'admin_to_operator_65';
-        //substr($str, 0, strrpos($str, '_'));
-        //dd(substr($str, strrpos($str, '_')+1, strlen($str)-1));
+        $coinbase = new Coinbase(auth()->user()->exchanger->coinbase_key, auth()->user()->exchanger->coinbase_secret);
+        $send = $coinbase->getBalance();
+        dd($send);
         return view('dashboard');
     }
 }
