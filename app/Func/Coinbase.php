@@ -90,7 +90,7 @@ class Coinbase
 
         if (!isset($res->data) || !isset($res->errors)) {
             $res = new \stdClass();
-            $res->errors = ['message' => 'Нет ответа от коинбаза. Возможно невенрые ключи'];
+            $res->errors[] = ['message' => 'Нет ответа от коинбаза. Возможно невенрые ключи'];
         }
 
         return $res;
