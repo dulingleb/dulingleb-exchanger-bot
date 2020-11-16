@@ -43,7 +43,7 @@ class User extends Authenticatable
 
     public function isSuperAdmin() : bool
     {
-        return $this->role_id === self::ROLE_SUPERADMIN;
+        return $this->role_id == self::ROLE_SUPERADMIN;
     }
 
     public function exchanger()
