@@ -78,8 +78,8 @@ class Operation extends Model
 
     public function successOperation()
     {
-        //$coinbase = new Coinbase($this->exchanger->coinbase_key, $this->exchanger->coinbase_secret);
-        //$send = $coinbase->sendBtc($this->btc_address, floatval($this->amount));
+        $coinbase = new Coinbase($this->exchanger->coinbase_key, $this->exchanger->coinbase_secret);
+        $send = $coinbase->sendBtc($this->btc_address, floatval($this->amount));
 
         if (isset($send->errors)) {
             return $send->errors;

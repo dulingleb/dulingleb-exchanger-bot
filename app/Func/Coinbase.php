@@ -24,6 +24,10 @@ class Coinbase
 
     public function getBalance($account = 'BTC')
     {
+        $info = $this->getInfoAccount();
+        if (!isset($info->balance)) {
+            return $info;
+        }
         return floatval($this->getInfoAccount()->data->balance->amount);
     }
 
@@ -88,11 +92,11 @@ class Coinbase
 
         $res = json_decode($res->getBody()->getContents());
 
-//        if (!isset($res->data) || !isset($res->errors)) {
-//            $res = null;
-//            $res['errors'][]['message'] = 'Нет ответа от коинбаза. Возможно невенрые ключи';
-//            $res = json_decode(json_encode($res), false);
-//        }
+        if (!isset($res->data) && !isset($res->errors)) {
+            $res = null;
+            $res['errors'][]['message'] = 'Нет ответа от коинбаза. Возможно невенрые ключи';
+            $res = json_decode(json_encode($res), false);
+        }
 
         return $res;
     }
