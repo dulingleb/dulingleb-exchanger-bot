@@ -15,6 +15,6 @@ class TelegramUser extends Model
 
     public function setting()
     {
-        return $this->belongsTo(TelegramUserSetting::class)->where('exchanger_id', auth()->user()->exchanger->id);
+        return $this->hasOne(TelegramUserSetting::class, '', '')->where('exchanger_id', auth()->user()->exchanger->id);
     }
 }
