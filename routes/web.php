@@ -64,9 +64,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('operation/{operation}/cancel', ['as' => 'operation.cancel', 'uses' => 'OperationController@cancel']);
 	Route::post('operation/{operation}/direct-to-operator', ['as' => 'operation.directToOperator', 'uses' => 'OperationController@directToOperator']);
 
-	// Отправка бита
-    Route::get('send-btc', ['as' => 'send.index', 'uses' => 'SendController@index']);
-    Route::post('send-btc', ['as' => 'send.send', 'uses' => 'SendController@send']);
+//    Route::get('send-btc', ['as' => 'send.index', 'uses' => 'SendController@index']);
+//    Route::post('send-btc', ['as' => 'send.send', 'uses' => 'SendController@send']);
 
     // Телеграм пользователи
     Route::get('telegram-users', ['as' => 'telegramUser.index', 'uses' => 'TelegramUserController@index']);

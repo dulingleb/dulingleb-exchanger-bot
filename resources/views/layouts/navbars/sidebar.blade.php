@@ -111,11 +111,13 @@
                     </a>
                 </li>
 
+                @if(\Route::has('send.index'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('send.index') }}">
                         <i class="ni ni-curved-next text-blue"></i> Отправить btc
                     </a>
                 </li>
+                @endif
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('mailing.index') }}">
