@@ -36,6 +36,10 @@ class Coinbase
             'currency' => $currency
         ];
 
+        if (!isset($this->getInfoAccount()->data)) {
+            return $this->getInfoAccount();
+        }
+
         $path = 'accounts/' . $this->getInfoAccount()->data->id . '/transactions';
 
         return $this->query($path, 'POST', $params);
