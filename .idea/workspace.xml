@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -20,9 +23,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="448bdef4-fa30-4bf2-a6e1-ee3d22623842" name="Default Changelist" comment="fix">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Func/Coinbase.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Func/Coinbase.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Operation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Operation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TelegramUserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TelegramUserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/TelegramUserSetting.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TelegramUserSetting.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/headers/cards.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/headers/cards.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,14 +175,14 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\OpenServer\domains\dulingleb-exchanger-bot\storage\app\images" />
-      <recent name="C:\OpenServer\domains\dulingleb-exchanger-bot\resources\views\exchangerMessages\templates" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\OpenServer\domains\dulingleb-exchanger-bot\storage\app\public" />
       <recent name="C:\OpenServer\domains\dulingleb-exchanger-bot\app\Models" />
       <recent name="C:\OpenServer\domains\dulingleb-exchanger-bot\app\Http\Controllers\SuperAdmin" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\OpenServer\domains\dulingleb-exchanger-bot\storage\app\images" />
+      <recent name="C:\OpenServer\domains\dulingleb-exchanger-bot\resources\views\exchangerMessages\templates" />
     </key>
   </component>
   <component name="RunManager" selected="npm.install">
@@ -235,7 +240,8 @@
       <workItem from="1605262606907" duration="9347000" />
       <workItem from="1605362252032" duration="9247000" />
       <workItem from="1605538838691" duration="6768000" />
-      <workItem from="1605553388255" duration="2237000" />
+      <workItem from="1605553388255" duration="2888000" />
+      <workItem from="1605618758874" duration="2211000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1605293630763</created>
@@ -461,7 +467,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605562151029</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="fix">
+      <created>1605562430053</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1605562430053</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -544,19 +557,19 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="1114" y="443" key="NewPhpFileDialog/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1604176184771" />
-    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2" timestamp="1605562158958">
+    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2" timestamp="1605562434472">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605562158958" />
+    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605562434472" />
     <state x="907" y="236" width="585" height="534" key="find.popup" timestamp="1605379940857">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="907" y="236" width="585" height="534" key="find.popup/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605379940857" />
     <state x="907" y="236" width="585" height="534" key="find.popup/0.0.2560.1040@0.0.2560.1040" timestamp="1600776676690" />
-    <state x="943" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1604695523146">
+    <state x="943" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1605621776341">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="943" y="225" width="672" height="678" key="search.everywhere.popup/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1604695523146" />
+    <state x="943" y="225" width="672" height="678" key="search.everywhere.popup/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605621776341" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

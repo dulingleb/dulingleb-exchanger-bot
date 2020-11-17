@@ -48,4 +48,9 @@ class TelegramUserSetting extends Model
 
         return $sum;
     }
+
+    public function telegramUser()
+    {
+        return $this->belongsTo(TelegramUser::class);
+    }
 }

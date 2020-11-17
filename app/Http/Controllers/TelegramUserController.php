@@ -20,7 +20,7 @@ class TelegramUserController extends Controller
         $users = $users->has('setting')
             ->withCount(['operations' => function ($q) {
             return $q->where('status', Operation::STATUS_SUCCESS);
-        }])->orderBy('operations_count', 'DESC')->paginate(50);
+        }])->orderBy('operations_count', 'DESC')->paginate(15);
 
         return view('telegramUsers.index', compact('users'));
     }
