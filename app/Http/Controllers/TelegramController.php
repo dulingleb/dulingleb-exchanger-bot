@@ -338,7 +338,7 @@ class TelegramController extends Controller
         $this->telegram->editMessageText([
             'chat_id' => $this->chat_id,
             'message_id' => $this->message_id,
-            'text' => 'Пришлите фото/скрин чека оплаты. Вы можете прислать только одно фото.',
+            'text' => ExchangerMessage::getMessage($this->exchanger->id, 'send-check'),
             'parse_mode' => 'html',
             'reply_markup' => $keyboard
         ]);
