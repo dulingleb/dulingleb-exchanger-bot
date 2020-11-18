@@ -7,54 +7,60 @@ use App\Models\Operation;
 use App\Models\TelegramUser;
 use App\Models\TelegramUserSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Telegram;
 
 class TelegramUserController extends Controller
 {
     public function index(Request $request)
     {
-        $users = new TelegramUser();
+        $users = new TelegramUserSetting();
         if ($request->exists('s')) {
-            $users = $users->where('username', 'LIKE', '%' . $request->s . '%')->orWhere('id', $request->s);
+            $users = $users->whereHas('telegramUser', function ($q) use ($request) {
+                $q->where('username', 'LIKE', '%' . $request->s . '%')->orWhere('id', $request->s);
+            });
         }
-        $users = $users->has('setting')
-            ->withCount(['operations' => function ($q) {
-            return $q->where('status', Operation::STATUS_SUCCESS);
-        }])->orderBy('operations_count', 'DESC')->paginate(15);
+
+//        $users = $users->withCount(['operations' => function ($q) {
+//            return $q->where('status', Operation::STATUS_SUCCESS);
+//        }])->orderBy('operations_count', 'DESC')->paginate(15);
+
+        $users = $users->select()->addSelect(DB::raw('(SELECT COUNT(*) FROM operations WHERE (operations.telegram_user_id = telegram_user_settings.telegram_user_id) AND (operations.status = ' . Operation::STATUS_SUCCESS . ') ) AS operations_count'))
+            ->where('exchanger_id', auth()->user()->exchanger->id)->orderBy('operations_count', 'DESC')->paginate(15);
 
         return view('telegramUsers.index', compact('users'));
     }
 
-    public function show(TelegramUser $user)
+    public function show(TelegramUserSetting $userSetting)
     {
-        $this->checkUser($user);
+        $this->checkUser($userSetting);
 
-        return view('telegramUsers.show', compact('user'));
+        return view('telegramUsers.show', compact('userSetting'));
     }
 
-    public function update(Request $request, TelegramUser $user)
+    public function update(Request $request, TelegramUserSetting $userSetting)
     {
-        $this->checkUser($user);
+        $this->checkUser($userSetting);
 
-        if ($user->setting->discount != $request->discount) {
-            $user->setting->discount = floatval($request->discount);
+        if ($userSetting->discount != $request->discount) {
+            $userSetting->discount = floatval($request->discount);
 
             Telegram::setAccessToken(auth()->user()->exchanger->telegram_token);
 
             Telegram::sendMessage([
-                'chat_id' => $user->id,
+                'chat_id' => $userSetting->telegram_user_id,
                 'text' => 'Вам была установлена персональная скидка на все сделки <strong> ' . floatval($request->discount) . ' %</strong>',
                 'parse_mode' => 'html'
             ]);
         }
 
-        if ($user->setting->comment != $request->comment) {
-            $user->setting->comment = $request->comment;
+        if ($userSetting->comment != $request->comment) {
+            $userSetting->comment = $request->comment;
         }
 
         $ban = $request->ban ? 1 : 0;
-        if ($user->setting->ban != $ban) {
-            $user->setting->ban = $ban;
+        if ($userSetting->ban != $ban) {
+            $userSetting->ban = $ban;
 
             Telegram::setAccessToken(auth()->user()->exchanger->telegram_token);
 
@@ -66,33 +72,32 @@ class TelegramUserController extends Controller
 
 
             Telegram::sendMessage([
-                'chat_id' => $user->id,
+                'chat_id' => $userSetting->telegram_user_id,
                 'text' => $message,
                 'parse_mode' => 'html'
             ]);
         }
 
-        $user->setting->save();
-        return redirect()->route('telegramUser.show', $user)->with(['success' => 'Настройки успешно сохранены!']);
+        $userSetting->save();
+        return redirect()->route('telegramUser.show', $userSetting)->with(['success' => 'Настройки успешно сохранены!']);
     }
 
-    public function setAdmin(Request $request, TelegramUser $user)
+    public function setAdmin(Request $request, TelegramUserSetting $userSetting)
     {
-        $this->checkUser($user);
+        $this->checkUser($userSetting);
 
         if ($request->role == 'admin' && TelegramUserSetting::where('exchanger_id', auth()->user()->exchanger->id)->where('role', 'admin')->exists()) {
-            return redirect()->route('telegramUser.show', $user)->withErrors(['role' => 'В вашем обменнике уже есть админ']);
+            return redirect()->route('telegramUser.show', $userSetting)->withErrors(['role' => 'В вашем обменнике уже есть админ']);
         }
 
-        $user->setting->role = $request->role == 'admin' ? 'admin' : 'user';
-        $user->setting->save();
+        $userSetting->role = $request->role == 'admin' ? 'admin' : 'user';
+        $userSetting->save();
 
-        return redirect()->route('telegramUser.show', $user)->with(['success' => 'Пользователь назначен админом']);
+        return redirect()->route('telegramUser.show', $userSetting)->with(['success' => 'Пользователь назначен админом']);
     }
 
-    private function checkUser(TelegramUser $user) {
-        $set = TelegramUserSetting::where('telegram_user_id', $user->id)->where('exchanger_id', auth()->user()->exchanger->id)->first();
-        if (!$set) {
+    private function checkUser(TelegramUserSetting $userSetting) {
+        if ($userSetting->exchanger_id != auth()->user()->exchanger->id) {
             abort(404);
         }
     }

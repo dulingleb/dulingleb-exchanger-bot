@@ -51,6 +51,6 @@ class TelegramUserSetting extends Model
 
     public function telegramUser()
     {
-        return $this->hasOne(TelegramUser::class, 'id', 'user_id');
+        return $this->hasOne(TelegramUser::class, 'id', 'telegram_user_id');
     }
 }

@@ -10,14 +10,14 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">Пользователь {{ $user->username ?? ($user->first_name ?? '' . $user->last_name ?? '') }}</h3>
+                                <h3 class="mb-0">Пользователь {{ $userSetting->telegramUser->username ?? ($userSetting->telegramUser->first_name ?? '' . $userSetting->telegramUser->last_name ?? '') }}</h3>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="javascript:;" class="text-danger" onclick="if (confirm('Вы действительно хотите назначить этого пользователя {{ $user->setting->role == 'admin' ? 'пользователем' : 'админом' }}?')) $('#set-as-admin').submit();">{{ $user->setting->role == 'admin' ? 'Сделать пользователем' : 'Назначить админом' }}</a>
-                                <form action="{{ route('telegramUser.setAsAdmin', $user) }}" method="post" id="set-as-admin">
+                                <a href="javascript:;" class="text-danger" onclick="if (confirm('Вы действительно хотите назначить этого пользователя {{ $userSetting->role == 'admin' ? 'пользователем' : 'админом' }}?')) $('#set-as-admin').submit();">{{ $userSetting->role == 'admin' ? 'Сделать пользователем' : 'Назначить админом' }}</a>
+                                <form action="{{ route('telegramUser.setAsAdmin', $userSetting) }}" method="post" id="set-as-admin">
                                     @csrf
                                     @method('PUT')
-                                    <input type="hidden" name="role" value="{{ $user->setting->role == 'admin' ? 'user' : 'admin' }}">
+                                    <input type="hidden" name="role" value="{{ $userSetting->role == 'admin' ? 'user' : 'admin' }}">
                                 </form>
                             </div>
                         </div>
@@ -50,45 +50,45 @@
                             <table class="table">
                                 <tr>
                                     <th>id:</th>
-                                    <td>{{ $user->id }}</td>
+                                    <td>{{ $userSetting->telegram_user_id }}</td>
                                 </tr>
                                 <tr>
                                     <th>Username:</th>
-                                    <td>{{ $user->username ?? '' }}</td>
+                                    <td>{{ $userSetting->telegramUser->username ?? '' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Имя Фамилия:</th>
-                                    <td>{{ $user->first_name ?? '' . $user->last_name ?? '' }}</td>
+                                    <td>{{ $userSetting->telegramUser->first_name ?? '' . $userSetting->telegramUser->last_name ?? '' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Подтвержденных сделок:</th>
                                     <td>
-                                        <a href="{{ route('operations.index', ['user' => $user->id]) }}">
-                                            {{ $user->operations->where('status', \App\Models\Operation::STATUS_SUCCESS)->count() }}
+                                        <a href="{{ route('operations.index', ['user' => $userSetting->telegram_user_id]) }}">
+                                            {{ $userSetting->telegramUser->operations->where('status', \App\Models\Operation::STATUS_SUCCESS)->count() }}
                                             <i class="ni ni-curved-next"></i>
                                         </a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Сделок на сумму:</th>
-                                    <td>{{ $user->operations->where('status', \App\Models\Operation::STATUS_SUCCESS)->sum('price') }} руб.</td>
+                                    <td>{{ $userSetting->telegramUser->operations->where('status', \App\Models\Operation::STATUS_SUCCESS)->sum('price') }} руб.</td>
                                 </tr>
                                 <tr>
                                     <th>Рефералов:</th>
-                                    <td>{{ $user->setting->where('referer_id', $user->setting->id)->count() }}</td>
+                                    <td>{{ $userSetting->where('referer_id', $userSetting->id)->count() }}</td>
                                 </tr>
                                 <tr>
                                     <th>Сделок рефов:</th>
-                                    <td>{{ $user->setting->referralOperationsCount() }}</td>
+                                    <td>{{ $userSetting->referralOperationsCount() }}</td>
                                 </tr>
                                 <tr>
                                     <th>Сделок рефов на сумму:</th>
-                                    <td>{{ $user->setting->referralOperationsSum('price') }} руб.</td>
+                                    <td>{{ $userSetting->referralOperationsSum('price') }} руб.</td>
                                 </tr>
                             </table>
                         </div>
                         <div class="col-md-6">
-                            <form action="{{ route('telegramUser.update', $user) }}" method="post">
+                            <form action="{{ route('telegramUser.update', $userSetting) }}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">
@@ -97,13 +97,13 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon2">%</span>
                                         </div>
-                                        <input type="number" value="{{ $user->setting->discount ?? 0 }}" class="form-control" id="discount" name="discount" min="0" max="100%" step="0.5">
+                                        <input type="number" value="{{ $userSetting->discount ?? 0 }}" class="form-control" id="discount" name="discount" min="0" max="100%" step="0.5">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="comment">Примечание</label>
-                                    <textarea name="comment" class="form-control" id="comment" cols="3">{{ $user->setting->comment ?? '' }}</textarea>
+                                    <textarea name="comment" class="form-control" id="comment" cols="3">{{ $userSetting->comment ?? '' }}</textarea>
                                 </div>
 
                                 <table>
@@ -111,7 +111,7 @@
                                         <td><label for="ban">Бан</label></td>
                                         <td>
                                             <label class="custom-toggle ml-3">
-                                                <input type="checkbox" name="ban" id="ban" {{ $user->setting->ban ? 'checked' : '' }}>
+                                                <input type="checkbox" name="ban" id="ban" {{ $userSetting->ban ? 'checked' : '' }}>
                                                 <span class="custom-toggle-slider rounded-circle"></span>
                                             </label>
                                         </td>

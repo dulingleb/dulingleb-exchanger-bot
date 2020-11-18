@@ -61,12 +61,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($users as $user)
-                                <tr style="cursor: pointer;" onclick="location.href = '{{ route('telegramUser.show', $user) }}'">
-                                    <td>{{ $user->id }}</td>
-                                    <td>{{ $user->username ?? ($user->first_name ?? '' . $user->last_name ?? '') }}</td>
-                                    <td>{{ $user->operations_count }}</td>
-                                    <td>{{ $user->setting->discount ?? 0 }}%</td>
+                            @foreach($users as $userSetting)
+                                <tr style="cursor: pointer;" onclick="location.href = '{{ route('telegramUser.show', $userSetting) }}'">
+                                    <td>{{ $userSetting->telegram_user_id }}</td>
+                                    <td>{{ $userSetting->telegramUser->username ?? ($userSetting->telegramUser->first_name ?? '' . $userSetting->telegramUser->last_name ?? '') }}</td>
+                                    <td>{{ $userSetting->operations_count }}</td>
+                                    <td>{{ $userSetting->discount ?? 0 }}%</td>
                                 </tr>
                             @endforeach
                             </tbody>
