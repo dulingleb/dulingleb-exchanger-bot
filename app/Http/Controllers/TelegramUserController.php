@@ -17,9 +17,7 @@ class TelegramUserController extends Controller
         if ($request->exists('s')) {
             $users = $users->where('username', 'LIKE', '%' . $request->s . '%')->orWhere('id', $request->s);
         }
-        $users = $users->has('setting')->whereHas('setting', function ($q) {
-            $q->where('exchanger_id', auth()->user()->exchanger->id);
-        })
+        $users = $users->has('setting')
             ->withCount(['operations' => function ($q) {
             return $q->where('status', Operation::STATUS_SUCCESS);
         }])->orderBy('operations_count', 'DESC')->paginate(15);

@@ -23,7 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="448bdef4-fa30-4bf2-a6e1-ee3d22623842" name="Default Changelist" comment="fix">
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OperationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OperationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TelegramUserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TelegramUserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/TelegramUserSetting.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TelegramUserSetting.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,7 +244,7 @@
       <workItem from="1605538838691" duration="6768000" />
       <workItem from="1605553388255" duration="2888000" />
       <workItem from="1605618758874" duration="6088000" />
-      <workItem from="1605731483164" duration="3428000" />
+      <workItem from="1605731483164" duration="4313000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1605293630763</created>
@@ -502,7 +505,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605736290653</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="fix">
+      <created>1605736391790</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1605736391790</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -586,14 +596,14 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="1114" y="443" key="NewPhpFileDialog/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1604176184771" />
-    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2" timestamp="1605736296830">
+    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2" timestamp="1605736398285">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605736296830" />
-    <state x="907" y="236" width="585" height="534" key="find.popup" timestamp="1605379940857">
+    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605736398285" />
+    <state x="907" y="236" width="585" height="534" key="find.popup" timestamp="1605737100939">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="907" y="236" width="585" height="534" key="find.popup/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605379940857" />
+    <state x="907" y="236" width="585" height="534" key="find.popup/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605737100939" />
     <state x="907" y="236" width="585" height="534" key="find.popup/0.0.2560.1040@0.0.2560.1040" timestamp="1600776676690" />
     <state x="943" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1605621776341">
       <screen x="0" y="0" width="2560" height="1040" />

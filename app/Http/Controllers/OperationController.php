@@ -24,7 +24,7 @@ class OperationController extends Controller
             $operations = $operations->where('telegram_user_id', $request->user);
         }
 
-        $operations = $operations->latest()->paginate(50);
+        $operations = $operations->latest()->paginate(20);
         return response()->view('operations.index', compact('operations'));
     }
 
