@@ -16,11 +16,12 @@
                 ] }
         ],
         menubar: false,
-        plugins: 'code emoticons link',
+        plugins: 'code emoticons link paste',
         convert_fonts_to_spans: false,
         element_format : 'html',
         forced_root_block : false,
         branding: false,
+        paste_as_text: true,
         setup: function (editor) {
             editor.on('init', function (e) {
                 setTimeout(() => {

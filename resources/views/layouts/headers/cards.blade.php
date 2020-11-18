@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <p class="mt-3 mb-0 text-muted text-sm">
-                                <span class="text-success mr-2">+ {{ \App\Models\TelegramUser::whereHas('setting', function ($q) { $q->where('exchanger_id', auth()->user()->exchanger->id); })->where('created_at', '>=', date('Y-m-d', time()))->count() }}</span>
+                                <span class="text-success mr-2">+ {{ \App\Models\TelegramUserSetting::where('exchanger_id', auth()->user()->exchanger->id)->where('created_at', '>=', date('Y-m-d', time()))->count() }}</span>
                                 <span class="text-nowrap">За сегодня</span>
                             </p>
                         </div>

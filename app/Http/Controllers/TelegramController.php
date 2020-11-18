@@ -8,6 +8,7 @@ use App\Models\Exchanger;
 use App\Models\ExchangerCommission;
 use App\Models\ExchangerMessage;
 use App\Models\Operation;
+use App\Models\TelegramUser;
 use App\Models\TelegramUserSetting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -289,7 +290,8 @@ class TelegramController extends Controller
                 'chat_id' => $this->chat_id,
                 'message_id' => $this->message_id,
                 'text' => 'Этой операции уже не существует. Создайте новую.',
-                'parse_mode' => 'html'
+                'parse_mode' => 'html',
+                'rely_markup' => \App\Models\Telegram::goStart()
             ]);
             return;
         }
