@@ -48,6 +48,6 @@ class User extends Authenticatable
 
     public function exchanger()
     {
-        return $this->belongsTo(Exchanger::class);
+        return $this->belongsTo(Exchanger::class, 'id', 'user_id');
     }
 }
