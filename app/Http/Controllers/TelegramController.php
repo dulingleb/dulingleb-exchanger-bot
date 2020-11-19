@@ -79,14 +79,37 @@ class TelegramController extends Controller
                 case 'get_check':
                     $this->message_GetCheck();
                     break;
+                case 'set_course':
+                    $this->message_admin_setCourse();
+                    break;
             }
         }
 
-        switch ($this->update->getMessage()->getText()) {
-            case 'Ожидают проверки':
-                $this->callback_admin_ListWaiting();
-                break;
+        if (TelegramUserSetting::where([
+            ['telegram_user_id', $this->chat_id],
+            ['exchanger_id', $this->exchanger->id],
+            ['role', 'admin']])->exists())
+        {
+            switch ($this->update->getMessage()->getText()) {
+                case 'На проверке':
+                    $this->callback_admin_ListWaiting();
+                    break;
+                case 'Стоп':
+                    $this->exchanger->status = Exchanger::STATUS_CLOSED;
+                    $this->exchanger->save();
+                    $this->sendSimpleMessage('Бот успешно остановлен');
+                    break;
+                case 'Старт':
+                    $this->exchanger->status = Exchanger::STATUS_ACTIVE;
+                    $this->exchanger->save();
+                    $this->sendSimpleMessage('Бот запущен');
+                    break;
+                case 'Курс':
+                    $this->callback_admin_currentCource();
+                    break;
+            }
         }
+
     }
 
     private function getCallback()
@@ -125,6 +148,12 @@ class TelegramController extends Controller
             case 'admin_confirm_yes':
                 $this->callback_admin_confirmYes();
                 break;
+            case 'admin_setCourse':
+                $this->callback_admin_setCourse();
+                break;
+            case 'admin_cancel':
+                $this->callback_Cancel(true);
+                break;
         }
 
         $str = $this->update->getCallbackQuery()->getData();
@@ -144,16 +173,16 @@ class TelegramController extends Controller
     //////////  Колбэки
     /////////////////////////
 
-    private function callback_Cancel()
+    private function callback_Cancel(bool $admin = false)
     {
         TelegramUserSetting::setTransaction($this->exchanger->id, $this->chat_id);
 
         $this->telegram->editMessageText([
             'chat_id' => $this->chat_id,
             'message_id' => $this->message_id,
-            'text' => ExchangerMessage::getMessage($this->exchanger->id, 'start'),
+            'text' => $admin ? 'Добро пожаловать в админку' : ExchangerMessage::getMessage($this->exchanger->id, 'start'),
             'parse_mode' => 'html',
-            'reply_markup' => \App\Models\Telegram::mainMenu($this->exchanger->id)
+            'reply_markup' => $admin ? false : \App\Models\Telegram::mainMenu($this->exchanger->id)
         ]);
     }
 
@@ -365,9 +394,42 @@ class TelegramController extends Controller
         }
     }
 
-    private function callback_admin_ToOperator()
+    private function callback_admin_currentCource()
     {
+        $keyboard = Keyboard::make()
+            ->inline()
+            ->row(
+                Keyboard::inlineButton(['text' => 'Установить новый', 'callback_data' => 'admin_setCourse'])
+            );
 
+        $this->telegram->sendMessage([
+            'chat_id' => $this->chat_id,
+            'text' => 'Текущий курс: <b>' . number_format($this->exchanger->course, 0, '.', ' ') . ' руб</b>',
+            'parse_mode' => 'html',
+            'reply_markup' => $keyboard
+        ]);
+    }
+
+    private function callback_admin_setCourse()
+    {
+        $transaction = [
+            'step' => 'set_course'
+        ];
+
+        TelegramUserSetting::setTransaction($this->exchanger->id, $this->chat_id, $transaction);
+
+        $keyboard = Keyboard::make()
+            ->inline()
+            ->row(
+                Keyboard::inlineButton(['text' => 'Отмена', 'callback_data' => 'admin_cancel'])
+            );
+
+        $this->telegram->editMessageText([
+            'chat_id' => $this->chat_id,
+            'message_id' => $this->message_id,
+            'text' => 'Введите новый курс:',
+            'reply_markup' => $keyboard
+        ]);
     }
 
     private function callback_admin_confirm($id, $step)
@@ -647,6 +709,22 @@ class TelegramController extends Controller
 
     }
 
+    private function message_admin_setCourse()
+    {
+        $course = (float)str_replace(',', '.', $this->update->getMessage()->getText());
+
+        $this->exchanger->course = $course;
+        $this->exchanger->save();
+
+        $this->telegram->sendMessage([
+            'chat_id' => $this->chat_id,
+            'text' => 'Курс установлен. Новый куср: <b>' . $course . ' руб.</b>',
+            'parse_mode' => 'html'
+        ]);
+
+        TelegramUserSetting::setTransaction($this->exchanger->id, $this->chat_id);
+    }
+
 
     /////////////////////////
     //////////  Всякое
@@ -753,7 +831,7 @@ class TelegramController extends Controller
 
     private function admin_messageOperation(Operation $operation)
     {
-        $user = $operation->telegram_user->username ? '@' . $operation->telegram_user->username : '';
+        $user = $operation->telegram_user->username ? '@' . $operation->telegram_user->username : $operation->telegram_user->first_name;
         $message = '<strong>#' . $operation->id . '</strong>: ' . $user . ' ' . floatval($operation->amount) . ' btc за ' . $operation->price . ' руб.' . PHP_EOL . 'https://' . $_SERVER['SERVER_NAME'] . '/storage/images/' . $operation->id . '.jpg';
 
         $keyboard = Keyboard::make()
@@ -782,5 +860,12 @@ class TelegramController extends Controller
         }
 
         return true;
+    }
+
+    private function sendSimpleMessage($message) {
+        $this->telegram->sendMessage([
+            'chat_id' => $this->chat_id,
+            'text' => $message
+        ]);
     }
 }

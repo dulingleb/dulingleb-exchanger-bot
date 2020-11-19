@@ -11,7 +11,7 @@ class Telegram extends Model
     public static function adminMainKeyboard()
     {
         return Keyboard::make([
-            'keyboard' => [['Ожидают проверки', 'Закончить работу']],
+            'keyboard' => [['На проверке', 'На оплате'], ['Курс'], ['Старт', 'Стоп']],
             'resize_keyboard' => true,
             'one_time_keyboard' => false
         ]);

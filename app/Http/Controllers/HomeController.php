@@ -25,7 +25,7 @@ class HomeController extends Controller
     {
         $coinbase = new Coinbase(auth()->user()->exchanger->coinbase_key, auth()->user()->exchanger->coinbase_secret);
         $send = $coinbase->getBalance();
-        dd($send);
+        //dd($send);
         return view('dashboard');
     }
 }
