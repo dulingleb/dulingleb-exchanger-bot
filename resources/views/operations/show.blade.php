@@ -43,7 +43,7 @@
                                 <tr>
                                     <th>Пользователь:</th>
                                     <td>
-                                        <a href="{{ route('telegramUser.show', $operation->telegram_user) }}">
+                                        <a href="{{ route('telegramUser.show', $operation->telegram_user->setting) }}">
                                             {{ $operation->telegram_user->username ?? ($operation->telegram_user->first_name ?? '' . $operation->telegram_user->last_name ?? '') }} <i class="ni ni-curved-next"></i>
                                         </a>
                                     </td>
