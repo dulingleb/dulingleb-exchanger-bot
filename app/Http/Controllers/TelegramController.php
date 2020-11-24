@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Func\AddressValidator;
+use App\Func\Coinbase;
 use App\Models\BankDetail;
 use App\Models\Exchanger;
 use App\Models\ExchangerCommission;
@@ -511,13 +512,16 @@ class TelegramController extends Controller
                     ]);
                     return "ok";
                 }
+                $coinbase = new Coinbase($this->exchanger->coinbase_key, $this->exchanger->coinbase_secret);
+                $balance = $coinbase->getBalance();
                 break;
         }
 
         $this->telegram->editMessageText([
             'chat_id' => $this->chat_id,
             'message_id' => $this->message_id,
-            'text' => 'Успех!'
+            'text' => 'Успех!' . $balance ? 'Баланс: <b>' . $balance . '</b>' : '',
+            'parse_mode' => 'html'
         ]);
     }
 
