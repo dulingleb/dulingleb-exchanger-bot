@@ -520,7 +520,7 @@ class TelegramController extends Controller
         $this->telegram->editMessageText([
             'chat_id' => $this->chat_id,
             'message_id' => $this->message_id,
-            'text' => 'Успех!' . $balance ? 'Баланс: <b>' . $balance . '</b>' : '',
+            'text' => 'Успех! ' . ($balance ? ('Баланс: <b>' . $balance . '</b>') : ''),
             'parse_mode' => 'html'
         ]);
     }

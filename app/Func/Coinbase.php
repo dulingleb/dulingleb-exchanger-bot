@@ -25,10 +25,10 @@ class Coinbase
     public function getBalance($account = 'BTC')
     {
         $info = $this->getInfoAccount();
-        if (!isset($info->balance)) {
-            return $info;
+        if (isset($info->errors)) {
+            return $info->errors[0]->message;
         }
-        return floatval($this->getInfoAccount()->data->balance->amount);
+        return floatval($info->data->balance->amount);
     }
 
     public function sendBtc($to, $amount, $currency = 'BTC')
