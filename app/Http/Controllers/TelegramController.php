@@ -108,6 +108,11 @@ class TelegramController extends Controller
                 case 'Курс':
                     $this->callback_admin_currentCource();
                     break;
+                case 'Баланс':
+                    $coinbase = new Coinbase($this->exchanger->coinbase_key, $this->exchanger->coinbase_secret);
+                    $balance = $coinbase->getBalance();
+                    $this->sendSimpleMessage($balance);
+                    break;
             }
         }
 
@@ -512,15 +517,13 @@ class TelegramController extends Controller
                     ]);
                     return "ok";
                 }
-                $coinbase = new Coinbase($this->exchanger->coinbase_key, $this->exchanger->coinbase_secret);
-                $balance = $coinbase->getBalance();
                 break;
         }
 
         $this->telegram->editMessageText([
             'chat_id' => $this->chat_id,
             'message_id' => $this->message_id,
-            'text' => 'Успех! ' . ($balance ? ('Баланс: <b>' . $balance . '</b>') : ''),
+            'text' => 'Успех!',
             'parse_mode' => 'html'
         ]);
     }
