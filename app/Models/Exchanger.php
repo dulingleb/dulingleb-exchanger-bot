@@ -8,7 +8,7 @@ class Exchanger extends Model
 {
     protected $guarded = [];
 
-    const DEBUG_URI = 'https://6e36e84b5fe7.ngrok.io';
+    const DEBUG_URI = 'https://6649e88374f7.ngrok.io';
 
     const STATUS_ACTIVE = 0;
     const STATUS_CLOSED = 1;

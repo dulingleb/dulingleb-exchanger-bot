@@ -50,14 +50,6 @@ class StartCommand extends Command
             return "ok";
         }
 
-
-        $keyboard = Keyboard::make()
-            ->inline()
-            ->row(
-                Keyboard::inlineButton(['text' => '💰 Купить Btc', 'callback_data' => 'buy_btc'])
-            );
-
-
         $this->replyWithMessage([
             'text' => ExchangerMessage::getMessage($exchangerId, 'start'),
             'parse_mode' => 'html',

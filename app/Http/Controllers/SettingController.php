@@ -15,6 +15,7 @@ class SettingController extends Controller
 
     public function updateTelegramToken(Request $request)
     {
+
         $request->validate([
             'telegram_token' => 'required|string',
             'username' => 'required|string'
@@ -22,7 +23,7 @@ class SettingController extends Controller
 
         $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.telegram.org/bot' . $request->telegram_token . '/']);
         $res = $client->request('POST', 'setWebhook', [
-            'query' => ['url' => Exchanger::DEBUG_URI . '/telegram_callback/' . $request->telegram_token],
+            'query' => ['url' => env('APP_TELEGRAM_URI') . '/telegram_callback/' . $request->telegram_token],
             'http_errors' => false
         ]);
 
