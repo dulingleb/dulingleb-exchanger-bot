@@ -24,10 +24,8 @@
   <component name="ChangeListManager">
     <list default="true" id="448bdef4-fa30-4bf2-a6e1-ee3d22623842" name="Default Changelist" comment="fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TelegramController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TelegramController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TelegramUserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TelegramUserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Exchanger.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Exchanger.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Telegram.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Telegram.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,14 +176,14 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\OpenServer\domains\dulingleb-exchanger-bot\storage\app\images" />
+      <recent name="C:\OpenServer\domains\dulingleb-exchanger-bot\resources\views\exchangerMessages\templates" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\OpenServer\domains\dulingleb-exchanger-bot\storage\app\public" />
       <recent name="C:\OpenServer\domains\dulingleb-exchanger-bot\app\Models" />
       <recent name="C:\OpenServer\domains\dulingleb-exchanger-bot\app\Http\Controllers\SuperAdmin" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\OpenServer\domains\dulingleb-exchanger-bot\storage\app\images" />
-      <recent name="C:\OpenServer\domains\dulingleb-exchanger-bot\resources\views\exchangerMessages\templates" />
     </key>
   </component>
   <component name="RunManager" selected="npm.install">
@@ -247,6 +245,12 @@
       <workItem from="1605618758874" duration="6088000" />
       <workItem from="1605731483164" duration="6124000" />
       <workItem from="1605793130559" duration="5995000" />
+      <workItem from="1605868813139" duration="405000" />
+      <workItem from="1606224523257" duration="2469000" />
+      <workItem from="1606294549188" duration="1519000" />
+      <workItem from="1606409176838" duration="1204000" />
+      <workItem from="1606426968480" duration="1240000" />
+      <workItem from="1606478908376" duration="1355000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1605293630763</created>
@@ -528,7 +532,42 @@
       <option name="project" value="LOCAL" />
       <updated>1605795215582</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="balance">
+      <created>1606224878832</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1606224878832</updated>
+    </task>
+    <task id="LOCAL-00042" summary="balance">
+      <created>1606242246127</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1606242246127</updated>
+    </task>
+    <task id="LOCAL-00043" summary="send">
+      <created>1606242414597</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1606242414597</updated>
+    </task>
+    <task id="LOCAL-00044" summary="send">
+      <created>1606294828413</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1606294828413</updated>
+    </task>
+    <task id="LOCAL-00045" summary="fix">
+      <created>1606427653751</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1606427653751</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -550,6 +589,8 @@
     <MESSAGE value="test" />
     <MESSAGE value="init user" />
     <MESSAGE value="cards" />
+    <MESSAGE value="balance" />
+    <MESSAGE value="send" />
     <MESSAGE value="fix" />
     <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
@@ -571,14 +612,14 @@
     </state>
     <state x="649" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1602163917163" />
     <state x="649" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1040/-1920.0.1920.1040@0.0.2560.1040" timestamp="1601121857998" />
-    <state x="1010" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1605129277828">
+    <state x="1010" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1606224716667">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="1010" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605129277828" />
-    <state x="1060" y="275" key="FileChooserDialogImpl" timestamp="1605627719670">
+    <state x="1010" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1606224716667" />
+    <state x="1060" y="275" key="FileChooserDialogImpl" timestamp="1606417762781">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="1060" y="275" key="FileChooserDialogImpl/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605627719670" />
+    <state x="1060" y="275" key="FileChooserDialogImpl/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1606417762781" />
     <state x="1060" y="275" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1599816325989" />
     <state x="1119" y="418" key="Github.ShareDialog" timestamp="1605266881943">
       <screen x="0" y="0" width="2560" height="1040" />
@@ -612,10 +653,10 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="1114" y="443" key="NewPhpFileDialog/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1604176184771" />
-    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2" timestamp="1605795218691">
+    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2" timestamp="1606427655826">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605795218691" />
+    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1606427655826" />
     <state x="907" y="236" width="585" height="534" key="find.popup" timestamp="1605737100939">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>

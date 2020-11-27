@@ -21,11 +21,8 @@ class TelegramUserController extends Controller
             });
         }
 
-//        $users = $users->withCount(['operations' => function ($q) {
-//            return $q->where('status', Operation::STATUS_SUCCESS);
-//        }])->orderBy('operations_count', 'DESC')->paginate(15);
-
-        $users = $users->select()->addSelect(DB::raw('(SELECT COUNT(*) FROM operations WHERE (operations.telegram_user_id = telegram_user_settings.telegram_user_id) AND (operations.status = ' . Operation::STATUS_SUCCESS . ') ) AS operations_count'))
+        $users = $users->select()
+            ->addSelect(DB::raw('(SELECT COUNT(*) FROM operations WHERE (operations.telegram_user_id = telegram_user_settings.telegram_user_id) AND (operations.exchanger_id = telegram_user_settings.exchanger_id) AND (operations.status = ' . Operation::STATUS_SUCCESS . ') ) AS operations_count'))
             ->where('exchanger_id', auth()->user()->exchanger->id)->orderBy('operations_count', 'DESC')->paginate(15);
 
         return view('telegramUsers.index', compact('users'));
