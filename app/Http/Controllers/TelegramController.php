@@ -839,7 +839,8 @@ class TelegramController extends Controller
     private function admin_messageOperation(Operation $operation)
     {
         $user = $operation->telegram_user->username ? '@' . $operation->telegram_user->username : $operation->telegram_user->first_name;
-        $message = '<strong>#' . $operation->id . '</strong>: ' . $user . ' ' . floatval($operation->amount) . ' btc за ' . $operation->price . ' руб.' . PHP_EOL . 'https://' . $_SERVER['SERVER_NAME'] . '/storage/images/' . $operation->id . '.jpg';
+        $message = '<strong>#' . $operation->id . '</strong>: ' . $user . ' ' . floatval($operation->amount) . ' btc за ' . $operation->price . ' руб.' . PHP_EOL
+            . 'адрес: ' . $operation->btc_address . PHP_EOL . 'https://' . $_SERVER['SERVER_NAME'] . '/storage/images/' . $operation->id . '.jpg';
 
         $keyboard = Keyboard::make()
             ->inline()
