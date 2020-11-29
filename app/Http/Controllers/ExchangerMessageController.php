@@ -46,7 +46,8 @@ class ExchangerMessageController extends Controller
             'text' => 'required|string|max:4000'
         ]);
 
-        $message->text = str_replace('&nbsp;', ' ', $request->text);
+        $text = strip_tags($request->text, ['<br>', '<strong>', '<b>', '<i>', '<u>', '<pre>', '<code>']);
+        $message->text = str_replace('&nbsp;', ' ', $text);
         $message->save();
 
         return redirect()->route('settings.messages.edit', ['slug' => $message->defaultMessage->slug])->with(['success' => 'Сообщение успешно сохранено']);

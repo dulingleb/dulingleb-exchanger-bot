@@ -11,8 +11,7 @@
         },
         style_formats: [
             { title: 'Блоки', items: [
-                    {title: 'pre', format: 'pre'},
-                    {title: 'code', format: 'code'}
+                    {title: 'pre', format: 'pre'}
                 ] }
         ],
         menubar: false,

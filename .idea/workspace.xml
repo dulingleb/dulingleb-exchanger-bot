@@ -24,8 +24,8 @@
   <component name="ChangeListManager">
     <list default="true" id="448bdef4-fa30-4bf2-a6e1-ee3d22623842" name="Default Changelist" comment="fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TelegramController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TelegramController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Operation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Operation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ExchangerMessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ExchangerMessageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/func/tinymce.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/func/tinymce.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,6 +252,7 @@
       <workItem from="1606426968480" duration="1240000" />
       <workItem from="1606478908376" duration="1968000" />
       <workItem from="1606600281728" duration="844000" />
+      <workItem from="1606650291788" duration="694000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1605293630763</created>
