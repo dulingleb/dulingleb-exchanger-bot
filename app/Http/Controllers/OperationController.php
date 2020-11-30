@@ -34,13 +34,15 @@ class OperationController extends Controller
             abort(404);
         }
 
-        $allFiles = Storage::files('public/images');
-        $matchingFiles = preg_grep('/' . $operation->id . '\./', $allFiles);
+//        $allFiles = Storage::files('public/images');
+//        $matchingFiles = preg_grep('/' . $operation->id . '\./', $allFiles);
+//
+//        $file = false;
+//        if ($matchingFiles) {
+//            $file = '/storage/' . str_replace('public/', '', $matchingFiles[array_key_first($matchingFiles)]);
+//        }
 
-        $file = false;
-        if ($matchingFiles) {
-            $file = '/storage/' . str_replace('public/', '', $matchingFiles[array_key_first($matchingFiles)]);
-        }
+        $file = '/storage/images/'. $operation->id . '.jpg';
 
         return response()->view('operations.show', compact('operation', 'file'));
     }
