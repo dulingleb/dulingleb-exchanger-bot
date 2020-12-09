@@ -46,7 +46,7 @@
                                 <div class="form-group">
                                     <label for="min-exchange" class="form-control-label">Мин. покупка</label>
                                     <div class="input-group">
-                                        <input name="min_exchange" class="form-control" type="number" value="{{ old('min_exchange') ?? floatval($exchanger->min_exchange) }}" id="min-exchange" min="0" step="0.0001">
+                                        <input name="min_exchange" class="form-control" type="number" value="{{ old('min_exchange') ?? floatval($exchanger->min_exchange) }}" id="min-exchange" min="0" step="0.00001">
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2">btc</span>
                                         </div>
@@ -56,7 +56,7 @@
                                 <div class="form-group">
                                     <label for="max-exchange" class="form-control-label">Макс. покупка</label>
                                     <div class="input-group">
-                                        <input name="max_exchange" class="form-control" type="number" value="{{ old('max_exchange') ?? floatval($exchanger->max_exchange) }}" id="max-exchange" min="0" step="0.0001">
+                                        <input name="max_exchange" class="form-control" type="number" value="{{ old('max_exchange') ?? floatval($exchanger->max_exchange) }}" id="max-exchange" min="0" step="0.00001">
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2">btc</span>
                                         </div>

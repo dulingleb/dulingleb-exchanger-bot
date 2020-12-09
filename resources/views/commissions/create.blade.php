@@ -20,7 +20,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="from-input" class="form-control-label">от, btc</label>
-                                <input type="number" step="0.001" name="from" class="form-control{{ $errors->has('from') ? ' is-invalid' : '' }}" value="{{ old('from') ?? '' }}" id="from-input">
+                                <input type="number" step="0.0001" name="from" class="form-control{{ $errors->has('from') ? ' is-invalid' : '' }}" value="{{ old('from') ?? '' }}" id="from-input">
                                 @if ($errors->has('from'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">
                                         <strong>{{ $errors->first('from') }}</strong>
@@ -30,7 +30,7 @@
 
                             <div class="form-group">
                                 <label for="to-input" class="form-control-label">до, btc</label>
-                                <input type="number" step="0.001" name="to" class="form-control{{ $errors->has('to') ? ' is-invalid' : '' }}" value="{{ old('to') ?? '' }}" id="to-input">
+                                <input type="number" step="0.0001" name="to" class="form-control{{ $errors->has('to') ? ' is-invalid' : '' }}" value="{{ old('to') ?? '' }}" id="to-input">
                                 @if ($errors->has('to'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">
                                         <strong>{{ $errors->first('to') }}</strong>
