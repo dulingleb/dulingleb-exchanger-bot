@@ -22,12 +22,12 @@ class ExchangerCommissionController extends Controller
     {
         $request->validate([
             'from' => ['required', 'numeric', 'min:0', function($a, $value, $fail) {
-                if (ExchangerCommission::where('from', '<=', $value)->where('to', '>', $value)->exists()) {
+                if (ExchangerCommission::where('from', '<=', $value)->where('to', '>', $value)->where('exchanger_id', auth()->user()->exchanger->id)->exists()) {
                     $fail('Значение в данном диапазоне уже существует.');
                 }
             }],
             'to' => ['required', 'numeric', 'min:0', function($a, $value, $fail) {
-                if (ExchangerCommission::where('from', '<', $value)->where('to', '>=', $value)->exists()) {
+                if (ExchangerCommission::where('from', '<', $value)->where('to', '>=', $value)->where('exchanger_id', auth()->user()->exchanger->id)->exists()) {
                     $fail('Значение в данном диапазоне уже существует.');
                 }
             }],
@@ -55,12 +55,12 @@ class ExchangerCommissionController extends Controller
 
         $request->validate([
             'from' => ['required', 'numeric', 'min:0', function($a, $value, $fail) use ($commission) {
-                if (ExchangerCommission::where('from', '<=', $value)->where('to', '>', $value)->where('id', '!=', $commission->id)->exists()) {
+                if (ExchangerCommission::where('from', '<=', $value)->where('to', '>', $value)->where('id', '!=', $commission->id)->where('exchanger_id', auth()->user()->exchanger->id)->exists()) {
                     $fail('Значение в данном диапазоне уже существует.');
                 }
             }],
             'to' => ['required', 'numeric', 'min:0', function($a, $value, $fail) use ($commission) {
-                if (ExchangerCommission::where('from', '<', $value)->where('to', '>=', $value)->where('id', '!=', $commission->id)->exists()) {
+                if (ExchangerCommission::where('from', '<', $value)->where('to', '>=', $value)->where('id', '!=', $commission->id)->where('exchanger_id', auth()->user()->exchanger->id)->exists()) {
                     $fail('Значение в данном диапазоне уже существует.');
                 }
             }],
