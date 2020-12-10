@@ -248,7 +248,16 @@ class TelegramController extends Controller
         $userSet = TelegramUserSetting::where('exchanger_id', $this->exchanger->id)->where('telegram_user_id', $this->chat_id)->first();
         $refs = TelegramUserSetting::where('exchanger_id', $this->exchanger->id)->where('referer_id', $userSet->id)->count();
 
-        $message = '<strong>Рефералов:</strong> ' . $refs . PHP_EOL . '<strong>Реф ссылка:</strong> https://t.me/';
+        $message = '<strong>Рефералов:</strong> ' . $refs . PHP_EOL . '<strong>Реф ссылка:</strong> https://t.me/' . $this->exchanger->username . '?start=' . $this->chat_id;
+
+        $this->telegram->editMessageText([
+            'chat_id' => $this->chat_id,
+            'message_id' => $this->message_id,
+            'text' => $message,
+            'parse_mode' => 'html',
+            'disable_web_page_preview' => true,
+            'reply_markup' => $this->cancel
+        ]);
     }
 
     private function callback_EnterSum()
@@ -788,8 +797,9 @@ class TelegramController extends Controller
     }
 
     private function ban() {
-        $ban = TelegramUserSetting::where('telegram_user_id', $this->chat_id)->where('exchanger_id', $this->exchanger->id)->first()->ban;
-        if ($ban) {
+
+        $ban = TelegramUserSetting::where('telegram_user_id', $this->chat_id)->where('exchanger_id', $this->exchanger->id)->first();
+        if (isset($ban->ban) && $ban->ban == 1) {
             $message = ExchangerMessage::getMessage($this->exchanger->id, 'ban');
 
             $this->telegram->sendMessage([
