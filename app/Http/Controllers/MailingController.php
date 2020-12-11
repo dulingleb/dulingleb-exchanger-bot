@@ -18,8 +18,10 @@ class MailingController extends Controller
             'message' => 'required|string|max:3999'
         ]);
 
-        $message = str_replace('&nbsp;', ' ', $request->message);
-        $message = strip_tags($message, '<br><strong><b><i><u><pre><code>');
+        $message = str_replace(['&nbsp;', '<br>'], [' ', PHP_EOL], $request->message);
+        $message = strip_tags($message, '<strong><b><i><u><pre><code>');
+
+        dd($message);
 
         SendTelegramMessage::dispatch(auth()->user()->exchanger->id, $message);
 
