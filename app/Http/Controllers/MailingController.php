@@ -21,8 +21,6 @@ class MailingController extends Controller
         $message = str_replace(['&nbsp;', '<br>'], [' ', PHP_EOL], $request->message);
         $message = strip_tags($message, '<strong><b><i><u><pre><code>');
 
-        dd($message);
-
         SendTelegramMessage::dispatch(auth()->user()->exchanger->id, $message);
 
         return redirect()->route('mailing.index')->with(['success' => 'Рассылка отправляется']);
