@@ -67,12 +67,16 @@ class TelegramUserController extends Controller
                 $message = 'Вы были разблокированны!';
             }
 
+            try {
+                Telegram::sendMessage([
+                    'chat_id' => $userSetting->telegram_user_id,
+                    'text' => $message,
+                    'parse_mode' => 'html'
+                ]);
+            } catch (\Exception $exception) {
 
-            Telegram::sendMessage([
-                'chat_id' => $userSetting->telegram_user_id,
-                'text' => $message,
-                'parse_mode' => 'html'
-            ]);
+            }
+
         }
 
         $userSetting->save();
