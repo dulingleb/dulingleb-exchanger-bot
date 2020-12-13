@@ -48,16 +48,10 @@ class Operation extends Model
 
     public function directToOperator()
     {
-        Telegram::setAccessToken($this->exchanger->telegram_token);
-
         $message = ExchangerMessage::getMessage($this->exchanger_id, 'direct-to-operator');
         $message = str_replace('{id}', $this->id, $message);
 
-        Telegram::sendMessage([
-            'chat_id' => $this->telegram_user_id,
-            'text' => $message,
-            'parse_mode' => 'html'
-        ]);
+        $this->sendMessage($this->telegram_user_id, $message);
     }
 
     public function cancelOperation()
@@ -65,15 +59,10 @@ class Operation extends Model
         $this->status = self::STATUS_CANCELED;
         $this->save();
 
-        Telegram::setAccessToken($this->exchanger->telegram_token);
-
         $message = ExchangerMessage::getMessage($this->exchanger_id, 'operation-canceled-by-moderator');
         $message = str_replace('{id}', $this->id, $message);
-        Telegram::sendMessage([
-            'chat_id' => $this->telegram_user_id,
-            'text' => $message,
-            'parse_mode' => 'html'
-        ]);
+
+        $this->sendMessage($this->telegram_user_id, $message);
     }
 
     public function successOperation()
@@ -88,17 +77,26 @@ class Operation extends Model
         $this->status = Operation::STATUS_SUCCESS;
         $this->save();
 
-        Telegram::setAccessToken($this->exchanger->telegram_token);
-
         $message = ExchangerMessage::getMessage($this->exchanger_id, 'operation-success');
         $message = str_replace(['{id}', '{link}'], [$this->id, 'https://www.blockchain.com/ru/btc/address/' . $this->btc_address], $message);
 
-        Telegram::sendMessage([
-            'chat_id' => $this->telegram_user_id,
-            'text' => $message,
-            'parse_mode' => 'html'
-        ]);
+        $this->sendMessage($this->telegram_user_id, $message);
 
         return true;
+    }
+
+    public function sendMessage($chatId, $text)
+    {
+        Telegram::setAccessToken($this->exchanger->telegram_token);
+
+        try {
+            Telegram::sendMessage([
+                'chat_id' => $chatId,
+                'text' => $text,
+                'parse_mode' => 'html'
+            ]);
+        } catch (\Exception $exception) {
+
+        }
     }
 }
