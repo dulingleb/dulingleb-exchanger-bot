@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 
 @Component({
   selector: 'app-header',
@@ -7,9 +7,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Output() changeTheme = new EventEmitter<boolean>();
+  @Output() changeTheme = new EventEmitter<boolean>()
 
-  isDarkTheme: boolean;
+  isDarkTheme: boolean
 
   constructor() { }
 
@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
 
   // TODO: Use Store
   switchTheme(): void {
-    this.changeTheme.emit(this.isDarkTheme);
+    this.changeTheme.emit(this.isDarkTheme)
   }
 
 }
