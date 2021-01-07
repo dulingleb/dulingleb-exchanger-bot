@@ -4,10 +4,14 @@
   min-height: 100vh;
 
   .app-main {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     flex: 1;
 
     .mat-card {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
       border-radius: 0;
     }
   }

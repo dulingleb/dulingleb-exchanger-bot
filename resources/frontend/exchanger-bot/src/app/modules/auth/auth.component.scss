@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  flex: 1;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+
+  .mat-card {
+    margin: auto;
+    max-width: 100%;
+
+    .form-auth {
+      width: 400px;
+      max-width: 100%;
+
+      .mat-form-field {
+        display: block;
+      }
+    }
+  }
+}
