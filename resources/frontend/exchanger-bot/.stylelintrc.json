@@ -4,6 +4,7 @@
     "stylelint-prettier/recommended"
   ],
   "rules": {
+    "prettier/prettier": true,
     "no-empty-source": true,
     "no-descending-specificity": true,
     "at-rule-empty-line-before": "always",
