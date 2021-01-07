@@ -1,0 +1,14 @@
+<header class="app-header">
+  <mat-toolbar color="primary">
+    <div class="container">
+      <a routerLink="/">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+      </a>
+
+      <mat-slide-toggle labelPosition="before" [(ngModel)]="isDarkTheme" (ngModelChange)="switchTheme()">
+        <mat-icon class="theme-icon" aria-label="Dark theme">bedtime</mat-icon>
+      </mat-slide-toggle>
+
+    </div>
+  </mat-toolbar>
+</header>

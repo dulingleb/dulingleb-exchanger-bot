@@ -1,0 +1,12 @@
+:host { display: block }
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .theme-icon {
+    position: relative;
+    top: 3px;
+  }
+}

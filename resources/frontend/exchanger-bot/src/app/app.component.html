@@ -1,0 +1,11 @@
+<div class="app-wrapper" [ngClass]="{ 'dark-mode': isDarkTheme }">
+  <app-header (changeTheme)="isDarkTheme = $event"></app-header>
+
+  <main class="app-main">
+    <mat-card>
+      <router-outlet></router-outlet>
+    </mat-card>
+  </main>
+
+  <app-footer></app-footer>
+</div>
