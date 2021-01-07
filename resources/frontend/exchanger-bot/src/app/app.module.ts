@@ -9,20 +9,9 @@ import { AppComponent } from './app.component'
 import { FooterModule, HeaderModule } from '@core/components'
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-
-    MatCardModule,
-
-    HeaderModule,
-    FooterModule
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MatCardModule, HeaderModule, FooterModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
