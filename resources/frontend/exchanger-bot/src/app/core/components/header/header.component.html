@@ -5,7 +5,7 @@
         <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
       </a>
 
-      <mat-slide-toggle labelPosition="before" [(ngModel)]="isDarkTheme" (ngModelChange)="switchTheme()">
+      <mat-slide-toggle labelPosition="before" [(ngModel)]="isDarkTheme" (ngModelChange)="uiFacade.changeThemeMode($event)">
         <mat-icon class="theme-icon" aria-label="Dark theme">bedtime</mat-icon>
       </mat-slide-toggle>
 

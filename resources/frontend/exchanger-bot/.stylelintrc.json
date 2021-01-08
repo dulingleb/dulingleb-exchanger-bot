@@ -3,6 +3,9 @@
     "stylelint-config-standard",
     "stylelint-prettier/recommended"
   ],
+  "ignoreFiles": [
+    "dist/**/*"
+  ],
   "rules": {
     "prettier/prettier": true,
     "no-empty-source": true,

@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { Component, Inject, OnInit } from '@angular/core'
+
+import { IUiFacade, UI_FACADE } from '@core/features'
 
 @Component({
   selector: 'app-header',
@@ -6,16 +8,11 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core'
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  @Output() changeTheme = new EventEmitter<boolean>()
-
   isDarkTheme: boolean
 
-  constructor() {}
+  constructor(@Inject(UI_FACADE) public uiFacade: IUiFacade) {}
 
-  ngOnInit(): void {}
-
-  // TODO: Use Store
-  switchTheme(): void {
-    this.changeTheme.emit(this.isDarkTheme)
+  ngOnInit(): void {
+    this.uiFacade.isDarkTheme$.subscribe(themeMode => this.isDarkTheme = themeMode)
   }
 }

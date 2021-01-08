@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "exchanger-bot"
+  "defaultProject": "exchanger-bot",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

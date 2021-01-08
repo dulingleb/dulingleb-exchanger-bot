@@ -1,5 +1,5 @@
-<div class="app-wrapper" [ngClass]="{ 'dark-mode': isDarkTheme }">
-  <app-header (changeTheme)="isDarkTheme = $event"></app-header>
+<div class="app-wrapper" [ngClass]="{ 'dark-mode': uiFacade.isDarkTheme$ | async }">
+  <app-header></app-header>
 
   <main class="app-main">
     <mat-card>
