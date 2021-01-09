@@ -22,8 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c47262b-432e-4d09-a340-1cf25fae59dd" name="add localhost to exlude csrf" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="3c47262b-432e-4d09-a340-1cf25fae59dd" name="add localhost to exlude csrf" comment="add localhost to exlude csrf">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterDir="false" />
     </list>
@@ -54,7 +53,6 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="MIXED" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -204,7 +202,6 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="" name="Default Changelist" comment="update .gitignore" />
       <changelist id="3c47262b-432e-4d09-a340-1cf25fae59dd" name="add localhost to exlude csrf" comment="" />
       <created>1599056881406</created>
       <option name="number" value="Default" />
@@ -270,13 +267,8 @@
       <workItem from="1609676536437" duration="21534000" />
       <workItem from="1609786955965" duration="34702000" />
       <workItem from="1610214019108" duration="127000" />
-    </task>
-    <task id="LOCAL-00010" summary="fix">
-      <created>1605377029780</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1605377029780</updated>
+      <workItem from="1610214160677" duration="124000" />
+      <workItem from="1610214297564" duration="233000" />
     </task>
     <task id="LOCAL-00011" summary="fix">
       <created>1605377304561</created>
@@ -614,7 +606,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610213935018</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="add localhost to exlude csrf">
+      <created>1610214207191</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1610214207191</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -656,7 +655,8 @@
     <MESSAGE value="fix mailing" />
     <MESSAGE value="fix cancel ban" />
     <MESSAGE value="update .gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="update .gitignore" />
+    <MESSAGE value="add localhost to exlude csrf" />
+    <option name="LAST_COMMIT_MESSAGE" value="add localhost to exlude csrf" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
