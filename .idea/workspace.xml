@@ -22,9 +22,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="448bdef4-fa30-4bf2-a6e1-ee3d22623842" name="Default Changelist" comment="fix">
+    <list default="true" id="3c47262b-432e-4d09-a340-1cf25fae59dd" name="add localhost to exlude csrf" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OperationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OperationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,10 +49,12 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="backend-refactor" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -201,7 +204,8 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="448bdef4-fa30-4bf2-a6e1-ee3d22623842" name="Default Changelist" comment="" />
+      <changelist id="" name="Default Changelist" comment="update .gitignore" />
+      <changelist id="3c47262b-432e-4d09-a340-1cf25fae59dd" name="add localhost to exlude csrf" comment="" />
       <created>1599056881406</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -253,70 +257,19 @@
       <workItem from="1606600281728" duration="844000" />
       <workItem from="1606650291788" duration="2171000" />
       <workItem from="1606734932175" duration="101000" />
-      <workItem from="1606769523773" duration="169000" />
-    </task>
-    <task id="LOCAL-00001" summary="test">
-      <created>1605293630763</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1605293630763</updated>
-    </task>
-    <task id="LOCAL-00002" summary="test">
-      <created>1605293932315</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1605293932315</updated>
-    </task>
-    <task id="LOCAL-00003" summary="init user">
-      <created>1605294339737</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1605294339737</updated>
-    </task>
-    <task id="LOCAL-00004" summary="init user">
-      <created>1605294524868</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1605294524868</updated>
-    </task>
-    <task id="LOCAL-00005" summary="init user">
-      <created>1605294587419</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1605294587419</updated>
-    </task>
-    <task id="LOCAL-00006" summary="fix">
-      <created>1605374723055</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1605374723055</updated>
-    </task>
-    <task id="LOCAL-00007" summary="fix">
-      <created>1605374837113</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1605374837113</updated>
-    </task>
-    <task id="LOCAL-00008" summary="fix">
-      <created>1605375320591</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1605375320591</updated>
-    </task>
-    <task id="LOCAL-00009" summary="fix">
-      <created>1605376705988</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1605376705988</updated>
+      <workItem from="1606769523773" duration="1477000" />
+      <workItem from="1606944041237" duration="631000" />
+      <workItem from="1607459103858" duration="5180000" />
+      <workItem from="1607532038024" duration="1564000" />
+      <workItem from="1607601207612" duration="1448000" />
+      <workItem from="1607684009216" duration="2074000" />
+      <workItem from="1607886036200" duration="1801000" />
+      <workItem from="1608030641256" duration="15000" />
+      <workItem from="1608721071729" duration="5899000" />
+      <workItem from="1609494940789" duration="3164000" />
+      <workItem from="1609676536437" duration="21534000" />
+      <workItem from="1609786955965" duration="34702000" />
+      <workItem from="1610214019108" duration="127000" />
     </task>
     <task id="LOCAL-00010" summary="fix">
       <created>1605377029780</created>
@@ -591,7 +544,77 @@
       <option name="project" value="LOCAL" />
       <updated>1606651278433</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="fix">
+      <created>1606769722436</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1606769722436</updated>
+    </task>
+    <task id="LOCAL-00050" summary="fix commission">
+      <created>1607542886169</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1607542886170</updated>
+    </task>
+    <task id="LOCAL-00051" summary="fix commission">
+      <created>1607543017334</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1607543017334</updated>
+    </task>
+    <task id="LOCAL-00052" summary="fix ban">
+      <created>1607606342122</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1607606342122</updated>
+    </task>
+    <task id="LOCAL-00053" summary="fix mailing">
+      <created>1607684269631</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1607684269631</updated>
+    </task>
+    <task id="LOCAL-00054" summary="fix mailing">
+      <created>1607684816338</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1607684816338</updated>
+    </task>
+    <task id="LOCAL-00055" summary="fix mailing">
+      <created>1607684899263</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1607684899263</updated>
+    </task>
+    <task id="LOCAL-00056" summary="fix mailing">
+      <created>1607886409714</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1607886409715</updated>
+    </task>
+    <task id="LOCAL-00057" summary="fix cancel ban">
+      <created>1607887200372</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1607887200373</updated>
+    </task>
+    <task id="LOCAL-00058" summary="update .gitignore">
+      <created>1610213935018</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1610213935018</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -602,7 +625,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -616,80 +651,13 @@
     <MESSAGE value="balance" />
     <MESSAGE value="send" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="986" y="291" key="#Log_Highlighting_(ideolog)" timestamp="1599940993259">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state x="986" y="291" key="#Log_Highlighting_(ideolog)/0.0.2560.1040@0.0.2560.1040" timestamp="1599940993259" />
-    <state x="872" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599057107608">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state x="872" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1599057107608" />
-    <state x="1020" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602162244486">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state x="1020" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1602162244486" />
-    <state x="649" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1602163917163">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state x="649" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1602163917163" />
-    <state x="649" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1040/-1920.0.1920.1040@0.0.2560.1040" timestamp="1601121857998" />
-    <state x="1010" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1606224716667">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state x="1010" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1606224716667" />
-    <state x="1060" y="275" key="FileChooserDialogImpl" timestamp="1606417762781">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state x="1060" y="275" key="FileChooserDialogImpl/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1606417762781" />
-    <state x="1060" y="275" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1599816325989" />
-    <state x="1119" y="418" key="Github.ShareDialog" timestamp="1605266881943">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state x="1119" y="418" key="Github.ShareDialog/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605266881943" />
-    <state x="1004" y="225" key="Github.UntrackedFilesDialog" timestamp="1605266889598">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state x="1004" y="225" key="Github.UntrackedFilesDialog/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605266889598" />
-    <state width="2517" height="282" key="GridCell.Tab.0.bottom" timestamp="1599060499430">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state width="2517" height="282" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1599060499430" />
-    <state width="2517" height="282" key="GridCell.Tab.0.center" timestamp="1599060499428">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state width="2517" height="282" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1599060499428" />
-    <state width="2517" height="282" key="GridCell.Tab.0.left" timestamp="1599060499428">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state width="2517" height="282" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1599060499428" />
-    <state width="2517" height="282" key="GridCell.Tab.0.right" timestamp="1599060499429">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state width="2517" height="282" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1599060499429" />
-    <state x="1029" y="243" key="NewPhpClassDialog" timestamp="1604176205597">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state x="1029" y="243" key="NewPhpClassDialog/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1604176205597" />
-    <state x="1114" y="443" key="NewPhpFileDialog" timestamp="1604176184771">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state x="1114" y="443" key="NewPhpFileDialog/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1604176184771" />
-    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2" timestamp="1606651280313">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state x="872" y="253" width="816" height="533" key="Vcs.Push.Dialog.v2/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1606651280313" />
-    <state x="907" y="236" width="585" height="534" key="find.popup" timestamp="1605737100939">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state x="907" y="236" width="585" height="534" key="find.popup/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605737100939" />
-    <state x="907" y="236" width="585" height="534" key="find.popup/0.0.2560.1040@0.0.2560.1040" timestamp="1600776676690" />
-    <state x="943" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1605621776341">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state x="943" y="225" width="672" height="678" key="search.everywhere.popup/0.0.2560.1040/-1280.0.1280.680@0.0.2560.1040" timestamp="1605621776341" />
+    <MESSAGE value="fix commission" />
+    <MESSAGE value="fix ban" />
+    <MESSAGE value="fix mailing" />
+    <MESSAGE value="fix cancel ban" />
+    <MESSAGE value="update .gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="update .gitignore" />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
