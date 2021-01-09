@@ -10,7 +10,10 @@ class TelegramUserSetting extends Model
 
     public static function getTransaction(int $exchangerId, int $userId)
     {
-        return json_decode(self::where('telegram_user_id', $userId)->where('exchanger_id', $exchangerId)->first()->transaction, true);
+        $setting = self::where('telegram_user_id', $userId)->where('exchanger_id', $exchangerId)->first();
+        if ($setting) {
+            return json_decode($setting->transaction, true);
+        }
     }
 
     public static function setTransaction(int $exchangerId, int $userId, array $transaction = [], bool $merge = false)
@@ -19,7 +22,7 @@ class TelegramUserSetting extends Model
             $transaction = array_merge(self::getTransaction($exchangerId, $userId) ?? [], $transaction);
         }
 
-        self::where('telegram_user_id', $userId)->where('exchanger_id', $exchangerId)->first()->update(['transaction' => json_encode($transaction) ?? null]);
+        self::where('telegram_user_id', $userId)->where('exchanger_id', $exchangerId)->first()->update(['transaction' => $transaction ? json_encode($transaction) : null]);
     }
 
     public function referrals()

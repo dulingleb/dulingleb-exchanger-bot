@@ -10,7 +10,7 @@ class TelegramUser extends Model
 
     public function operations()
     {
-        return $this->hasMany(Operation::class)->where('exchanger_id', auth()->user()->exchanger->id);
+        return $this->hasMany(Operation::class, 'telegram_user_id', 'id')->where('exchanger_id', auth()->user()->exchanger->id);
     }
 
     public function setting()
