@@ -16,7 +16,7 @@ use Telegram\Bot\Keyboard\Keyboard;
 
 class BuyBtcController extends BaseController
 {
-    public function callback($update)
+    public function callbackMessage($update)
     {
         if ($this->work() === false) {
             return "ok";
@@ -79,7 +79,7 @@ class BuyBtcController extends BaseController
         }
     }
 
-    private function buyBtc()
+    public function buyBtc()
     {
         // Если есть открытая сделка
         if (Operation::where('exchanger_id', $this->chatData['exchanger']->id)->where('telegram_user_id', $this->chatData['chat_id'])

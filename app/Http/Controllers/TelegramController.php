@@ -2,21 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Func\AddressValidator;
 use App\Func\Coinbase;
 use App\Http\Controllers\Bot\User\BuyBtcController;
-use App\Models\BankDetail;
 use App\Models\Exchanger;
-use App\Models\ExchangerCommission;
 use App\Models\ExchangerMessage;
 use App\Models\Operation;
-use App\Models\TelegramUser;
 use App\Models\TelegramUserSetting;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
-use SebastianBergmann\CodeCoverage\Report\PHP;
 use Telegram;
 use Telegram\Bot\Keyboard\Keyboard;
+use App\Http\Controllers\Bot\Admin\OperationController;
 
 class TelegramController extends Controller
 {
@@ -71,44 +65,27 @@ class TelegramController extends Controller
 
         if (isset($transaction['name'])) {
             try {
-                app('App\Http\Controllers\Bot\\' . $transaction['name'], ['telegram' => $this->telegram, 'chatData' => $chatData])->callback($update);
+                app('App\Http\Controllers\Bot\\' . $transaction['name'], ['telegram' => $this->telegram, 'chatData' => $chatData])->callbackMessage($update);
             } catch (\Exception $exception) {
                 $this->telegram->sendMessage([
                     'chat_id' => $this->chat_id,
-                    'text' => 'Произошла ошибка в обмене' . PHP_EOL . $exception->getMessage() . PHP_EOL . $exception->getLine()
+                    'text' => 'Произошла ошибка' . PHP_EOL . $exception->getMessage() . PHP_EOL . $exception->getLine()
                 ]);
             }
         } else {
             // Типа если нет имени, то это главное меню
 
-            switch ($update->getMessage()->getText()) {
-                case '💰 Купить BTC':
-                    (new BuyBtcController($this->telegram, $chatData))->callback($update);
-                    break;
-                case '🧾️ Просмотр сделки':
-                    (new BuyBtcController($this->telegram, $chatData))->waitOperation();
-                    break;
+            $telegramUser = TelegramUserSetting::where('exchanger_id', $this->exchanger->id)->where('telegram_user_id', $this->chat_id)->first();
+
+            if ($telegramUser->role == 'admin') {
+                $this->adminsMessageCommands($update, $chatData);
+            } else {
+                $this->usersMessageCommands($update, $chatData);
             }
         }
 
         return;
 
-        if (isset($transaction['step'])) {
-            switch ($transaction['step']) {
-                case 'enter_sum':
-                    $this->message_getEnteredSum();
-                    break;
-                case 'enter_btc_address':
-                    $this->message_getBtcAddress();
-                    break;
-                case 'get_check':
-                    $this->message_GetCheck();
-                    break;
-                case 'set_course':
-                    $this->message_admin_setCourse();
-                    break;
-            }
-        }
 
         if (TelegramUserSetting::where([
             ['telegram_user_id', $this->chat_id],
@@ -147,21 +124,25 @@ class TelegramController extends Controller
 
     private function getCallback()
     {
-        $callback = $this->update->getCallbackQuery()->getData();
-        $prefix = substr($callback, 0, strpos($callback, '_'));
-        $task = substr($callback, strpos($callback, '_')+1);
+        $transaction = TelegramUserSetting::getTransaction($this->exchanger->id, $this->chat_id);
+        $update = $this->update;
 
         $chatData = [];
         $chatData['chat_id'] = $this->chat_id;
         $chatData['message_id'] = $this->message_id;
         $chatData['exchanger'] = $this->exchanger;
 
-        switch ($prefix) {
-            case 'BUYBTC':
-                (new BuyBtcController($this->telegram, $chatData))->callback($task);
-                break;
+
+
+        $telegramUser = TelegramUserSetting::where('exchanger_id', $this->exchanger->id)->where('telegram_user_id', $this->chat_id)->first();
+
+        if ($telegramUser->role == 'admin') {
+            $this->adminsCallbackCommands($update, $chatData);
+        } else {
+            $this->usersCallbackCommands($update, $chatData);
         }
-        return;
+
+return;
 
         switch ($this->update->getCallbackQuery()->getData()) {
             case 'buy_btc':
@@ -237,24 +218,6 @@ class TelegramController extends Controller
             'disable_web_page_preview' => true,
             'reply_markup' => $this->cancel
         ]);
-    }
-
-    private function callback_admin_ListWaiting()
-    {
-        $operations = Operation::where('exchanger_id', $this->exchanger->id)->where('status', Operation::STATUS_CHECKING)->get();
-
-        if (!$operations->count()) {
-            $this->telegram->sendMessage([
-                'chat_id' => $this->chat_id,
-                'text' => 'На данный момент все сделки проверены! Расслабтесь...'
-            ]);
-
-            return "ok";
-        }
-
-        foreach ($operations as $operation) {
-            $this->admin_messageOperation($operation);
-        }
     }
 
     private function callback_admin_currentCource()
@@ -412,30 +375,52 @@ class TelegramController extends Controller
     /////////////////////////
 
 
-
-
-    private function getMinMax()
+    private function usersMessageCommands($update, $chatData)
     {
-        $data = [];
-
-        $data['minBtc'] = floatval($this->exchanger->min_exchange);
-        $data['maxBtc'] = floatval($this->exchanger->max_exchange);
-
-        $minRub = $data['minBtc'] * $this->exchanger->course;
-        $data['minRub'] = $this->mod5($minRub);
-
-        $maxRub = $data['maxBtc'] * $this->exchanger->course;
-        $data['maxRub'] = $this->mod5($maxRub);
-
-        return $data;
+        switch ($update->getMessage()->getText()) {
+            case '💰 Купить BTC':
+                (new BuyBtcController($this->telegram, $chatData))->buyBtc();
+                break;
+            case '🧾️ Просмотр сделки':
+                (new BuyBtcController($this->telegram, $chatData))->waitOperation();
+                break;
+        }
     }
 
-    private function mod5($price)
+    private function usersCallbackCommands($update, $chatData)
     {
-        if (($mod5 = fmod($price, 5)) > 0.5) {
-            return ($price - $mod5) + 5;
-        } else {
-            return $price - $mod5;
+        switch ($update->getMessage()->getText()) {
+            case 'На проверке':
+                (new OperationController($this->telegram, $chatData))->getWaitOperations();
+                break;
+            case '🧾️ Просмотр сделки':
+                (new BuyBtcController($this->telegram, $chatData))->waitOperation();
+                break;
+        }
+    }
+
+    private function adminsMessageCommands($update, $chatData)
+    {
+        switch ($update->getMessage()->getText()) {
+            case 'На проверке':
+                (new OperationController($this->telegram, $chatData))->getWaitOperations();
+                break;
+            case '🧾️ Просмотр сделки':
+                (new BuyBtcController($this->telegram, $chatData))->waitOperation();
+                break;
+        }
+    }
+
+    private function adminsCallbackCommands($update, $chatData)
+    {
+        $str = $update->getCallbackQuery()->getData();
+        $controller = substr($str, 0, strpos($str, '_'));
+        $callback = substr($str, strpos($str, '_')+1);
+
+        switch ($controller) {
+            case 'operation':
+                (new OperationController($this->telegram, $chatData))->callback($callback);
+                break;
         }
     }
 
@@ -455,24 +440,6 @@ class TelegramController extends Controller
         }
 
         return false;
-    }
-
-    private function work()
-    {
-         if ($this->exchanger->status != Exchanger::STATUS_ACTIVE) {
-            $message = ExchangerMessage::getMessage($this->exchanger->id, 'dont-work');
-
-            $this->telegram->sendMessage([
-                'chat_id' => $this->chat_id,
-                'text' => $message,
-                'parse_mode' => 'html',
-                'reply_markup' => \App\Models\Telegram::goStart()
-            ]);
-
-            return false;
-        }
-
-        return true;
     }
 
     private function admin_CheckOperationSuccess(Operation $operation)

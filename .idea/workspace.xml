@@ -24,15 +24,10 @@
   <component name="ChangeListManager">
     <list default="true" id="448bdef4-fa30-4bf2-a6e1-ee3d22623842" name="Default Changelist" comment="fix cancel ban">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Commands/CheckOperation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/CheckOperation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Bot/Admin/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Bot/Admin/BaseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Bot/Admin/OperationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Bot/Admin/OperationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Bot/User/BuyBtcController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Bot/User/BuyBtcController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TelegramController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TelegramController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/SendTelegramMessage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SendTelegramMessage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Operation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Operation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Telegram.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Telegram.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/TelegramUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TelegramUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/TelegramUserSetting.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/TelegramUserSetting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Telegram/StartCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Telegram/StartCommand.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -628,7 +623,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
