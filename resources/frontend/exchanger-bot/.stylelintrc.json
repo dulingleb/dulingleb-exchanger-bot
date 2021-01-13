@@ -1,13 +1,11 @@
 {
   "extends": [
-    "stylelint-config-standard",
-    "stylelint-prettier/recommended"
+    "stylelint-config-standard"
   ],
   "ignoreFiles": [
     "dist/**/*"
   ],
   "rules": {
-    "prettier/prettier": true,
     "no-empty-source": true,
     "no-descending-specificity": true,
     "at-rule-empty-line-before": "always",
