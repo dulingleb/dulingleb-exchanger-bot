@@ -1,19 +1,27 @@
 .app-wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
 
-  .app-main {
+  .app-sidenav {
+    width: 200px;
+  }
+
+  .app-content-wrapper {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    height: 100%;
 
-    .mat-card {
+    .app-main {
       display: flex;
       flex-direction: column;
       flex: 1;
-      border-radius: 0;
-      background: linear-gradient(135deg, #d9d9d9 0%, #dadada 11%, #c5c5c5 11%, #f8fdff 63%, #5331a2 63%, #7953d2 70%, #371992 70%, #4527a0 78%, #00002a 78%, #000070 80%);
+
+      .mat-card {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        border-radius: 0;
+        background: linear-gradient(135deg, #d9d9d9 0%, #dadada 11%, #c5c5c5 11%, #f8fdff 63%, #5331a2 63%, #7953d2 70%, #371992 70%, #4527a0 78%, #00002a 78%, #000070 80%);
+      }
     }
   }
 }

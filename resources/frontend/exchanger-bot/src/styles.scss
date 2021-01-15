@@ -1,7 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+a, button {
+  cursor: pointer;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  scrollbar-width: thin;
+}
+
+mat-cell {
+  box-sizing: content-box;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  // background: map-get($map: $gray-palette, $key: 400);
+}
 
 .container {
   margin: 0 auto;

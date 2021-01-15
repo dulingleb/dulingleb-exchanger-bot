@@ -1,11 +1,19 @@
-<div class="app-wrapper" [ngClass]="{ 'dark-mode': uiFacade.isDarkTheme$ | async }">
-  <app-header></app-header>
+<mat-drawer-container class="app-wrapper" autosize [ngClass]="{ 'dark-mode': uiFacade.isDarkTheme$ | async }">
 
-  <main class="app-main">
-    <mat-card>
-      <router-outlet></router-outlet>
-    </mat-card>
-  </main>
+  <mat-drawer #drawer [opened]="uiFacade.showSideNav$ | async" class="app-sidenav" mode="side">
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
 
-  <app-footer></app-footer>
-</div>
+  <div class="app-content-wrapper">
+    <app-header></app-header>
+
+    <main class="app-main">
+      <mat-card>
+        <router-outlet></router-outlet>
+      </mat-card>
+    </main>
+
+    <app-footer></app-footer>
+  </div>
+
+</mat-drawer-container>

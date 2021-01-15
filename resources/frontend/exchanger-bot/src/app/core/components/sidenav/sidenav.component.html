@@ -1,0 +1,68 @@
+<mat-nav-list>
+  <mat-list-item>
+    <button mat-icon-button routerLink="/">
+       <mat-icon>dashboard</mat-icon>
+       <span>{{ 'side-nav.dashboard' | translate }}</span>
+    </button>
+ </mat-list-item>
+ <mat-list-item>
+  <button mat-icon-button routerLink="/admins">
+     <mat-icon>supervisor_account</mat-icon>
+     <span>{{ 'side-nav.admins' | translate }}</span>
+  </button>
+</mat-list-item>
+<mat-list-item>
+  <button mat-icon-button routerLink="/users">
+     <mat-icon>people</mat-icon>
+     <span>{{ 'side-nav.users' | translate }}</span>
+  </button>
+</mat-list-item>
+<mat-list-item>
+  <button mat-icon-button routerLink="/operations">
+     <mat-icon>attach_money</mat-icon>
+     <span>{{ 'side-nav.operations' | translate }}</span>
+  </button>
+</mat-list-item>
+<mat-list-item>
+  <button mat-icon-button routerLink="/mailing">
+     <mat-icon>mail_outline</mat-icon>
+     <span>{{ 'side-nav.mailing' | translate }}</span>
+  </button>
+</mat-list-item>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+     <mat-icon>settings</mat-icon>
+      <span>{{ 'side-nav.settings.title' | translate }}</span>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <mat-list-item>
+    <button mat-icon-button routerLink="/settings">
+       <mat-icon>perm_data_setting</mat-icon>
+       <span>{{ 'side-nav.settings.common' | translate }}</span>
+    </button>
+  </mat-list-item>
+  <mat-list-item>
+    <button mat-icon-button routerLink="/settings/messages">
+       <mat-icon>message</mat-icon>
+       <span>{{ 'side-nav.settings.messages' | translate }}</span>
+    </button>
+  </mat-list-item>
+  <mat-list-item>
+    <button mat-icon-button routerLink="/settings/commission">
+       <mat-icon>monetization_on</mat-icon>
+       <span>{{ 'side-nav.settings.commission' | translate }}</span>
+    </button>
+  </mat-list-item>
+  <mat-list-item>
+    <button mat-icon-button routerLink="/settings/requisites">
+       <mat-icon>info</mat-icon>
+       <span>{{ 'side-nav.settings.requisites' | translate }}</span>
+    </button>
+  </mat-list-item>
+
+</mat-expansion-panel>
+
+</mat-nav-list>

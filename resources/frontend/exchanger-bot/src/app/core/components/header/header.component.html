@@ -1,9 +1,16 @@
 <header class="app-header">
   <mat-toolbar color="primary">
     <div class="container">
-      <a routerLink="/">
-        <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-      </a>
+      <div>
+        <a routerLink="/">
+          <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+        </a>
+        <button mat-icon-button (click)="uiFacade.toggleSideNav()">
+          <mat-icon aria-label="Menu" *ngIf="uiFacade.showSideNav$ | async">menu_open</mat-icon>
+          <mat-icon aria-label="Menu" *ngIf="!(uiFacade.showSideNav$ | async)">menu</mat-icon>
+       </button>
+      </div>
+
 
       <mat-slide-toggle labelPosition="before" [(ngModel)]="isDarkTheme" (ngModelChange)="uiFacade.changeThemeMode($event)">
         <mat-icon class="theme-icon" aria-label="Dark theme">bedtime</mat-icon>

@@ -5,10 +5,12 @@ export const uiFeatureKey = 'UI exchanger bot'
 
 export interface IUiState {
   isDarkTheme: boolean;
+  showSideNav: boolean;
 }
 
 export const createUiInitState = (): IUiState => ({
-  isDarkTheme: false
+  isDarkTheme: false,
+  showSideNav: false
 })
 
 export interface IAppWithUiState {
@@ -23,6 +25,7 @@ export const uiState = createReducer(
   createUiInitState(),
 
   on(UI_ACTIONS.saveThemeMode, (state, { isDarkTheme }) => ({ ...state, isDarkTheme })),
+  on(UI_ACTIONS.toggleSideNav, state => ({ ...state, showSideNav: !state.showSideNav })),
 
 )
 

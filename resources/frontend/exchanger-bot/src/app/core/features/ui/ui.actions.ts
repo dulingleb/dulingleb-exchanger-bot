@@ -14,8 +14,13 @@ const saveThemeMode = createAction(
   props<{ isDarkTheme: boolean }>()
 )
 
+const toggleSideNav = createAction(
+  '[UI exchanger bot] Toggle side nav'
+)
+
 export const UI_ACTIONS = {
   initUi,
   changeThemeMode,
-  saveThemeMode
+  saveThemeMode,
+  toggleSideNav
 }

@@ -38,6 +38,15 @@
             "style": "camelCase"
           }
         ],
+
+        "@typescript-eslint/naming-convention": [
+          "warn",
+          {
+            "selector": "enumMember",
+            "format": ["UPPER_CASE"]
+          }
+        ],
+
         "semi": "off",
         "no-shadow": "off",
         "@typescript-eslint/semi": ["error", "never"],
@@ -67,7 +76,9 @@
       "extends": [
         "plugin:@angular-eslint/template/recommended"
       ],
-      "rules": {}
+      "rules": {
+        "@angular-eslint/template/no-negated-async": "off"
+      }
     }
   ]
 }

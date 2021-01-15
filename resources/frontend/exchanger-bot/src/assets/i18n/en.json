@@ -1,0 +1,19 @@
+{
+  "info": {
+    "copyright": "© 2020-{{year}} Created by Andrey Lebedev, Gleb Dulin"
+  },
+  "side-nav": {
+    "dashboard": "Доска",
+    "admins": "Администраторы",
+    "users": "Пользователи",
+    "operations": "Сделки",
+    "mailing": "Рассылка",
+    "settings": {
+      "title": "Настройки",
+      "common": "Общие",
+      "messages": "Сообщения",
+      "commission": "Коммиссии",
+      "requisites": "Реквизиты"
+    }
+  }
+}

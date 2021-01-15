@@ -8,3 +8,8 @@ export const selectUiThemeMode = createSelector(
   [selectUi],
   state => state.isDarkTheme
 )
+
+export const selectUiShowSideNav = createSelector(
+  [selectUi],
+  state => state.showSideNav
+)

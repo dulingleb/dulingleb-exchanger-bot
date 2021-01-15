@@ -6,7 +6,11 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./modules/auth').then(m => m.AuthModule),
   },
-  { path: '**', redirectTo: '/auth' },
+  {
+    path: 'workspace',
+    loadChildren: () => import('./modules/workspace').then(m => m.WorkspaceModule),
+  },
+  { path: '**', redirectTo: '/workspace' },
 ]
 
 @NgModule({
