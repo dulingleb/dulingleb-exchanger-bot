@@ -1,4 +1,6 @@
-.side-nav {
+@import "styles";
+
+.app-side-nav {
   position: relative;
   height: 100%;
 
@@ -20,5 +22,18 @@
     position: relative;
     z-index: 2;
     background: transparent;
+
+    @include block-shadow;
+
+    .nav-link {
+      flex: 1;
+      text-align: left;
+    }
+  }
+
+  .nav-group-item {
+    .mat-expansion-panel-header {
+      padding: 0 1rem;
+    }
   }
 }
