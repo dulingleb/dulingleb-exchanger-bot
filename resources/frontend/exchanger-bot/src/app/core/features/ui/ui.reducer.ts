@@ -10,7 +10,7 @@ export interface IUiState {
 
 export const createUiInitState = (): IUiState => ({
   isDarkTheme: false,
-  showSideNav: false
+  showSideNav: true
 })
 
 export interface IAppWithUiState {

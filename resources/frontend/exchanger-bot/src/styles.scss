@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+@import "./styles/styles";
 
 html, body { height: 100%; }
 
@@ -50,6 +50,16 @@ mat-cell {
   }
 }
 
+.mat-button, .mat-icon-button {
+  &.three-dots-btn {
+    .mat-button-wrapper {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+  }
+}
+
 .app-side-nav {
   .mat-expansion-panel {
     .mat-expansion-panel-body {
@@ -74,4 +84,18 @@ mat-cell {
       }
     }
   }
+}
+
+.user-logo {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  min-width: 2.2rem;
+  min-height: 2.2rem;
+  text-transform: uppercase;
+  color: $white;
+  border-radius: 50%;
+  background: $primary;
 }

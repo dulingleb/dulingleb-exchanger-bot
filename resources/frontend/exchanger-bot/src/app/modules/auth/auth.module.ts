@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { TranslateModule } from '@ngx-translate/core'
 import { MatCardModule } from '@angular/material/card'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatButtonModule } from '@angular/material/button'
@@ -13,6 +14,7 @@ import { AuthRoutingModule } from './auth-routing.module'
   declarations: [AuthComponent],
   imports: [
     CommonModule,
+    TranslateModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,

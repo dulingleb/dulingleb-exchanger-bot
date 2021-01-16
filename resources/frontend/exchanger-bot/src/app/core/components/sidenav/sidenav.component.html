@@ -1,33 +1,42 @@
 <mat-nav-list class="app-side-nav">
-  <mat-list-item class="nav-item">
-    <button mat-icon-button disableRipple="true" class="nav-link" routerLink="/dashboard">
-       <mat-icon>dashboard</mat-icon>
-       <span>{{ 'side-nav.dashboard' | translate }}</span>
-    </button>
+  <mat-list-item class="nav-item user-profile-nav-item">
+    <a mat-button disableRipple="true" class="nav-link three-dots-btn" routerLink="/profile">
+      <span class="mat-button-wrapper">
+        <span class="user-logo">dj</span>
+        <span class="fio">Don John</span>
+      </span>
+    </a>
  </mat-list-item>
+
+ <mat-list-item class="nav-item">
+  <a mat-icon-button disableRipple="true" class="nav-link" routerLink="/dashboard">
+     <mat-icon>dashboard</mat-icon>
+     <span>{{ 'side-nav.dashboard' | translate }}</span>
+  </a>
+</mat-list-item>
   <mat-list-item class="nav-item">
-  <button mat-icon-button disableRipple="true" class="nav-link" routerLink="/admins">
+  <a mat-icon-button disableRipple="true" class="nav-link" routerLink="/admins">
      <mat-icon>supervisor_account</mat-icon>
      <span>{{ 'side-nav.admins' | translate }}</span>
-  </button>
+  </a>
 </mat-list-item>
  <mat-list-item class="nav-item">
-  <button mat-icon-button disableRipple="true" class="nav-link" routerLink="/users">
+  <a mat-icon-button disableRipple="true" class="nav-link" routerLink="/users">
      <mat-icon>people</mat-icon>
      <span>{{ 'side-nav.users' | translate }}</span>
-  </button>
+  </a>
 </mat-list-item>
  <mat-list-item class="nav-item">
-  <button mat-icon-button disableRipple="true" class="nav-link" routerLink="/operations">
+  <a mat-icon-button disableRipple="true" class="nav-link" routerLink="/operations">
      <mat-icon>attach_money</mat-icon>
      <span>{{ 'side-nav.operations' | translate }}</span>
-  </button>
+  </a>
 </mat-list-item>
  <mat-list-item class="nav-item">
-  <button mat-icon-button disableRipple="true" class="nav-link" routerLink="/mailing">
+  <a mat-icon-button disableRipple="true" class="nav-link" routerLink="/mailing">
      <mat-icon>mail_outline</mat-icon>
      <span>{{ 'side-nav.mailing' | translate }}</span>
-  </button>
+  </a>
 </mat-list-item>
 
 <mat-expansion-panel class="nav-group-item">
@@ -41,28 +50,28 @@
   </mat-expansion-panel-header>
 
    <mat-list-item class="nav-item">
-    <button mat-icon-button disableRipple="true" class="nav-link" routerLink="/settings/common">
+    <a mat-icon-button disableRipple="true" class="nav-link" routerLink="/settings/common">
        <mat-icon>perm_data_setting</mat-icon>
        <span>{{ 'side-nav.settings.common' | translate }}</span>
-    </button>
+    </a>
   </mat-list-item>
    <mat-list-item class="nav-item">
-    <button mat-icon-button disableRipple="true" class="nav-link" routerLink="/settings/messages">
+    <a mat-icon-button disableRipple="true" class="nav-link" routerLink="/settings/messages">
        <mat-icon>message</mat-icon>
        <span>{{ 'side-nav.settings.messages' | translate }}</span>
-    </button>
+    </a>
   </mat-list-item>
    <mat-list-item class="nav-item">
-    <button mat-icon-button disableRipple="true" class="nav-link" routerLink="/settings/commission">
+    <a mat-icon-button disableRipple="true" class="nav-link" routerLink="/settings/commission">
        <mat-icon>monetization_on</mat-icon>
        <span>{{ 'side-nav.settings.commission' | translate }}</span>
-    </button>
+    </a>
   </mat-list-item>
    <mat-list-item class="nav-item">
-    <button mat-icon-button disableRipple="true" class="nav-link" routerLink="/settings/requisites">
+    <a mat-icon-button disableRipple="true" class="nav-link" routerLink="/settings/requisites">
        <mat-icon>info</mat-icon>
        <span>{{ 'side-nav.settings.requisites' | translate }}</span>
-    </button>
+    </a>
   </mat-list-item>
 
 </mat-expansion-panel>

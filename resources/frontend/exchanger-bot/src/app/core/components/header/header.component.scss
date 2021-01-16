@@ -2,10 +2,41 @@
   display: block;
 }
 
-.container {
+$logoSize: 1.7rem;
+
+.header-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+
+  .left-side-wrapper {
+    display: flex;
+    align-items: center;
+
+    .logo-wrapper {
+      width: auto;
+      font-size: $logoSize;
+
+      .mat-icon {
+        font-size: $logoSize;
+        width: $logoSize;
+        height: $logoSize;
+      }
+    }
+
+    .toggle-side-wrapper {
+      margin-left: 2rem;
+
+      .mat-icon {
+        position: relative;
+        top: 0.13rem;
+        font-size: $logoSize;
+        width: $logoSize;
+        height: $logoSize;
+      }
+    }
+  }
 
   .theme-icon {
     position: relative;

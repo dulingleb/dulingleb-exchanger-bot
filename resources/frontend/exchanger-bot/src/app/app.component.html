@@ -4,14 +4,14 @@
     <app-sidenav></app-sidenav>
   </mat-drawer>
 
-  <div class="app-content-wrapper">
-    <app-header></app-header>
+  <mat-drawer-content class="app-content-wrapper">
+    <app-header class="app-header"></app-header>
 
     <main class="app-main">
       <router-outlet></router-outlet>
     </main>
 
     <app-footer></app-footer>
-  </div>
+  </mat-drawer-content>
 
 </mat-drawer-container>

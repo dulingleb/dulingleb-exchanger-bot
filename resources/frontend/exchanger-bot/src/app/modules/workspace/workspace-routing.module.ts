@@ -15,6 +15,7 @@ const routes: Routes = [
       { path: 'operations', loadChildren: () => import('./modules/operations').then(m => m.OperationsModule) },
       { path: 'mailing', loadChildren: () => import('./modules/mailing').then(m => m.MailingModule) },
       { path: 'settings', loadChildren: () => import('./modules/settings').then(m => m.SettingsModule) },
+      { path: 'profile', loadChildren: () => import('./modules/profile').then(m => m.ProfileModule) },
     ]
   },
   { path: '**', redirectTo: 'dashboard' }

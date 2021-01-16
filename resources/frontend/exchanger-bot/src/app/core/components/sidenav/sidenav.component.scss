@@ -3,6 +3,7 @@
 .app-side-nav {
   position: relative;
   height: 100%;
+  padding-top: $app_header_width;
 
   &:after {
     content: '';
@@ -28,6 +29,26 @@
     .nav-link {
       flex: 1;
       text-align: left;
+    }
+  }
+
+  .nav-item {
+    &.user-profile-nav-item {
+      height: $app_sidenav_size / 2;
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        height: $app_sidenav_size / 2;
+
+        .user-logo {
+          margin-right: 0.5rem;
+        }
+
+        .fio {
+          @include threeDots;
+        }
+      }
     }
   }
 

@@ -1,6 +1,7 @@
 {
   "info": {
-    "copyright": "© 2020-{{year}} Created by Andrey Lebedev, Gleb Dulin"
+    "copyright": "© 2020-{{year}} Created by Andrey Lebedev, Gleb Dulin",
+    "app-name": "bot"
   },
   "side-nav": {
     "dashboard": "Доска",
@@ -15,5 +16,12 @@
       "commission": "Коммиссии",
       "requisites": "Реквизиты"
     }
+  },
+  "auth": {
+    "input": {
+      "email": "Введите Email",
+      "password": "Введите пароль"
+    },
+    "login-btn": "Вход"
   }
 }
