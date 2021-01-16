@@ -11,6 +11,14 @@ import { AuthRoutingModule } from './auth-routing.module'
 
 @NgModule({
   declarations: [AuthComponent],
-  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, AuthRoutingModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    AuthRoutingModule
+  ],
 })
 export class AuthModule {}

@@ -3,14 +3,14 @@ import { Routes, RouterModule } from '@angular/router'
 
 const routes: Routes = [
   {
+    path: '',
+    loadChildren: () => import('./modules/workspace').then(m => m.WorkspaceModule),
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./modules/auth').then(m => m.AuthModule),
   },
-  {
-    path: 'workspace',
-    loadChildren: () => import('./modules/workspace').then(m => m.WorkspaceModule),
-  },
-  { path: '**', redirectTo: '/workspace' },
+  { path: '**', redirectTo: '' },
 ]
 
 @NgModule({

@@ -1,23 +1,25 @@
-<div class="container">
-  <mat-card>
-    <form class="form-auth">
-      <mat-form-field appearance="fill">
-        <mat-label>Enter your email</mat-label>
-        <input matInput placeholder="pat@example.com" required>
-        <mat-error></mat-error>
-      </mat-form-field>
+<mat-card class="auth-wrapper">
+  <div class="container">
+    <mat-card>
+      <form class="form-auth">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your email</mat-label>
+          <input matInput placeholder="pat@example.com" required>
+          <mat-error></mat-error>
+        </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Enter your password</mat-label>
-        <input [type]="showPassword ? 'text' : 'password'" matInput placeholder="pat@example.com" required>
-        <button type="button" mat-icon-button matSuffix (click)="showPassword = !showPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showPassword">
-          <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
-        </button>
-        <mat-error></mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your password</mat-label>
+          <input [type]="showPassword ? 'text' : 'password'" matInput placeholder="pat@example.com" required>
+          <button type="button" mat-icon-button matSuffix (click)="showPassword = !showPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showPassword">
+            <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+          </button>
+          <mat-error></mat-error>
+        </mat-form-field>
 
-      <button mat-raised-button color="primary">Login</button>
+        <button mat-raised-button color="primary">Login</button>
 
-    </form>
-  </mat-card>
-</div>
+      </form>
+    </mat-card>
+  </div>
+</mat-card>

@@ -11,6 +11,7 @@ import { AppStoreModule } from '@core/features'
 import { TranslationModule } from './translation.module'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
+import { StoreRouterConnectingModule } from '@ngrx/router-store'
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { AppComponent } from './app.component'
 
     TranslationModule,
     AppRoutingModule,
+
     AppStoreModule,
     SidenavModule,
     HeaderModule,
