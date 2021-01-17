@@ -22,6 +22,12 @@
       "email": "Введите Email",
       "password": "Введите пароль"
     },
+    "error": {
+      "email": "Некорректный Email",
+      "password": "Некорректный пароль",
+      "email-required": "Введите Email",
+      "password-required": "Введите пароль"
+    },
     "login-btn": "Вход"
   }
 }

@@ -6,6 +6,7 @@ import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store'
 import { ROOT_MODULES } from '@env/environment'
 
 import { UiModule } from './ui'
+import { UserModule } from './user'
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { UiModule } from './ui'
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([]),
     ...ROOT_MODULES,
+    UserModule,
     UiModule
   ]
 })

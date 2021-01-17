@@ -17,11 +17,13 @@ $logoSize: 1.7rem;
     .logo-wrapper {
       width: auto;
       font-size: $logoSize;
+      font-style: italic;
 
       .mat-icon {
-        font-size: $logoSize;
         width: $logoSize;
         height: $logoSize;
+        font-size: $logoSize;
+        font-style: normal;
       }
     }
 

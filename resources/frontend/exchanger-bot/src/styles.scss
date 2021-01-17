@@ -87,15 +87,18 @@ mat-cell {
 }
 
 .user-logo {
+  $logo_size: 2.8rem;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 2.2rem;
-  height: 2.2rem;
-  min-width: 2.2rem;
-  min-height: 2.2rem;
-  text-transform: uppercase;
+  width: $logo_size;
+  height: $logo_size;
+  min-width: $logo_size;
+  min-height: $logo_size;
+
   color: $white;
+  font-size: 1.3rem;
+  text-transform: uppercase;
   border-radius: 50%;
   background: $primary;
 }

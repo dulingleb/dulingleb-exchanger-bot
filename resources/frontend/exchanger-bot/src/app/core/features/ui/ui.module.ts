@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreModule } from '@ngrx/store'
-import { UiEffects } from './ui.effects'
 
+import { UiEffects } from './ui.effects'
 import { UI_FACADE, UiFacade } from './ui.facade'
 import { uiFeatureKey, uiReducer } from './ui.reducer'
 
