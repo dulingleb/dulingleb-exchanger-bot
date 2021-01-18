@@ -3,7 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
-/app/Models/Exchanger.php
+.idea/workspace.xml
 .env
 .env.backup
 .phpunit.result.cache

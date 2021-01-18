@@ -15,5 +15,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'telegram_callback/*',
         'https://e2f18ce232ec.ngrok.io/telegram_callback/*',
+        'api/*'
     ];
 }
