@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core'
 
-import { UserApiService } from '@core/api'
-import { IUiFacade, UI_FACADE } from '@core/features'
+import { IUiFacade, UI_FACADE, IUserFacade, USER_FACADE } from '@core/features'
 
 @Component({
   selector: 'app-root',
@@ -10,11 +9,14 @@ import { IUiFacade, UI_FACADE } from '@core/features'
 })
 export class AppComponent implements OnInit {
 
-  constructor(@Inject(UI_FACADE) public uiFacade: IUiFacade, private userApiService: UserApiService) {}
+  constructor(
+    @Inject(USER_FACADE) public userFacade: IUserFacade,
+    @Inject(UI_FACADE) public uiFacade: IUiFacade,
+  ) {}
 
   ngOnInit(): void {
-    this.uiFacade.initUi()
-    this.userApiService.login('', '')
+    this.userFacade.init()
+    this.uiFacade.init()
   }
 
 }

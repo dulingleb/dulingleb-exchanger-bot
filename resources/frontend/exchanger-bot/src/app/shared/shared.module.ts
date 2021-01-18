@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
+import { LogoNamePipe } from './pipes'
+
 @NgModule({
-  declarations: [],
+  declarations: [LogoNamePipe],
   imports: [CommonModule],
-  exports: [],
+  exports: [LogoNamePipe],
 })
 export class SharedModule {}

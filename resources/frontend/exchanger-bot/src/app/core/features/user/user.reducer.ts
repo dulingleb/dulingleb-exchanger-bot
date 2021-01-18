@@ -32,23 +32,22 @@ export const createAppWithUiInitState = (): IAppWithUserState => ({
 export const userState = createReducer(
   createUserInitState(),
 
+  on(USER_ACTIONS.getAuthUser, state => ({ ...state, inRequest: true })),
   on(USER_ACTIONS.login, state => ({ ...state, inRequest: true })),
-  on(USER_ACTIONS.loginSuccess, (state, { userData }) => ({
-    ...state,
-    inRequest: false,
-    inError: false,
-    data: {
-      user: userData.user,
-      token: userData.accessToken,
-      error: null
-    }
-  })),
   on(USER_ACTIONS.loginError, (state, { error }) => ({
     ...state,
     inRequest: false,
     inError: true,
     data: { user: null, token: '', error }
-  }))
+  })),
+
+  on(USER_ACTIONS.saveToken, (state, { token }) => ({ ...state, data: { ...state.data, token } })),
+  on(USER_ACTIONS.saveUser, (state, { user }) => ({
+    ...state,
+    inRequest: false,
+    inError: false,
+    data: { ...state.data, user, error: null }
+  })),
 
 )
 

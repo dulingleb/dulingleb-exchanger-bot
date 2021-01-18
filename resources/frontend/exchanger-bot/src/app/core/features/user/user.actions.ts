@@ -1,6 +1,15 @@
 import { createAction, props } from '@ngrx/store'
 
-import { IUserLoginInDto } from './user.model'
+import { IUserInDto, IUserLoginInDto } from './user.model'
+
+const init = createAction(
+  '[User exchanger bot] Init'
+)
+
+const getAuthUser = createAction(
+  '[User exchanger bot] Get auth user',
+  props<{ token: string }>()
+)
 
 const login = createAction(
   '[User exchanger bot] Login',
@@ -20,8 +29,29 @@ const loginError = createAction(
   props<{ error: Error }>()
 )
 
+const saveToken = createAction(
+  '[User exchanger bot] Save token',
+  props<{ token: string }>()
+)
+
+const saveUser = createAction(
+  '[User exchanger bot] Save user',
+  props<{ user: IUserInDto }>()
+)
+
+const redirectAfterAuth = createAction(
+  '[User exchanger bot] Redirect after auth'
+)
+
 export const USER_ACTIONS = {
+  init,
+  getAuthUser,
+
   login,
   loginSuccess,
   loginError,
+
+  saveToken,
+  saveUser,
+  redirectAfterAuth
 }

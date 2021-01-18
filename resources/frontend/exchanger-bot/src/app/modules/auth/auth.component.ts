@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 
-import { UserFacade, USER_FACADE } from '@core/features/user'
+import { UserFacade, USER_FACADE } from '@core/features'
 
 @Component({
   selector: 'app-auth',

@@ -20,7 +20,7 @@ import { HeaderComponent } from './header.component'
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
   ],
   exports: [HeaderComponent],
 })

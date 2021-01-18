@@ -2,8 +2,8 @@
   <mat-list-item class="nav-item user-profile-nav-item">
     <a mat-button disableRipple="true" class="nav-link three-dots-btn" routerLink="/profile">
       <span class="mat-button-wrapper">
-        <span class="user-logo">dj</span>
-        <span class="fio">Don John</span>
+        <span class="user-logo">{{ userFacade.user$ | async | logoName }}</span>
+        <span class="fio">{{ (userFacade.user$ | async)?.name }}</span>
       </span>
     </a>
  </mat-list-item>

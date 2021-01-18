@@ -47,10 +47,12 @@
           }
         ],
 
+        "max-len": ["error", { "code": 255 }],
         "semi": "off",
         "no-shadow": "off",
         "@typescript-eslint/semi": ["error", "never"],
-        "@typescript-eslint/explicit-function-return-type": ["error"]
+        "@typescript-eslint/explicit-function-return-type": ["error"],
+        "@typescript-eslint/no-unused-expressions": ["error", { "allowTernary": true }]
       }
     },
     {

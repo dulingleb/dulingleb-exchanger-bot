@@ -24,6 +24,11 @@ export const selectUser = createSelector(
   state => state.user
 )
 
+export const selectToken = createSelector(
+  [selectUserData],
+  state => state.token
+)
+
 export const selectUserError = createSelector(
   [selectUserData],
   state => state.error

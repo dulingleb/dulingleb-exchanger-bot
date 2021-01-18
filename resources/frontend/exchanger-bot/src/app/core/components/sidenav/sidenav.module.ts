@@ -7,6 +7,8 @@ import { MatListModule } from '@angular/material/list'
 import { MatButtonModule } from '@angular/material/button'
 import { MatExpansionModule } from '@angular/material/expansion'
 
+import { SharedModule } from '@shared/index'
+
 import { SidenavComponent } from './sidenav.component'
 
 @NgModule({
@@ -18,7 +20,8 @@ import { SidenavComponent } from './sidenav.component'
     MatIconModule,
     MatButtonModule,
     MatExpansionModule,
-    TranslateModule
+    TranslateModule,
+    SharedModule
   ],
   exports: [SidenavComponent]
 })

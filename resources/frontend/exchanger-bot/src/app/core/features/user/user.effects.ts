@@ -1,6 +1,7 @@
+import { Router } from '@angular/router'
 import { Injectable } from '@angular/core'
+import { catchError, map, mergeMap } from 'rxjs/operators'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
-import { catchError, map, mergeMap, tap } from 'rxjs/operators'
 
 import { LocalStorageService } from '@core/services'
 
@@ -11,10 +12,30 @@ import { UserService } from './user.service'
 export class UserEffects {
 
   constructor(
+    private router: Router,
     private actions$: Actions,
     private userService: UserService,
     private localStorageService: LocalStorageService
   ) {}
+
+  init$ = createEffect(() => this.actions$.pipe(
+    ofType(USER_ACTIONS.init),
+    mergeMap(() => {
+      const token = this.localStorageService.getToken()
+      return [
+        USER_ACTIONS.saveToken({ token }),
+        USER_ACTIONS.getAuthUser({ token })
+      ]
+    })
+  ))
+
+  getAuthUser$ = createEffect(() => this.actions$.pipe(
+    ofType(USER_ACTIONS.getAuthUser),
+    mergeMap(() => this.userService.getAuthUser().pipe(
+      map(user => USER_ACTIONS.saveUser({ user })),
+      catchError(error => [USER_ACTIONS.loginError({ error })])
+    ))
+  ))
 
   login$ = createEffect(() => this.actions$.pipe(
     ofType(USER_ACTIONS.login),
@@ -26,6 +47,20 @@ export class UserEffects {
 
   loginSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(USER_ACTIONS.loginSuccess),
-    tap(({ userData }) => this.localStorageService.saveToken(userData.accessToken))
+    mergeMap(({ userData }) => [
+        USER_ACTIONS.saveToken({ token: userData.accessToken }),
+        USER_ACTIONS.saveUser({ user: userData.user }),
+        USER_ACTIONS.redirectAfterAuth()
+      ])
+  ))
+
+  saveToken$ = createEffect(() => this.actions$.pipe(
+    ofType(USER_ACTIONS.saveToken),
+    map(({ token }) => this.localStorageService.saveToken(token))
+  ), { dispatch: false })
+
+  redirectAfterAuth$ = createEffect(() => this.actions$.pipe(
+    ofType(USER_ACTIONS.redirectAfterAuth),
+    map(() => this.router.navigateByUrl('/dashboard'))
   ), { dispatch: false })
 }

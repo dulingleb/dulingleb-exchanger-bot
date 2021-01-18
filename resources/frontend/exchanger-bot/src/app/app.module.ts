@@ -1,17 +1,17 @@
-import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
 import { MatCardModule } from '@angular/material/card'
-import { HttpClientModule } from '@angular/common/http'
+import { BrowserModule } from '@angular/platform-browser'
 import { MatSidenavModule } from '@angular/material/sidenav'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { FooterModule, HeaderModule, SidenavModule } from '@core/components'
+import { AuthInterceptor } from '@core/interceptors'
 import { AppStoreModule } from '@core/features'
 
 import { TranslationModule } from './translation.module'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
-import { StoreRouterConnectingModule } from '@ngrx/router-store'
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +30,13 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store'
     HeaderModule,
     FooterModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

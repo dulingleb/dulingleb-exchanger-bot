@@ -4,7 +4,7 @@ import { Observable } from 'rxjs'
 
 import { ENV } from '@env/environment'
 
-import { IUserLoginInDto, IUserLoginOutDto } from './user.model'
+import { IUserInDto, IUserLoginInDto, IUserLoginOutDto, IUserOutDto } from './user.model'
 import { map } from 'rxjs/operators'
 
 @Injectable()
@@ -23,9 +23,22 @@ export class UserService {
           name: userData.user.name,
           email: userData.user.email,
           role: userData.user.role_id,
-          createdAt: userData.user.created_at,
-          updatedAt: userData.user.updated_at
+          createdAt: new Date(userData.user.created_at),
+          updatedAt: new Date(userData.user.updated_at)
         }
+      }))
+    )
+  }
+
+  getAuthUser(): Observable<IUserInDto> {
+    return this.http.get<IUserOutDto>(`${ENV.api}/auth/me`).pipe(
+      map(user => ({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role_id,
+        createdAt: new Date(user.created_at),
+        updatedAt: new Date(user.updated_at)
       }))
     )
   }
