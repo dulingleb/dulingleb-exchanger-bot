@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Exchanger;
 use App\Models\Operation;
+use App\Models\TelegramUserSetting;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Telegram;
@@ -59,23 +60,13 @@ class CheckOperation extends Command
                 $operation->status = Operation::STATUS_CANCELED;
                 $operation->save();
 
-                $keyboard = Keyboard::make()
-                    ->inline()
-                    ->row(
-                        Keyboard::inlineButton(['text' => 'На главную', 'callback_data' => 'cancel'])
-                    );
+                TelegramUserSetting::setTransaction($operation->exchanger_id, $operation->telegram_user_id, []);
 
                 Telegram::sendMessage([
                     'chat_id' => $operation->telegram_user_id,
                     'text' => 'Вы не подтвердили платеж в течении часа. Сделка #' . $operation->id . ' отменена.',
                     'parse_mode' => 'html',
-                    'reply_markup' => $keyboard
-                ]);
-
-                Telegram::editMessageText([
-                    'chat_id' => $operation->telegram_user_id,
-                    'message_id' => $operation->message_id,
-                    'text' => 'Сделка #' . $operation->id . ' отменена.'
+                    'reply_markup' => \App\Models\Telegram::mainMenu()
                 ]);
             }
         }

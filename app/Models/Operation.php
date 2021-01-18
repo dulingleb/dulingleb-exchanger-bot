@@ -99,4 +99,18 @@ class Operation extends Model
 
         }
     }
+
+    public static function getCheckLinks($operation_id) : array
+    {
+        $links = [];
+
+        for ($i=0; $i<3; $i++) {
+            if (!file_exists(public_path() . '/storage/images/' . $operation_id . '_' . $i . '.jpg')) {
+                break;
+            }
+            $links[] = 'https://' . $_SERVER['SERVER_NAME'] . '/storage/images/' . $operation_id . '_' . $i . '.jpg';
+        }
+
+        return $links;
+    }
 }
