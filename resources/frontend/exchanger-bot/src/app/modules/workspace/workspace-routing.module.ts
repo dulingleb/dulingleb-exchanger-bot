@@ -18,7 +18,8 @@ const routes: Routes = [
       { path: 'profile', loadChildren: () => import('./modules/profile').then(m => m.ProfileModule) },
     ]
   },
-  { path: '**', redirectTo: 'dashboard' }
+  // { path: '**', redirectTo: 'dashboard' }
+  { path: '**', redirectTo: 'admins' }
 ]
 
 @NgModule({

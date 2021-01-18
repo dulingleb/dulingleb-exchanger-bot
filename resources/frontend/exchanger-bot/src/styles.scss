@@ -44,13 +44,11 @@ mat-cell {
   padding: 1rem;
 }
 
-.mat-icon-button {
+.mat-button-base {
   .mat-icon ~ * {
     margin-left: 1rem;
   }
-}
 
-.mat-button, .mat-icon-button {
   &.three-dots-btn {
     .mat-button-wrapper {
       display: flex;

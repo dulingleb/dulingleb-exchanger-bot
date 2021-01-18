@@ -29,5 +29,8 @@
       "password-required": "Введите пароль"
     },
     "login-btn": "Вход"
+  },
+  "admins": {
+    "add-btn": "Добавить"
   }
 }
