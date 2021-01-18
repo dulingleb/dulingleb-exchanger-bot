@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        dd(public_path());
+        //dd(env('APP_TELEGRAM_URI'));
         $coinbase = new Coinbase(auth()->user()->exchanger->coinbase_key, auth()->user()->exchanger->coinbase_secret);
         $send = $coinbase->getBalance();
         //dd($send);
