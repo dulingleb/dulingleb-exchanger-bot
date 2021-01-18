@@ -47,11 +47,11 @@ class SendTelegramMessage implements ShouldQueue
                 'chat_id' => $user,
                 'text' => $this->message,
                 'parse_mode' => 'html',
-                'reply_markup' => \App\Models\Telegram::goStart()
+                'reply_markup' => \App\Models\Telegram::mainMenu()
             ]);
 
             if ($key % 25 == 0) {
-                sleep(2);
+                sleep(1);
             }
         }
     }
