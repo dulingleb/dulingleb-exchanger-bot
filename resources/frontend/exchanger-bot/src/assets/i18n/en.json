@@ -1,0 +1,36 @@
+{
+  "info": {
+    "copyright": "© 2020-{{year}} Created by Andrey Lebedev, Gleb Dulin",
+    "app-name": "bot"
+  },
+  "side-nav": {
+    "dashboard": "Доска",
+    "admins": "Администраторы",
+    "users": "Пользователи",
+    "operations": "Сделки",
+    "mailing": "Рассылка",
+    "settings": {
+      "title": "Настройки",
+      "common": "Общие",
+      "messages": "Сообщения",
+      "commission": "Коммиссии",
+      "requisites": "Реквизиты"
+    }
+  },
+  "auth": {
+    "input": {
+      "email": "Введите Email",
+      "password": "Введите пароль"
+    },
+    "error": {
+      "email": "Некорректный Email",
+      "password": "Некорректный пароль",
+      "email-required": "Введите Email",
+      "password-required": "Введите пароль"
+    },
+    "login-btn": "Вход"
+  },
+  "admins": {
+    "add-btn": "Добавить"
+  }
+}

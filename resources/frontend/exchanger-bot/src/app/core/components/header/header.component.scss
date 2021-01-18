@@ -1,0 +1,47 @@
+:host {
+  display: block;
+}
+
+$logoSize: 1.7rem;
+
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  .left-side-wrapper {
+    display: flex;
+    align-items: center;
+
+    .logo-wrapper {
+      width: auto;
+      font-size: $logoSize;
+      font-style: italic;
+
+      .mat-icon {
+        width: $logoSize;
+        height: $logoSize;
+        font-size: $logoSize;
+        font-style: normal;
+      }
+    }
+
+    .toggle-side-wrapper {
+      margin-left: 2rem;
+
+      .mat-icon {
+        position: relative;
+        top: 0.13rem;
+        font-size: $logoSize;
+        width: $logoSize;
+        height: $logoSize;
+      }
+    }
+  }
+
+  .theme-icon {
+    position: relative;
+    top: 3px;
+  }
+}

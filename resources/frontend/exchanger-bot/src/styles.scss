@@ -1,0 +1,102 @@
+@import "./styles/styles";
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+a, button {
+  cursor: pointer;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  scrollbar-width: thin;
+}
+
+mat-cell {
+  box-sizing: content-box;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  // background: map-get($map: $gray-palette, $key: 400);
+}
+
+.container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.app-container {
+  padding: 1rem;
+}
+
+.mat-button-base {
+  .mat-icon ~ * {
+    margin-left: 1rem;
+  }
+
+  &.three-dots-btn {
+    .mat-button-wrapper {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+  }
+}
+
+.app-side-nav {
+  .mat-expansion-panel {
+    .mat-expansion-panel-body {
+      padding: 0;
+    }
+  }
+
+  .mat-list-item {
+    .mat-list-base .mat-list-option .mat-list-item-content {
+      padding: 0;
+
+      .nav-link {
+        padding: 0 1rem;
+      }
+    }
+  }
+
+  .nav-group-item {
+    .mat-expansion-panel-content {
+      .nav-link {
+        padding: 0 1rem 0 1.5rem;
+      }
+    }
+  }
+}
+
+.user-logo {
+  $logo_size: 2.8rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: $logo_size;
+  height: $logo_size;
+  min-width: $logo_size;
+  min-height: $logo_size;
+
+  color: $white;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  border-radius: 50%;
+  background: $primary;
+}

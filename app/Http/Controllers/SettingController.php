@@ -15,7 +15,6 @@ class SettingController extends Controller
 
     public function updateTelegramToken(Request $request)
     {
-
         $request->validate([
             'telegram_token' => 'required|string',
             'username' => 'required|string'

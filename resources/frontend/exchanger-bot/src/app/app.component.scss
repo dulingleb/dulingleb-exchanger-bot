@@ -1,0 +1,31 @@
+@import 'styles';
+
+.app-wrapper {
+  height: 100vh;
+  padding-top: $app_header_width;
+
+  .app-sidenav {
+    width: $app_sidenav_size;
+  }
+
+  .app-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    z-index: 3;
+
+    .app-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: $app_header_z;
+    }
+
+    .app-main {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+  }
+}

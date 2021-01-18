@@ -1,0 +1,24 @@
+<header class="app-header">
+  <mat-toolbar color="primary">
+    <div class="header-wrapper" [ngClass]="{ 'container': false }">
+
+      <div class="left-side-wrapper">
+        <a mat-icon-button routerLink="/" class="logo-wrapper">
+          <mat-icon aria-hidden="false">near_me</mat-icon>
+          {{ 'info.app-name' | translate }}
+        </a>
+
+        <button mat-icon-button (click)="uiFacade.toggleSideNav()" *ngIf="userFacade.user$ | async" class="toggle-side-wrapper">
+          <mat-icon aria-label="Menu" *ngIf="uiFacade.showSideNav$ | async">menu_open</mat-icon>
+          <mat-icon aria-label="Menu" *ngIf="!(uiFacade.showSideNav$ | async)">menu</mat-icon>
+       </button>
+      </div>
+
+
+      <mat-slide-toggle labelPosition="before" [(ngModel)]="isDarkTheme" (ngModelChange)="uiFacade.changeThemeMode($event)">
+        <mat-icon class="theme-icon" aria-label="Dark theme">bedtime</mat-icon>
+      </mat-slide-toggle>
+
+    </div>
+  </mat-toolbar>
+</header>

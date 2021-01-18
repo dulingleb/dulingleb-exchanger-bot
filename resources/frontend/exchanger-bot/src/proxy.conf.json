@@ -1,0 +1,11 @@
+{
+  "/api-dul": {
+    "target": "https://dul.bot",
+    "secure": false,
+    "pathRewrite": {
+      "^/api-dul": ""
+    },
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
