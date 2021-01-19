@@ -1,0 +1,62 @@
+<mat-table [dataSource]="list" class="app-table">
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>
+      {{ 'admins.table.name' | translate }}
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <span class="bold">{{ row.name }}</span>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef>
+      {{ 'admins.table.email' | translate }}
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <span class="bold">{{ row.email }}</span>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="createdAt">
+    <mat-header-cell *matHeaderCellDef>
+      {{ 'admins.table.createdAt' | translate }}
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <span class="bold">{{ row.createdAt | date: 'd.MM.yyyy hh:mm' }}</span>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="info">
+    <mat-header-cell *matHeaderCellDef class="action-header-cell">
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row" class="action-cell">
+      <a mat-icon-button class="table-action" [routerLink]="['/admins', row.id, 'info']">
+        <mat-icon>info_outline</mat-icon>
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <mat-header-cell *matHeaderCellDef class="action-header-cell"></mat-header-cell>
+    <mat-cell *matCellDef="let row" class="action-cell">
+      <a mat-icon-button class="table-action" [routerLink]="['/admins', row.id, 'edit']" queryParamsHandling="preserve">
+        <mat-icon>edit</mat-icon>
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <mat-header-cell *matHeaderCellDef class="action-header-cell"></mat-header-cell>
+    <mat-cell *matCellDef="let row" class="action-cell">
+      <button mat-icon-button class="table-action" (click)="delete.emit(row)">
+        <mat-icon>delete_outline</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columnNames"></mat-header-row>
+  <mat-row *matRowDef="let row; let even = even; columns: columnNames" [class.accent]="even">
+  </mat-row>
+</mat-table>
+

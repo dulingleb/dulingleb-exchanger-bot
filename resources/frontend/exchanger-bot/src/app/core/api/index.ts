@@ -1,1 +1,2 @@
-export * from './user.api.servcie'
+export * from './admin.api.service'
+export * from './user.api.service'

@@ -22,6 +22,7 @@
       "@shared/*": ["src/app/shared/*"],
       "@env/*": ["src/environments/*"],
       "@ui/*": ["src/app/ui-components/*"],
+      "@utils/*": ["src/app/utils/*"],
     }
   }
 }

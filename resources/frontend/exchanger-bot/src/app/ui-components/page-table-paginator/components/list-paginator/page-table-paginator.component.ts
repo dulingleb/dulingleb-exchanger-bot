@@ -15,17 +15,17 @@ import { IPaginator, IPaginatorEvent } from '../../models/index'
 })
 export class PageTablePaginatorComponent {
 
-  @Output() public pageChange = new EventEmitter<IPaginator>()
+  @Output() public changePaginator = new EventEmitter<IPaginator>()
 
   @Input() public length: number
   @Input() public pageIndex: number
 
   public paginatorChanged(event: IPaginatorEvent): void {
     const paginatorValue = {
-      pageNumber: event.pageIndex,
+      page: event.pageIndex,
       pageSize: event.pageSize,
     }
 
-    this.pageChange.emit(paginatorValue)
+    this.changePaginator.emit(paginatorValue)
   }
 }

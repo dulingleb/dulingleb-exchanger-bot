@@ -1,5 +1,5 @@
 export interface IPaginator {
-  pageNumber: number;
+  page: number;
   pageSize: number;
 }
 

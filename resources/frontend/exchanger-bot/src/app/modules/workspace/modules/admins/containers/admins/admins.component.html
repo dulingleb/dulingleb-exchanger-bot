@@ -1,25 +1,22 @@
 <app-page-content-layout>
     <app-page-layout-table layout-content>
       <ng-container table-title>
-        admins admins admins0
+        {{ 'admins.table-header.title' | translate }}
       </ng-container>
 
       <ng-container table-actions>
         <a mat-raised-button color="primary" disableRipple="true" class="nav-link" routerLink="/dashboard">
           <mat-icon>add</mat-icon>
-          <span>{{ 'admins.add-btn' | translate }}</span>
+          <span>{{ 'admins.table-header.add-btn' | translate }}</span>
        </a>
       </ng-container>
 
       <ng-container paginator>
-        <app-page-table-paginator [length]="10"
-                            [pageIndex]="1"
-                            (pageChange)="changePage($event)">
-        </app-page-table-paginator>
+        <app-page-table-paginator [length]="10" [pageIndex]="1" (changePaginator)="changePaginator($event)"></app-page-table-paginator>
       </ng-container>
 
       <ng-container table>
-        admins admins admins
+        <app-admins-table [list]="users" [currentUserRole]="(userFacade.user$ | async)?.role"></app-admins-table>
       </ng-container>
 
     </app-page-layout-table>

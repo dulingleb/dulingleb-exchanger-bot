@@ -31,6 +31,14 @@
     "login-btn": "Вход"
   },
   "admins": {
-    "add-btn": "Добавить"
+    "table-header": {
+      "add-btn": "Добавить",
+      "title": "Администраторы"
+    },
+    "table": {
+      "name": "Имя",
+      "email": "Email",
+      "createdAt": "Дата регистрации"
+    }
   }
 }
