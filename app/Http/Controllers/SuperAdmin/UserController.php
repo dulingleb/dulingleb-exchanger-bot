@@ -6,13 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Models\Exchanger;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\QueryBuilderRequest;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
-        return view('users.index', compact('users'));
+        $users = QueryBuilder::for(User::class)
+            ->allowedFilters(['name', 'email'])
+            ->defaultSort('-id')
+            ->allowedSorts('id', 'name', 'email')
+            ->jsonPaginate();
+
+        return response()->json($users);
     }
 
     public function create()
