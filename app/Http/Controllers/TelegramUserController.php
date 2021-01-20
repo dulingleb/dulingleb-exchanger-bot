@@ -6,26 +6,28 @@ use App\Models\ExchangerMessage;
 use App\Models\Operation;
 use App\Models\TelegramUser;
 use App\Models\TelegramUserSetting;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\QueryBuilder\QueryBuilder;
 use Telegram;
 
 class TelegramUserController extends Controller
 {
     public function index(Request $request)
     {
-        $users = new TelegramUserSetting();
-        if ($request->exists('s')) {
-            $users = $users->whereHas('telegramUser', function ($q) use ($request) {
-                $q->where('username', 'LIKE', '%' . $request->s . '%')->orWhere('id', $request->s);
-            });
-        }
-
-        $users = $users->select()
+        $users = QueryBuilder::for(TelegramUserSetting::class)
+            ->join('telegram_users', 'telegram_users.id', 'telegram_user_settings.telegram_user_id')
+            ->allowedFilters(['username', 'id'])
+            ->defaultSort('-operations_count')
+            ->allowedSorts('operations_count', 'username', 'telegram_user_id')
+            ->select(['telegram_user_settings.id', 'telegram_user_id', 'exchanger_id', 'telegram_users.username'])
             ->addSelect(DB::raw('(SELECT COUNT(*) FROM operations WHERE (operations.telegram_user_id = telegram_user_settings.telegram_user_id) AND (operations.exchanger_id = telegram_user_settings.exchanger_id) AND (operations.status = ' . Operation::STATUS_SUCCESS . ') ) AS operations_count'))
-            ->where('exchanger_id', auth()->user()->exchanger->id)->orderBy('operations_count', 'DESC')->paginate(15);
+            ->where('telegram_user_settings.exchanger_id', auth()->user()->exchanger->id)
+            ->jsonPaginate();
 
-        return view('telegramUsers.index', compact('users'));
+
+        return response()->json($users);
     }
 
     public function show(TelegramUserSetting $userSetting)
