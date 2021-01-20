@@ -32,6 +32,24 @@ Route::group([
     Route::get('/me', [AuthController::class, 'userProfile']);
 });
 
+Route::group([
+    'middleware' => 'auth:api'
+], function () {
+    Route::middleware('super_admin')->namespace('SuperAdmin')->group(function() {
+        Route::resource('users', 'UserController', ['except' => ['show']]);
+
+        Route::get('settings/messages/template/create', ['as' => 'settings.messages.default.create', 'uses' => 'ExchangerDefaultMessageController@create']);
+        Route::post('settings/messages/template/store', ['as' => 'settings.messages.default.store', 'uses' => 'ExchangerDefaultMessageController@store']);
+        Route::get('settings/messages/template/{message}', ['as' => 'settings.messages.default.edit', 'uses' => 'ExchangerDefaultMessageController@edit']);
+        Route::patch('settings/messages/template/{message}/update', ['as' => 'settings.messages.default.update', 'uses' => 'ExchangerDefaultMessageController@update']);
+    });
+
+    Route::get('telegram-users', ['as' => 'telegramUser.index', 'uses' => 'TelegramUserController@index']);
+    Route::get('telegram-users/{userSetting}', ['as' => 'telegramUser.show', 'uses' => 'TelegramUserController@show']);
+    Route::put('telegram-users/{userSetting}/update', ['as' => 'telegramUser.update', 'uses' => 'TelegramUserController@update']);
+    Route::put('telegram-users/{userSetting}/set-as-admin', ['as' => 'telegramUser.setAsAdmin', 'uses' => 'TelegramUserController@setAdmin']);
+});
+
 Route::get('/', function() {
     return 'hi';
 });

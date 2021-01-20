@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Exchanger;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\QueryBuilderRequest;
 
@@ -17,7 +18,7 @@ class UserController extends Controller
             ->allowedFilters(['name', 'email'])
             ->defaultSort('-id')
             ->allowedSorts('id', 'name', 'email')
-            ->jsonPaginate();
+            ->jsonPaginate($request->perPage ?? Config::get('default_size', '10'));
 
         return response()->json($users);
     }
