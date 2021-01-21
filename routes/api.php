@@ -36,7 +36,7 @@ Route::group([
     'middleware' => 'auth:api'
 ], function () {
     Route::middleware('super_admin')->namespace('SuperAdmin')->group(function() {
-        Route::resource('users', 'UserController', ['except' => ['show']]);
+        Route::resource('users', 'UserController', ['except' => ['edit']]);
 
         Route::get('settings/messages/template/create', ['as' => 'settings.messages.default.create', 'uses' => 'ExchangerDefaultMessageController@create']);
         Route::post('settings/messages/template/store', ['as' => 'settings.messages.default.store', 'uses' => 'ExchangerDefaultMessageController@store']);

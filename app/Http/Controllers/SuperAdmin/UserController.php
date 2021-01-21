@@ -54,7 +54,7 @@ class UserController extends Controller
         return response()->json(['status' => true, 'message' => 'Пользователь успешно добавлен']);
     }
 
-    public function edit(User $user)
+    public function show(User $user)
     {
         return response()->json(['status' => true, 'data' => $user]);
     }
