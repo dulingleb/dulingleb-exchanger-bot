@@ -62,6 +62,11 @@ Route::group([
     Route::get('settings/messages', ['as' => 'settings.messages.index', 'uses' => 'ExchangerMessageController@index']);
     Route::get('settings/messages/{slug}', ['as' => 'settings.messages.edit', 'uses' => 'ExchangerMessageController@show']);
     Route::patch('settings/messages/{message}/update', ['as' => 'settings.messages.update', 'uses' => 'ExchangerMessageController@update']);
+
+    // Настройки комиссии
+    Route::resource('settings/commissions', 'ExchangerCommissionController', ['except' => ['edit']]);
+    // Настройки реквизитов
+    Route::resource('settings/bank-details', 'BankDetailController', ['except' => ['edit']]);
 });
 
 Route::get('/', function() {
