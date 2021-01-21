@@ -51,12 +51,12 @@ class UserController extends Controller
             'max_exchange' => '0.1',
         ]);
 
-        return redirect()->route('user.index')->with(['success' => 'Пользователь успешно добавлен']);
+        return response()->json(['status' => true, 'message' => 'Пользователь успешно добавлен']);
     }
 
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        return response()->json(['status' => true, 'data' => $user]);
     }
 
     public function update(Request $request, User $user)
@@ -75,17 +75,17 @@ class UserController extends Controller
         }
         $user->save();
 
-        return redirect()->route('user.edit', $user)->with(['success' => 'Данные успешно сохранены!']);
+        return response()->json(['status' => true, 'message' => 'Данные успешно сохранены']);
     }
 
     public function destroy(User $user)
     {
         if (auth()->id() === $user->id) {
-            return redirect()->route('user.index')->withErrors(['Нельзя удалить самого себя']);
+            return response()->json(['status' => false, 'message' => 'Нельзя удалить самого себя'])->setStatusCode(400);
         }
 
         $user->delete();
 
-        return redirect()->route('user.index')->with(['success' => 'Пользователь успещно удален']);
+        return response()->json(['status' => true, 'message' => 'Пользователь успешно удален']);
     }
 }
