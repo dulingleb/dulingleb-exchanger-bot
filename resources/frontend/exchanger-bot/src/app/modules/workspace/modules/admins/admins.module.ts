@@ -11,7 +11,6 @@ import { MatInputModule } from '@angular/material/input'
 
 import { PageContentLayoutModule, TableFilterPaginatorModule, LoadingSpinnerModule, PageContentTableModule } from '@ui/index'
 
-import { AdminsTableComponent } from './components/student-table/admins-table.component'
 import { AdminEditComponent, AdminInfoComponent, AdminsComponent } from './containers'
 import { AdminsRoutingModule } from './admins-routing.module'
 
@@ -19,7 +18,6 @@ import { AdminsRoutingModule } from './admins-routing.module'
 @NgModule({
   declarations: [
     AdminsComponent,
-    AdminsTableComponent,
     AdminInfoComponent,
     AdminEditComponent
   ],

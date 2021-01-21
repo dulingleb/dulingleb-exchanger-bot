@@ -10,8 +10,8 @@ import {
 } from '@angular/core'
 import { MatSort } from '@angular/material/sort'
 
+import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, ISortEvent, ITableColumn } from '@core/models'
 import { EUserRoleDto, IUserInDto } from '@core/features'
-import { ISortEvent, ITableColumn } from '@core/models'
 import { getTableColumnNames } from '@utils/index'
 
 @Component({
@@ -29,6 +29,10 @@ export class ContentTableComponent implements OnChanges {
   @Input() currentUserRole: EUserRoleDto
 
   @ViewChild(MatSort) sort: MatSort
+
+  ETableColumnType = ETableColumnType
+  ETableColumnActionType = ETableColumnActionType
+  ETableColumnActionEventType = ETableColumnActionEventType
 
   columnNames: string[] = []
 
