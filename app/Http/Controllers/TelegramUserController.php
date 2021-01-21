@@ -34,7 +34,7 @@ class TelegramUserController extends Controller
     {
         $this->checkUser($userSetting);
 
-        return view('telegramUsers.show', compact('userSetting'));
+        return response()->json(['status' => true, 'data' => $userSetting]);
     }
 
     public function update(Request $request, TelegramUserSetting $userSetting)
@@ -82,7 +82,7 @@ class TelegramUserController extends Controller
         }
 
         $userSetting->save();
-        return redirect()->route('telegramUser.show', $userSetting)->with(['success' => 'Настройки успешно сохранены!']);
+        return response()->json(['status' => true, 'message' => 'Пользователь успешно сохранен']);
     }
 
     public function setAdmin(Request $request, TelegramUserSetting $userSetting)
@@ -96,7 +96,7 @@ class TelegramUserController extends Controller
         $userSetting->role = $request->role == 'admin' ? 'admin' : 'user';
         $userSetting->save();
 
-        return redirect()->route('telegramUser.show', $userSetting)->with(['success' => 'Пользователь назначен админом']);
+        return response()->json(['status' => true, 'message' => 'Пользователь успешно назначен админом']);
     }
 
     private function checkUser(TelegramUserSetting $userSetting) {
