@@ -1,10 +1,12 @@
 export interface IUserInDto {
-  id: number;
+  id?: number;
   name: string;
+  password?: string;
+  cPassword?: string;
   email: string;
-  role: EUserRoleDto;
-  createdAt: Date;
-  updatedAt: Date;
+  role?: EUserRoleDto;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export enum EUserRoleDto {
@@ -13,12 +15,14 @@ export enum EUserRoleDto {
 }
 
 export interface IUserOutDto {
-  id: number;
+  id?: number;
   name: string;
   email: string;
-  role_id: EUserRoleDto;
-  created_at: Date;
-  updated_at: Date;
+  password?: string;
+  c_password?: string;
+  role_id?: EUserRoleDto;
+  created_at?: Date;
+  updated_at?: Date;
 }
 
 export interface IUserLoginOutDto {

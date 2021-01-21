@@ -38,4 +38,31 @@ export class AdminApiService {
     )
   }
 
+  getUser(id: number): Observable<any> {
+    return this.http.get<any>(`${ENV.api}/users/${id}`).pipe(
+      map(res => ({
+        status: res.status,
+        data: res.data
+      }))
+    )
+  }
+
+  updateUser(user: IUserInDto): Observable<any> {
+    return this.http.put(`${ENV.api}/users/${user.id}`, user)
+  }
+
+  addUser(user: IUserInDto): Observable<any> {
+    const userOutDto: IUserOutDto = {
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      c_password: user.cPassword
+    }
+    return this.http.post(`${ENV.api}/users`, userOutDto)
+  }
+
+  deleteUser(id: number): Observable<any> {
+    return this.http.delete(`${ENV.api}/users/${id}`)
+  }
+
 }
