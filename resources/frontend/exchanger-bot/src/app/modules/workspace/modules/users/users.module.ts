@@ -1,15 +1,23 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { MatCardModule } from '@angular/material/card'
+import { TranslateModule } from '@ngx-translate/core'
+import { MatIconModule } from '@angular/material/icon'
+import { MatButtonModule } from '@angular/material/button'
 
-import { UsersComponent } from './users.component'
+import { PageContentTableModule } from '@ui/index'
+
+import { UsersComponent } from './containers'
 import { UsersRoutingModule } from './users-routing.module'
 
 @NgModule({
   declarations: [UsersComponent],
   imports: [
     CommonModule,
-    MatCardModule,
+    TranslateModule,
+    MatIconModule,
+    MatButtonModule,
+
+    PageContentTableModule,
     UsersRoutingModule
   ],
   exports: [UsersComponent]

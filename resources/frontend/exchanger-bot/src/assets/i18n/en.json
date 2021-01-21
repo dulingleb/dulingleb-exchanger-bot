@@ -52,5 +52,17 @@
       "email": "Email",
       "createdAt": "Дата регистрации"
     }
+  },
+  "users": {
+    "table-header": {
+      "add-btn": "Добавить",
+      "title": "Пользователи"
+    },
+    "table": {
+      "username": "Имя",
+      "exchangerId": "exchangerId",
+      "telegramUserId": "telegramUserId",
+      "operationsCount": "operationsCount"
+    }
   }
 }

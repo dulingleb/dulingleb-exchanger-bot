@@ -2,21 +2,21 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { takeUntil, withLatestFrom } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
-import { EUserRoleDto, IUserFacade, IUserInDto, USER_FACADE } from '@core/features'
+import { EUserRoleDto, IUserFacade, USER_FACADE } from '@core/features'
 import { IFilterField, IPaginator } from '@ui/index'
-import { IRequestApiDto } from '@core/models'
-import { AdminApiService } from '@core/api'
+import { TelegramUserApiService } from '@core/api'
+import { IRequestApiDto, ITelegramUserInDto } from '@core/models'
 
 import { TABLE_COLUMNS } from '../../constants/table-columns'
 
 @Component({
-  selector: 'app-admins',
-  templateUrl: './admins.component.html',
+  selector: 'app-users',
+  templateUrl: './users.component.html',
 })
-export class AdminsComponent implements OnInit, OnDestroy {
+export class UsersComponent implements OnInit, OnDestroy {
 
   currentUserRole: EUserRoleDto = EUserRoleDto.ADMIN
-  users: IUserInDto[] = []
+  users: ITelegramUserInDto[] = []
   inRequest: boolean
 
   paginator: IPaginator
@@ -28,7 +28,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(USER_FACADE) public userFacade: IUserFacade,
-    private adminApiService: AdminApiService
+    private adminApiService: TelegramUserApiService
   ) {}
 
   ngOnInit(): void {
@@ -62,12 +62,20 @@ export class AdminsComponent implements OnInit, OnDestroy {
   protected initFilterFields(): void {
     this.filterFields = [
       {
-        labelI18n: 'admins.table.name',
-        name: 'name'
+        labelI18n: 'users.table.username',
+        name: 'username'
       },
       {
-        labelI18n: 'admins.table.email',
-        name: 'email'
+        labelI18n: 'users.table.exchangerId',
+        name: 'exchangerId'
+      },
+      {
+        labelI18n: 'users.table.telegramUserId',
+        name: 'telegramUserId'
+      },
+      {
+        labelI18n: 'users.table.operationsCount',
+        name: 'operationsCount'
       }
     ]
   }

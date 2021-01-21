@@ -3,21 +3,27 @@ import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, 
 
 export const TABLE_COLUMNS: ITableColumn[] = [
   {
-    name: 'name',
-    nameI18n: 'admins.table.name',
+    name: 'username',
+    nameI18n: 'users.table.username',
     type: ETableColumnType.STRING,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
   {
-    name: 'email',
-    nameI18n: 'admins.table.email',
+    name: 'exchangerId',
+    nameI18n: 'users.table.exchangerId',
     type: ETableColumnType.STRING,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
   {
-    name: 'createdAt',
-    nameI18n: 'admins.table.createdAt',
-    type: ETableColumnType.DATE,
+    name: 'telegramUserId',
+    nameI18n: 'users.table.telegramUserId',
+    type: ETableColumnType.STRING,
+    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+  },
+  {
+    name: 'operationsCount',
+    nameI18n: 'users.table.operationsCount',
+    type: ETableColumnType.STRING,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
   {
@@ -25,7 +31,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     nameI18n: 'table.action.info',
     type: ETableColumnType.STRING,
     actionData: {
-      link: (item: any): string => `/admins/${item.id}/info`,
+      link: (item: any): string => `/users/${item.id}/info`,
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.INFO
     },
@@ -36,7 +42,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     nameI18n: 'table.action.edit',
     type: ETableColumnType.STRING,
     actionData: {
-      link: (item: any): string => `/admins/${item.id}/edit`,
+      link: (item: any): string => `/users/${item.id}/edit`,
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.EDIT
     },

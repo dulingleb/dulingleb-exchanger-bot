@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { TranslateModule } from '@ngx-translate/core'
-import { MatCardModule } from '@angular/material/card'
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
-import { MatTableModule } from '@angular/material/table'
-import { MatSortModule } from '@angular/material/sort'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 
-import { PageContentLayoutModule, TableFilterPaginatorModule, LoadingSpinnerModule, PageContentTableModule } from '@ui/index'
+import { PageContentLayoutModule, PageContentTableModule } from '@ui/index'
 
 import { AdminEditComponent, AdminInfoComponent, AdminsComponent } from './containers'
 import { AdminsRoutingModule } from './admins-routing.module'
@@ -23,21 +20,15 @@ import { AdminsRoutingModule } from './admins-routing.module'
   ],
   imports: [
     CommonModule,
-    MatCardModule,
     MatIconModule,
-    MatTableModule,
-    MatSortModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     TranslateModule,
 
     AdminsRoutingModule,
+    PageContentTableModule,
     PageContentLayoutModule,
-    TableFilterPaginatorModule,
-    LoadingSpinnerModule,
-
-    PageContentTableModule
   ],
   exports: [AdminsComponent]
 })
