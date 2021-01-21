@@ -5,16 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\ExchangerDefaultMessage;
 use App\Models\ExchangerMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ExchangerMessageController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
-        $messages = ExchangerDefaultMessage::all();
-        return view('exchangerMessages.index', compact('messages'));
+        $messages = QueryBuilder::for(ExchangerDefaultMessage::class)
+            ->allowedFilters('title')
+            ->select(['id', 'title'])
+            ->jsonPaginate($request->perPage ?? Config::get('default_size', '10'));
+
+        return response()->json($messages);
     }
 
-    public function edit(Request $request)
+    public function show(Request $request)
     {
         $default = ExchangerDefaultMessage::where('slug', $request->slug)->first();
 
@@ -33,13 +39,13 @@ class ExchangerMessageController extends Controller
         $message = $message ?? ExchangerMessage::where('exchanger_default_message_id', $default->id)->where('exchanger_id', auth()->user()->exchanger->id)->first();
         $description = $default->description;
 
-        return view('exchangerMessages.edit', compact('message', 'description'));
+        return response()->json(['status' => true, 'data' => ['message' => $message, 'description' => $description]]);
     }
 
     public function update(Request $request, ExchangerMessage $message)
     {
         if ($message->exchanger_id != auth()->user()->exchanger->id) {
-            return redirect(404);
+            return abort(404);
         }
 
         $request->validate([
@@ -50,7 +56,7 @@ class ExchangerMessageController extends Controller
         $message->text = str_replace('&nbsp;', ' ', $text);
         $message->save();
 
-        return redirect()->route('settings.messages.edit', ['slug' => $message->defaultMessage->slug])->with(['success' => 'Сообщение успешно сохранено']);
+        return response()->json(['status' => true, 'data' => ['message' => $message, 'description' => $message->defaultMessage->description]]);
     }
 
 }
