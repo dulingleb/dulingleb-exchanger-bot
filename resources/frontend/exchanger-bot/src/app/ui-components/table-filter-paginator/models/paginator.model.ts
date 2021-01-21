@@ -1,6 +1,7 @@
 export interface IPaginator {
   page: number;
   pageSize: number;
+  length: number;
 }
 
 export interface IPaginatorEvent {

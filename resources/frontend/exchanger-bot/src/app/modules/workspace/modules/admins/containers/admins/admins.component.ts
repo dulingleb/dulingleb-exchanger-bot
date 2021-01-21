@@ -1,11 +1,13 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import { takeUntil, withLatestFrom } from 'rxjs/operators'
+import { Subject } from 'rxjs'
 
-import { IPaginator } from '@ui/index'
 import { EUserRoleDto, IUserFacade, IUserInDto, USER_FACADE } from '@core/features'
-import { BehaviorSubject, Subject } from 'rxjs'
-import { catchError, takeUntil, withLatestFrom } from 'rxjs/operators'
+import { IFilterField, IPaginator } from '@ui/index'
 import { IRequestApiDto } from '@core/models'
 import { AdminApiService } from '@core/api'
+
+import { TABLE_COLUMNS } from '../../constants/table-columns'
 
 @Component({
   selector: 'app-admins',
@@ -14,29 +16,15 @@ import { AdminApiService } from '@core/api'
 export class AdminsComponent implements OnInit, OnDestroy {
 
   currentUserRole: EUserRoleDto = EUserRoleDto.ADMIN
-  users: IUserInDto[] = [
-    {
-      id: 1,
-      name: 'n1',
-      email: 'email1',
-      createdAt: new Date()
-    } as IUserInDto,
-    {
-      id: 2,
-      name: 'n2',
-      email: 'email2',
-      createdAt: new Date()
-    } as IUserInDto,
-    {
-      id: 3,
-      name: 'n3',
-      email: 'email3',
-      createdAt: new Date()
-    } as IUserInDto,
-  ]
+  users: IUserInDto[] = []
+  inRequest: boolean
+
+  paginator: IPaginator
+  filterFields: IFilterField[]
+
+  tableColumns = TABLE_COLUMNS
 
   private destroy$ = new Subject()
-  private requestApiQuery = new BehaviorSubject<IRequestApiDto>({ page: 0, pageSize: 10, query: '' })
 
   constructor(
     @Inject(USER_FACADE) public userFacade: IUserFacade,
@@ -44,31 +32,44 @@ export class AdminsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.requestApiQuery.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(req => this.getAdminList(req))
+    this.initFilterFields()
   }
 
-  changePaginator(paginator: IPaginator): void {
-    this.requestApiQuery.next({
-      page: paginator.page,
-      pageSize: paginator.pageSize,
-      query: ''
-    })
-  }
-
-  getAdminList(req: IRequestApiDto): void {
-    this.adminApiService.getList().pipe(
+  getAdminList(requestApiQuery: IRequestApiDto): void {
+    this.inRequest = true
+    this.adminApiService.getList(requestApiQuery).pipe(
       withLatestFrom(this.userFacade.user$),
       takeUntil(this.destroy$)
-    ).subscribe(([user, res]) => {
-      console.log('user, res', user, res)
-    }, (err) => console.log('err', err))
+    ).subscribe(
+      ([res, user]) => {
+        this.users = res.data
+        this.paginator = {
+          length: res.total,
+          page: res.currentPage - 1,
+          pageSize: res.pageSize
+        }
+      },
+      (err) => console.log('err', err),
+      () => this.inRequest = false
+    )
   }
 
   ngOnDestroy(): void {
     this.destroy$.next()
     this.destroy$.complete()
+  }
+
+  protected initFilterFields(): void {
+    this.filterFields = [
+      {
+        labelI18n: 'name',
+        name: 'name'
+      },
+      {
+        labelI18n: 'email',
+        name: 'email'
+      }
+    ]
   }
 
 }

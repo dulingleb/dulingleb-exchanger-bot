@@ -1,7 +1,7 @@
 import { EUserRoleDto } from '@core/features'
-import { TableColumn } from '@core/models'
+import { ITableColumn } from '@core/models'
 
-export const TABLE_COLUMNS: TableColumn[] = [
+export const TABLE_COLUMNS: ITableColumn[] = [
   {
     name: 'name',
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],

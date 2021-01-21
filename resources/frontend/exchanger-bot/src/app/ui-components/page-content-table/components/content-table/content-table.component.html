@@ -1,4 +1,4 @@
-<mat-table [dataSource]="list" class="app-table" matSort (matSortChange)="sortData.emit($event)">
+<mat-table [dataSource]="items" class="app-table" matSort (matSortChange)="sortData.emit($event)">
 
   <ng-container matColumnDef="name">
     <mat-header-cell mat-sort-header *matHeaderCellDef>

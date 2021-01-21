@@ -5,12 +5,16 @@ import { MatCardModule } from '@angular/material/card'
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
 import { MatTableModule } from '@angular/material/table'
+import { MatSortModule } from '@angular/material/sort'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
 
-import { PageContentLayoutModule, PageTablePaginatorModule } from '@ui/index'
+import { PageContentLayoutModule, TableFilterPaginatorModule, LoadingSpinnerModule, PageContentTableModule } from '@ui/index'
 
 import { AdminsTableComponent } from './components/student-table/admins-table.component'
 import { AdminEditComponent, AdminInfoComponent, AdminsComponent } from './containers'
 import { AdminsRoutingModule } from './admins-routing.module'
+
 
 @NgModule({
   declarations: [
@@ -24,12 +28,18 @@ import { AdminsRoutingModule } from './admins-routing.module'
     MatCardModule,
     MatIconModule,
     MatTableModule,
+    MatSortModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
     TranslateModule,
 
     AdminsRoutingModule,
     PageContentLayoutModule,
-    PageTablePaginatorModule
+    TableFilterPaginatorModule,
+    LoadingSpinnerModule,
+
+    PageContentTableModule
   ],
   exports: [AdminsComponent]
 })

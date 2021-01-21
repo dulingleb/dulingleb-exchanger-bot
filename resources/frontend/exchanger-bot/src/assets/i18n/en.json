@@ -17,6 +17,13 @@
       "requisites": "Реквизиты"
     }
   },
+  "table": {
+    "filter": {
+      "show-filter": "Показать фильтр",
+      "done": "Показать",
+      "clear": "Очистить"
+    }
+  },
   "auth": {
     "input": {
       "email": "Введите Email",

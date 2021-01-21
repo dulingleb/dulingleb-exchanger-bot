@@ -1,23 +1,18 @@
-<app-page-content-layout>
-    <app-page-layout-table layout-content>
-      <ng-container table-title>
-        {{ 'admins.table-header.title' | translate }}
-      </ng-container>
+<app-page-content-table
+                        [tableColumns]="tableColumns"
+                        [inRequest]="inRequest" [items]="users"
+                        [filterFields]="filterFields"
+                        [paginator]="paginator"
+                        (getList)="getAdminList($event)"
+  >
+  <ng-container table-title>
+    {{ 'admins.table-header.title' | translate }}
+  </ng-container>
 
-      <ng-container table-actions>
-        <a mat-raised-button color="primary" disableRipple="true" class="nav-link" routerLink="/dashboard">
-          <mat-icon>add</mat-icon>
-          <span>{{ 'admins.table-header.add-btn' | translate }}</span>
-       </a>
-      </ng-container>
-
-      <ng-container paginator>
-        <app-page-table-paginator [length]="10" [pageIndex]="1" (changePaginator)="changePaginator($event)"></app-page-table-paginator>
-      </ng-container>
-
-      <ng-container table>
-        <app-admins-table [list]="users" [currentUserRole]="(userFacade.user$ | async)?.role"></app-admins-table>
-      </ng-container>
-
-    </app-page-layout-table>
-</app-page-content-layout>
+  <ng-container table-actions>
+    <a mat-raised-button color="primary" disableRipple="true" class="nav-link" routerLink="/dashboard">
+      <mat-icon>add</mat-icon>
+      <span>{{ 'admins.table-header.add-btn' | translate }}</span>
+   </a>
+  </ng-container>
+</app-page-content-table>

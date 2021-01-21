@@ -2,18 +2,14 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 
-import { LogoNamePipe } from './pipes'
+import { LoadingSpinnerComponent } from './loading-spinner.component'
 
 @NgModule({
-  declarations: [
-    LogoNamePipe,
-  ],
+  declarations: [LoadingSpinnerComponent],
   imports: [
     CommonModule,
     MatProgressSpinnerModule
   ],
-  exports: [
-    LogoNamePipe,
-  ],
+  exports: [LoadingSpinnerComponent],
 })
-export class SharedModule {}
+export class LoadingSpinnerModule {}
