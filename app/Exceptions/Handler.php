@@ -57,7 +57,7 @@ class Handler extends ExceptionHandler
         }
 
         if ($request->ajax() || $request->wantsJson()) {
-            return new JsonResponse($exception->getMessage(), 422);
+            return response()->json(['status' => false, 'message' => $exception->getMessage(), 422]);
         }
 
         return parent::render($request, $exception);
