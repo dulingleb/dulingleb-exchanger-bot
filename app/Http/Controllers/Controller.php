@@ -39,7 +39,7 @@ class Controller extends BaseController
     public function response($data, string $message = null, int $code = 200): \Illuminate\Http\JsonResponse
     {
 
-        $json = ['status' => true, 'data' => $data];
+        $json = ['status' => $code == 200, 'data' => $data];
         if ($message) {
             $json['message'] = $message;
         }
