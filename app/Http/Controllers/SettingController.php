@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-    public function settingsIndex()
+    public function settingsIndex(): \Illuminate\Http\JsonResponse
     {
-        $exchanger = auth()->user()->exchanger;
+        $exchanger = Exchanger::find(auth()->id());
 
-        return response()->json(['status' => true, 'data' => $exchanger]);
+        return $this->response($exchanger);
     }
 
-    public function updateTelegramToken(Request $request)
+    public function updateTelegramToken(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
             'telegram_token' => 'required|string',
@@ -38,10 +38,10 @@ class SettingController extends Controller
         $exchanger->username = $request->username;
         $exchanger->save();
 
-        return response()->json(['status' => true, 'message' => 'Токен успешно сохранен']);
+        return $this->response($exchanger, 'Токен успешно сохранен');
     }
 
-    public function updateCoinbaseKey(Request $request)
+    public function updateCoinbaseKey(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
             'coinbase_key' => 'required|string',
@@ -53,10 +53,10 @@ class SettingController extends Controller
         $exchanger->coinbase_secret = $request->coinbase_secret;
         $exchanger->save();
 
-        return response()->json(['status' => true, 'message' => 'Ключ успещно сохранен']);
+        return $this->response($exchanger, 'Ключ успещно сохранен');
     }
 
-    public function startStop()
+    public function startStop(): \Illuminate\Http\JsonResponse
     {
         $status = '';
         if (auth()->user()->exchanger->status == Exchanger::STATUS_ACTIVE) {
@@ -68,10 +68,10 @@ class SettingController extends Controller
         }
         auth()->user()->exchanger->save();
 
-        return response()->json(['status' => true, 'message' => $status]);
+        return $this->response(null, $status);
     }
 
-    public function limits(Request $request)
+    public function limits(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
             'course' => 'required|numeric|min:0',
@@ -85,6 +85,6 @@ class SettingController extends Controller
         $exchanger->max_exchange = $request->max_exchange;
         $exchanger->save();
 
-        return response()->json(['status' => true, 'message' => 'Лимиты успешно установлены']);
+        return $this->response($exchanger, 'Лимиты успешно установлены');
     }
 }

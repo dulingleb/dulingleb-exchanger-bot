@@ -8,6 +8,7 @@ use App\Models\TelegramUser;
 use App\Models\TelegramUserSetting;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -15,7 +16,7 @@ use Telegram;
 
 class TelegramUserController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): \Illuminate\Http\JsonResponse
     {
         $users = QueryBuilder::for(TelegramUserSetting::class)
             ->join('telegram_users', 'telegram_users.id', 'telegram_user_settings.telegram_user_id')
@@ -25,20 +26,20 @@ class TelegramUserController extends Controller
             ->select(['telegram_user_settings.id', 'telegram_user_id', 'exchanger_id', 'telegram_users.username'])
             ->addSelect(DB::raw('(SELECT COUNT(*) FROM operations WHERE (operations.telegram_user_id = telegram_user_settings.telegram_user_id) AND (operations.exchanger_id = telegram_user_settings.exchanger_id) AND (operations.status = ' . Operation::STATUS_SUCCESS . ') ) AS operations_count'))
             ->where('telegram_user_settings.exchanger_id', auth()->user()->exchanger->id)
-            ->jsonPaginate();
+            ->jsonPaginate($request->perPage ?? Config::get('default_size', '10'));
 
 
-        return response()->json($users);
+        return $this->response($users);
     }
 
-    public function show(TelegramUserSetting $userSetting)
+    public function show(TelegramUserSetting $userSetting): \Illuminate\Http\JsonResponse
     {
         $this->checkUser($userSetting);
 
-        return response()->json(['status' => true, 'data' => $userSetting]);
+        return $this->response($userSetting);
     }
 
-    public function update(Request $request, TelegramUserSetting $userSetting)
+    public function update(Request $request, TelegramUserSetting $userSetting): \Illuminate\Http\JsonResponse
     {
         $this->checkUser($userSetting);
 
@@ -83,7 +84,7 @@ class TelegramUserController extends Controller
         }
 
         $userSetting->save();
-        return response()->json(['status' => true, 'message' => 'Пользователь успешно сохранен']);
+        return $this->response($userSetting, 'Пользователь успешно сохранен');
     }
 
     public function setAdmin(Request $request, TelegramUserSetting $userSetting)
@@ -97,7 +98,7 @@ class TelegramUserController extends Controller
         $userSetting->role = $request->role == 'admin' ? 'admin' : 'user';
         $userSetting->save();
 
-        return response()->json(['status' => true, 'message' => 'Пользователь успешно назначен админом']);
+        return $this->response($userSetting, 'Пользователь успешно назначен админом');
     }
 
     private function checkUser(TelegramUserSetting $userSetting) {
