@@ -67,6 +67,14 @@ Route::group([
     Route::resource('settings/commissions', 'ExchangerCommissionController', ['except' => ['edit']]);
     // Настройки реквизитов
     Route::resource('settings/bank-details', 'BankDetailController', ['except' => ['edit']]);
+
+    // Операции
+    Route::get('operations', ['as' => 'operations.index', 'uses' => 'OperationController@index']);
+    Route::get('operations/{operation}', ['as' => 'operation.show', 'uses' => 'OperationController@show']);
+    Route::put('operations/{operation}/add-comment', ['as' => 'operation.addComment', 'uses' => 'OperationController@addComment']);
+    Route::put('operations/{operation}/success', ['as' => 'operation.success', 'uses' => 'OperationController@success']);
+    Route::put('operations/{operation}/cancel', ['as' => 'operation.cancel', 'uses' => 'OperationController@cancel']);
+    Route::post('operations/{operation}/direct-to-operator', ['as' => 'operation.directToOperator', 'uses' => 'OperationController@directToOperator']);
 });
 
 Route::get('/', function() {
