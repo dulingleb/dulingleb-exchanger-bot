@@ -3,6 +3,15 @@
     "copyright": "© 2020-{{year}} Created by Andrey Lebedev, Gleb Dulin",
     "app-name": "bot"
   },
+  "common": {
+    "name": "Имя",
+    "email": "Email",
+    "role": "Роль",
+    "roles": {
+      "1": "Супер администратор",
+      "2": "Администратор"
+    }
+  },
   "side-nav": {
     "dashboard": "Доска",
     "admins": "Администраторы",
@@ -15,6 +24,14 @@
       "messages": "Сообщения",
       "commission": "Коммиссии",
       "requisites": "Реквизиты"
+    }
+  },
+  "confirm": {
+    "ok": "Да",
+    "cancel": "Отмена",
+    "delete-modal": {
+      "title": "Удаление {{titleKey}}",
+      "message": "Вы действительно хотите удалить {{messageKey}}"
     }
   },
   "table": {
@@ -53,6 +70,10 @@
       "createdAt": "Дата регистрации"
     }
   },
+  "admin": {
+    "page-title": "Информация об администраторе",
+    "editAdmin": "Редактировать"
+  },
   "users": {
     "table-header": {
       "add-btn": "Добавить",
@@ -60,9 +81,9 @@
     },
     "table": {
       "username": "Имя",
-      "exchangerId": "exchangerId",
-      "telegramUserId": "telegramUserId",
-      "operationsCount": "operationsCount"
+      "exchangerId": "id обменника",
+      "telegramUserId": "id",
+      "operationsCount": "Количество операций"
     }
   }
 }

@@ -66,10 +66,6 @@ export class UsersComponent implements OnInit, OnDestroy {
         name: 'username'
       },
       {
-        labelI18n: 'users.table.exchangerId',
-        name: 'exchangerId'
-      },
-      {
         labelI18n: 'users.table.telegramUserId',
         name: 'telegramUserId'
       },

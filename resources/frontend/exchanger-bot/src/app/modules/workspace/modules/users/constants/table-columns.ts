@@ -9,12 +9,6 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
   {
-    name: 'exchangerId',
-    nameI18n: 'users.table.exchangerId',
-    type: ETableColumnType.STRING,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
-  },
-  {
     name: 'telegramUserId',
     nameI18n: 'users.table.telegramUserId',
     type: ETableColumnType.STRING,

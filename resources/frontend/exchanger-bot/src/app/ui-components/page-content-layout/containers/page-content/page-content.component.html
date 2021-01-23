@@ -1,0 +1,20 @@
+<app-page-content-layout>
+  <section layout-content>
+    <header class="header">
+      <h2 class="title">
+        <ng-content select="[header]"></ng-content>
+      </h2>
+      <div class="actions">
+        <ng-content select="[actions]"></ng-content>
+      </div>
+    </header>
+
+    <article>
+      <ng-content select="[content]"></ng-content>
+    </article>
+
+    <footer>
+      <ng-content select="[footer]"></ng-content>
+    </footer>
+  </section>
+</app-page-content-layout>

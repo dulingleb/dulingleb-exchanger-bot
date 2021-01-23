@@ -6,11 +6,10 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 
-import { PageContentLayoutModule, PageContentTableModule } from '@ui/index'
+import { ConfirmModalModule, PageContentLayoutModule, PageContentTableModule } from '@ui/index'
 
 import { AdminEditComponent, AdminInfoComponent, AdminsComponent } from './containers'
 import { AdminsRoutingModule } from './admins-routing.module'
-
 
 @NgModule({
   declarations: [
@@ -26,6 +25,7 @@ import { AdminsRoutingModule } from './admins-routing.module'
     MatInputModule,
     TranslateModule,
 
+    ConfirmModalModule,
     AdminsRoutingModule,
     PageContentTableModule,
     PageContentLayoutModule,

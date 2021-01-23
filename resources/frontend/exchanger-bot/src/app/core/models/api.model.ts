@@ -7,6 +7,12 @@ export interface IRequestApiDto {
   filterValues: IFilterValues[];
 }
 
+export interface ICommonResponseDto<T> {
+  status: boolean;
+  message: string;
+  data: T;
+}
+
 export interface IResponseApiDto<T> {
   totalPages: number;
 	content: T;
@@ -18,10 +24,10 @@ export interface IResponseApiDto<T> {
 export interface IResponseApiOutDto<T> {
   current_page: number;
   from: number; // page
-	last_page: number;
-	per_page: number; // pageSize
-	to: number;
-	total: number;
+  last_page: number;
+  per_page: number; // pageSize
+  to: number;
+  total: number;
   data: T;
 }
 

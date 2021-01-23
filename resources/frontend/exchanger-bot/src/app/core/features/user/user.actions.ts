@@ -29,6 +29,10 @@ const loginError = createAction(
   props<{ error: Error }>()
 )
 
+const logout = createAction(
+  '[User exchanger bot] Logout'
+)
+
 const saveToken = createAction(
   '[User exchanger bot] Save token',
   props<{ token: string }>()
@@ -43,6 +47,10 @@ const redirectAfterAuth = createAction(
   '[User exchanger bot] Redirect after auth'
 )
 
+const redirectAfterLogout = createAction(
+  '[User exchanger bot] Redirect after logout'
+)
+
 export const USER_ACTIONS = {
   init,
   getAuthUser,
@@ -50,8 +58,10 @@ export const USER_ACTIONS = {
   login,
   loginSuccess,
   loginError,
+  logout,
 
   saveToken,
   saveUser,
-  redirectAfterAuth
+  redirectAfterAuth,
+  redirectAfterLogout
 }

@@ -1,9 +1,9 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
-import { takeUntil, withLatestFrom } from 'rxjs/operators'
+import { catchError, takeUntil, withLatestFrom } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 import { EUserRoleDto, IUserFacade, IUserInDto, USER_FACADE } from '@core/features'
-import { IFilterField, IPaginator } from '@ui/index'
+import { IFilterField, IPaginator, ConfirmModalService, IConfirmModal } from '@ui/index'
 import { IRequestApiDto } from '@core/models'
 import { AdminApiService } from '@core/api'
 
@@ -28,11 +28,21 @@ export class AdminsComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(USER_FACADE) public userFacade: IUserFacade,
-    private adminApiService: AdminApiService
+    private adminApiService: AdminApiService,
+    private confirmModalService: ConfirmModalService
   ) {}
 
   ngOnInit(): void {
     this.initFilterFields()
+    const data: IConfirmModal = {
+      titleI18n: 'confirm.delete-modal.title',
+      titleKeyI18n: 'пользователя',
+      messageI18n: 'confirm.delete-modal.message',
+      messageKeyI18n: 'bla',
+      confirmBtn: true,
+      cancelBtn: true
+    }
+    // this.confirmModalService.openDialog(data)
   }
 
   getAdminList(requestApiQuery: IRequestApiDto): void {
@@ -42,6 +52,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(
       ([res, user]) => {
+        console.log('aa', res, user)
         this.users = res.data
         this.paginator = {
           length: res.total,
@@ -49,8 +60,13 @@ export class AdminsComponent implements OnInit, OnDestroy {
           pageSize: res.pageSize
         }
       },
-      (err) => console.log('err', err),
-      () => this.inRequest = false
+      (err) => {
+        this.userFacade.logout()
+        console.log('err', err)
+      },
+      () => {
+        this.inRequest = false
+      }
     )
   }
 

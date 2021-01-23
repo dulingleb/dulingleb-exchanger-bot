@@ -20,8 +20,7 @@ export class AdminEditComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.pipe(
       mergeMap((params: ParamMap) => this.adminApiService.getUser(+params.get('id')))
-    ).subscribe(({ status, data }) =>  {
-      console.log(status, data)
+    ).subscribe(user =>  {
       // this.adminApiService.updateUser({ ...data, name: 'Дмитрий' }).subscribe(a => console.log(a))
       // this.adminApiService.addUser({
       //   name: 'test',
