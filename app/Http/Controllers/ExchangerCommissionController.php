@@ -4,18 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\ExchangerCommission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ExchangerCommissionController extends Controller
 {
     public function index()
     {
-        $commissions = ExchangerCommission::where('exchanger_id', auth()->user()->exchanger->id)->get();
-        return view('commissions.index', compact('commissions'));
-    }
+        $commissions = QueryBuilder::for(ExchangerCommission::class)
+            ->allowedSorts(['from', 'percent'])
+            ->select(['id', 'from', 'to', 'percent'])
+            ->where('exchanger_id', auth()->user()->exchanger->id)
+            ->jsonPaginate($request->perPage ?? Config::get('default_size', '10'));
 
-    public function create()
-    {
-        return view('commissions.create');
+        return response()->json($commissions);
     }
 
     public function store(Request $request)
@@ -34,19 +36,19 @@ class ExchangerCommissionController extends Controller
             'percent' => 'required|numeric|min:0|max:99'
         ]);
 
-        ExchangerCommission::create([
+        $commission = ExchangerCommission::create([
             'exchanger_id' => auth()->user()->exchanger->id,
             'from' => $request->from,
             'to' => $request->to,
             'percent' => $request->percent
         ]);
 
-        return redirect()->route('commission.index')->with(['success' => 'Комиссия успешно добавлена']);
+        return response()->json(['success' => true, 'data' => $commission, 'message' => 'Комиссия успешно добавлена']);
     }
 
-    public function edit(ExchangerCommission $commission)
+    public function show(ExchangerCommission $commission)
     {
-        return view('commissions.edit', compact('commission'));
+        return response()->json(['success' => true, 'data' => $commission]);
     }
 
     public function update(Request $request, ExchangerCommission $commission)
@@ -72,7 +74,7 @@ class ExchangerCommissionController extends Controller
         $commission->percent = $request->percent;
         $commission->save();
 
-        return redirect()->route('commission.index')->with(['success' => 'Комиссия успешно сохранена!']);
+        return response()->json(['success' => true, 'data' => $commission, 'message' => 'Комиссия успешно сохранена']);
     }
 
     public function destroy(ExchangerCommission $commission)
@@ -81,7 +83,7 @@ class ExchangerCommissionController extends Controller
 
         $commission->delete();
 
-        return redirect()->route('commission.index')->with(['success' => 'Комиссия успешно удалена']);
+        return response()->json(['success' => true, 'message' => 'Комиссия успешно удалена']);
     }
 
     private function check(ExchangerCommission $commission)

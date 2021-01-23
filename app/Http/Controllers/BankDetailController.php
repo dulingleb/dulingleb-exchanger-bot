@@ -4,65 +4,60 @@ namespace App\Http\Controllers;
 
 use App\Models\BankDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class BankDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
-        $bankDetails = BankDetail::where('exchanger_id', auth()->user()->exchanger->id)->get();
-        return view('bankDetails.index', compact('bankDetails'));
-    }
+        $bankDetails = QueryBuilder::for(BankDetail::class)
+            ->allowedSorts(['title', 'status'])
+            ->select(['id', 'title', 'status'])
+            ->where('exchanger_id', auth()->user()->exchanger->id)
+            ->jsonPaginate($request->perPage ?? Config::get('default_size', '10'));
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('bankDetails.create');
+        return response()->json(['data' => $bankDetails]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
             'title' => 'required|string|min:2|max:198',
             'text' => 'required|string',
         ]);
 
-        BankDetail::create([
+        $bankDetail = BankDetail::create([
             'exchanger_id' => auth()->user()->exchanger->id,
             'title' => $request->title,
             'text' => $request->text,
             'status' => isset($request->status) ? 1 : 0
         ]);
 
-        return redirect()->route('bankDetail.index')->with(['success' => 'Реквизиты успешно добавлены']);
+        return response()->json(['success' => true, 'data' => $bankDetail, 'message' => 'Реквизиты успешно добавлены']);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\BankDetail  $bankDetail
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function edit(BankDetail $bankDetail)
+    public function show(BankDetail $bankDetail): \Illuminate\Http\JsonResponse
     {
-        if ($bankDetail->exchanger_id != auth()->user()->exchanger->id) {
-            return redirect()->route('bankDetail.index')->withErrors(['auth' => 'Ошибка авторизации']);
-        }
-        return view('bankDetails.edit', compact('bankDetail'));
+        $this->check($bankDetail);
+        return response()->json(['success' => true, 'data' => $bankDetail, 'message' => 'Реквизиты успешно добавлены']);
     }
 
     /**
@@ -70,13 +65,11 @@ class BankDetailController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\BankDetail  $bankDetail
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, BankDetail $bankDetail)
+    public function update(Request $request, BankDetail $bankDetail): \Illuminate\Http\JsonResponse
     {
-        if ($bankDetail->exchanger_id != auth()->user()->exchanger->id) {
-            return redirect()->route('bankDetail.index')->withErrors(['auth' => 'Ошибка авторизации']);
-        }
+        $this->check($bankDetail);
 
         $request->validate([
             'title' => 'required|string|min:2|max:198',
@@ -88,23 +81,28 @@ class BankDetailController extends Controller
         $bankDetail->status = isset($request->status) ? 1 : 0;
         $bankDetail->save();
 
-        return redirect()->route('bankDetail.index')->with(['success' => 'Реквизиты успешно сохранены']);
+        return response()->json(['success' => true, 'data' => $bankDetail, 'message' => 'Реквизиты успешно изменены']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\BankDetail  $bankDetail
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(BankDetail $bankDetail)
+    public function destroy(BankDetail $bankDetail): \Illuminate\Http\JsonResponse
     {
-        if ($bankDetail->exchanger_id != auth()->user()->exchanger->id) {
-            return redirect()->route('bankDetail.index')->withErrors(['auth' => 'Ошибка авторизации']);
-        }
+        $this->check($bankDetail);
 
         $bankDetail->delete();
 
-        return redirect()->route('bankDetail.index')->with(['success' => 'Реквизиты успешно удалены']);
+        return response()->json(['success' => true, 'message' => 'Реквизиты успешно удаленыц']);
+    }
+
+    private function check(BankDetail $bankDetail)
+    {
+        if ($bankDetail->exchanger_id != auth()->user()->exchanger->id) {
+            abort(404);
+        }
     }
 }

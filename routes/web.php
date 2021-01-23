@@ -51,7 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('settings/buttons/update', ['as' => 'settings.buttons.update', 'uses' => 'SettingController@buttonsUpdate']);
 
 	Route::get('settings/messages', ['as' => 'settings.messages.index', 'uses' => 'ExchangerMessageController@index']);
-	Route::get('settings/messages/{slug}', ['as' => 'settings.messages.edit', 'uses' => 'ExchangerMessageController@edit']);
+	Route::get('settings/messages/{slug}', ['as' => 'settings.messages.edit', 'uses' => 'ExchangerMessageController@show']);
 	Route::patch('settings/messages/{message}/update', ['as' => 'settings.messages.update', 'uses' => 'ExchangerMessageController@update']);
 
 	Route::resource('settings/commission', 'ExchangerCommissionController', ['except' => ['show']]);

@@ -44,10 +44,29 @@ Route::group([
         Route::patch('settings/messages/template/{message}/update', ['as' => 'settings.messages.default.update', 'uses' => 'ExchangerDefaultMessageController@update']);
     });
 
+
+    // Телеграм пользователи
     Route::get('telegram-users', ['as' => 'telegramUser.index', 'uses' => 'TelegramUserController@index']);
     Route::get('telegram-users/{userSetting}', ['as' => 'telegramUser.show', 'uses' => 'TelegramUserController@show']);
     Route::put('telegram-users/{userSetting}/update', ['as' => 'telegramUser.update', 'uses' => 'TelegramUserController@update']);
     Route::put('telegram-users/{userSetting}/set-as-admin', ['as' => 'telegramUser.setAsAdmin', 'uses' => 'TelegramUserController@setAdmin']);
+
+    // Настройки главные
+    Route::get('settings', ['as' => 'settings.index', 'uses' => 'SettingController@settingsIndex']);
+    Route::patch('settings/set/telegram-token', ['as' => 'settings.set.telegram-token', 'uses' => 'SettingController@updateTelegramToken']);
+    Route::patch('settings/set/coinbase-key', ['as' => 'settings.set.coinbaseKey', 'uses' => 'SettingController@updateCoinbaseKey']);
+    Route::post('settings/status/status', ['as' => 'settings.set.status', 'uses' => 'SettingController@startStop']);
+    Route::patch('settings/set/limits', ['as' => 'settings.set.limits', 'uses' => 'SettingController@limits']);
+
+    // Настройки сообщения
+    Route::get('settings/messages', ['as' => 'settings.messages.index', 'uses' => 'ExchangerMessageController@index']);
+    Route::get('settings/messages/{slug}', ['as' => 'settings.messages.edit', 'uses' => 'ExchangerMessageController@show']);
+    Route::patch('settings/messages/{message}/update', ['as' => 'settings.messages.update', 'uses' => 'ExchangerMessageController@update']);
+
+    // Настройки комиссии
+    Route::resource('settings/commissions', 'ExchangerCommissionController', ['except' => ['edit']]);
+    // Настройки реквизитов
+    Route::resource('settings/bank-details', 'BankDetailController', ['except' => ['edit']]);
 });
 
 Route::get('/', function() {
