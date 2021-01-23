@@ -12,7 +12,7 @@ use Spatie\QueryBuilder\QueryBuilderRequest;
 
 class UserController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): \Illuminate\Http\JsonResponse
     {
         $users = QueryBuilder::for(User::class)
             ->allowedFilters(['name', 'email'])
@@ -20,15 +20,10 @@ class UserController extends Controller
             ->allowedSorts('id', 'name', 'email')
             ->jsonPaginate($request->perPage ?? Config::get('default_size', '10'));
 
-        return response()->json($users);
+        return $this->response($users);
     }
 
-    public function create()
-    {
-        return view('users.create');
-    }
-
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
             'name' => 'required|min:2|max:198|string',
@@ -51,15 +46,15 @@ class UserController extends Controller
             'max_exchange' => '0.1',
         ]);
 
-        return response()->json(['status' => true, 'message' => 'Пользователь успешно добавлен']);
+        return $this->response(null, 'Пользователь успешно добавлен');
     }
 
-    public function show(User $user)
+    public function show(User $user): \Illuminate\Http\JsonResponse
     {
-        return response()->json(['status' => true, 'data' => $user]);
+        return $this->response($user);
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user): \Illuminate\Http\JsonResponse
     {
         $request->validate([
             'name' => 'required|min:2|max:198|string',
@@ -75,17 +70,17 @@ class UserController extends Controller
         }
         $user->save();
 
-        return response()->json(['status' => true, 'message' => 'Данные успешно сохранены']);
+        return $this->response(null, 'Данные успешно сохранены');
     }
 
-    public function destroy(User $user)
+    public function destroy(User $user): \Illuminate\Http\JsonResponse
     {
         if (auth()->id() === $user->id) {
-            return response()->json(['status' => false, 'message' => 'Нельзя удалить самого себя'])->setStatusCode(400);
+            return $this->response(null, 'Нельзя удалить самого себя', 400);
         }
 
         $user->delete();
 
-        return response()->json(['status' => true, 'message' => 'Пользователь успешно удален']);
+        return $this->response(null, 'Пользователь успешно удален');
     }
 }

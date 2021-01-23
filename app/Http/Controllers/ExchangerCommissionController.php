@@ -9,7 +9,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class ExchangerCommissionController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
         $commissions = QueryBuilder::for(ExchangerCommission::class)
             ->allowedSorts(['from', 'percent'])
@@ -17,10 +17,10 @@ class ExchangerCommissionController extends Controller
             ->where('exchanger_id', auth()->user()->exchanger->id)
             ->jsonPaginate($request->perPage ?? Config::get('default_size', '10'));
 
-        return response()->json($commissions);
+        return $this->response($commissions);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
             'from' => ['required', 'numeric', 'min:0', function($a, $value, $fail) {
@@ -43,15 +43,15 @@ class ExchangerCommissionController extends Controller
             'percent' => $request->percent
         ]);
 
-        return response()->json(['success' => true, 'data' => $commission, 'message' => 'Комиссия успешно добавлена']);
+        return $this->response(null, 'Комиссия успешно добавлена');
     }
 
-    public function show(ExchangerCommission $commission)
+    public function show(ExchangerCommission $commission): \Illuminate\Http\JsonResponse
     {
-        return response()->json(['success' => true, 'data' => $commission]);
+        return $this->response($commission);
     }
 
-    public function update(Request $request, ExchangerCommission $commission)
+    public function update(Request $request, ExchangerCommission $commission): \Illuminate\Http\JsonResponse
     {
         $this->check($commission);
 
@@ -74,7 +74,7 @@ class ExchangerCommissionController extends Controller
         $commission->percent = $request->percent;
         $commission->save();
 
-        return response()->json(['success' => true, 'data' => $commission, 'message' => 'Комиссия успешно сохранена']);
+        return $this->response($commission, 'Комиссия успешно сохранена');
     }
 
     public function destroy(ExchangerCommission $commission)
@@ -83,7 +83,7 @@ class ExchangerCommissionController extends Controller
 
         $commission->delete();
 
-        return response()->json(['success' => true, 'message' => 'Комиссия успешно удалена']);
+        return $this->response(null, 'Комиссия успешно удалена');
     }
 
     private function check(ExchangerCommission $commission)

@@ -22,7 +22,7 @@ class BankDetailController extends Controller
             ->where('exchanger_id', auth()->user()->exchanger->id)
             ->jsonPaginate($request->perPage ?? Config::get('default_size', '10'));
 
-        return response()->json(['data' => $bankDetails]);
+        return $this->response($bankDetails);
     }
 
     /**
@@ -45,7 +45,7 @@ class BankDetailController extends Controller
             'status' => isset($request->status) ? 1 : 0
         ]);
 
-        return response()->json(['success' => true, 'data' => $bankDetail, 'message' => 'Реквизиты успешно добавлены']);
+        return $this->response($bankDetail, 'Реквизиты успешно добавлены');
     }
 
     /**
@@ -57,7 +57,7 @@ class BankDetailController extends Controller
     public function show(BankDetail $bankDetail): \Illuminate\Http\JsonResponse
     {
         $this->check($bankDetail);
-        return response()->json(['success' => true, 'data' => $bankDetail, 'message' => 'Реквизиты успешно добавлены']);
+        return $this->response($bankDetail);
     }
 
     /**
@@ -81,7 +81,7 @@ class BankDetailController extends Controller
         $bankDetail->status = isset($request->status) ? 1 : 0;
         $bankDetail->save();
 
-        return response()->json(['success' => true, 'data' => $bankDetail, 'message' => 'Реквизиты успешно изменены']);
+        return $this->response($bankDetail, 'Реквизиты успешно сохранены');
     }
 
     /**
@@ -96,7 +96,7 @@ class BankDetailController extends Controller
 
         $bankDetail->delete();
 
-        return response()->json(['success' => true, 'message' => 'Реквизиты успешно удаленыц']);
+        return $this->response(null, 'Реквизиты успешно удалены');
     }
 
     private function check(BankDetail $bankDetail)

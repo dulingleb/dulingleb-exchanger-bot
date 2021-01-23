@@ -35,4 +35,14 @@ class Controller extends BaseController
                 ], \Illuminate\Http\JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
         }
     }
+
+    public function response($data, string $message = null, int $code = 200): \Illuminate\Http\JsonResponse
+    {
+
+        $json = ['status' => true, 'data' => $data];
+        if ($message) {
+            $json['message'] = $message;
+        }
+        return response()->json($json, $code);
+    }
 }

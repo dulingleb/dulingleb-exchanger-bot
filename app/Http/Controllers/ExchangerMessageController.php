@@ -17,7 +17,7 @@ class ExchangerMessageController extends Controller
             ->select(['id', 'title'])
             ->jsonPaginate($request->perPage ?? Config::get('default_size', '10'));
 
-        return response()->json($messages);
+        return $this->response($messages);
     }
 
     public function show(Request $request)
@@ -36,10 +36,10 @@ class ExchangerMessageController extends Controller
             ]);
         }
 
-        $message = $message ?? ExchangerMessage::where('exchanger_default_message_id', $default->id)->where('exchanger_id', auth()->user()->exchanger->id)->first();
-        $description = $default->description;
+        $message = $message ?? ExchangerMessage::where('exchanger_default_message_id', $default->id)->where('exchanger_id', auth()->user()->exchanger->id)->first()->toArray();
+        $message['description'] = $default->description;
 
-        return response()->json(['status' => true, 'data' => ['message' => $message, 'description' => $description]]);
+        return $this->response($message);
     }
 
     public function update(Request $request, ExchangerMessage $message)
@@ -56,7 +56,11 @@ class ExchangerMessageController extends Controller
         $message->text = str_replace('&nbsp;', ' ', $text);
         $message->save();
 
-        return response()->json(['status' => true, 'data' => ['message' => $message, 'description' => $message->defaultMessage->description]]);
+        $description = $message->defaultMessage->description;
+        $message = $message->toArray();
+        $message['description'] = $description;
+
+        return $this->response($message, 'Сообщение успешно сохранено');
     }
 
 }
