@@ -4,6 +4,9 @@ export interface ITelegramUserInDto {
   exchangerId: number;
   telegramUserId: number;
   operationsCount: number;
+  discount?: number;
+  comment?: string;
+  ban?: boolean;
 }
 
 export interface ITelegramUserOutDto {
@@ -12,4 +15,14 @@ export interface ITelegramUserOutDto {
   exchanger_id: number;
   telegram_user_id: number;
   operations_count: number;
+  discount?: number;
+  comment?: string;
+  ban?: boolean;
+}
+
+export interface ITelegramUserDataDto {
+  id: number;
+  discount?: number;
+  comment?: string;
+  ban?: boolean;
 }

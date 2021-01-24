@@ -108,5 +108,19 @@
       "telegramUserId": "id",
       "operationsCount": "Количество операций"
     }
+  },
+  "user": {
+    "edit": {
+      "pageTitle": "Редактирование пользователя",
+      "input": {
+        "discount": "Персональная скидка",
+        "comment": "Примечание",
+        "ban": "Бан"
+      },
+      "error": {
+        "discount": "Некорректная скидка"
+      },
+      "save": "Сохранить"
+    }
   }
 }
