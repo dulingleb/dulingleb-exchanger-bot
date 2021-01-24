@@ -17,7 +17,7 @@ class SendController extends Controller
 
     public function send(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'amount' => 'required|numeric|min:0.0001|max:1',
             'address' => ['required', 'string', function($a, $value, $fail) {
                 $status = AddressValidator::validateBTC($value);
@@ -31,6 +31,7 @@ class SendController extends Controller
         $send = $coinbase->sendBtc($request->address, $request->amount);
 
         if (isset($send->errors)) {
+            //return $this->response()
             return redirect()->route('send.index')->withErrors($send->errors);
         }
 

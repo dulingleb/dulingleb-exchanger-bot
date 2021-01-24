@@ -33,7 +33,7 @@ class BankDetailController extends Controller
      */
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        $request->validate([
+        $this->validate($request, [
             'title' => 'required|string|min:2|max:198',
             'text' => 'required|string',
         ]);
@@ -71,7 +71,7 @@ class BankDetailController extends Controller
     {
         $this->check($bankDetail);
 
-        $request->validate([
+        $this->validate($request, [
             'title' => 'required|string|min:2|max:198',
             'text' => 'required|string',
         ]);

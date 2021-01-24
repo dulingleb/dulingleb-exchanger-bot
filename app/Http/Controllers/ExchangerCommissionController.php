@@ -22,7 +22,7 @@ class ExchangerCommissionController extends Controller
 
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        $request->validate([
+        $this->validate($request, [
             'from' => ['required', 'numeric', 'min:0', function($a, $value, $fail) {
                 if (ExchangerCommission::where('from', '<=', $value)->where('to', '>', $value)->where('exchanger_id', auth()->user()->exchanger->id)->exists()) {
                     $fail('Значение в данном диапазоне уже существует.');
@@ -55,7 +55,7 @@ class ExchangerCommissionController extends Controller
     {
         $this->check($commission);
 
-        $request->validate([
+        $this->validate($request, [
             'from' => ['required', 'numeric', 'min:0', function($a, $value, $fail) use ($commission) {
                 if (ExchangerCommission::where('from', '<=', $value)->where('to', '>', $value)->where('id', '!=', $commission->id)->where('exchanger_id', auth()->user()->exchanger->id)->exists()) {
                     $fail('Значение в данном диапазоне уже существует.');

@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        $request->validate([
+        $this->validate($request, [
             'name' => 'required|min:2|max:198|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:4|max:32',
@@ -56,7 +56,7 @@ class UserController extends Controller
 
     public function update(Request $request, User $user): \Illuminate\Http\JsonResponse
     {
-        $request->validate([
+        $this->validate($request, [
             'name' => 'required|min:2|max:198|string',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|min:4|max:32',
