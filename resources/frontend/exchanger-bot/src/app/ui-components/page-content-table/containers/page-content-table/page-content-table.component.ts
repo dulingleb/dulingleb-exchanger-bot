@@ -4,7 +4,7 @@ import { BehaviorSubject, Subject } from 'rxjs'
 
 import { IUserFacade, USER_FACADE } from '@core/features'
 import { IFilterField, IFilterValues, IPaginator } from '@ui/index'
-import { IRequestApiDto, ISortEvent, ITableColumn } from '@core/models'
+import { IRequestApiDto, ISortEvent, ITableActionEvent, ITableColumn } from '@core/models'
 
 @Component({
   selector: 'app-page-content-table',
@@ -13,6 +13,7 @@ import { IRequestApiDto, ISortEvent, ITableColumn } from '@core/models'
 export class PageContentTableComponent implements AfterViewInit, OnDestroy {
 
   @Output() getList = new EventEmitter<IRequestApiDto>()
+  @Output() eventData = new EventEmitter<ITableActionEvent>()
 
   @Input() items: []
   @Input() inRequest: boolean

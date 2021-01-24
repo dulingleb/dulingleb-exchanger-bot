@@ -10,8 +10,8 @@ import {
 } from '@angular/core'
 import { MatSort } from '@angular/material/sort'
 
-import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, ISortEvent, ITableColumn } from '@core/models'
-import { EUserRoleDto, IUserInDto } from '@core/features'
+import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, ISortEvent, ITableActionEvent, ITableColumn } from '@core/models'
+import { EUserRoleDto } from '@core/features'
 import { getTableColumnNames } from '@utils/index'
 
 @Component({
@@ -21,7 +21,7 @@ import { getTableColumnNames } from '@utils/index'
 })
 export class ContentTableComponent implements OnChanges {
 
-  @Output() delete = new EventEmitter<IUserInDto>()
+  @Output() eventData = new EventEmitter<ITableActionEvent>()
   @Output() sortData = new EventEmitter<ISortEvent>()
 
   @Input() items: []
@@ -41,6 +41,10 @@ export class ContentTableComponent implements OnChanges {
     if (changes.currentUserRole?.currentValue !== undefined) {
       this.columnNames = getTableColumnNames(this.tableColumns, this.currentUserRole)
     }
+  }
+
+  setEvent(event: ETableColumnActionEventType, data: any): void {
+    this.eventData.emit({ event, data })
   }
 
 }

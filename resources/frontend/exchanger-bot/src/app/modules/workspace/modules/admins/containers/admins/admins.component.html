@@ -4,13 +4,14 @@
                         [filterFields]="filterFields"
                         [paginator]="paginator"
                         (getList)="getAdminList($event)"
+                        (eventData)="setEventData($event)"
 >
   <ng-container table-title>
     {{ 'admins.table-header.title' | translate }}
   </ng-container>
 
   <ng-container table-actions>
-    <a mat-raised-button color="primary" disableRipple="true" class="nav-link" routerLink="admins/new">
+    <a mat-raised-button color="primary" disableRipple="true" class="nav-link" routerLink="/admins/new">
       <mat-icon>add</mat-icon>
       <span>{{ 'admins.table-header.add-btn' | translate }}</span>
    </a>

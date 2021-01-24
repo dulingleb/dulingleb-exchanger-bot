@@ -14,13 +14,13 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     type: ETableColumnType.STRING,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
-  // {
-  //   name: 'role',
-  //   nameI18n: 'admins.table.role',
-  //   type: ETableColumnType.STRING,
-  //   translate: (user: IUserInDto): string => `common.roles.${user.role}`,
-  //   allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
-  // },
+  {
+    name: 'role',
+    nameI18n: 'admins.table.role',
+    type: ETableColumnType.STRING,
+    translate: (user: IUserInDto): string => `common.roles.${user.role}`,
+    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+  },
   {
     name: 'createdAt',
     nameI18n: 'admins.table.createdAt',

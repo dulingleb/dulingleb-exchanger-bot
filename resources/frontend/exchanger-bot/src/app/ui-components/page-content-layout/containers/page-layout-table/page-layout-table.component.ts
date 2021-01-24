@@ -6,4 +6,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
   styleUrls: ['./page-layout-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PageLayoutTableComponent { }
+export class PageLayoutTableComponent {}

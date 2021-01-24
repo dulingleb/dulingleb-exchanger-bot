@@ -32,15 +32,14 @@
           <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.DELETE">delete_outline</mat-icon>
         </a>
 
-        <button mat-icon-button *ngIf="tableColumn.actionData.actionType === ETableColumnActionType.EVENT" class="table-action">
+        <button mat-icon-button *ngIf="tableColumn.actionData.actionType === ETableColumnActionType.EVENT" (click)="setEvent(tableColumn.actionData.eventType, row)" class="table-action">
           <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.INFO">info_outline</mat-icon>
           <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.EDIT">edit</mat-icon>
-          <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.DELETE && !tableColumn.actionData.hide(row, currentUserId)">delete_outline</mat-icon>
+          <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.DELETE && (!tableColumn.actionData.hide || !tableColumn.actionData.hide(row, currentUserId))">delete_outline</mat-icon>
         </button>
 
       </mat-cell>
     </ng-container>
-
 
   </ng-container>
 

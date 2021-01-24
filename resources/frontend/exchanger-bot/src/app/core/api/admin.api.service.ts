@@ -70,7 +70,9 @@ export class AdminApiService {
   }
 
   deleteUser(id: number): Observable<any> {
-    return this.http.delete(`${ENV.api}/users/${id}`)
+    return this.http.delete<ICommonResponseDto<null>>(`${ENV.api}/users/${id}`).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
+    )
   }
 
 }

@@ -21,7 +21,14 @@
 
     <ng-container table>
       <app-loading-spinner *ngIf="inRequest"></app-loading-spinner>
-      <app-content-table [items]="items" [tableColumns]="tableColumns" [currentUserRole]="(userFacade.user$ | async)?.role" [currentUserId]="(userFacade.user$ | async)?.id" (sortData)="sortData($event)"></app-content-table>
+      <app-content-table
+            [items]="items"
+            [tableColumns]="tableColumns"
+            [currentUserRole]="(userFacade.user$ | async)?.role"
+            [currentUserId]="(userFacade.user$ | async)?.id"
+            (eventData)="eventData.emit($event)"
+            (sortData)="sortData($event)"
+      ></app-content-table>
     </ng-container>
 
   </app-page-layout-table>

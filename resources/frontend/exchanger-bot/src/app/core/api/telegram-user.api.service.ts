@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { map } from 'rxjs/operators'
-import { Observable } from 'rxjs'
+import { map, mergeMap } from 'rxjs/operators'
+import { Observable, of, throwError } from 'rxjs'
 
 import { ENV } from '@env/environment'
 import { apiQueryToParams } from '@utils/index'
-import { IRequestApiDto, IResponseApiInDto, IResponseApiOutDto, ITelegramUserInDto, ITelegramUserOutDto } from '@core/models'
+import { ICommonResponseDto, IRequestApiDto, IResponseApiInDto, IResponseApiOutDto, ITelegramUserInDto, ITelegramUserOutDto } from '@core/models'
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +16,9 @@ export class TelegramUserApiService {
 
   getList(apiQuery: IRequestApiDto): Observable<IResponseApiInDto<ITelegramUserInDto[]>> {
     const params = apiQueryToParams(apiQuery)
-    return this.http.get<IResponseApiOutDto<ITelegramUserOutDto[]>>(`${ENV.api}/telegram-users`, { params }).pipe(
-      map(res => ({
+    return this.http.get<ICommonResponseDto<IResponseApiOutDto<ITelegramUserOutDto[]>>>(`${ENV.api}/telegram-users`, { params }).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data: res }) => ({
         currentPage: res.current_page,
         page: res.from,
         lastPage: res.last_page,

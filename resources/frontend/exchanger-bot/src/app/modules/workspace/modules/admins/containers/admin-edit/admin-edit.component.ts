@@ -1,6 +1,6 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { ActivatedRoute, ParamMap } from '@angular/router'
+import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { mergeMap, takeUntil } from 'rxjs/operators'
 import { of, Subject } from 'rxjs'
 
@@ -20,6 +20,7 @@ export class AdminEditComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject()
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private adminApiService: AdminApiService
   ) {
@@ -55,14 +56,6 @@ export class AdminEditComponent implements OnInit, OnDestroy {
         email: user.email,
         name: user.name
       })
-      // this.adminApiService.updateUser({ ...data, name: 'Дмитрий' }).subscribe(a => console.log(a))
-      // this.adminApiService.addUser({
-      //   name: 'test',
-      //   email: 'test@test.com',
-      //   password: 'test',
-      //   cPassword: 'test'
-      // }).subscribe(a => console.log(a))
-      // this.adminApiService.deleteUser(data.id).subscribe(a => console.log('aaa', a))
     })
   }
 
@@ -77,15 +70,14 @@ export class AdminEditComponent implements OnInit, OnDestroy {
           id: this.user.id,
           email: email || this.user.email,
           name: name || this.user.name
-        }).subscribe(res => console.log(res))
+        }).subscribe(res => this.router.navigateByUrl('/admins'))
 
       : this.adminApiService.addUser({
           email,
           name,
           password,
           cPassword
-        }).subscribe(res => console.log(res))
-
+        }).subscribe(() => this.router.navigateByUrl('/admins'))
   }
 
   ngOnDestroy(): void {

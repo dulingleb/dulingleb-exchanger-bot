@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core'
 
 import { IUiFacade, UI_FACADE, IUserFacade, USER_FACADE } from '@core/features'
 
@@ -6,6 +6,7 @@ import { IUiFacade, UI_FACADE, IUserFacade, USER_FACADE } from '@core/features'
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
+import { Observable } from 'rxjs'
 
 import { ConfirmModalComponent } from './confirm-modal.component'
 import { IConfirmModal } from './confirm-modal.model'
@@ -9,12 +10,10 @@ export class ConfirmModalService {
 
   constructor(public dialog: MatDialog) {}
 
-  openDialog(data: IConfirmModal): void {
+  openDialog(data: IConfirmModal): Observable<boolean> {
     const dialogRef = this.dialog.open(ConfirmModalComponent, { data })
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`)
-    })
+    return dialogRef.afterClosed()
   }
 
 }

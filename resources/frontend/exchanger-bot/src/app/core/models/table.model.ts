@@ -31,6 +31,11 @@ export enum ETableColumnActionEventType {
   DELETE
 }
 
+export interface ITableActionEvent {
+  event: ETableColumnActionEventType;
+  data: any;
+}
+
 export interface ISortEvent {
   active: string;
   direction: 'asc' | 'desc' | '';
