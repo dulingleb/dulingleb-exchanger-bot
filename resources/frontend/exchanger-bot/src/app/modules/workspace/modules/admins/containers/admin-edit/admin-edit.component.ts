@@ -2,7 +2,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import { mergeMap, takeUntil } from 'rxjs/operators'
-import { Subject } from 'rxjs'
+import { of, Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
 import { IUserInDto } from '@core/features'
@@ -44,7 +44,10 @@ export class AdminEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
-      mergeMap((params: ParamMap) => this.adminApiService.getUser(+params.get('id'))),
+      mergeMap((params: ParamMap) => {
+        const id = +params.get('id')
+        return id ? this.adminApiService.getUser(id) : of({} as IUserInDto)
+      }),
       takeUntil(this.destroy$)
     ).subscribe(user =>  {
       this.user = user
@@ -64,13 +67,25 @@ export class AdminEditComponent implements OnInit, OnDestroy {
   }
 
   save(): void {
-    const email = this.form.get('email').value
     const name = this.form.get('name').value
-    this.adminApiService.updateUser({
-      id: this.user.id,
-      email: email || this.user.email,
-      name: name || this.user.name
-    }).subscribe(res => console.log(res))
+    const email = this.form.get('email').value
+    const password = this.form.get('password').value
+    const cPassword = this.form.get('confirmPassword').value
+
+    this.user.id
+      ? this.adminApiService.updateUser({
+          id: this.user.id,
+          email: email || this.user.email,
+          name: name || this.user.name
+        }).subscribe(res => console.log(res))
+
+      : this.adminApiService.addUser({
+          email,
+          name,
+          password,
+          cPassword
+        }).subscribe(res => console.log(res))
+
   }
 
   ngOnDestroy(): void {

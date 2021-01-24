@@ -5,8 +5,9 @@ import { AdminEditComponent, AdminInfoComponent, AdminsComponent } from './conta
 
 const routes: Routes = [
   { path: '', component: AdminsComponent },
+  { path: 'new', component: AdminEditComponent },
+  { path: ':id/edit', component: AdminEditComponent },
   { path: ':id/info', component: AdminInfoComponent },
-  { path: ':id/edit', component: AdminEditComponent }
 ]
 
 @NgModule({

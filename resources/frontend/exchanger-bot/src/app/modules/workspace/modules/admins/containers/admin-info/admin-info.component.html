@@ -1,6 +1,6 @@
 <app-page-content>
   <ng-container header>
-    {{ 'admin.info.page-title' | translate }} <i>{{ user?.name }}</i>
+    {{ 'admin.info.pageTitle' | translate }} <i>{{ user?.name }}</i>
   </ng-container>
   <ng-container actions>
     <a mat-raised-button color="primary" [routerLink]="['/admins', user?.id, 'edit']">
