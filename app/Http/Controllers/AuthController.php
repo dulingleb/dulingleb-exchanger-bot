@@ -24,7 +24,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function login(Request $request){
-    	$request->validate([
+        $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
@@ -42,7 +42,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function register(Request $request) {
-        $request->validate([
+        $this->validate($request, [
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6',

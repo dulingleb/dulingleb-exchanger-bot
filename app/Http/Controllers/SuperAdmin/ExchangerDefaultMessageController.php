@@ -16,7 +16,7 @@ class ExchangerDefaultMessageController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'title' => 'required|string',
             'slug' => 'required|string|unique:exchanger_default_messages',
             'description' => 'nullable',
@@ -40,7 +40,7 @@ class ExchangerDefaultMessageController extends Controller
 
     public function update(Request $request, ExchangerDefaultMessage $message)
     {
-        $request->validate([
+        $this->validate($request, [
             'title' => 'required|string',
             'slug' => 'required|string|unique:exchanger_default_messages,slug,' . $message->id,
             'description' => 'nullable',

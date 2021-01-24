@@ -48,7 +48,7 @@ class ExchangerMessageController extends Controller
             return abort(404);
         }
 
-        $request->validate([
+        $this->validate($request, [
             'text' => 'required|string|max:4000'
         ]);
 
