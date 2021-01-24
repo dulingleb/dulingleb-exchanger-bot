@@ -125,3 +125,11 @@ mat-cell {
     }
   }
 }
+
+.form-group {
+  padding-bottom: 0.5rem;
+
+  .mat-form-field {
+    display: block;
+  }
+}

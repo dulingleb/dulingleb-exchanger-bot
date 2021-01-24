@@ -54,7 +54,9 @@ export class AdminApiService {
   }
 
   updateUser(user: IUserInDto): Observable<any> {
-    return this.http.put(`${ENV.api}/users/${user.id}`, user)
+    return this.http.put<ICommonResponseDto<null>>(`${ENV.api}/users/${user.id}`, user).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
+    )
   }
 
   addUser(user: IUserInDto): Observable<any> {

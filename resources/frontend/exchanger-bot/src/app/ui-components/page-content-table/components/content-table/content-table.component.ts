@@ -25,6 +25,7 @@ export class ContentTableComponent implements OnChanges {
   @Output() sortData = new EventEmitter<ISortEvent>()
 
   @Input() items: []
+  @Input() currentUserId: number
   @Input() tableColumns: ITableColumn[]
   @Input() currentUserRole: EUserRoleDto
 

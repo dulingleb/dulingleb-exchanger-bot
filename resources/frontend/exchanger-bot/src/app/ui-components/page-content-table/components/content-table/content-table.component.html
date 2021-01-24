@@ -14,9 +14,14 @@
 
     <ng-container *ngIf="!tableColumn.actionData">
       <mat-cell *matCellDef="let row" [class]>
-        <span class="bold" *ngIf="tableColumn.type === ETableColumnType.STRING">{{ row[tableColumn.name] }}</span>
-        <span class="bold" *ngIf="tableColumn.type === ETableColumnType.DATE">{{ row[tableColumn.name] | date: 'd.MM.yyyy hh:mm' }}</span>
-      </mat-cell>
+        <ng-container *ngIf="!tableColumn.translate">
+          <span class="bold" *ngIf="tableColumn.type === ETableColumnType.STRING">{{ row[tableColumn.name] }}</span>
+          <span class="bold" *ngIf="tableColumn.type === ETableColumnType.DATE">{{ row[tableColumn.name] | date: 'd.MM.yyyy hh:mm' }}</span>
+        </ng-container>
+        <ng-container *ngIf="tableColumn.translate">
+          <span class="bold">{{ tableColumn.translate(row) | translate }}</span>
+        </ng-container>
+        </mat-cell>
     </ng-container>
 
     <ng-container *ngIf="tableColumn.actionData">
@@ -30,7 +35,7 @@
         <button mat-icon-button *ngIf="tableColumn.actionData.actionType === ETableColumnActionType.EVENT" class="table-action">
           <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.INFO">info_outline</mat-icon>
           <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.EDIT">edit</mat-icon>
-          <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.DELETE">delete_outline</mat-icon>
+          <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.DELETE && !tableColumn.actionData.hide(row, currentUserId)">delete_outline</mat-icon>
         </button>
 
       </mat-cell>

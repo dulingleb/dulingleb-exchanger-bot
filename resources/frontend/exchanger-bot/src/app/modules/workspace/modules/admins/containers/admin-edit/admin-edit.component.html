@@ -1,5 +1,54 @@
-<app-page-content-layout>
-    <section layout-content>
-      admin edit
-    </section>
-</app-page-content-layout>
+<app-page-content>
+  <ng-container header>
+    {{ 'admin.edit.page-title' | translate }} <i>{{ user?.name }}</i>
+  </ng-container>
+  <ng-container content>
+    <form [formGroup]="form" (ngSubmit)="save()" class="form">
+
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'admin.edit.input.name' | translate }}</mat-label>
+          <input formControlName="name" matInput>
+          <mat-error *ngIf="form.get('name').hasError('required')">{{ 'admin.edit.error.nameRequired' | translate }}</mat-error>
+          <mat-error *ngIf="form.get('name').hasError('name')">{{ 'admin.edit.error.name' | translate }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'admin.edit.input.email' | translate }}</mat-label>
+          <input formControlName="email" matInput placeholder="pat@example.com">
+          <mat-error *ngIf="form.get('email').hasError('required')">{{ 'admin.edit.error.emailRequired' | translate }}</mat-error>
+          <mat-error *ngIf="form.get('email').hasError('email')">{{ 'admin.edit.error.email' | translate }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'admin.edit.input.password' | translate }}</mat-label>
+          <input formControlName="password" [type]="showPassword ? 'text' : 'password'" matInput>
+          <button type="button" mat-icon-button matSuffix (click)="showPassword = !showPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showPassword">
+            <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="form.get('password').hasError('required')">{{ 'admin.edit.error.passwordRequired' | translate }}</mat-error>
+          <mat-error *ngIf="form.get('password').hasError('minlength')">{{ 'admin.edit.error.password' | translate }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'admin.edit.input.confirmPassword' | translate }}</mat-label>
+          <input formControlName="confirmPassword" [type]="showPassword ? 'text' : 'password'" matInput>
+          <button type="button" mat-icon-button matSuffix (click)="showPassword = !showPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showPassword">
+            <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="form.get('confirmPassword').hasError('required')">{{ 'admin.edit.error.passwordRequired' | translate }}</mat-error>
+          <mat-error *ngIf="form.get('confirmPassword').hasError('minlength')">{{ 'admin.edit.error.password' | translate }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'admin.edit.save' | translate }}</button>
+
+    </form>
+  </ng-container>
+</app-page-content>

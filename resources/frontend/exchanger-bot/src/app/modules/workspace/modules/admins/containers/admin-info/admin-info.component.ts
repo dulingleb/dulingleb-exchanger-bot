@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
-import { mergeMap } from 'rxjs/operators'
+import { mergeMap, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
@@ -23,7 +23,8 @@ export class AdminInfoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
-      mergeMap((params: ParamMap) => this.adminApiService.getUser(+params.get('id')))
+      mergeMap((params: ParamMap) => this.adminApiService.getUser(+params.get('id'))),
+      takeUntil(this.destroy$)
     ).subscribe(user =>  {
       this.user = user
     })

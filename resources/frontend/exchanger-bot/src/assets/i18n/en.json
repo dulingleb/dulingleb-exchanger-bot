@@ -67,12 +67,34 @@
     "table": {
       "name": "Имя",
       "email": "Email",
+      "role": "Роль",
       "createdAt": "Дата регистрации"
     }
   },
   "admin": {
-    "page-title": "Информация об администраторе",
-    "editAdmin": "Редактировать"
+    "edit": {
+      "page-title": "Редактирование администратора",
+      "input": {
+        "name": "Введите имя",
+        "email": "Введите Email",
+        "password": "Введите пароль",
+        "confirmPassword": "Повторите пароль"
+      },
+      "error": {
+        "name": "Некорректное имя",
+        "email": "Некорректный Email",
+        "password": "Некорректный пароль",
+
+        "nameRequired": "Введите имя",
+        "emailRequired": "Введите Email",
+        "passwordRequired": "Введите пароль"
+      },
+      "save": "Сохранить"
+    },
+    "info": {
+      "page-title": "Информация об администраторе",
+      "editAdmin": "Редактировать"
+    }
   },
   "users": {
     "table-header": {

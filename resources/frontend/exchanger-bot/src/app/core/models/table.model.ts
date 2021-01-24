@@ -5,11 +5,13 @@ export interface ITableColumn {
   nameI18n: string;
   type: ETableColumnType;
   allowedForRoles: EUserRoleDto[];
+  translate?: (...args: any) => string;
   actionData?: {
     icon?: string;
-    link?: (item: any) => string;
+    link?: (...args: any) => string;
     actionType: ETableColumnActionType;
     eventType?: ETableColumnActionEventType;
+    hide?: (...args: any) => boolean;
   };
 }
 
