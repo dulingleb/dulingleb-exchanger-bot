@@ -4,7 +4,7 @@ import { map, mergeMap } from 'rxjs/operators'
 import { Observable, of, throwError } from 'rxjs'
 
 import { ENV } from '@env/environment'
-import { apiQueryToParams } from '@utils/index'
+import { apiQueryToParams, operationOutToInDto } from '@utils/index'
 import { EFilterUserInOut, IUserInDto, IUserOutDto } from '@core/features'
 import { ICommonResponseDto, IRequestApiDto, IResponseApiInDto, IResponseApiOutDto } from '@core/models'
 
@@ -20,15 +20,10 @@ export class AdminApiService {
     return this.http.get<ICommonResponseDto<IResponseApiOutDto<IUserOutDto[]>>>(`${ENV.api}/users`, { params }).pipe(
       mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: res }) => ({
-          currentPage: res.current_page,
-          page: res.from,
-          lastPage: res.last_page,
-          pageSize: res.per_page,
-          to: res.to,
-          total: res.total,
-          sort: apiQuery.sort,
-          data: res.data.map(user => this.userOutToInDto(user))
-        }))
+        ...operationOutToInDto(res),
+        sort: apiQuery.sort,
+        data: res.data.map(user => this.userOutToInDto(user))
+      }))
     )
   }
 

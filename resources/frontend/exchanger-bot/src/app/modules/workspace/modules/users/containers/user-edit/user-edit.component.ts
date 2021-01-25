@@ -1,10 +1,11 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { mergeMap, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 import { TelegramUserApiService } from '@core/api'
+import { IUiFacade, UI_FACADE } from '@core/features'
 import { ITelegramUserDataDto, ITelegramUserInDto } from '@core/models'
 
 @Component({
@@ -22,6 +23,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    @Inject(UI_FACADE) private uiFacade: IUiFacade,
     private telegramUserApiService: TelegramUserApiService
   ) {
     this.form = new FormGroup({

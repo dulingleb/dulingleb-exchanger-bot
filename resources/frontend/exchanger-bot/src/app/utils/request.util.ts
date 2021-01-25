@@ -1,4 +1,4 @@
-import { IRequestApiDto } from '@core/models'
+import { IRequestApiDto, IResponseApiInDto, IResponseApiOutDto } from '@core/models'
 
 export const apiQueryToParams = (apiQuery: IRequestApiDto, EFilterInToOutDto = {}): { [key: string]: string } => {
   const params: { [key: string]: string } = {}
@@ -17,3 +17,13 @@ export const apiQueryToParams = (apiQuery: IRequestApiDto, EFilterInToOutDto = {
   }
   return params
 }
+
+export const operationOutToInDto = (res: IResponseApiOutDto<any>): IResponseApiInDto<any> => ({
+  currentPage: res.current_page - 1,
+  page: res.from,
+  lastPage: res.last_page,
+  pageSize: res.per_page,
+  to: res.to,
+  total: res.total,
+  data: res.data
+})

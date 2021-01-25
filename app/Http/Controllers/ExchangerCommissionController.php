@@ -15,7 +15,7 @@ class ExchangerCommissionController extends Controller
             ->allowedSorts(['from', 'percent'])
             ->select(['id', 'from', 'to', 'percent'])
             ->where('exchanger_id', auth()->user()->exchanger->id)
-            ->jsonPaginate($request->perPage ?? Config::get('default_size', '10'));
+            ->jsonPaginate($request->per_page ?? Config::get('default_size', '10'));
 
         return $this->response($commissions);
     }

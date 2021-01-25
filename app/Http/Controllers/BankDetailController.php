@@ -20,7 +20,7 @@ class BankDetailController extends Controller
             ->allowedSorts(['title', 'status'])
             ->select(['id', 'title', 'status'])
             ->where('exchanger_id', auth()->user()->exchanger->id)
-            ->jsonPaginate($request->perPage ?? Config::get('default_size', '10'));
+            ->jsonPaginate($request->per_page ?? Config::get('default_size', '10'));
 
         return $this->response($bankDetails);
     }

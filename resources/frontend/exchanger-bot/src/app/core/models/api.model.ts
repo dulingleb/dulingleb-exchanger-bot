@@ -39,6 +39,6 @@ export interface IResponseApiInDto<T> {
 	pageSize: number;
 	to: number;
   total: number;
-  sort: string;
+  sort?: string;
   data: T;
 }

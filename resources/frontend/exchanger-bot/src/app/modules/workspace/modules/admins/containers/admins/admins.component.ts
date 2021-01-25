@@ -50,7 +50,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
         this.users = res.data
         this.paginator = {
           length: res.total,
-          page: res.currentPage - 1,
+          page: res.currentPage,
           pageSize: res.pageSize
         }
       },

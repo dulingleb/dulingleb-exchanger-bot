@@ -18,7 +18,7 @@ class UserController extends Controller
             ->allowedFilters(['name', 'email'])
             ->defaultSort('-id')
             ->allowedSorts('id', 'name', 'email')
-            ->jsonPaginate($request->perPage ?? Config::get('default_size', '10'));
+            ->jsonPaginate($request->per_page ?? Config::get('default_size', '10'));
 
         return $this->response($users);
     }

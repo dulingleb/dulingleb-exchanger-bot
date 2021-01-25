@@ -4,7 +4,7 @@ import { map, mergeMap } from 'rxjs/operators'
 import { Observable, of, throwError } from 'rxjs'
 
 import { ENV } from '@env/environment'
-import { apiQueryToParams } from '@utils/index'
+import { apiQueryToParams, operationOutToInDto } from '@utils/index'
 import { EFilterTelegramUserInOut, ICommonResponseDto, IRequestApiDto, IResponseApiInDto, IResponseApiOutDto, ITelegramUserDataDto, ITelegramUserInDto, ITelegramUserOutDto } from '@core/models'
 
 @Injectable({
@@ -19,12 +19,7 @@ export class TelegramUserApiService {
     return this.http.get<ICommonResponseDto<IResponseApiOutDto<ITelegramUserOutDto[]>>>(`${ENV.api}/telegram-users`, { params }).pipe(
       mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: res }) => ({
-        currentPage: res.current_page,
-        page: res.from,
-        lastPage: res.last_page,
-        pageSize: res.per_page,
-        to: res.to,
-        total: res.total,
+        ...operationOutToInDto(res),
         sort: apiQuery.sort,
         data: res.data.map(user => this.userOutToInDto(user))
       }))

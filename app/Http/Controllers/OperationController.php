@@ -29,7 +29,7 @@ class OperationController extends Controller
             ])
             ->select(['operations.*', 'telegram_users.username', 'telegram_users.first_name', 'telegram_users.last_name'])
             ->where('exchanger_id', auth()->user()->exchanger->id)
-            ->jsonPaginate($request->perPage ?? Config::get('default_size', '10'));
+            ->jsonPaginate($request->per_page ?? Config::get('default_size', '10'));
 
         return $this->response($operations);
     }

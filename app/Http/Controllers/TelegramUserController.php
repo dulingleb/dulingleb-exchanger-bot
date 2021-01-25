@@ -26,8 +26,7 @@ class TelegramUserController extends Controller
             ->select(['telegram_user_settings.id', 'telegram_user_id', 'exchanger_id', 'telegram_users.username'])
             ->addSelect(DB::raw('(SELECT COUNT(*) FROM operations WHERE (operations.telegram_user_id = telegram_user_settings.telegram_user_id) AND (operations.exchanger_id = telegram_user_settings.exchanger_id) AND (operations.status = ' . Operation::STATUS_SUCCESS . ') ) AS operations_count'))
             ->where('telegram_user_settings.exchanger_id', auth()->user()->exchanger->id)
-            ->jsonPaginate($request->perPage ?? Config::get('default_size', '10'));
-
+            ->jsonPaginate($request->per_page ?? Config::get('default_size', '10'));
 
         return $this->response($users);
     }

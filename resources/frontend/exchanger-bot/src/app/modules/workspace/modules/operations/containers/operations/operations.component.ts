@@ -1,22 +1,21 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
-import { takeUntil, withLatestFrom } from 'rxjs/operators'
-import { Subject } from 'rxjs'
 
+import { OperationApiService } from '@core/api'
 import { EUserRoleDto, IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
+import { IOperationInDto, IRequestApiDto } from '@core/models'
 import { IFilterField, IPaginator } from '@ui/index'
-import { TelegramUserApiService } from '@core/api'
-import { IRequestApiDto, ITelegramUserInDto } from '@core/models'
-
+import { Subject } from 'rxjs'
+import { finalize, takeUntil, withLatestFrom } from 'rxjs/operators'
 import { TABLE_COLUMNS } from '../../constants/table-columns'
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
+  selector: 'app-operations',
+  templateUrl: './operations.component.html',
 })
-export class UsersComponent implements OnInit, OnDestroy {
+export class OperationsComponent implements OnInit, OnDestroy {
 
   currentUserRole: EUserRoleDto = EUserRoleDto.ADMIN
-  users: ITelegramUserInDto[] = []
+  operations: IOperationInDto[] = []
   inRequest: boolean
 
   paginator: IPaginator
@@ -25,33 +24,38 @@ export class UsersComponent implements OnInit, OnDestroy {
   tableColumns = TABLE_COLUMNS
 
   private destroy$ = new Subject()
+  private requestApiQuery: IRequestApiDto
 
   constructor(
     @Inject(USER_FACADE) public userFacade: IUserFacade,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
-    private adminApiService: TelegramUserApiService
+    private operationApiService: OperationApiService
   ) {}
 
   ngOnInit(): void {
     this.initFilterFields()
   }
 
-  getAdminList(requestApiQuery: IRequestApiDto): void {
+  getOperationsList(requestApiQuery: IRequestApiDto = this.requestApiQuery): void {
+    this.requestApiQuery = requestApiQuery
     this.inRequest = true
-    this.adminApiService.getList(requestApiQuery).pipe(
+    this.operationApiService.getList(requestApiQuery).pipe(
       withLatestFrom(this.userFacade.user$),
+      finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
       ([res, user]) => {
-        this.users = res.data
+        this.operations = res.data
         this.paginator = {
           length: res.total,
           page: res.currentPage,
           pageSize: res.pageSize
         }
       },
-      (err) => this.uiFacade.addErrorNotification(err.message),
-      () => this.inRequest = false
+      (err) => {
+        // this.userFacade.logout()
+        this.uiFacade.addErrorNotification(err.message)
+      }
     )
   }
 
@@ -63,16 +67,20 @@ export class UsersComponent implements OnInit, OnDestroy {
   protected initFilterFields(): void {
     this.filterFields = [
       {
-        labelI18n: 'users.table.username',
+        labelI18n: 'operations.table.id',
+        name: 'id'
+      },
+      {
+        labelI18n: 'operations.table.username',
         name: 'username'
       },
       {
-        labelI18n: 'users.table.telegramUserId',
-        name: 'telegramUserId'
+        labelI18n: 'operations.table.amount',
+        name: 'amount'
       },
       {
-        labelI18n: 'users.table.operationsCount',
-        name: 'operationsCount'
+        labelI18n: 'operations.table.price',
+        name: 'price'
       }
     ]
   }
