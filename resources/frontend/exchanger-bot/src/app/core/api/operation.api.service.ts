@@ -26,6 +26,20 @@ export class OperationApiService {
     )
   }
 
+  getOperation(id: number): Observable<IOperationInDto> {
+    return this.http.get<ICommonResponseDto<IOperationOutDto>>(`${ENV.api}/operations/${id}`).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data: operation }) => this.operationOutToInDto(operation))
+    )
+  }
+
+  addComment(id: number, comment: string): Observable<ICommonResponseDto<IOperationInDto>> {
+    return this.http.put<ICommonResponseDto<IOperationOutDto>>(`${ENV.api}/operations/${id}/add-comment`, { comment }).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(res => ({ ...res, data: this.operationOutToInDto(res.data) }))
+    )
+  }
+
   private operationOutToInDto(operation: IOperationOutDto): IOperationInDto {
     return {
       id: operation.id,

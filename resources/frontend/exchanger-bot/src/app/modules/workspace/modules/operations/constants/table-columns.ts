@@ -30,7 +30,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     name: 'status',
     nameI18n: 'operations.table.status',
     type: ETableColumnType.STRING,
-    translate: (operation: IOperationInDto): string => `operations.status.${operation.status}`,
+    translate: (operation: IOperationInDto): string => `operation.status.${operation.status}`,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
   {

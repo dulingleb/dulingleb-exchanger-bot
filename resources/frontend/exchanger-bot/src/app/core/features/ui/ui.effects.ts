@@ -43,6 +43,17 @@ export class UiEffects {
     }))
   ))
 
+  addInfoNotification$ = createEffect(() => this.actions$.pipe(
+    ofType(UI_ACTIONS.addInfoNotification),
+    map(({ messageI18n, messageKeyI18n }) => UI_ACTIONS.addNotification({
+      snackBarData: {
+        messageI18n,
+        messageKeyI18n,
+        type: ESnackBarType.INFO
+      }
+    }))
+  ))
+
   addNotification$ = createEffect(() => this.actions$.pipe(
     ofType(UI_ACTIONS.addNotification),
     map(({ snackBarData }) => this.snackBarService.openSnackBar(snackBarData))

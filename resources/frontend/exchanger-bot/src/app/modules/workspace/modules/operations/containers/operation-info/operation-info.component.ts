@@ -1,12 +1,12 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
-import { mergeMap, takeUntil } from 'rxjs/operators'
+import { finalize, mergeMap, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
-import { TelegramUserApiService } from '@core/api'
+import { OperationApiService } from '@core/api'
 import { IUiFacade, UI_FACADE } from '@core/features'
-import { ITelegramUserDataDto, ITelegramUserInDto } from '@core/models'
+import { IOperationInDto, ITelegramUserDataDto } from '@core/models'
 
 @Component({
   selector: 'app-operation-info',
@@ -14,9 +14,9 @@ import { ITelegramUserDataDto, ITelegramUserInDto } from '@core/models'
 })
 export class OperationInfoComponent implements OnInit, OnDestroy {
 
-  user: ITelegramUserInDto
+  operation: IOperationInDto
   form: FormGroup
-  showPassword: boolean
+  inRequest: boolean
 
   private destroy$ = new Subject()
 
@@ -24,45 +24,51 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
-    private telegramUserApiService: TelegramUserApiService
+    private operationApiService: OperationApiService
   ) {
     this.form = new FormGroup({
-      discount: new FormControl('', [Validators.min(0), Validators.max(100)]),
       comment: new FormControl(''),
-      ban: new FormControl(''),
     })
   }
 
   ngOnInit(): void {
+    this.inRequest = true
     this.route.paramMap.pipe(
-      mergeMap((params: ParamMap) => this.telegramUserApiService.getUser(+params.get('id'))),
+      mergeMap((params: ParamMap) => this.operationApiService.getOperation(+params.get('id'))),
+      finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
-    ).subscribe(user =>  {
-      this.user = user
-      this.form.patchValue({
-        discount: user.discount,
-        comment: user.comment,
-        ban: user.ban,
-      })
+    ).subscribe(operation =>  {
+      this.operation = operation
+      this.initFormData()
     })
   }
 
-  save(): void {
-    const discount = this.form.get('discount').value
+  addComment(): void {
+    this.inRequest = true
     const comment = this.form.get('comment').value
-    const ban = this.form.get('ban').value
-
-    const userData: ITelegramUserDataDto = {
-      id: this.user.id,
-      comment,
-      ban,
-    }
-    this.telegramUserApiService.updateUser(userData).subscribe(res => this.router.navigateByUrl('/users'))
+    this.operationApiService.addComment(this.operation.id, comment).pipe(
+      finalize(() => this.inRequest = false),
+      takeUntil(this.destroy$)
+    )
+    .subscribe(
+      (res) => {
+        this.operation = res.data
+        this.initFormData()
+        this.uiFacade.addInfoNotification(res.message)
+      },
+      (err) => this.uiFacade.addErrorNotification(err.message)
+    )
   }
 
   ngOnDestroy(): void {
     this.destroy$.next()
     this.destroy$.complete()
+  }
+
+  private initFormData(): void {
+    this.form.patchValue({
+      comment: this.operation.comment,
+    })
   }
 
 }

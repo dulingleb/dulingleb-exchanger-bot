@@ -33,6 +33,14 @@ const addErrorNotification = createAction(
   }>()
 )
 
+const addInfoNotification = createAction(
+  '[UI banner admin] Add Info Notification',
+  props<{
+    messageI18n?: string;
+    messageKeyI18n?: { [key: string]: string };
+  }>()
+)
+
 export const UI_ACTIONS = {
   initUi,
   changeThemeMode,
@@ -40,5 +48,6 @@ export const UI_ACTIONS = {
   toggleSideNav,
 
   addNotification,
-  addErrorNotification
+  addErrorNotification,
+  addInfoNotification
 }

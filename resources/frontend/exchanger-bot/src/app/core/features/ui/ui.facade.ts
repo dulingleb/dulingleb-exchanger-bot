@@ -18,6 +18,7 @@ export interface IUiFacade {
   toggleSideNav(): void;
   addNotification(snackBarData: ISnackBar): void;
   addErrorNotification(messageI18n: string, messageKeyI18n?: { [key: string]: string }): void;
+  addInfoNotification(messageI18n: string, messageKeyI18n?: { [key: string]: string }): void;
 
 }
 
@@ -49,6 +50,10 @@ export class UiFacade {
 
   addErrorNotification(messageI18n: string, messageKeyI18n: { [key: string]: string } = {}): void {
     this.store$.dispatch(UI_ACTIONS.addErrorNotification({ messageI18n, messageKeyI18n }))
+  }
+
+  addInfoNotification(messageI18n: string, messageKeyI18n: { [key: string]: string } = {}): void {
+    this.store$.dispatch(UI_ACTIONS.addInfoNotification({ messageI18n, messageKeyI18n }))
   }
 
 }
