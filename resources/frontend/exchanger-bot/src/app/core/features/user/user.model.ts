@@ -1,24 +1,28 @@
 export interface IUserInDto {
-  id: number;
+  id?: number;
   name: string;
+  password?: string;
+  cPassword?: string;
   email: string;
-  role: EUserRoleDto;
-  createdAt: Date;
-  updatedAt: Date;
+  role?: EUserRoleDto;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export enum EUserRoleDto {
-  ADMIN,
-  SUPER_ADMIN
+  ADMIN = 1,
+  SUPER_ADMIN = 2
 }
 
 export interface IUserOutDto {
-  id: number;
+  id?: number;
   name: string;
   email: string;
-  role_id: EUserRoleDto;
-  created_at: Date;
-  updated_at: Date;
+  password?: string;
+  c_password?: string;
+  role_id?: EUserRoleDto;
+  created_at?: Date;
+  updated_at?: Date;
 }
 
 export interface IUserLoginOutDto {
@@ -33,4 +37,11 @@ export interface IUserLoginInDto {
   tokenType: string;
   expiresIn: number;
   user: IUserInDto;
+}
+
+/* eslint-disable @typescript-eslint/naming-convention */
+export enum EFilterUserInOut {
+  role = 'role_id',
+  createdAt = 'created_at',
+  updatedAt = 'updated_at'
 }

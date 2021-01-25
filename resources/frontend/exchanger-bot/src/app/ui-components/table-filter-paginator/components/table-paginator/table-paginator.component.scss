@@ -1,0 +1,9 @@
+.paginator-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .paginator {
+    margin-left: auto;
+  }
+}

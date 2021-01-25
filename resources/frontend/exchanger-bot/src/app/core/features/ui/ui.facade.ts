@@ -2,23 +2,23 @@ import { Injectable, InjectionToken } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
 
+import { ISnackBar } from '@ui/snack-bar'
+
 import { UI_ACTIONS } from './ui.actions'
 import { IAppWithUiState } from './ui.reducer'
-import { IGlobalNotification } from './ui.model'
-import { selectUiNotifications, selectUiShowSideNav, selectUiThemeMode } from './ui.selectors'
+import { selectUiShowSideNav, selectUiThemeMode } from './ui.selectors'
 
 export interface IUiFacade {
 
-  globalNotifications$: Observable<IGlobalNotification[]>;
   isDarkTheme$: Observable<boolean>;
   showSideNav$: Observable<boolean>;
 
   init(): void;
   changeThemeMode(isDarkTheme: boolean): void;
   toggleSideNav(): void;
-  addNotification(notification: IGlobalNotification): void;
-  closeNotification(notification: IGlobalNotification): void;
-  clearNotifications(): void;
+  addNotification(snackBarData: ISnackBar): void;
+  addErrorNotification(messageI18n: string, messageKeyI18n?: { [key: string]: string }): void;
+  addInfoNotification(messageI18n: string, messageKeyI18n?: { [key: string]: string }): void;
 
 }
 
@@ -27,7 +27,6 @@ export const UI_FACADE = new InjectionToken<IUiFacade>('UI_FACADE')
 @Injectable()
 export class UiFacade {
 
-  globalNotifications$ = this.store$.select(selectUiNotifications)
   isDarkTheme$ = this.store$.select(selectUiThemeMode)
   showSideNav$ = this.store$.select(selectUiShowSideNav)
 
@@ -45,16 +44,16 @@ export class UiFacade {
     this.store$.dispatch(UI_ACTIONS.toggleSideNav())
   }
 
-  addNotification(notification: IGlobalNotification): void {
-    this.store$.dispatch(UI_ACTIONS.addNotification({ notification }))
+  addNotification(snackBarData: ISnackBar): void {
+    this.store$.dispatch(UI_ACTIONS.addNotification({ snackBarData }))
   }
 
-  closeNotification(notification: IGlobalNotification): void {
-    this.store$.dispatch(UI_ACTIONS.closeNotification({ notification }))
+  addErrorNotification(messageI18n: string, messageKeyI18n: { [key: string]: string } = {}): void {
+    this.store$.dispatch(UI_ACTIONS.addErrorNotification({ messageI18n, messageKeyI18n }))
   }
 
-  clearNotifications(): void {
-    this.store$.dispatch(UI_ACTIONS.clearNotifications())
+  addInfoNotification(messageI18n: string, messageKeyI18n: { [key: string]: string } = {}): void {
+    this.store$.dispatch(UI_ACTIONS.addInfoNotification({ messageI18n, messageKeyI18n }))
   }
 
 }

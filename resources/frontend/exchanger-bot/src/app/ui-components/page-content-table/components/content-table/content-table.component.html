@@ -1,0 +1,50 @@
+<mat-table [dataSource]="items" class="app-table" matSort (matSortChange)="sortData.emit($event)">
+
+  <ng-container *ngFor="let tableColumn of tableColumns" [matColumnDef]="tableColumn.name">
+
+    <ng-container *ngIf="!tableColumn.actionData">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>
+        {{ tableColumn.nameI18n | translate }}
+      </mat-header-cell>
+    </ng-container>
+
+    <ng-container *ngIf="tableColumn.actionData">
+      <mat-header-cell *matHeaderCellDef class="action-header-cell"></mat-header-cell>
+    </ng-container>
+
+    <ng-container *ngIf="!tableColumn.actionData">
+      <mat-cell *matCellDef="let row" [class]>
+        <ng-container *ngIf="!tableColumn.translate">
+          <span class="bold" *ngIf="tableColumn.type === ETableColumnType.STRING">{{ row[tableColumn.name] }}</span>
+          <span class="bold" *ngIf="tableColumn.type === ETableColumnType.DATE">{{ row[tableColumn.name] | date: 'd.MM.yyyy hh:mm' }}</span>
+        </ng-container>
+        <ng-container *ngIf="tableColumn.translate">
+          <span class="bold">{{ tableColumn.translate(row) | translate }}</span>
+        </ng-container>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container *ngIf="tableColumn.actionData">
+      <mat-cell *matCellDef="let row" class="action-cell">
+        <a mat-icon-button *ngIf="tableColumn.actionData.actionType === ETableColumnActionType.LINK" class="table-action" [routerLink]="tableColumn.actionData.link(row)">
+          <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.INFO">info_outline</mat-icon>
+          <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.EDIT">edit</mat-icon>
+          <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.DELETE">delete_outline</mat-icon>
+        </a>
+
+        <button mat-icon-button *ngIf="tableColumn.actionData.actionType === ETableColumnActionType.EVENT" (click)="setEvent(tableColumn.actionData.eventType, row)" class="table-action">
+          <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.INFO">info_outline</mat-icon>
+          <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.EDIT">edit</mat-icon>
+          <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.DELETE && (!tableColumn.actionData.hide || !tableColumn.actionData.hide(row, currentUserId))">delete_outline</mat-icon>
+        </button>
+
+      </mat-cell>
+    </ng-container>
+
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columnNames"></mat-header-row>
+  <mat-row *matRowDef="let row; let even = even; columns: columnNames" [class.accent]="even">
+  </mat-row>
+</mat-table>
+

@@ -1,0 +1,11 @@
+<app-page-content-table
+                        [tableColumns]="tableColumns"
+                        [inRequest]="inRequest" [items]="operations"
+                        [filterFields]="filterFields"
+                        [paginator]="paginator"
+                        (getList)="getOperationsList($event)"
+>
+  <ng-container table-title>
+    {{ 'operations.tableHeader.title' | translate }}
+  </ng-container>
+</app-page-content-table>

@@ -1,6 +1,6 @@
 <mat-nav-list class="app-side-nav">
   <mat-list-item class="nav-item user-profile-nav-item">
-    <a mat-button disableRipple="true" class="nav-link three-dots-btn" routerLink="/profile">
+    <a mat-button disableRipple="true" class="nav-link three-dots-btn" [routerLink]="['admins', (userFacade.user$ | async)?.id, 'info']">
       <span class="mat-button-wrapper">
         <span class="user-logo">{{ userFacade.user$ | async | logoName }}</span>
         <span class="fio">{{ (userFacade.user$ | async)?.name }}</span>

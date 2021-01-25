@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
+import { map, mergeMap } from 'rxjs/operators'
+import { Observable, of, throwError } from 'rxjs'
 
 import { ENV } from '@env/environment'
+import { ICommonResponseDto } from '@core/models'
 
 import { IUserInDto, IUserLoginInDto, IUserLoginOutDto, IUserOutDto } from './user.model'
-import { map } from 'rxjs/operators'
 
 @Injectable()
 export class UserService {
@@ -13,8 +14,9 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<IUserLoginInDto> {
-    return this.http.post<IUserLoginOutDto>(`${ENV.api}/auth/login`, { email, password }).pipe(
-      map(userData => ({
+    return this.http.post<ICommonResponseDto<IUserLoginOutDto>>(`${ENV.api}/auth/login`, { email, password }).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data: userData }) => ({
         accessToken: userData.access_token,
         tokenType: userData.token_type,
         expiresIn: userData.expires_in,
@@ -31,8 +33,9 @@ export class UserService {
   }
 
   getAuthUser(): Observable<IUserInDto> {
-    return this.http.get<IUserOutDto>(`${ENV.api}/auth/me`).pipe(
-      map(user => ({
+    return this.http.get<ICommonResponseDto<IUserOutDto>>(`${ENV.api}/auth/me`).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data: user }) => ({
         id: user.id,
         name: user.name,
         email: user.email,

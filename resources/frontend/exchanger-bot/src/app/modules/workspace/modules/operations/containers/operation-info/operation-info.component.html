@@ -1,0 +1,40 @@
+<app-page-content>
+  <ng-container header>
+    {{ 'operation.info.pageTitle' | translate }} <i>#{{ operation?.id }}</i>
+  </ng-container>
+  <ng-container content>
+    <form [formGroup]="form" (ngSubmit)="addComment()" class="form">
+
+      <h3>{{ 'operation.info.user' | translate }}</h3>
+      <p><i>{{ operation?.username || operation?.firstName || operation?.lastName || operation?.telegramUserId }}</i></p>
+
+      <h3>{{ 'operation.info.amount' | translate }}</h3>
+      <p><i>{{ operation?.amount }}</i></p>
+
+      <h3>{{ 'operation.info.price' | translate }}</h3>
+      <p><i>{{ operation?.price }}</i></p>
+
+      <h3>{{ 'operation.info.detail' | translate }}</h3>
+      <p><i>{{ operation?.bankDetailId }}</i></p>
+
+      <h3>{{ 'operation.info.btcAddress' | translate }}</h3>
+      <p><i>{{ operation?.btcAddress }}</i></p>
+
+      <h3>{{ 'operation.info.date' | translate }}</h3>
+      <p><i>{{ operation?.createdAt | date: 'd.MM.yyyy hh:mm' }}</i></p>
+
+      <h3>{{ 'operation.info.status' | translate }}</h3>
+      <p><i>{{ 'operation.status.' + operation?.status | translate }}</i></p>
+
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'operation.info.comment' | translate }}</mat-label>
+          <textarea formControlName="comment" matInput></textarea>
+        </mat-form-field>
+      </div>
+
+      <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'operation.info.save' | translate }}</button>
+
+    </form>
+  </ng-container>
+</app-page-content>

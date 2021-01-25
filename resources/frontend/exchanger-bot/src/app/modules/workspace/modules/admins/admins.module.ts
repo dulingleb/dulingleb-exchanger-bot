@@ -1,27 +1,36 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { TranslateModule } from '@ngx-translate/core'
-import { MatCardModule } from '@angular/material/card'
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { ReactiveFormsModule } from '@angular/forms'
 
-import { AdminsComponent } from './admins.component'
+import { ConfirmModalModule, PageContentLayoutModule, PageContentTableModule } from '@ui/index'
+
+import { AdminEditComponent, AdminInfoComponent, AdminsComponent } from './containers'
 import { AdminsRoutingModule } from './admins-routing.module'
 
-import { PageContentLayoutModule, PageTablePaginatorModule } from '@ui/index'
-
 @NgModule({
-  declarations: [AdminsComponent],
+  declarations: [
+    AdminsComponent,
+    AdminInfoComponent,
+    AdminEditComponent
+  ],
   imports: [
     CommonModule,
-    MatCardModule,
     MatIconModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
     TranslateModule,
+    ReactiveFormsModule,
 
+    ConfirmModalModule,
     AdminsRoutingModule,
+    PageContentTableModule,
     PageContentLayoutModule,
-    PageTablePaginatorModule
   ],
   exports: [AdminsComponent]
 })

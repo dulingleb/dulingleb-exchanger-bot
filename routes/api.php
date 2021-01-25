@@ -50,6 +50,10 @@ Route::group([
     Route::put('telegram-users/{userSetting}/update', ['as' => 'telegramUser.update', 'uses' => 'TelegramUserController@update']);
     Route::put('telegram-users/{userSetting}/set-as-admin', ['as' => 'telegramUser.setAsAdmin', 'uses' => 'TelegramUserController@setAdmin']);
 
+    //рассылка
+    Route::get('mailing', ['as' => 'mailing.index', 'uses' => 'MailingController@index']);
+    Route::post('mailing', ['as' => 'mailing.send', 'uses' => 'MailingController@send']);
+
     // Настройки главные
     Route::get('settings', ['as' => 'settings.index', 'uses' => 'SettingController@settingsIndex']);
     Route::patch('settings/set/telegram-token', ['as' => 'settings.set.telegram-token', 'uses' => 'SettingController@updateTelegramToken']);

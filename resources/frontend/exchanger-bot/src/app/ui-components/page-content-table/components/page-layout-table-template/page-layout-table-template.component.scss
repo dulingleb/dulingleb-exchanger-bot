@@ -1,0 +1,15 @@
+
+$table_min_h: 300px;
+
+.table-wrapper {
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .table {
+    position: relative;
+    min-height: $table_min_h;
+  }
+}

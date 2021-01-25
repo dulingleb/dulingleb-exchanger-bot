@@ -63,4 +63,18 @@ export class UserEffects {
     ofType(USER_ACTIONS.redirectAfterAuth),
     map(() => this.router.navigateByUrl('/dashboard'))
   ), { dispatch: false })
+
+  redirectAfterLogout$ = createEffect(() => this.actions$.pipe(
+    ofType(USER_ACTIONS.redirectAfterLogout),
+    map(() => this.router.navigateByUrl('/auth'))
+  ), { dispatch: false })
+
+  logout$ = createEffect(() => this.actions$.pipe(
+    ofType(USER_ACTIONS.logout),
+    mergeMap(() => [
+      USER_ACTIONS.saveToken({ token: '' }),
+      USER_ACTIONS.saveUser({ user: null }),
+      USER_ACTIONS.redirectAfterLogout()
+    ])
+  ))
 }

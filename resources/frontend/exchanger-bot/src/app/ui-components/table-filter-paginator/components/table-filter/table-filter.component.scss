@@ -1,0 +1,18 @@
+.filter-wrapper {
+  height: 0;
+  overflow: hidden;
+
+  &.show-filter {
+    height: auto;
+  }
+
+  .form-fields-wrapper {
+    display: flex;
+    align-items: center;
+
+    .form-field {
+      margin-right: 1rem;
+      flex: 1;
+    }
+  }
+}

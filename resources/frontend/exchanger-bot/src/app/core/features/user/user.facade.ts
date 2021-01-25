@@ -17,6 +17,7 @@ export interface IUserFacade {
 
   init(): void;
   login(email: string, password: string): void;
+  logout(): void;
 
 }
 
@@ -39,6 +40,10 @@ export class UserFacade {
 
   login(email: string, password: string): void {
     this.store$.dispatch(USER_ACTIONS.login({ email, password }))
+  }
+
+  logout(): void {
+    this.store$.dispatch(USER_ACTIONS.logout())
   }
 
 }

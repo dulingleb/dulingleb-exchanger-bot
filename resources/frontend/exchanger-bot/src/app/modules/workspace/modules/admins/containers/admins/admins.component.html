@@ -1,0 +1,19 @@
+<app-page-content-table
+                        [tableColumns]="tableColumns"
+                        [inRequest]="inRequest" [items]="users"
+                        [filterFields]="filterFields"
+                        [paginator]="paginator"
+                        (getList)="getAdminList($event)"
+                        (eventData)="setEventData($event)"
+>
+  <ng-container table-title>
+    {{ 'admins.tableHeader.title' | translate }}
+  </ng-container>
+
+  <ng-container table-actions>
+    <a mat-raised-button color="primary" disableRipple="true" class="nav-link" routerLink="/admins/new">
+      <mat-icon>add</mat-icon>
+      <span>{{ 'admins.tableHeader.add-btn' | translate }}</span>
+   </a>
+  </ng-container>
+</app-page-content-table>
