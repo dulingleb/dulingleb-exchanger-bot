@@ -56,6 +56,7 @@ class Handler extends ExceptionHandler
             return response()->json(['status' => false, 'message' => 'Not Found!'], 404);
         }
 
-        return parent::prepareJsonResponse($request, $exception);
+        return response()->json(['status' => false, 'message' => $exception->getMessage()], 401);
+        //return parent::prepareJsonResponse($request, $exception);
     }
 }
