@@ -107,7 +107,16 @@ class OperationController extends BaseController
         TelegramUserSetting::setTransaction($this->chatData['exchanger']->id, $this->chatData['chat_id']);
         if (!$operation) return false;
 
-        $operation->successOperation();
+        $status = $operation->successOperation();
+        if ($status !== true) {
+            $this->telegram->sendMessage([
+                'chat_id' => $this->chatData['chat_id'],
+                'text' => 'Произошла ошибка: ' . $status[0]->message
+            ]);
+
+            return  false;
+        }
+
         $this->messageSuccess();
     }
 

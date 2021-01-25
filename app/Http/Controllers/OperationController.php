@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Func\Coinbase;
-use App\Models\ExchangerMessage;
 use App\Models\Operation;
-use http\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Storage;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -19,7 +15,7 @@ class OperationController extends Controller
     public function index(Request $request): \Illuminate\Http\JsonResponse
     {
         $operations = QueryBuilder::for(Operation::class)
-            ->join('telegram_users', 'telegram_users.id', 'operations.telegram_user_id')
+            ->with('telegram_user')
             ->allowedSorts([AllowedSort::field('id', 'operations.id'), 'status', 'amount', 'price'])
             ->defaultSort('operations.id')
             ->allowedFilters([
@@ -27,9 +23,8 @@ class OperationController extends Controller
                 AllowedFilter::scope('user', 'telegram_user'),
                 'status'
             ])
-            ->select(['operations.*', 'telegram_users.username', 'telegram_users.first_name', 'telegram_users.last_name'])
             ->where('exchanger_id', auth()->user()->exchanger->id)
-            ->jsonPaginate($request->perPage ?? Config::get('default_size', '10'));
+            ->jsonPaginate();
 
         return $this->response($operations);
     }
@@ -56,7 +51,7 @@ class OperationController extends Controller
         $this->checkStatusOperation($operation);
         $errors = $operation->successOperation();
         if ($errors !== true) {
-            return redirect()->route('operation.show', $operation)->withErrors(['first' => $errors[0]->message]);
+            return $this->responseError('Ошибка отправки', $errors);
         }
 
         return $this->response($operation, 'Операция #' . $operation->id . ' успешно подтверждена');

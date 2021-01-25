@@ -45,4 +45,13 @@ class Controller extends BaseController
         }
         return response()->json($json, $code);
     }
+
+    public function responseError($message, $errors = null, $code = 422): \Illuminate\Http\JsonResponse
+    {
+        $json = ['status' => false, 'message' => $message];
+        if ($errors) {
+            $json['errors'] = $errors;
+        }
+        return response()->json($json, $code);
+    }
 }

@@ -31,10 +31,9 @@ class SendController extends Controller
         $send = $coinbase->sendBtc($request->address, $request->amount);
 
         if (isset($send->errors)) {
-            //return $this->response()
-            return redirect()->route('send.index')->withErrors($send->errors);
+            return $this->responseError('Произошла ошибка при отправке', $send->errors);
         }
 
-        return redirect()->route('send.index')->with(['success' => 'Биткоины успешно отправлены!<br>' . $send->data->network->status_description]);
+        return $this->response(null, 'Биткоины успешно отправлены');
     }
 }

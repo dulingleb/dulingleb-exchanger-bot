@@ -18,7 +18,7 @@ class UserController extends Controller
             ->allowedFilters(['name', 'email'])
             ->defaultSort('-id')
             ->allowedSorts('id', 'name', 'email')
-            ->jsonPaginate($request->perPage ?? Config::get('default_size', '10'));
+            ->jsonPaginate();
 
         return $this->response($users);
     }
@@ -76,7 +76,7 @@ class UserController extends Controller
     public function destroy(User $user): \Illuminate\Http\JsonResponse
     {
         if (auth()->id() === $user->id) {
-            return $this->response(null, 'Нельзя удалить самого себя', 400);
+            return $this->responseError('Нельзя удалить самого себя', null, 400);
         }
 
         $user->delete();
