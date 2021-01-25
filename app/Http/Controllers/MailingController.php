@@ -23,6 +23,6 @@ class MailingController extends Controller
 
         SendTelegramMessage::dispatch(auth()->user()->exchanger->id, $message);
 
-        return redirect()->route('mailing.index')->with(['success' => 'Рассылка отправляется']);
+        return $this->response(null, 'Рассылка успешно отправляется');
     }
 }

@@ -15,7 +15,7 @@ class ExchangerMessageController extends Controller
         $messages = QueryBuilder::for(ExchangerDefaultMessage::class)
             ->allowedFilters('title')
             ->select(['id', 'title'])
-            ->jsonPaginate($request->per_page ?? Config::get('default_size', '10'));
+            ->jsonPaginate();
 
         return $this->response($messages);
     }

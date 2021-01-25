@@ -30,7 +30,7 @@ class SettingController extends Controller
         $res = json_decode($res->getBody()->getContents());
 
         if ($res->ok === false) {
-            return response()->json(['status' => false, 'message' => 'Ошибка установки токена: ' . $res->description], 422);
+            return $this->responseError('Ошибка установки токена: ' . $res->description);
         }
 
         $exchanger = Exchanger::where('user_id', auth()->id())->first();

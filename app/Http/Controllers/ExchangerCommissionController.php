@@ -15,7 +15,7 @@ class ExchangerCommissionController extends Controller
             ->allowedSorts(['from', 'percent'])
             ->select(['id', 'from', 'to', 'percent'])
             ->where('exchanger_id', auth()->user()->exchanger->id)
-            ->jsonPaginate($request->per_page ?? Config::get('default_size', '10'));
+            ->jsonPaginate();
 
         return $this->response($commissions);
     }
@@ -43,7 +43,7 @@ class ExchangerCommissionController extends Controller
             'percent' => $request->percent
         ]);
 
-        return $this->response(null, 'Комиссия успешно добавлена');
+        return $this->response($commission, 'Комиссия успешно добавлена');
     }
 
     public function show(ExchangerCommission $commission): \Illuminate\Http\JsonResponse

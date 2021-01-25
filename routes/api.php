@@ -36,9 +36,8 @@ Route::group([
     'middleware' => 'auth:api'
 ], function () {
     Route::middleware('super_admin')->namespace('SuperAdmin')->group(function() {
-        Route::resource('users', 'UserController', ['except' => ['edit']]);
+        Route::resource('users', 'UserController', ['except' => ['edit', 'create']]);
 
-        Route::get('settings/messages/template/create', ['as' => 'settings.messages.default.create', 'uses' => 'ExchangerDefaultMessageController@create']);
         Route::post('settings/messages/template/store', ['as' => 'settings.messages.default.store', 'uses' => 'ExchangerDefaultMessageController@store']);
         Route::get('settings/messages/template/{message}', ['as' => 'settings.messages.default.edit', 'uses' => 'ExchangerDefaultMessageController@edit']);
         Route::patch('settings/messages/template/{message}/update', ['as' => 'settings.messages.default.update', 'uses' => 'ExchangerDefaultMessageController@update']);
@@ -64,9 +63,9 @@ Route::group([
     Route::patch('settings/messages/{message}/update', ['as' => 'settings.messages.update', 'uses' => 'ExchangerMessageController@update']);
 
     // Настройки комиссии
-    Route::resource('settings/commissions', 'ExchangerCommissionController', ['except' => ['edit']]);
+    Route::resource('settings/commissions', 'ExchangerCommissionController', ['except' => ['edit', 'create']]);
     // Настройки реквизитов
-    Route::resource('settings/bank-details', 'BankDetailController', ['except' => ['edit']]);
+    Route::resource('settings/bank-details', 'BankDetailController', ['except' => ['edit', 'create']]);
 
     // Операции
     Route::get('operations', ['as' => 'operations.index', 'uses' => 'OperationController@index']);
