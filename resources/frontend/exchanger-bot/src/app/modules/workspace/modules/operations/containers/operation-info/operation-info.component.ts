@@ -1,6 +1,6 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { FormControl, FormGroup } from '@angular/forms'
+import { ActivatedRoute, ParamMap } from '@angular/router'
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
-import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { finalize, mergeMap, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
@@ -21,7 +21,6 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject()
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
     private operationApiService: OperationApiService

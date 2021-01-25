@@ -6,7 +6,7 @@ export const apiQueryToParams = (apiQuery: IRequestApiDto, EFilterInToOutDto = {
     params['page[number]'] = apiQuery.page + ''
   }
   if (apiQuery.pageSize) {
-    params.per_page = apiQuery.pageSize + ''
+    params['page[size]'] = apiQuery.pageSize + ''
   }
   if (apiQuery.sort) {
     params.sort = apiQuery.order === 'desc' ? '-' : ''
