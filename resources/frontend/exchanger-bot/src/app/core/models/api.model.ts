@@ -4,6 +4,7 @@ export interface IRequestApiDto {
   page: number;
 	pageSize: number;
   sort: string;
+  order: 'asc' | 'desc' | '';
   filterValues: IFilterValues[];
 }
 

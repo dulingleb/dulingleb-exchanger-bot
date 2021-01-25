@@ -11,12 +11,13 @@ import { TableFilterPaginatorModule } from '../table-filter-paginator'
 import { PageContentLayoutModule } from '../page-content-layout'
 import { LoadingSpinnerModule } from '../loading-spinner'
 
+import { ContentTableComponent, PageLayoutTableTemplateComponent } from './components'
 import { PageContentTableComponent } from './containers'
-import { ContentTableComponent } from './components'
 
 @NgModule({
   declarations: [
     PageContentTableComponent,
+    PageLayoutTableTemplateComponent,
     ContentTableComponent
   ],
   imports: [

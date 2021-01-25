@@ -13,8 +13,3 @@ export const selectUiShowSideNav = createSelector(
   [selectUi],
   state => state.showSideNav
 )
-
-export const selectUiNotifications = createSelector(
-  [selectUi],
-  state => state.notifications
-)

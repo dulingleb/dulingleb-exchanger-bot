@@ -26,3 +26,10 @@ export interface ITelegramUserDataDto {
   comment?: string;
   ban?: boolean;
 }
+
+/* eslint-disable @typescript-eslint/naming-convention */
+export enum EFilterTelegramUserInOut {
+  exchangerId = 'exchanger_id',
+  telegramUserId = 'telegram_user_id',
+  operationsCount = 'operations_count'
+}

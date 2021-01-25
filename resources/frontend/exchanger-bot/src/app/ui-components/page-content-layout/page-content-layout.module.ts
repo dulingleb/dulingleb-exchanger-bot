@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { MatCardModule } from '@angular/material/card'
 
-import { PageContentLayoutComponent, PageLayoutTableComponent, PageContentComponent } from './containers'
+import { PageContentLayoutComponent, PageContentComponent } from './containers'
 
 @NgModule({
   declarations: [
     PageContentLayoutComponent,
-    PageLayoutTableComponent,
     PageContentComponent
   ],
   imports: [
@@ -16,7 +15,6 @@ import { PageContentLayoutComponent, PageLayoutTableComponent, PageContentCompon
   ],
   exports: [
     PageContentLayoutComponent,
-    PageLayoutTableComponent,
     PageContentComponent
   ]
 })

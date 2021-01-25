@@ -24,6 +24,7 @@ export class PageContentTableComponent implements AfterViewInit, OnDestroy {
   private requestApiQuery$ = new BehaviorSubject<IRequestApiDto>({
     page: 0,
     sort: '',
+    order: '',
     pageSize: 10,
     filterValues: []
   })
@@ -47,11 +48,10 @@ export class PageContentTableComponent implements AfterViewInit, OnDestroy {
   }
 
   sortData(sortEvent: ISortEvent): void {
-    let sort = sortEvent.direction === 'desc' ? '-' : ''
-    sort += sortEvent.direction === '' ? '' : sortEvent.active
     this.requestApiQuery$.next({
       ...this.requestApiQuery$.value,
-      sort
+      sort: sortEvent.active,
+      order: sortEvent.direction
     })
   }
 

@@ -38,3 +38,10 @@ export interface IUserLoginInDto {
   expiresIn: number;
   user: IUserInDto;
 }
+
+/* eslint-disable @typescript-eslint/naming-convention */
+export enum EFilterUserInOut {
+  role = 'role_id',
+  createdAt = 'created_at',
+  updatedAt = 'updated_at'
+}

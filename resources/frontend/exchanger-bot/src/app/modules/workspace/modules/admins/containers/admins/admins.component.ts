@@ -1,11 +1,11 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
-import { catchError, filter, finalize, mergeMap, takeUntil, tap, withLatestFrom } from 'rxjs/operators'
+import { filter, finalize, mergeMap, takeUntil, tap, withLatestFrom } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
-import { EUserRoleDto, IUserFacade, IUserInDto, USER_FACADE } from '@core/features'
-import { IFilterField, IPaginator, ConfirmModalService, IConfirmModal } from '@ui/index'
+import { EUserRoleDto, IUiFacade, IUserFacade, IUserInDto, UI_FACADE, USER_FACADE } from '@core/features'
 import { ETableColumnActionEventType, IRequestApiDto, ITableActionEvent } from '@core/models'
+import { IFilterField, IPaginator, ConfirmModalService, IConfirmModal } from '@ui/index'
 
 import { TABLE_COLUMNS } from '../../constants/table-columns'
 
@@ -29,6 +29,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(USER_FACADE) public userFacade: IUserFacade,
+    @Inject(UI_FACADE) private uiFacade: IUiFacade,
     private confirmModalService: ConfirmModalService,
     private adminApiService: AdminApiService,
   ) {}
@@ -46,7 +47,6 @@ export class AdminsComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(
       ([res, user]) => {
-        console.log('aa', res, user)
         this.users = res.data
         this.paginator = {
           length: res.total,
@@ -56,7 +56,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
       },
       (err) => {
         this.userFacade.logout()
-        console.log('err', err)
+        this.uiFacade.addErrorNotification(err.message)
       }
     )
   }
@@ -86,7 +86,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
         this.getAdminList()
       },
       (err) => {
-        console.log('err', err)
+        this.uiFacade.addErrorNotification(err.message)
       }
     )
   }

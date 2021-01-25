@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store'
 
-import { IGlobalNotification } from './ui.model'
+import { ISnackBar } from '@ui/snack-bar'
 
 const initUi = createAction(
   '[UI exchanger bot] Init UI'
@@ -22,16 +22,15 @@ const toggleSideNav = createAction(
 
 const addNotification = createAction(
   '[UI banner admin] Add Notification',
-  props<{ notification: IGlobalNotification }>()
+  props<{ snackBarData: ISnackBar }>()
 )
 
-const closeNotification = createAction(
-  '[UI banner admin] Close Notification',
-  props<{ notification: IGlobalNotification }>()
-)
-
-const clearNotifications = createAction(
-  '[UI banner admin] Clear Notifications'
+const addErrorNotification = createAction(
+  '[UI banner admin] Add Error Notification',
+  props<{
+    messageI18n?: string;
+    messageKeyI18n?: { [key: string]: string };
+  }>()
 )
 
 export const UI_ACTIONS = {
@@ -41,6 +40,5 @@ export const UI_ACTIONS = {
   toggleSideNav,
 
   addNotification,
-  closeNotification,
-  clearNotifications
+  addErrorNotification
 }

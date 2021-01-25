@@ -5,7 +5,7 @@ import { Observable, of, throwError } from 'rxjs'
 
 import { ENV } from '@env/environment'
 import { apiQueryToParams } from '@utils/index'
-import { IUserInDto, IUserOutDto } from '@core/features'
+import { EFilterUserInOut, IUserInDto, IUserOutDto } from '@core/features'
 import { ICommonResponseDto, IRequestApiDto, IResponseApiInDto, IResponseApiOutDto } from '@core/models'
 
 @Injectable({
@@ -16,7 +16,7 @@ export class AdminApiService {
   constructor(private http: HttpClient) {}
 
   getList(apiQuery: IRequestApiDto): Observable<IResponseApiInDto<IUserInDto[]> | any> {
-    const params = apiQueryToParams(apiQuery)
+    const params = apiQueryToParams(apiQuery, EFilterUserInOut)
     return this.http.get<ICommonResponseDto<IResponseApiOutDto<IUserOutDto[]>>>(`${ENV.api}/users`, { params }).pipe(
       mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: res }) => ({

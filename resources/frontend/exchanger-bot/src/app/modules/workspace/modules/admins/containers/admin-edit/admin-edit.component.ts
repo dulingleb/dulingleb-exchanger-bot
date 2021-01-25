@@ -1,11 +1,11 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { mergeMap, takeUntil } from 'rxjs/operators'
 import { of, Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
-import { IUserInDto } from '@core/features'
+import { IUiFacade, IUserInDto, UI_FACADE } from '@core/features'
 
 @Component({
   selector: 'app-admin-edit',
@@ -16,13 +16,15 @@ export class AdminEditComponent implements OnInit, OnDestroy {
   user: IUserInDto
   form: FormGroup
   showPassword: boolean
+  inRequest: boolean
 
   private destroy$ = new Subject()
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private adminApiService: AdminApiService
+    private adminApiService: AdminApiService,
+    @Inject(UI_FACADE) private uiFacade: IUiFacade,
   ) {
     this.form = new FormGroup({
       email: new FormControl('', [
@@ -50,13 +52,18 @@ export class AdminEditComponent implements OnInit, OnDestroy {
         return id ? this.adminApiService.getUser(id) : of({} as IUserInDto)
       }),
       takeUntil(this.destroy$)
-    ).subscribe(user =>  {
+    ).subscribe(
+      (user) =>  {
       this.user = user
-      this.form.patchValue({
-        email: user.email,
-        name: user.name
-      })
-    })
+        this.form.patchValue({
+          email: user.email,
+          name: user.name
+        })
+      },
+      (err) => {
+        this.uiFacade.addErrorNotification(err.message)
+      }
+    )
   }
 
   save(): void {
@@ -66,23 +73,31 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     const cPassword = this.form.get('confirmPassword').value
 
     this.user.id
-      ? this.adminApiService.updateUser({
-          id: this.user.id,
-          email: email || this.user.email,
-          name: name || this.user.name
-        }).subscribe(res => this.router.navigateByUrl('/admins'))
-
-      : this.adminApiService.addUser({
-          email,
-          name,
-          password,
-          cPassword
-        }).subscribe(() => this.router.navigateByUrl('/admins'))
+      ? this.updateUser(this.user.id, email || this.user.email, name || this.user.name)
+      : this.addUser(email, name, password, cPassword)
   }
 
   ngOnDestroy(): void {
     this.destroy$.next()
     this.destroy$.complete()
+  }
+
+  private updateUser(id: number, email: string, name: string): void {
+    this.adminApiService.updateUser({ id, email, name}).subscribe(
+      () => this.router.navigateByUrl('/admins'),
+      (err) => {
+        this.uiFacade.addErrorNotification(err.message)
+      }
+    )
+  }
+
+  private addUser(email: string, name: string, password: string, cPassword: string): void {
+    this.adminApiService.addUser({ email, name, password, cPassword}).subscribe(
+      () => this.router.navigateByUrl('/admins'),
+      (err) => {
+        this.uiFacade.addErrorNotification(err.message)
+      }
+    )
   }
 
 }

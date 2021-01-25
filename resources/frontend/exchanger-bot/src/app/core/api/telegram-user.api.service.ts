@@ -5,7 +5,7 @@ import { Observable, of, throwError } from 'rxjs'
 
 import { ENV } from '@env/environment'
 import { apiQueryToParams } from '@utils/index'
-import { ICommonResponseDto, IRequestApiDto, IResponseApiInDto, IResponseApiOutDto, ITelegramUserDataDto, ITelegramUserInDto, ITelegramUserOutDto } from '@core/models'
+import { EFilterTelegramUserInOut, ICommonResponseDto, IRequestApiDto, IResponseApiInDto, IResponseApiOutDto, ITelegramUserDataDto, ITelegramUserInDto, ITelegramUserOutDto } from '@core/models'
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class TelegramUserApiService {
   constructor(private http: HttpClient) {}
 
   getList(apiQuery: IRequestApiDto): Observable<IResponseApiInDto<ITelegramUserInDto[]>> {
-    const params = apiQueryToParams(apiQuery)
+    const params = apiQueryToParams(apiQuery, EFilterTelegramUserInOut)
     return this.http.get<ICommonResponseDto<IResponseApiOutDto<ITelegramUserOutDto[]>>>(`${ENV.api}/telegram-users`, { params }).pipe(
       mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: res }) => ({
