@@ -1,10 +1,12 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
-import { SettingApiService } from '@core/api'
-import { EUserRoleDto, IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
-import { ETableColumnActionEventType, IRequestApiDto, ISettingMessageDto, ITableActionEvent } from '@core/models'
-import { ConfirmModalService, IFilterField, IPaginator } from '@ui/index'
-import { Subject } from 'rxjs'
 import { finalize, takeUntil, withLatestFrom } from 'rxjs/operators'
+import { Subject } from 'rxjs'
+
+import { EUserRoleDto, IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
+import { IRequestApiDto, ISettingMessageDto, ITableActionEvent } from '@core/models'
+import { ConfirmModalService, IFilterField, IPaginator } from '@ui/index'
+import { SettingApiService } from '@core/api'
+
 import { TABLE_COLUMNS } from '../../constants/table-columns'
 
 @Component({
@@ -74,6 +76,10 @@ export class SettingMessagesComponent implements OnInit, OnDestroy {
       {
         labelI18n: 'settings.messages.table.title',
         name: 'title'
+      },
+      {
+        labelI18n: 'settings.messages.table.slug',
+        name: 'slug'
       }
     ]
   }

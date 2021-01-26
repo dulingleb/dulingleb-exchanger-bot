@@ -51,4 +51,13 @@ export interface ISettingInDto extends ISettingLimitInDto, ISettingTelegramInDto
 export interface ISettingMessageDto {
   id: number;
   title: string;
+  slug: string;
+}
+
+export interface ISettingMessageDto {
+  id: number;
+  title: string;
+  slug: string;
+  text?: string;
+  description?: string;
 }

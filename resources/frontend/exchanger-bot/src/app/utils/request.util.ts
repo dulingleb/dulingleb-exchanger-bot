@@ -3,7 +3,7 @@ import { IRequestApiDto, IResponseApiInDto, IResponseApiOutDto } from '@core/mod
 export const apiQueryToParams = (apiQuery: IRequestApiDto, EFilterInToOutDto = {}): { [key: string]: string } => {
   const params: { [key: string]: string } = {}
   if (apiQuery.page) {
-    params['page[number]'] = apiQuery.page + ''
+    params['page[number]'] = apiQuery.page + 1 + ''
   }
   if (apiQuery.pageSize) {
     params['page[size]'] = apiQuery.pageSize + ''

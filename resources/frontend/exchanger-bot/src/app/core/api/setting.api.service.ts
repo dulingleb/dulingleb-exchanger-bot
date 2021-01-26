@@ -88,24 +88,22 @@ export class SettingApiService {
     )
   }
 
-  updateMessage(slug: string, message: string): Observable<ISettingMessageDto> {
-    return this.http.get<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/${slug}`).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
-      map(({ data: message }) => message)
+  updateMessage(id: number, text: string): Observable<ICommonResponseDto<null>> {
+    return this.http.patch<ICommonResponseDto<null>>(`${ENV.api}/settings/messages/${id}/update`, { text }).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
     )
   }
 
   getMessageTemplate(id: number): Observable<ISettingMessageDto> {
-    return this.http.get<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/${id}`).pipe(
+    return this.http.get<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/template/${id}`).pipe(
       mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: message }) => message)
     )
   }
 
-  updateMessageTemplate(id: number): Observable<ISettingMessageDto> {
-    return this.http.get<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/${id}`).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
-      map(({ data: message }) => message)
+  updateMessageTemplate(message: ISettingMessageDto): Observable<ICommonResponseDto<ISettingMessageDto>> {
+    return this.http.patch<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/template/${message.id}/update`, message).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
     )
   }
 

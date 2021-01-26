@@ -188,7 +188,8 @@
         "addBtn": "Добавить"
       },
       "table": {
-        "title": "Сообщение"
+        "title": "Сообщение",
+        "slug": "slug"
       },
       "edit": {
         "pageTitle": "Редактирование сообщения",
@@ -196,7 +197,7 @@
           "title": "Title",
           "slug": "Slug",
           "description": "Описание",
-          "message": "Сообщение"
+          "text": "Сообщение"
         },
         "saveBtn": "Сохранить"
       },

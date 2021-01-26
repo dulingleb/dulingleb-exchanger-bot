@@ -9,11 +9,17 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
   {
+    name: 'slug',
+    nameI18n: 'settings.messages.table.slug',
+    type: ETableColumnType.STRING,
+    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+  },
+  {
     name: 'info',
     nameI18n: 'table.action.info',
     type: ETableColumnType.STRING,
     actionData: {
-      link: (message: ISettingMessageDto): string => `/settings/messages/${message?.id}/edit`,
+      link: (message: ISettingMessageDto): string => `/settings/messages/${message?.slug}/edit`,
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.EDIT
     },

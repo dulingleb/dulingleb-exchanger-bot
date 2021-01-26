@@ -30,20 +30,23 @@ export class SettingMessageTemplateEditComponent implements OnInit, OnDestroy {
       title: new FormControl(''),
       slug: new FormControl(''),
       description: new FormControl(''),
-      message: new FormControl(''),
+      text: new FormControl(''),
     })
   }
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
-      mergeMap((params: ParamMap) => this.settingApiService.getMessage(params.get('id'))),
+      mergeMap((params: ParamMap) => this.settingApiService.getMessageTemplate(+params.get('id'))),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
       (message) => {
         this.message = message
         this.form.patchValue({
-          title: message.title
+          title: message.title,
+          slug: message.slug,
+          description: message.description,
+          text: message.text,
         })
       },
       (err) => this.uiFacade.addErrorNotification(err.message)
@@ -51,10 +54,24 @@ export class SettingMessageTemplateEditComponent implements OnInit, OnDestroy {
   }
 
   save(): void {
-    const message = this.form.get('message').value
+    const title = this.form.get('title').value
+    const slug = this.form.get('slug').value
+    const description = this.form.get('description').value
+    const text = this.form.get('text').value
 
-    this.settingApiService.updateMessage(message, '').subscribe(
-      () => this.router.navigateByUrl('/users'),
+    const message: ISettingMessageDto = {
+      ...this.message,
+      title,
+      slug,
+      description,
+      text
+    }
+
+    this.settingApiService.updateMessageTemplate(message).subscribe(
+      (res) => {
+        this.router.navigateByUrl('/settings/messages')
+        this.uiFacade.addInfoNotification(res.message)
+      },
       (err) => this.uiFacade.addErrorNotification(err.message)
     )
   }

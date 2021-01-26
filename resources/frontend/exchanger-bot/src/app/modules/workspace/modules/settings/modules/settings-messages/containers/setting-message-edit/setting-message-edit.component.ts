@@ -27,7 +27,7 @@ export class SettingMessageEditComponent implements OnInit, OnDestroy {
     private settingApiService: SettingApiService,
   ) {
     this.form = new FormGroup({
-      message: new FormControl(''),
+      text: new FormControl(''),
     })
   }
 
@@ -39,19 +39,20 @@ export class SettingMessageEditComponent implements OnInit, OnDestroy {
     ).subscribe(
       (message) => {
         this.message = message
-        this.form.patchValue({
-          message: message.title
-        })
+        this.form.patchValue({ text: message.text })
       },
       (err) => this.uiFacade.addErrorNotification(err.message)
     )
   }
 
   save(): void {
-    const message = this.form.get('message').value
+    const text = this.form.get('text').value
 
-    this.settingApiService.updateMessage(message, '').subscribe(
-      () => this.router.navigateByUrl('/users'),
+    this.settingApiService.updateMessage(this.message.id, text).subscribe(
+      (res) => {
+        this.router.navigateByUrl('/settings/messages')
+        this.uiFacade.addInfoNotification(res.message)
+      },
       (err) => this.uiFacade.addErrorNotification(err.message)
     )
   }
