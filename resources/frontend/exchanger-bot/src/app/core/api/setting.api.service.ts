@@ -81,6 +81,34 @@ export class SettingApiService {
     )
   }
 
+  getMessage(slug: string): Observable<ISettingMessageDto> {
+    return this.http.get<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/${slug}`).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data: message }) => message)
+    )
+  }
+
+  updateMessage(slug: string, message: string): Observable<ISettingMessageDto> {
+    return this.http.get<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/${slug}`).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data: message }) => message)
+    )
+  }
+
+  getMessageTemplate(id: number): Observable<ISettingMessageDto> {
+    return this.http.get<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/${id}`).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data: message }) => message)
+    )
+  }
+
+  updateMessageTemplate(id: number): Observable<ISettingMessageDto> {
+    return this.http.get<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/${id}`).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data: message }) => message)
+    )
+  }
+
   private settingOutToInDto(setting: ISettingOutDto): ISettingInDto {
     return {
       id: setting.id,

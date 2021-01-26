@@ -9,11 +9,15 @@ import { TranslateModule } from '@ngx-translate/core'
 
 import { ConfirmModalModule, PageContentTableModule, PageContentLayoutModule } from '@ui/index'
 
-import { SettingMessagesComponent } from './containers'
+import { SettingMessageEditComponent, SettingMessagesComponent, SettingMessageTemplateEditComponent } from './containers'
 import { SettingsMessagesRoutingModule } from './settings-messages-routing.module'
 
 @NgModule({
-  declarations: [SettingMessagesComponent],
+  declarations: [
+    SettingMessagesComponent,
+    SettingMessageEditComponent,
+    SettingMessageTemplateEditComponent
+  ],
   imports: [
     CommonModule,
     MatIconModule,

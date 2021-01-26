@@ -189,6 +189,24 @@
       },
       "table": {
         "title": "Сообщение"
+      },
+      "edit": {
+        "pageTitle": "Редактирование сообщения",
+        "input": {
+          "title": "Title",
+          "slug": "Slug",
+          "description": "Описание",
+          "message": "Сообщение"
+        },
+        "saveBtn": "Сохранить"
+      },
+      "template": {
+        "edit": {
+          "pageTitle": "Редактирование шаблона сообщения"
+        },
+        "new": {
+          "pageTitle": "Создание шаблона сообщения"
+        }
       }
     }
   }

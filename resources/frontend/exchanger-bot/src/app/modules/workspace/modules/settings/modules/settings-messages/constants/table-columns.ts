@@ -13,9 +13,9 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     nameI18n: 'table.action.info',
     type: ETableColumnType.STRING,
     actionData: {
-      link: (message: ISettingMessageDto): string => `/settings/messages/${message?.id}/info`,
+      link: (message: ISettingMessageDto): string => `/settings/messages/${message?.id}/edit`,
       actionType: ETableColumnActionType.LINK,
-      eventType: ETableColumnActionEventType.INFO
+      eventType: ETableColumnActionEventType.EDIT
     },
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
@@ -24,7 +24,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     nameI18n: 'table.action.edit',
     type: ETableColumnType.STRING,
     actionData: {
-      link: (message: ISettingMessageDto): string => `/settings/messages/${message?.id}/edit`,
+      link: (message: ISettingMessageDto): string => `/settings/messages/template/${message?.id}/edit`,
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.EDIT
     },

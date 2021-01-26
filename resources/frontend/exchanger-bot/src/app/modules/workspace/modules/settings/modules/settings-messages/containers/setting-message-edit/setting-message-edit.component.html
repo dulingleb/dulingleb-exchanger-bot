@@ -1,0 +1,19 @@
+<app-page-content>
+  <ng-container header>
+    {{ 'settings.messages.edit.pageTitle' | translate }} <i>{{ message?.id }}</i>
+  </ng-container>
+  <ng-container content>
+    <form [formGroup]="form" (ngSubmit)="save()" class="form">
+
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'settings.messages.edit.input.message' | translate }}</mat-label>
+          <textarea formControlName="message" matInput></textarea>
+        </mat-form-field>
+      </div>
+
+      <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'settings.messages.edit.saveBtn' | translate }}</button>
+
+    </form>
+  </ng-container>
+</app-page-content>
