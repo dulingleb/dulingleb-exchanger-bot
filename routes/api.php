@@ -39,7 +39,7 @@ Route::group([
         Route::resource('users', 'UserController', ['except' => ['edit', 'create']]);
 
         Route::post('settings/messages/template/store', ['as' => 'settings.messages.default.store', 'uses' => 'ExchangerDefaultMessageController@store']);
-        Route::get('settings/messages/template/{message}', ['as' => 'settings.messages.default.edit', 'uses' => 'ExchangerDefaultMessageController@edit']);
+        Route::get('settings/messages/template/{message}', ['as' => 'settings.messages.default.show', 'uses' => 'ExchangerDefaultMessageController@show']);
         Route::patch('settings/messages/template/{message}/update', ['as' => 'settings.messages.default.update', 'uses' => 'ExchangerDefaultMessageController@update']);
     });
 
