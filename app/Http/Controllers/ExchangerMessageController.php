@@ -14,7 +14,7 @@ class ExchangerMessageController extends Controller
     {
         $messages = QueryBuilder::for(ExchangerDefaultMessage::class)
             ->allowedFilters('title')
-            ->select(['id', 'title'])
+            ->select(['id', 'title', 'slug'])
             ->jsonPaginate();
 
         return $this->response($messages);
@@ -36,8 +36,8 @@ class ExchangerMessageController extends Controller
             ]);
         }
 
-        $message = $message ?? ExchangerMessage::where('exchanger_default_message_id', $default->id)->where('exchanger_id', auth()->user()->exchanger->id)->first()->toArray();
-        $message['description'] = $default->description;
+        $message = $message ?? ExchangerMessage::with('default_message')->where('exchanger_default_message_id', $default->id)->where('exchanger_id', auth()->user()->exchanger->id)->first();
+        //$message->load(['default_message:title']);
 
         return $this->response($message);
     }
