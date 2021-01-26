@@ -28,6 +28,11 @@ class ExchangerDefaultMessageController extends Controller
         return $this->response($message, 'Сообщение успешно добавлено');
     }
 
+    public function show(ExchangerDefaultMessage $message)
+    {
+        return $this->response($message);
+    }
+
     public function update(Request $request, ExchangerDefaultMessage $message)
     {
         $this->validate($request, [
