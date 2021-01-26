@@ -15,7 +15,7 @@ import { TABLE_COLUMNS } from '../../constants/table-columns'
 })
 export class AdminsComponent implements OnInit, OnDestroy {
 
-  currentUserRole: EUserRoleDto = EUserRoleDto.ADMIN
+  currentUserRole: EUserRoleDto = EUserRoleDto.ADMIN // TODO: User role
   users: IUserInDto[] = []
   inRequest: boolean
 
@@ -46,7 +46,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      ([res, user]) => {
+      ([res, user]) => { // TODO: User role
         this.users = res.data
         this.paginator = {
           length: res.total,

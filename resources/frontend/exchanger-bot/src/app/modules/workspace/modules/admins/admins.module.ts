@@ -28,9 +28,10 @@ import { AdminsRoutingModule } from './admins-routing.module'
     ReactiveFormsModule,
 
     ConfirmModalModule,
-    AdminsRoutingModule,
     PageContentTableModule,
     PageContentLayoutModule,
+
+    AdminsRoutingModule,
   ],
   exports: [AdminsComponent]
 })

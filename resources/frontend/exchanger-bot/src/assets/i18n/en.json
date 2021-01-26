@@ -61,7 +61,7 @@
   },
   "admins": {
     "tableHeader": {
-      "add-btn": "Добавить",
+      "addBtn": "Добавить",
       "title": "Администраторы"
     },
     "table": {
@@ -99,7 +99,7 @@
   },
   "users": {
     "tableHeader": {
-      "add-btn": "Добавить",
+      "addBtn": "Добавить",
       "title": "Пользователи"
     },
     "table": {
@@ -161,5 +161,35 @@
     "pageTitle": "Рассылка",
     "message": "Сообщение",
     "send": "Разослать"
+  },
+  "settings": {
+    "btn": "btn",
+    "rub": "руб.",
+    "saveBtn": "Сохранить",
+    "limits": {
+      "pageTitle": "Лимиты",
+      "course": "Курс",
+      "minExchange": "Мин. покупка",
+      "maxExchange": "Макс. покупка"
+    },
+    "telegram": {
+      "pageTitle": "Телеграм",
+      "telegramToken": "Токен",
+      "username": "Логин"
+    },
+    "keys": {
+      "pageTitle": "Ключи coinbase",
+      "coinbaseKey": "Key",
+      "coinbaseSecret": "Secret"
+    },
+    "messages": {
+      "tableHeader": {
+        "title": "Сообщения",
+        "addBtn": "Добавить"
+      },
+      "table": {
+        "title": "Сообщение"
+      }
+    }
   }
 }

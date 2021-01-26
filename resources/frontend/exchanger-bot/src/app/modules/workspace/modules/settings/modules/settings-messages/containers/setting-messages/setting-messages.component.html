@@ -1,18 +1,19 @@
 <app-page-content-table
                         [tableColumns]="tableColumns"
-                        [inRequest]="inRequest" [items]="users"
+                        [inRequest]="inRequest" [items]="messages"
                         [filterFields]="filterFields"
                         [paginator]="paginator"
                         (getList)="getAdminList($event)"
+                        (eventData)="setEventData($event)"
 >
   <ng-container table-title>
-    {{ 'users.tableHeader.title' | translate }}
+    {{ 'settings.messages.tableHeader.title' | translate }}
   </ng-container>
 
   <ng-container table-actions>
-    <a mat-raised-button color="primary" disableRipple="true" class="nav-link" routerLink="/dashboard">
+    <a mat-raised-button color="primary" disableRipple="true" class="nav-link" routerLink="/settings/messages/new">
       <mat-icon>add</mat-icon>
-      <span>{{ 'users.tableHeader.addBtn' | translate }}</span>
+      <span>{{ 'settings.messages.tableHeader.addBtn' | translate }}</span>
    </a>
   </ng-container>
 </app-page-content-table>
