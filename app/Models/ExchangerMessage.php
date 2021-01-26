@@ -3,15 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ExchangerMessage extends Model
 {
     protected $guarded = [];
 
-    public function defaultMessage()
+    public function default_message(): BelongsTo
     {
-        return $this->hasOne(ExchangerDefaultMessage::class, 'id', 'exchanger_default_message_id');
+        return $this->belongsTo(ExchangerDefaultMessage::class, 'exchanger_default_message_id', 'id');
     }
 
     public static function getMessage($exchangerId, $slug)
