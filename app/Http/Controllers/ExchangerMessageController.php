@@ -29,14 +29,18 @@ class ExchangerMessageController extends Controller
         }
 
         if (!ExchangerMessage::where('exchanger_default_message_id', $default->id)->where('exchanger_id', auth()->user()->exchanger->id)->exists()) {
-            $message = ExchangerMessage::create([
+            ExchangerMessage::create([
                 'text' => $default->text,
                 'exchanger_id' => auth()->user()->exchanger->id,
                 'exchanger_default_message_id' => $default->id
             ]);
         }
 
-        $message = $message ?? ExchangerMessage::with('default_message')->where('exchanger_default_message_id', $default->id)->where('exchanger_id', auth()->user()->exchanger->id)->first();
+        $message = ExchangerMessage::join('exchanger_default_messages', 'exchanger_default_messages.id', 'exchanger_messages.exchanger_default_message_id')
+            ->select('exchanger_messages.*', 'exchanger_default_messages.title', 'exchanger_default_messages.description', 'exchanger_default_messages.slug')
+            ->where('exchanger_default_message_id', $default->id)
+            ->where('exchanger_id', auth()->user()->exchanger->id)
+            ->first();
         //$message->load(['default_message:title']);
 
         return $this->response($message);
@@ -56,11 +60,7 @@ class ExchangerMessageController extends Controller
         $message->text = str_replace('&nbsp;', ' ', $text);
         $message->save();
 
-        $description = $message->defaultMessage->description;
-        $message = $message->toArray();
-        $message['description'] = $description;
-
-        return $this->response($message, 'Сообщение успешно сохранено');
+        return $this->response(null, 'Сообщение успешно сохранено');
     }
 
 }
