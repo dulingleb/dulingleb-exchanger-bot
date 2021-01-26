@@ -1,0 +1,14 @@
+<div class="table-filter-wrapper">
+  <app-table-paginator
+                  [length]="length"
+                  [pageIndex]="pageIndex"
+                  [pageSize]="pageSize"
+                  [showFilter]="showFilter"
+                  [tableWithFilter]="tableWithFilter"
+                  (changeFilter)="showFilter = !showFilter"
+                  (changePaginator)="changePaginator.emit($event)"
+  ></app-table-paginator>
+
+  <app-table-filter *ngIf="tableWithFilter" [filterFields]="filterFields" [showFilter]="showFilter" (filter)="filter.emit($event)"></app-table-filter>
+</div>
+

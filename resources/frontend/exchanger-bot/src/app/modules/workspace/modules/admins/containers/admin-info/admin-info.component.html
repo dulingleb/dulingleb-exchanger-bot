@@ -1,0 +1,21 @@
+<app-page-content>
+  <ng-container header>
+    {{ 'admin.info.pageTitle' | translate }} <i>{{ user?.name }}</i>
+  </ng-container>
+  <ng-container actions>
+    <a mat-raised-button color="primary" [routerLink]="['/admins', user?.id, 'edit']">
+      <mat-icon>edit</mat-icon>
+      <span>{{ 'admin.info.editAdmin' | translate }}</span>
+    </a>
+  </ng-container>
+  <ng-container content>
+    <h3>{{ 'common.name' | translate }}</h3>
+    <p><i>{{ user?.name }}</i></p>
+
+    <h3>{{ 'common.email' | translate }}</h3>
+    <p><i>{{ user?.email }}</i></p>
+
+    <h3>{{ 'common.role' | translate }}</h3>
+    <p><i>{{ ('common.roles.' + user?.role) | translate }}</i></p>
+  </ng-container>
+</app-page-content>

@@ -28,7 +28,6 @@ class TelegramUserController extends Controller
             ->where('telegram_user_settings.exchanger_id', auth()->user()->exchanger->id)
             ->jsonPaginate();
 
-
         return $this->response($users);
     }
 

@@ -100,3 +100,40 @@ mat-cell {
   border-radius: 50%;
   background: $primary;
 }
+
+.mat-table {
+  .mat-header-row {
+    .action-header-cell {
+      max-width: 40px;
+    }
+  }
+
+  .mat-column-actions, .action-cell {
+    display: flex;
+    justify-content: flex-end;
+
+    max-width: 40px;
+
+    .table-action {
+      mat-icon {
+        width: 19px;
+        height: 19px;
+
+        font-size: 19px;
+        line-height: 19px;
+      }
+    }
+  }
+}
+
+.form-group {
+  padding-bottom: 0.5rem;
+
+  .mat-form-field {
+    display: block;
+  }
+
+  .mat-slide-toggle {
+    margin-bottom: 0.5rem;
+  }
+}
