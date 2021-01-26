@@ -27,15 +27,25 @@
     <ng-container *ngIf="tableColumn.actionData">
       <mat-cell *matCellDef="let row" class="action-cell">
         <a mat-icon-button *ngIf="tableColumn.actionData.actionType === ETableColumnActionType.LINK" class="table-action" [routerLink]="tableColumn.actionData.link(row)">
-          <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.INFO">info_outline</mat-icon>
-          <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.EDIT">edit</mat-icon>
-          <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.DELETE">delete_outline</mat-icon>
+          <ng-container *ngIf="tableColumn.actionData.icon">
+            <mat-icon>{{ tableColumn.actionData.icon }}</mat-icon>
+          </ng-container>
+          <ng-container *ngIf="!tableColumn.actionData.icon">
+            <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.INFO">info_outline</mat-icon>
+            <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.EDIT">edit</mat-icon>
+            <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.DELETE">delete_outline</mat-icon>
+          </ng-container>
         </a>
 
         <button mat-icon-button *ngIf="tableColumn.actionData.actionType === ETableColumnActionType.EVENT" (click)="setEvent(tableColumn.actionData.eventType, row)" class="table-action">
-          <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.INFO">info_outline</mat-icon>
-          <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.EDIT">edit</mat-icon>
-          <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.DELETE && (!tableColumn.actionData.hide || !tableColumn.actionData.hide(row, currentUserId))">delete_outline</mat-icon>
+          <ng-container *ngIf="tableColumn.actionData.icon">
+            <mat-icon>{{ tableColumn.actionData.icon }}</mat-icon>
+          </ng-container>
+          <ng-container *ngIf="!tableColumn.actionData.icon">
+            <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.INFO">info_outline</mat-icon>
+            <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.EDIT">edit</mat-icon>
+            <mat-icon *ngIf="tableColumn.actionData.eventType === ETableColumnActionEventType.DELETE && (!tableColumn.actionData.hide || !tableColumn.actionData.hide(row, currentUserId))">delete_outline</mat-icon>
+          </ng-container>
         </button>
 
       </mat-cell>

@@ -1,10 +1,10 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
-import { finalize, takeUntil, withLatestFrom } from 'rxjs/operators'
+import { filter, finalize, mergeMap, takeUntil, tap, withLatestFrom } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 import { EUserRoleDto, IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
-import { IRequestApiDto, ISettingMessageDto, ITableActionEvent } from '@core/models'
-import { ConfirmModalService, IFilterField, IPaginator } from '@ui/index'
+import { ETableColumnActionEventType, IRequestApiDto, ISettingMessageDto, ITableActionEvent } from '@core/models'
+import { ConfirmModalService, IConfirmModal, IFilterField, IPaginator } from '@ui/index'
 import { SettingApiService } from '@core/api'
 
 import { TABLE_COLUMNS } from '../../constants/table-columns'
@@ -38,7 +38,7 @@ export class SettingMessagesComponent implements OnInit, OnDestroy {
     this.initFilterFields()
   }
 
-  getAdminList(requestApiQuery: IRequestApiDto = this.requestApiQuery): void {
+  getSettingMessageList(requestApiQuery: IRequestApiDto = this.requestApiQuery): void {
     this.requestApiQuery = requestApiQuery
     this.inRequest = true
     this.settingApiService.getMessageList(requestApiQuery).pipe(
@@ -62,13 +62,38 @@ export class SettingMessagesComponent implements OnInit, OnDestroy {
   }
 
   setEventData(eventData: ITableActionEvent): void {
-    // if (eventData.event === ETableColumnActionEventType.DELETE) { this.deleteUser(eventData.data) }
+    if (eventData.event === ETableColumnActionEventType.DELETE) { this.deleteMessage(eventData.data) }
   }
-
 
   ngOnDestroy(): void {
     this.destroy$.next()
     this.destroy$.complete()
+  }
+
+  protected deleteMessage(message: ISettingMessageDto): void {
+    const data: IConfirmModal = {
+      titleI18n: 'confirm.deleteModal.title',
+      titleKeyI18n: message.slug,
+      messageI18n: 'confirm.deleteModal.message',
+      messageKeyI18n: `${message.slug} (${message.title})`,
+      confirmBtn: true,
+      cancelBtn: true
+    }
+    this.confirmModalService.openDialog(data).pipe(
+      filter(res => res),
+      tap(() => this.inRequest = true),
+      mergeMap(() => this.settingApiService.deleteMessageTemplate(message.id)),
+      finalize(() => this.inRequest = false),
+      takeUntil(this.destroy$)
+    ).subscribe(
+      () => {
+        this.messages = this.messages.filter(m => m.id !== message.id)
+        this.getSettingMessageList()
+      },
+      (err) => {
+        this.uiFacade.addErrorNotification(err.message)
+      }
+    )
   }
 
   protected initFilterFields(): void {

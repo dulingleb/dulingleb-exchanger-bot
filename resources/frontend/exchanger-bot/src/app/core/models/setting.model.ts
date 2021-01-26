@@ -61,3 +61,17 @@ export interface ISettingMessageDto {
   text?: string;
   description?: string;
 }
+
+export interface ISettingRequisiteDto {
+  id: number;
+  title: string;
+  text?: string;
+  status: boolean;
+}
+
+export interface ISettingCommissionDto {
+  id: number;
+  from: number;
+  to: number;
+  percent: number;
+}

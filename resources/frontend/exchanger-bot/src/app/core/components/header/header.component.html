@@ -5,7 +5,7 @@
       <div class="left-side-wrapper">
         <a mat-icon-button routerLink="/" class="logo-wrapper">
           <mat-icon aria-hidden="false">near_me</mat-icon>
-          {{ 'info.app-name' | translate }}
+          {{ 'info.appName' | translate }}
         </a>
 
         <button mat-icon-button (click)="uiFacade.toggleSideNav()" *ngIf="userFacade.user$ | async" class="toggle-side-wrapper">

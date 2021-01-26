@@ -9,6 +9,7 @@ import {
   IRequestApiDto,
   IResponseApiInDto,
   IResponseApiOutDto,
+  ISettingCommissionDto,
   ISettingInDto,
   ISettingKeysInDto,
   ISettingKeysOutDto,
@@ -16,6 +17,7 @@ import {
   ISettingLimitOutDto,
   ISettingMessageDto,
   ISettingOutDto,
+  ISettingRequisiteDto,
   ISettingTelegramInDto,
   ISettingTelegramOutDto
 } from '@core/models'
@@ -101,8 +103,92 @@ export class SettingApiService {
     )
   }
 
+  addMessageTemplate(message: ISettingMessageDto): Observable<ICommonResponseDto<ISettingMessageDto>> {
+    return this.http.post<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/template/store`, message).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
+    )
+  }
+
   updateMessageTemplate(message: ISettingMessageDto): Observable<ICommonResponseDto<ISettingMessageDto>> {
     return this.http.patch<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/template/${message.id}/update`, message).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
+    )
+  }
+
+  deleteMessageTemplate(id: number): Observable<ICommonResponseDto<null>> {
+    return this.http.delete<ICommonResponseDto<null>>(`${ENV.api}/settings/messages/template/${id}`).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
+    )
+  }
+
+  getCommissionList(apiQuery: IRequestApiDto): Observable<IResponseApiInDto<ISettingCommissionDto[]>> {
+    const params = apiQueryToParams(apiQuery, EFilterUserInOut)
+    return this.http.get<ICommonResponseDto<IResponseApiOutDto<ISettingCommissionDto[]>>>(`${ENV.api}/settings/commissions`, { params }).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data: res }) => ({
+        ...operationOutToInDto(res),
+        sort: apiQuery.sort
+      }))
+    )
+  }
+
+  getCommission(id: number): Observable<ISettingCommissionDto> {
+    return this.http.get<ICommonResponseDto<ISettingCommissionDto>>(`${ENV.api}/settings/commissions/${id}`).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data: message }) => message)
+    )
+  }
+
+  addCommission(commission: ISettingCommissionDto): Observable<ICommonResponseDto<ISettingCommissionDto>> {
+    return this.http.post<ICommonResponseDto<ISettingCommissionDto>>(`${ENV.api}/settings/commissions`, commission).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
+    )
+  }
+
+  updateCommission(commission: ISettingCommissionDto): Observable<ICommonResponseDto<null>> {
+    return this.http.put<ICommonResponseDto<null>>(`${ENV.api}/settings/commissions/${commission.id}`, commission).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
+    )
+  }
+
+  deleteCommission(id: number): Observable<ICommonResponseDto<null>> {
+    return this.http.delete<ICommonResponseDto<null>>(`${ENV.api}/settings/commissions/${id}`).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
+    )
+  }
+
+  getRequisiteList(apiQuery: IRequestApiDto): Observable<IResponseApiInDto<ISettingRequisiteDto[]>> {
+    const params = apiQueryToParams(apiQuery, EFilterUserInOut)
+    return this.http.get<ICommonResponseDto<IResponseApiOutDto<ISettingRequisiteDto[]>>>(`${ENV.api}/settings/bank-details`, { params }).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data: res }) => ({
+        ...operationOutToInDto(res),
+        sort: apiQuery.sort
+      }))
+    )
+  }
+
+  getRequisite(id: number): Observable<ISettingRequisiteDto> {
+    return this.http.get<ICommonResponseDto<ISettingRequisiteDto>>(`${ENV.api}/settings/bank-details/${id}`).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data: message }) => message)
+    )
+  }
+
+  addRequisite(requisite: ISettingRequisiteDto): Observable<ICommonResponseDto<ISettingRequisiteDto>> {
+    return this.http.post<ICommonResponseDto<ISettingRequisiteDto>>(`${ENV.api}/settings/bank-details`, requisite).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
+    )
+  }
+
+  updateRequisite(requisite: ISettingRequisiteDto): Observable<ICommonResponseDto<null>> {
+    return this.http.put<ICommonResponseDto<null>>(`${ENV.api}/settings/bank-details/${requisite.id}`, requisite).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
+    )
+  }
+
+  deleteRequisite(id: number): Observable<ICommonResponseDto<null>> {
+    return this.http.delete<ICommonResponseDto<null>>(`${ENV.api}/settings/bank-details/${id}`).pipe(
       mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
     )
   }

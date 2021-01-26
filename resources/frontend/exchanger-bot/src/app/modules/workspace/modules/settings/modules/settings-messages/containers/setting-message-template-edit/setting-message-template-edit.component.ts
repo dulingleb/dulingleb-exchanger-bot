@@ -2,7 +2,7 @@ import { FormControl, FormGroup } from '@angular/forms'
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { finalize, mergeMap, takeUntil } from 'rxjs/operators'
-import { Subject } from 'rxjs'
+import { of, Subject } from 'rxjs'
 
 import { SettingApiService } from '@core/api'
 import { IUiFacade, UI_FACADE } from '@core/features'
@@ -36,7 +36,10 @@ export class SettingMessageTemplateEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
-      mergeMap((params: ParamMap) => this.settingApiService.getMessageTemplate(+params.get('id'))),
+      mergeMap((params: ParamMap) => {
+        const id = +params.get('id')
+        return id ? this.settingApiService.getMessageTemplate(id) : of({} as ISettingMessageDto)
+      }),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
@@ -67,7 +70,18 @@ export class SettingMessageTemplateEditComponent implements OnInit, OnDestroy {
       text
     }
 
-    this.settingApiService.updateMessageTemplate(message).subscribe(
+    this.message.id
+      ? this.updateMessageTemplate(message)
+      : this.addMessageTemplate(message)
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next()
+    this.destroy$.complete()
+  }
+
+  private addMessageTemplate(message: ISettingMessageDto): void {
+    this.settingApiService.addMessageTemplate(message).subscribe(
       (res) => {
         this.router.navigateByUrl('/settings/messages')
         this.uiFacade.addInfoNotification(res.message)
@@ -76,9 +90,14 @@ export class SettingMessageTemplateEditComponent implements OnInit, OnDestroy {
     )
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next()
-    this.destroy$.complete()
+  private updateMessageTemplate(message: ISettingMessageDto): void {
+    this.settingApiService.updateMessageTemplate(message).subscribe(
+      (res) => {
+        this.router.navigateByUrl('/settings/messages')
+        this.uiFacade.addInfoNotification(res.message)
+      },
+      (err) => this.uiFacade.addErrorNotification(err.message)
+    )
   }
 
 }

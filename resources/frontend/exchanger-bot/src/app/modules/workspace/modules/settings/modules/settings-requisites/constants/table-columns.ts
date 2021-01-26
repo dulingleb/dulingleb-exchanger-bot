@@ -1,16 +1,16 @@
 import { EUserRoleDto } from '@core/features'
-import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, ISettingMessageDto, ITableColumn } from '@core/models'
+import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, ISettingRequisiteDto, ITableColumn } from '@core/models'
 
 export const TABLE_COLUMNS: ITableColumn[] = [
   {
     name: 'title',
-    nameI18n: 'settings.messages.table.title',
+    nameI18n: 'settings.requisites.table.title',
     type: ETableColumnType.STRING,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
   {
-    name: 'slug',
-    nameI18n: 'settings.messages.table.slug',
+    name: 'status',
+    nameI18n: 'settings.requisites.table.status',
     type: ETableColumnType.STRING,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
@@ -19,9 +19,9 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     nameI18n: 'table.action.info',
     type: ETableColumnType.STRING,
     actionData: {
-      link: (message: ISettingMessageDto): string => `/settings/messages/${message?.slug}/edit`,
+      link: (requisite: ISettingRequisiteDto): string => `/settings/requisites/${requisite?.id}/info`,
       actionType: ETableColumnActionType.LINK,
-      eventType: ETableColumnActionEventType.EDIT
+      eventType: ETableColumnActionEventType.INFO
     },
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
@@ -30,8 +30,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     nameI18n: 'table.action.edit',
     type: ETableColumnType.STRING,
     actionData: {
-      icon: 'backup_table',
-      link: (message: ISettingMessageDto): string => `/settings/messages/template/${message?.id}/edit`,
+      link: (requisite: ISettingRequisiteDto): string => `/settings/requisites/${requisite?.id}/edit`,
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.EDIT
     },

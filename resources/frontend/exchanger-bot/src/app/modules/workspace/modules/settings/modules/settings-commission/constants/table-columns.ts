@@ -1,16 +1,22 @@
 import { EUserRoleDto } from '@core/features'
-import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, ISettingMessageDto, ITableColumn } from '@core/models'
+import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, ISettingCommissionDto, ITableColumn } from '@core/models'
 
 export const TABLE_COLUMNS: ITableColumn[] = [
   {
-    name: 'title',
-    nameI18n: 'settings.messages.table.title',
+    name: 'from',
+    nameI18n: 'settings.commissions.table.from',
     type: ETableColumnType.STRING,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
   {
-    name: 'slug',
-    nameI18n: 'settings.messages.table.slug',
+    name: 'to',
+    nameI18n: 'settings.commissions.table.to',
+    type: ETableColumnType.STRING,
+    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+  },
+  {
+    name: 'percent',
+    nameI18n: 'settings.commissions.table.percent',
     type: ETableColumnType.STRING,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
@@ -19,9 +25,9 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     nameI18n: 'table.action.info',
     type: ETableColumnType.STRING,
     actionData: {
-      link: (message: ISettingMessageDto): string => `/settings/messages/${message?.slug}/edit`,
+      link: (commission: ISettingCommissionDto): string => `/settings/commissions/${commission?.id}/info`,
       actionType: ETableColumnActionType.LINK,
-      eventType: ETableColumnActionEventType.EDIT
+      eventType: ETableColumnActionEventType.INFO
     },
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
@@ -30,8 +36,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     nameI18n: 'table.action.edit',
     type: ETableColumnType.STRING,
     actionData: {
-      icon: 'backup_table',
-      link: (message: ISettingMessageDto): string => `/settings/messages/template/${message?.id}/edit`,
+      link: (commission: ISettingCommissionDto): string => `/settings/commissions/${commission?.id}/edit`,
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.EDIT
     },

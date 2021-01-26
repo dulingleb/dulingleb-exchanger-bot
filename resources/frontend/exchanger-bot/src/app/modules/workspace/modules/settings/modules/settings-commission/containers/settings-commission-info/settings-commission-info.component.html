@@ -1,0 +1,22 @@
+<app-page-content>
+  <ng-container header>
+    {{ 'settings.commissions.info.pageTitle' | translate }}
+  </ng-container>
+  <ng-container actions>
+    <a mat-raised-button color="primary" [routerLink]="['/settings/commissions', commission?.id, 'edit']">
+      <mat-icon>edit</mat-icon>
+      <span>{{ 'settings.commissions.info.editBtn' | translate }}</span>
+    </a>
+  </ng-container>
+  <ng-container content>
+    <h3>{{ 'settings.commissions.edit.input.from' | translate }}</h3>
+    <p><i>{{ commission?.from }}</i></p>
+
+    <h3>{{ 'settings.commissions.edit.input.to' | translate }}</h3>
+    <p><i>{{ commission?.to }}</i></p>
+
+    <h3>{{ 'settings.commissions.edit.input.percent' | translate }}</h3>
+    <p><i>{{ commission?.percent }} %</i></p>
+
+  </ng-container>
+</app-page-content>

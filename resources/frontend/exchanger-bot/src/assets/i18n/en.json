@@ -1,7 +1,7 @@
 {
   "info": {
     "copyright": "© 2020-{{year}} Created by Andrey Lebedev, Gleb Dulin",
-    "app-name": "bot"
+    "appName": "bot"
   },
   "common": {
     "name": "Имя",
@@ -12,7 +12,7 @@
       "2": "Администратор"
     }
   },
-  "side-nav": {
+  "sideNav": {
     "dashboard": "Доска",
     "admins": "Администраторы",
     "users": "Пользователи",
@@ -29,14 +29,14 @@
   "confirm": {
     "ok": "Да",
     "cancel": "Отмена",
-    "delete-modal": {
+    "deleteModal": {
       "title": "Удаление {{titleKey}}",
       "message": "Вы действительно хотите удалить {{messageKey}}"
     }
   },
   "table": {
     "filter": {
-      "show-filter": "Показать фильтр",
+      "showFilter": "Показать фильтр",
       "done": "Показать",
       "clear": "Очистить"
     },
@@ -54,10 +54,10 @@
     "error": {
       "email": "Некорректный Email",
       "password": "Некорректный пароль",
-      "email-required": "Введите Email",
-      "password-required": "Введите пароль"
+      "emailRequired": "Введите Email",
+      "passwordRequired": "Введите пароль"
     },
-    "login-btn": "Вход"
+    "loginBtn": "Вход"
   },
   "admins": {
     "tableHeader": {
@@ -208,6 +208,59 @@
         "new": {
           "pageTitle": "Создание шаблона сообщения"
         }
+      }
+    },
+    "commissions": {
+      "tableHeader": {
+        "title": "Комиссии",
+        "addBtn": "Добавить"
+      },
+      "table": {
+        "from": "От",
+        "to": "До",
+        "percent": "Процент"
+      },
+      "edit": {
+        "pageTitle": "Редактирование комиссии",
+        "input": {
+          "from": "От, btc",
+          "to": "До, btc",
+          "percent": "Комиссия, %"
+        },
+        "saveBtn": "Сохранить"
+      },
+      "info": {
+        "pageTitle": "Комиссия",
+        "editBtn": "Редактировать"
+      },
+      "new": {
+        "pageTitle": "Добавление комиссии"
+      }
+    },
+    "requisites": {
+      "tableHeader": {
+        "title": "Реквизиты",
+        "addBtn": "Добавить"
+      },
+      "table": {
+        "title": "Банк",
+        "status": "Статус"
+      },
+      "edit": {
+        "pageTitle": "Редактирование реквезита",
+        "input": {
+          "title": "Заголовок",
+          "text": "Подробности",
+          "status": "Показывать"
+        },
+        "saveBtn": "Сохранить"
+      },
+      "info": {
+        "pageTitle": "Реквизит",
+        "editBtn": "Редактировать"
+      },
+      "new": {
+        "pageTitle": "Добавление реквезита"
       }
     }
   }

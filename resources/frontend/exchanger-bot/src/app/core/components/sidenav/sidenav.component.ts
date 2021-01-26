@@ -4,7 +4,7 @@ import { Component, Inject } from '@angular/core'
 import { IUserFacade, USER_FACADE } from '@core/features'
 
 @Component({
-  selector: 'app-sidenav',
+  selector: 'app-side-nav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

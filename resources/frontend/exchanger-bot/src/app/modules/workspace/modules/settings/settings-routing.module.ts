@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       { path: 'common', loadChildren: () => import('./modules/settings-common').then(m => m.SettingsCommonModule) },
       { path: 'messages', loadChildren: () => import('./modules/settings-messages').then(m => m.SettingsMessagesModule) },
-      { path: 'commission', loadChildren: () => import('./modules/settings-commission').then(m => m.SettingsCommissionModule) },
+      { path: 'commissions', loadChildren: () => import('./modules/settings-commission').then(m => m.SettingsCommissionModule) },
       { path: 'requisites', loadChildren: () => import('./modules/settings-requisites').then(m => m.SettingsRequisitesModule) },
     ]
   },

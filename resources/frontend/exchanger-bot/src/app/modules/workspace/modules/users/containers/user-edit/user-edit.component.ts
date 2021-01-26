@@ -54,6 +54,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 
     const userData: ITelegramUserDataDto = {
       id: this.user.id,
+      discount,
       comment,
       ban,
     }

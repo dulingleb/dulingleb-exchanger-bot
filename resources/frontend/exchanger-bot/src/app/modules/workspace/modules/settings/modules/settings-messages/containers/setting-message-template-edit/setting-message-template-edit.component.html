@@ -1,6 +1,6 @@
 <app-page-content>
   <ng-container header>
-    {{ message?.id ? 'settings.messages.template.edit.pageTitle' : 'settings.messages.template.new.pageTitle' | translate }} <i>{{ message?.title }}</i>
+    {{ (message?.id ? 'settings.messages.template.edit.pageTitle' : 'settings.messages.template.new.pageTitle') | translate }} <i>{{ message?.title }}</i>
   </ng-container>
   <ng-container content>
     <form [formGroup]="form" (ngSubmit)="save()" class="form">

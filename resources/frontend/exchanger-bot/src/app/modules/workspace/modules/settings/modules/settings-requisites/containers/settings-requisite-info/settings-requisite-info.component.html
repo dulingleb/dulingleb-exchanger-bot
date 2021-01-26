@@ -1,0 +1,21 @@
+<app-page-content>
+  <ng-container header>
+    {{ 'settings.requisites.info.pageTitle' | translate }} <i>{{ requisite?.title }}</i>
+  </ng-container>
+  <ng-container actions>
+    <a mat-raised-button color="primary" [routerLink]="['/settings/requisites', requisite?.id, 'edit']">
+      <mat-icon>edit</mat-icon>
+      <span>{{ 'settings.requisites.info.editBtn' | translate }}</span>
+    </a>
+  </ng-container>
+  <ng-container content>
+    <h3>{{ 'settings.requisites.edit.input.title' | translate }}</h3>
+    <p><i>{{ requisite?.title }}</i></p>
+
+    <h3>{{ 'settings.requisites.edit.input.text' | translate }}</h3>
+    <p><i>{{ requisite?.text }}</i></p>
+
+    <h3>{{ 'settings.requisites.edit.input.status' | translate }}</h3>
+    <p><i>{{ 'common.roles.' + requisite?.status }}</i></p>
+  </ng-container>
+</app-page-content>

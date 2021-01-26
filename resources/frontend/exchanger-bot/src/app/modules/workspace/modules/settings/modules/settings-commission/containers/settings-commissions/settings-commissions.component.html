@@ -1,19 +1,19 @@
 <app-page-content-table
                         [tableColumns]="tableColumns"
-                        [inRequest]="inRequest" [items]="messages"
+                        [inRequest]="inRequest" [items]="commissions"
                         [filterFields]="filterFields"
                         [paginator]="paginator"
-                        (getList)="getSettingMessageList($event)"
+                        (getList)="getSettingCommissionList($event)"
                         (eventData)="setEventData($event)"
 >
   <ng-container table-title>
-    {{ 'settings.messages.tableHeader.title' | translate }}
+    {{ 'settings.commissions.tableHeader.title' | translate }}
   </ng-container>
 
   <ng-container table-actions>
-    <a mat-raised-button color="primary" disableRipple="true" class="nav-link" routerLink="/settings/messages/template/new">
+    <a mat-raised-button color="primary" disableRipple="true" class="nav-link" routerLink="/settings/commissions/new">
       <mat-icon>add</mat-icon>
-      <span>{{ 'settings.messages.tableHeader.addBtn' | translate }}</span>
+      <span>{{ 'settings.commissions.tableHeader.addBtn' | translate }}</span>
    </a>
   </ng-container>
 </app-page-content-table>

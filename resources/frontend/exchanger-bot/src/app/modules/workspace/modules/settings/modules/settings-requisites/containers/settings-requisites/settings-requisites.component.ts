@@ -1,22 +1,23 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import { Inject } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { filter, finalize, mergeMap, takeUntil, tap, withLatestFrom } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
-import { AdminApiService } from '@core/api'
-import { EUserRoleDto, IUiFacade, IUserFacade, IUserInDto, UI_FACADE, USER_FACADE } from '@core/features'
-import { ETableColumnActionEventType, IRequestApiDto, ITableActionEvent } from '@core/models'
-import { IFilterField, IPaginator, ConfirmModalService, IConfirmModal } from '@ui/index'
+import { ETableColumnActionEventType, IRequestApiDto, ISettingRequisiteDto, ITableActionEvent } from '@core/models'
+import { EUserRoleDto, IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
+import { ConfirmModalService, IConfirmModal, IFilterField, IPaginator } from '@ui/index'
+import { SettingApiService } from '@core/api'
 
 import { TABLE_COLUMNS } from '../../constants/table-columns'
 
 @Component({
-  selector: 'app-admins',
-  templateUrl: './admins.component.html',
+  selector: 'app-settings-requisites',
+  templateUrl: './settings-requisites.component.html'
 })
-export class AdminsComponent implements OnInit, OnDestroy {
+export class SettingsRequisitesComponent implements OnInit, OnDestroy {
 
   currentUserRole: EUserRoleDto = EUserRoleDto.ADMIN // TODO: User role
-  users: IUserInDto[] = []
+  requisites: ISettingRequisiteDto[] = []
   inRequest: boolean
 
   paginator: IPaginator
@@ -31,23 +32,23 @@ export class AdminsComponent implements OnInit, OnDestroy {
     @Inject(USER_FACADE) public userFacade: IUserFacade,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
     private confirmModalService: ConfirmModalService,
-    private adminApiService: AdminApiService,
+    private settingApiService: SettingApiService,
   ) {}
 
   ngOnInit(): void {
     this.initFilterFields()
   }
 
-  getAdminList(requestApiQuery: IRequestApiDto = this.requestApiQuery): void {
+  getSettingRequisiteList(requestApiQuery: IRequestApiDto = this.requestApiQuery): void {
     this.requestApiQuery = requestApiQuery
     this.inRequest = true
-    this.adminApiService.getList(requestApiQuery).pipe(
+    this.settingApiService.getRequisiteList(requestApiQuery).pipe(
       withLatestFrom(this.userFacade.user$),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
       ([res, user]) => { // TODO: User role
-        this.users = res.data
+        this.requisites = res.data
         this.paginator = {
           length: res.total,
           page: res.currentPage,
@@ -62,33 +63,34 @@ export class AdminsComponent implements OnInit, OnDestroy {
   }
 
   setEventData(eventData: ITableActionEvent): void {
-    if (eventData.event === ETableColumnActionEventType.DELETE) { this.deleteUser(eventData.data) }
+    if (eventData.event === ETableColumnActionEventType.DELETE) { this.deleteRequisite(eventData.data) }
   }
+
 
   ngOnDestroy(): void {
     this.destroy$.next()
     this.destroy$.complete()
   }
 
-  protected deleteUser(user: IUserInDto): void {
+  protected deleteRequisite(requisite: ISettingRequisiteDto): void {
     const data: IConfirmModal = {
       titleI18n: 'confirm.deleteModal.title',
-      titleKeyI18n: user.name,
+      titleKeyI18n: requisite.id,
       messageI18n: 'confirm.deleteModal.message',
-      messageKeyI18n: `${user.name} (${user.email})`,
+      messageKeyI18n: `${requisite.id} (${requisite.id})`,
       confirmBtn: true,
       cancelBtn: true
     }
     this.confirmModalService.openDialog(data).pipe(
       filter(res => res),
       tap(() => this.inRequest = true),
-      mergeMap(() => this.adminApiService.deleteUser(user.id)),
+      mergeMap(() => this.settingApiService.deleteRequisite(requisite.id)),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
       () => {
-        this.users = this.users.filter(u => u.id !== user.id)
-        this.getAdminList()
+        this.requisites = this.requisites.filter(m => m.id !== requisite.id)
+        this.getSettingRequisiteList()
       },
       (err) => {
         this.uiFacade.addErrorNotification(err.message)
@@ -99,12 +101,12 @@ export class AdminsComponent implements OnInit, OnDestroy {
   protected initFilterFields(): void {
     this.filterFields = [
       {
-        labelI18n: 'admins.table.name',
-        name: 'name'
+        labelI18n: 'settings.requisites.table.title',
+        name: 'title'
       },
       {
-        labelI18n: 'admins.table.email',
-        name: 'email'
+        labelI18n: 'settings.requisites.table.status',
+        name: 'status'
       }
     ]
   }
