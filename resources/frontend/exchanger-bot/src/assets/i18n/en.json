@@ -61,7 +61,7 @@
   },
   "admins": {
     "tableHeader": {
-      "add-btn": "Добавить",
+      "addBtn": "Добавить",
       "title": "Администраторы"
     },
     "table": {
@@ -99,7 +99,7 @@
   },
   "users": {
     "tableHeader": {
-      "add-btn": "Добавить",
+      "addBtn": "Добавить",
       "title": "Пользователи"
     },
     "table": {
@@ -181,6 +181,15 @@
       "pageTitle": "Ключи coinbase",
       "coinbaseKey": "Key",
       "coinbaseSecret": "Secret"
+    },
+    "messages": {
+      "tableHeader": {
+        "title": "Сообщения",
+        "addBtn": "Добавить"
+      },
+      "table": {
+        "title": "Сообщение"
+      }
     }
   }
 }

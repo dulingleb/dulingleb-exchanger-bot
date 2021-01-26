@@ -6,15 +6,21 @@ import { Observable, of, throwError } from 'rxjs'
 import { ENV } from '@env/environment'
 import {
   ICommonResponseDto,
+  IRequestApiDto,
+  IResponseApiInDto,
+  IResponseApiOutDto,
   ISettingInDto,
   ISettingKeysInDto,
   ISettingKeysOutDto,
   ISettingLimitInDto,
   ISettingLimitOutDto,
+  ISettingMessageDto,
   ISettingOutDto,
   ISettingTelegramInDto,
   ISettingTelegramOutDto
 } from '@core/models'
+import { apiQueryToParams, operationOutToInDto } from '@utils/index'
+import { EFilterUserInOut } from '@core/features'
 
 @Injectable({
   providedIn: 'root',
@@ -61,6 +67,17 @@ export class SettingApiService {
     return this.http.patch<ICommonResponseDto<ISettingOutDto>>(`${ENV.api}/settings/set/coinbase-key`, data).pipe(
       mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data }) => this.settingOutToInDto(data))
+    )
+  }
+
+  getMessageList(apiQuery: IRequestApiDto): Observable<IResponseApiInDto<ISettingMessageDto[]>> {
+    const params = apiQueryToParams(apiQuery, EFilterUserInOut)
+    return this.http.get<ICommonResponseDto<IResponseApiOutDto<ISettingMessageDto[]>>>(`${ENV.api}/settings/messages`, { params }).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data: res }) => ({
+        ...operationOutToInDto(res),
+        sort: apiQuery.sort
+      }))
     )
   }
 

@@ -1,35 +1,3 @@
-export interface ISettingOutDto {
-  id: number;
-  username: string;
-  coinbase_key: string;
-  coinbase_secret: string;
-  course: number;
-  max_exchange: number;
-  min_exchange: number;
-  status: number;
-  telegram_token: string;
-  user_id: number;
-  created_at: Date;
-  updated_at: Date;
-  deleted_at: Date;
-}
-
-export interface ISettingInDto {
-  id: number;
-  username: string;
-  coinbaseKey: string;
-  coinbaseSecret: string;
-  course: number;
-  maxExchange: number;
-  minExchange: number;
-  status: number;
-  telegramToken: string;
-  userId: number;
-  updatedAt: Date;
-  createdAt: Date;
-  deletedAt: Date;
-}
-
 export interface ISettingLimitOutDto {
   course: number;
   max_exchange: number;
@@ -60,4 +28,27 @@ export interface ISettingKeysOutDto {
 export interface ISettingKeysInDto {
   coinbaseKey: string;
   coinbaseSecret: string;
+}
+
+export interface ISettingOutDto extends ISettingLimitOutDto, ISettingTelegramOutDto, ISettingKeysOutDto {
+  id: number;
+  status: number;
+  user_id: number;
+  created_at: Date;
+  updated_at: Date;
+  deleted_at: Date;
+}
+
+export interface ISettingInDto extends ISettingLimitInDto, ISettingTelegramInDto, ISettingKeysInDto {
+  id: number;
+  status: number;
+  userId: number;
+  updatedAt: Date;
+  createdAt: Date;
+  deletedAt: Date;
+}
+
+export interface ISettingMessageDto {
+  id: number;
+  title: string;
 }

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { SettingsMessagesComponent } from './settings-messages.component'
+import { SettingMessagesComponent } from './containers'
 
-const routes: Routes = [ { path: '', component: SettingsMessagesComponent } ]
+const routes: Routes = [ { path: '', component: SettingMessagesComponent } ]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
