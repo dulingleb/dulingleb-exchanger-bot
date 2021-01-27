@@ -18,6 +18,7 @@ class BankDetailController extends Controller
     {
         $bankDetails = QueryBuilder::for(BankDetail::class)
             ->allowedSorts(['title', 'status'])
+            ->allowedFilters(['title', 'status'])
             ->select(['id', 'title', 'status'])
             ->where('exchanger_id', auth()->user()->exchanger->id)
             ->jsonPaginate();
@@ -42,7 +43,7 @@ class BankDetailController extends Controller
             'exchanger_id' => auth()->user()->exchanger->id,
             'title' => $request->title,
             'text' => $request->text,
-            'status' => isset($request->status) ? 1 : 0
+            'status' => $request->status ? 1 : 0
         ]);
 
         return $this->response($bankDetail, 'Реквизиты успешно добавлены');
@@ -78,7 +79,7 @@ class BankDetailController extends Controller
 
         $bankDetail->title = $request->title;
         $bankDetail->text = $request->text;
-        $bankDetail->status = isset($request->status) ? 1 : 0;
+        $bankDetail->status = $request->status ? 1 : 0;
         $bankDetail->save();
 
         return $this->response($bankDetail, 'Реквизиты успешно сохранены');

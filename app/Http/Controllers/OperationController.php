@@ -17,7 +17,7 @@ class OperationController extends Controller
         $operations = QueryBuilder::for(Operation::class)
             ->with('telegram_user')
             ->allowedSorts([AllowedSort::field('id', 'operations.id'), 'status', 'amount', 'price'])
-            ->defaultSort('operations.id')
+            ->defaultSort('-operations.id')
             ->allowedFilters([
                 AllowedFilter::scope('user_id', 'telegram_user_id'),
                 AllowedFilter::scope('user', 'telegram_user'),
