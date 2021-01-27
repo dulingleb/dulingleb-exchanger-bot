@@ -7,7 +7,9 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { ReactiveFormsModule } from '@angular/forms'
 
-import { ConfirmModalModule, PageContentLayoutModule, PageContentTableModule } from '@ui/index'
+import { ConfirmModalModule } from '@ui/confirm-modal'
+import { PageContentTableModule } from '@ui/page-content-table'
+import { PageContentLayoutModule } from '@ui/page-content-layout'
 
 import { AdminEditComponent, AdminInfoComponent, AdminsComponent } from './containers'
 import { AdminsRoutingModule } from './admins-routing.module'

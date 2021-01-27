@@ -3,9 +3,9 @@ import { takeUntil, withLatestFrom } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 import { EUserRoleDto, IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
-import { IFilterField, IPaginator } from '@ui/index'
-import { TelegramUserApiService } from '@core/api'
+import { IPaginator, IFilterField } from '@ui/table-filter-paginator'
 import { IRequestApiDto, ITelegramUserInDto } from '@core/models'
+import { TelegramUserApiService } from '@core/api'
 
 import { TABLE_COLUMNS } from '../../constants/table-columns'
 

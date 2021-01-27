@@ -5,7 +5,8 @@ import { Subject } from 'rxjs'
 import { AdminApiService } from '@core/api'
 import { EUserRoleDto, IUiFacade, IUserFacade, IUserInDto, UI_FACADE, USER_FACADE } from '@core/features'
 import { ETableColumnActionEventType, IRequestApiDto, ITableActionEvent } from '@core/models'
-import { IFilterField, IPaginator, ConfirmModalService, IConfirmModal } from '@ui/index'
+import { ConfirmModalService, IConfirmModal } from '@ui/confirm-modal'
+import { IPaginator, IFilterField } from '@ui/table-filter-paginator'
 
 import { TABLE_COLUMNS } from '../../constants/table-columns'
 

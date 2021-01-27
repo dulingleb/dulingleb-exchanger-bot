@@ -1,0 +1,35 @@
+$iconSize: 55px;
+$blockH: 165px;
+
+.app-container {
+  height: $blockH;
+  display: flex;
+
+  .mat-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .mat-card-actions {
+      margin-top: auto;
+    }
+  }
+}
+
+.mat-card-header {
+  display: flex;
+  justify-content: space-between;
+
+  .icon-block {
+    .icon-wrapper {
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: $iconSize;
+      min-width: $iconSize;
+      height: $iconSize;
+      border-radius: 50%;
+    }
+  }
+}

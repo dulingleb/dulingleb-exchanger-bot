@@ -8,7 +8,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatInputModule } from '@angular/material/input'
 import { ReactiveFormsModule } from '@angular/forms'
 
-import { PageContentLayoutModule, PageContentTableModule } from '@ui/index'
+import { PageContentLayoutModule } from '@ui/page-content-layout'
+import { PageContentTableModule } from '@ui/page-content-table'
 
 import { UserEditComponent, UsersComponent } from './containers'
 import { UsersRoutingModule } from './users-routing.module'

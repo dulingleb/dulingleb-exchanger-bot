@@ -7,7 +7,8 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatInputModule } from '@angular/material/input'
 import { ReactiveFormsModule } from '@angular/forms'
 
-import { PageContentLayoutModule, PageContentTableModule } from '@ui/index'
+import { PageContentLayoutModule } from '@ui/page-content-layout'
+import { PageContentTableModule } from '@ui/page-content-table'
 
 import { OperationInfoComponent, OperationsComponent } from './containers'
 import { OperationsRoutingModule } from './operations-routing.module'

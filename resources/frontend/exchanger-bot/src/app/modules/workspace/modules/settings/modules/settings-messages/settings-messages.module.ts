@@ -8,7 +8,9 @@ import { MatInputModule } from '@angular/material/input'
 import { TranslateModule } from '@ngx-translate/core'
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular'
 
-import { ConfirmModalModule, PageContentTableModule, PageContentLayoutModule } from '@ui/index'
+import { ConfirmModalModule } from '@ui/confirm-modal'
+import { PageContentTableModule } from '@ui/page-content-table'
+import { PageContentLayoutModule } from '@ui/page-content-layout'
 
 import { SettingMessageEditComponent, SettingMessagesComponent, SettingMessageTemplateEditComponent } from './containers'
 import { SettingsMessagesRoutingModule } from './settings-messages-routing.module'

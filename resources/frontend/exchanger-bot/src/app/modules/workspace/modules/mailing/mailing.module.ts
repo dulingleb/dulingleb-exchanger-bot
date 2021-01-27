@@ -10,7 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular'
 
-import { PageContentLayoutModule } from '@ui/index'
+import { PageContentLayoutModule } from '@ui/page-content-layout'
 
 import { MailingComponent } from './mailing.component'
 import { MailingRoutingModule } from './mailing-routing.module'

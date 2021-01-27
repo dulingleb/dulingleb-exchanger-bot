@@ -3,7 +3,7 @@ import { debounceTime, takeUntil } from 'rxjs/operators'
 import { BehaviorSubject, Subject } from 'rxjs'
 
 import { IUserFacade, USER_FACADE } from '@core/features'
-import { IFilterField, IFilterValues, IPaginator } from '@ui/index'
+import { IFilterField, IFilterValues, IPaginator } from '@ui/table-filter-paginator'
 import { IRequestApiDto, ISortEvent, ITableActionEvent, ITableColumn } from '@core/models'
 
 @Component({

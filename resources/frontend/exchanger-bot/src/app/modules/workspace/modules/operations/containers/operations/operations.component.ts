@@ -1,11 +1,12 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import { finalize, takeUntil, withLatestFrom } from 'rxjs/operators'
+import { Subject } from 'rxjs'
 
-import { OperationApiService } from '@core/api'
+import { IPaginator, IFilterField } from '@ui/table-filter-paginator'
 import { EUserRoleDto, IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
 import { IOperationInDto, IRequestApiDto } from '@core/models'
-import { IFilterField, IPaginator } from '@ui/index'
-import { Subject } from 'rxjs'
-import { finalize, takeUntil, withLatestFrom } from 'rxjs/operators'
+import { OperationApiService } from '@core/api'
+
 import { TABLE_COLUMNS } from '../../constants/table-columns'
 
 @Component({

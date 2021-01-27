@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button'
 import { MatFormFieldModule } from '@angular/material/form-field'
 
-import { PageContentLayoutModule } from '@ui/index'
+import { PageContentLayoutModule } from '@ui/page-content-layout'
 
 import { SettingsCommonComponent } from './containers'
 import { SettingsCommonRoutingModule } from './settings-common-routing.module'

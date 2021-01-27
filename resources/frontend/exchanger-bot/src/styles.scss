@@ -56,6 +56,12 @@ mat-cell {
       width: 100%;
     }
   }
+
+  &.clear-btn {
+    .mat-button-wrapper {
+      padding: 0;
+    }
+  }
 }
 
 .app-side-nav {
@@ -140,4 +146,12 @@ mat-cell {
 
 ckeditor .ck-content {
   background: transparent !important;
+}
+
+.mat-card {
+  .mat-card-header {
+    .mat-card-header-text {
+      display: none;
+    }
+  }
 }

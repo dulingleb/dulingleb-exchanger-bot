@@ -1,0 +1,18 @@
+<section class="app-container">
+  <mat-card>
+    <mat-card-header>
+      <div class="info-block">
+        <mat-card-title>{{ blockNameI18n | translate }}</mat-card-title>
+        <mat-card-subtitle>{{ blockInfo }}</mat-card-subtitle>
+      </div>
+      <div class="icon-block">
+        <button mat-raised-button color="primary" class="clear-btn icon-wrapper">
+          <mat-icon>{{ icon || 'query_stats' }}</mat-icon>
+        </button>
+      </div>
+    </mat-card-header>
+    <mat-card-actions>
+      <ng-content select="[actions]"></ng-content>
+    </mat-card-actions>
+  </mat-card>
+</section>

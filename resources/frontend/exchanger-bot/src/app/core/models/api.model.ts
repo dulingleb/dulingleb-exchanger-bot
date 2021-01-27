@@ -1,4 +1,4 @@
-import { IFilterValues } from '@ui/index'
+import { IFilterValues } from '@ui/table-filter-paginator'
 
 export interface IRequestApiDto {
   page: number;

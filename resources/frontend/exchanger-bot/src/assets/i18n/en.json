@@ -26,6 +26,19 @@
       "requisites": "Реквизиты"
     }
   },
+  "statusInfoBlock": {
+    "status": {
+      "title": "Статус",
+      "inWork": "В работе",
+      "inPause": "На паузе",
+      "stopBtn": "Остановить",
+      "startBtn": "Возобновить"
+    },
+    "users": {
+      "title": "Пользователи",
+      "today": "За сегодня"
+    }
+  },
   "confirm": {
     "ok": "Да",
     "cancel": "Отмена",
