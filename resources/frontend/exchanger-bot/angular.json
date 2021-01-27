@@ -35,7 +35,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/theme.scss",
+              "src/styles/theme/mat-theme.scss",
               "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
@@ -108,7 +108,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/theme.scss",
+              "src/styles/theme/mat-theme.scss",
               "src/styles.scss"
             ],
             "scripts": []

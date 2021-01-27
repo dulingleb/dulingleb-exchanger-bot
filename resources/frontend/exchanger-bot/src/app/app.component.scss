@@ -4,6 +4,10 @@
   height: 100vh;
   padding-top: $app_header_width;
 
+  * {
+    background-color: var(--bg-color);
+  }
+
   .app-side-nav {
     width: $app_sidenav_size;
   }

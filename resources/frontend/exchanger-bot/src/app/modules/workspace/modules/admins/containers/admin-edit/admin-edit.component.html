@@ -1,6 +1,6 @@
 <app-page-content>
   <ng-container header>
-    {{ user?.id ? 'admin.edit.pageTitle' : 'admin.edit.pageNewTitle' | translate }} <i>{{ user?.name }}</i>
+    {{ (user?.id ? 'admin.edit.pageTitle' : 'admin.edit.pageNewTitle') | translate }} <i>{{ user?.name }}</i>
   </ng-container>
   <ng-container content>
     <form [formGroup]="form" (ngSubmit)="save()" class="form">

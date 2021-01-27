@@ -1,4 +1,5 @@
 @import "./styles/styles";
+@import "./styles/theme/colors";
 
 html, body { height: 100%; }
 
@@ -16,18 +17,10 @@ a, button {
   scrollbar-width: thin;
 }
 
-mat-cell {
-  box-sizing: content-box;
-}
-
 /* width */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-  // background: map-get($map: $gray-palette, $key: 400);
 }
 
 .container {
@@ -42,52 +35,6 @@ mat-cell {
 
 .app-container {
   padding: 1rem;
-}
-
-.mat-button-base {
-  .mat-icon ~ * {
-    margin-left: 1rem;
-  }
-
-  &.three-dots-btn {
-    .mat-button-wrapper {
-      display: flex;
-      align-items: center;
-      width: 100%;
-    }
-  }
-
-  &.clear-btn {
-    .mat-button-wrapper {
-      padding: 0;
-    }
-  }
-}
-
-.app-side-nav {
-  .mat-expansion-panel {
-    .mat-expansion-panel-body {
-      padding: 0;
-    }
-  }
-
-  .mat-list-item {
-    .mat-list-base .mat-list-option .mat-list-item-content {
-      padding: 0;
-
-      .nav-link {
-        padding: 0 1rem;
-      }
-    }
-  }
-
-  .nav-group-item {
-    .mat-expansion-panel-content {
-      .nav-link {
-        padding: 0 1rem 0 1.5rem;
-      }
-    }
-  }
 }
 
 .user-logo {
@@ -107,51 +54,6 @@ mat-cell {
   background: $primary;
 }
 
-.mat-table {
-  .mat-header-row {
-    .action-header-cell {
-      max-width: 40px;
-    }
-  }
-
-  .mat-column-actions, .action-cell {
-    display: flex;
-    justify-content: flex-end;
-
-    max-width: 40px;
-
-    .table-action {
-      mat-icon {
-        width: 19px;
-        height: 19px;
-
-        font-size: 19px;
-        line-height: 19px;
-      }
-    }
-  }
-}
-
-.form-group {
-  padding-bottom: 0.5rem;
-
-  .mat-form-field {
-    display: block;
-  }
-
-  .mat-slide-toggle {
-    margin-bottom: 0.5rem;
-  }
-}
-
 ckeditor .ck-content {
   background: transparent !important;
-}
-
-.mat-card {
-  .mat-card-header {
-    .mat-card-header-text {
-      display: none;
-    }
-  }
 }

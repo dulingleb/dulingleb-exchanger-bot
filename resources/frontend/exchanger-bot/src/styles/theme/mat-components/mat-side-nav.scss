@@ -1,0 +1,25 @@
+.app-side-nav {
+  .mat-expansion-panel {
+    .mat-expansion-panel-body {
+      padding: 0;
+    }
+  }
+
+  .mat-list-item {
+    .mat-list-base .mat-list-option .mat-list-item-content {
+      padding: 0;
+
+      .nav-link {
+        padding: 0 1rem;
+      }
+    }
+  }
+
+  .nav-group-item {
+    .mat-expansion-panel-content {
+      .nav-link {
+        padding: 0 1rem 0 1.5rem;
+      }
+    }
+  }
+}
