@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input'
 import { TranslateModule } from '@ngx-translate/core'
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular'
 
 import { ConfirmModalModule, PageContentTableModule, PageContentLayoutModule } from '@ui/index'
 
@@ -24,6 +25,8 @@ import { SettingsMessagesRoutingModule } from './settings-messages-routing.modul
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+
+    CKEditorModule,
     TranslateModule,
     ReactiveFormsModule,
 

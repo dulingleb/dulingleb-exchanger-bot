@@ -6,10 +6,8 @@
     <form [formGroup]="form" (ngSubmit)="addMessage()" class="form">
 
       <div class="form-group">
-        <mat-form-field appearance="fill">
-          <mat-label>{{ 'mailing.message' | translate }}</mat-label>
-          <textarea formControlName="message" matInput></textarea>
-        </mat-form-field>
+        <label>{{ 'mailing.message' | translate }}</label>
+        <ckeditor formControlName="message" [editor]="Editor" [config]="config"></ckeditor>
       </div>
 
       <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'mailing.send' | translate }}</button>

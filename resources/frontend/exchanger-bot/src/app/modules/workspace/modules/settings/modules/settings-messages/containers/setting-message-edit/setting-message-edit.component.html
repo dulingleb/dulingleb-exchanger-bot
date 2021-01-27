@@ -9,10 +9,8 @@
       <p [innerHTML]="message?.description"></p>
 
       <div class="form-group">
-        <mat-form-field appearance="fill">
-          <mat-label>{{ 'settings.messages.edit.input.text' | translate }}</mat-label>
-          <textarea formControlName="text" matInput></textarea>
-        </mat-form-field>
+        <label>{{ 'settings.messages.edit.input.text' | translate }}</label>
+        <ckeditor formControlName="text" [editor]="Editor" [config]="config"></ckeditor>
       </div>
 
       <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'settings.messages.edit.saveBtn' | translate }}</button>
