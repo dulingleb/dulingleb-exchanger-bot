@@ -56,7 +56,7 @@ class Handler extends ExceptionHandler
             return response()->json(['status' => false, 'message' => 'Not Found!'], 404);
         }
 
-        return response()->json(['status' => false, 'message' => $exception->getMessage(), 'file' => $exception->getFile(), 'line' => $exception->getLine(), 'trace' => $exception->getTrace()], 422);
+        return response()->json(['status' => false, 'message' => $exception->getMessage(), 'file' => $exception->getFile(), 'line' => $exception->getLine(), 'trace' => $exception->getTrace()], $exception->getCode());
         //return parent::prepareJsonResponse($request, $exception);
     }
 }

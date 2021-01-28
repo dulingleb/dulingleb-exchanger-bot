@@ -21,7 +21,7 @@ class TelegramUserController extends Controller
     {
         $users = QueryBuilder::for(TelegramUserSetting::class)
             ->join('telegram_users', 'telegram_users.id', 'telegram_user_settings.telegram_user_id')
-            ->allowedFilters([AllowedFilter::exact('username', 'telegram_users.username'), 'ban'])
+            ->allowedFilters([AllowedFilter::exact('username', 'telegram_users.username'), 'ban', 'discount'])
             ->defaultSort('-telegram_user_settings.created_at')
             ->allowedSorts('operations_count', 'username', 'telegram_user_id', 'operations_sum', AllowedSort::field('created_at', 'telegram_user_settings.created_at'))
             ->select([
