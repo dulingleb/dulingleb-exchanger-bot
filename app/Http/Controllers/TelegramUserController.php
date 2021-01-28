@@ -20,10 +20,15 @@ class TelegramUserController extends Controller
     {
         $users = QueryBuilder::for(TelegramUserSetting::class)
             ->join('telegram_users', 'telegram_users.id', 'telegram_user_settings.telegram_user_id')
-            ->allowedFilters([AllowedFilter::exact('username', 'telegram_users.username'), 'id'])
+            ->allowedFilters([AllowedFilter::exact('username', 'telegram_users.username'), 'ban'])
             ->defaultSort('-operations_count')
             ->allowedSorts('operations_count', 'username', 'telegram_user_id')
-            ->select(['telegram_user_settings.id', 'telegram_user_id', 'exchanger_id', 'telegram_users.username'])
+            ->select([
+                'telegram_user_settings.id',
+                'telegram_user_settings.telegram_user_id',
+                'telegram_user_settings.exchanger_id',
+                'telegram_user_settings.ban',
+                'telegram_users.username'])
             ->addSelect(DB::raw('(SELECT COUNT(*) FROM operations WHERE (operations.telegram_user_id = telegram_user_settings.telegram_user_id) AND (operations.exchanger_id = telegram_user_settings.exchanger_id) AND (operations.status = ' . Operation::STATUS_SUCCESS . ') ) AS operations_count'))
             ->where('telegram_user_settings.exchanger_id', auth()->user()->exchanger->id)
             ->jsonPaginate();
