@@ -12,7 +12,7 @@ class ExchangerCommissionController extends Controller
     public function index(): \Illuminate\Http\JsonResponse
     {
         $commissions = QueryBuilder::for(ExchangerCommission::class)
-            ->allowedSorts(['from', 'percent'])
+            ->allowedSorts(['from', 'to', 'percent'])
             ->select(['id', 'from', 'to', 'percent'])
             ->where('exchanger_id', auth()->user()->exchanger->id)
             ->jsonPaginate();
