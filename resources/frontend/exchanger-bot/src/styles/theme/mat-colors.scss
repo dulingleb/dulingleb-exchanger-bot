@@ -1,13 +1,16 @@
-$dark-primary-text: rgba(black, 0.87);
-$dark-secondary-text: rgba(black, 0.54);
-$dark-disabled-text: rgba(black, 0.38);
-$dark-dividers: rgba(black, 0.12);
-$dark-focused: rgba(black, 0.12);
-$light-primary-text: white;
-$light-secondary-text: rgba(white, 0.7);
-$light-disabled-text: rgba(white, 0.5);
-$light-dividers: rgba(white, 0.12);
-$light-focused: rgba(white, 0.12);
+$dark-base-color: #252525;
+$light-base-color: #d8d8d8;
+
+$dark-primary-text: rgba($dark-base-color, 0.87);
+$dark-secondary-text: rgba($dark-base-color, 0.54);
+$dark-disabled-text: rgba($dark-base-color, 0.38);
+$dark-dividers: rgba($dark-base-color, 0.12);
+$dark-focused: rgba($dark-base-color, 0.12);
+$light-primary-text: $light-base-color;
+$light-secondary-text: rgba($light-base-color, 0.7);
+$light-disabled-text: rgba($light-base-color, 0.5);
+$light-dividers: rgba($light-base-color, 0.12);
+$light-focused: rgba($light-base-color, 0.12);
 
 $mat-primary: (
   50: #ede7f6,

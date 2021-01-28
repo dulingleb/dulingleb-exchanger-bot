@@ -1,35 +1,19 @@
 @import './mat-colors';
 
-$primary: map-get($mat-primary, 500);
-$accent: map-get($mat-accent, 500);
-$warn: map-get($mat-warn, 500);
-
-$primary-dark: map-get($mat-primary-dark, 500);
-$accent-dark: map-get($mat-accent-dark, 500);
-$warn-dark: map-get($mat-warn, 500);
-
-$grey: map-get($mat-grey, 800);
-
-$font-color: $dark-primary-text;
-$font-color-dark: $light-primary-text;
-
-$bg: #fff;
-$bg-dark: $grey;
-
 :root {
-  --primary-color: #{$primary};
-  --accent-color: #{$accent};
-  --warn-color: #{$warn};
-  --font-color: #{$font-color};
-  --bg-color: #{$bg};
-  --grey-color: #{$grey};
+  --primary-color: #{map-get($mat-primary, 500)};
+  --accent-color: #{map-get($mat-accent, 500)};
+  --warn-color: #{map-get($mat-warn, 500)};
+  --font-color: #{$dark-primary-text};
+  --bg-color: #{$light-base-color};
+  --grey-color: #{map-get($mat-grey, 800)};
+  --light-color: #{$light-base-color};
+  --dark-color: #{$dark-base-color};
 }
 
 .dark-mode {
-  --primary-color: #{$primary-dark};
-  --accent-color: #{$accent-dark};
-  --warn-color: #{$warn};
-  --font-color: #{$font-color-dark};
-  --bg-color: #{$bg-dark};
-  --grey-color: #{$grey};
+  --primary-color: #{map-get($mat-primary-dark, 500)};
+  --accent-color: #{map-get($mat-accent-dark, 500)};
+  --font-color: #{$light-primary-text};
+  --bg-color: #{map-get($mat-grey, 800)};
 }

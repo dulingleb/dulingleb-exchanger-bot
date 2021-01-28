@@ -6,6 +6,7 @@ html, body { height: 100%; }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: var(--font-color);
 }
 
 a, button {
@@ -47,11 +48,11 @@ a, button {
   min-width: $logo_size;
   min-height: $logo_size;
 
-  color: $white;
+  color: var(--light-color);
   font-size: 1.3rem;
   text-transform: uppercase;
   border-radius: 50%;
-  background: $primary;
+  background: var(--primary-color);
 }
 
 ckeditor .ck-content {
