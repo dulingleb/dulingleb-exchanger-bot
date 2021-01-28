@@ -2,12 +2,12 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { finalize, takeUntil, withLatestFrom } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
-import { IPaginator, IFilterField } from '@ui/table-filter-paginator'
-import { EUserRoleDto, IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
+import { IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
+import { IPaginator, IFilterField, EFilterType } from '@ui/table-filter-paginator'
 import { IOperationInDto, IRequestApiDto } from '@core/models'
 import { OperationApiService } from '@core/api'
 
-import { TABLE_COLUMNS } from '../../constants/table-columns'
+import { EOperationStatus, OPERATION_CLASS, TABLE_COLUMNS } from '../../constants'
 
 @Component({
   selector: 'app-operations',
@@ -15,7 +15,6 @@ import { TABLE_COLUMNS } from '../../constants/table-columns'
 })
 export class OperationsComponent implements OnInit, OnDestroy {
 
-  currentUserRole: EUserRoleDto = EUserRoleDto.ADMIN
   operations: IOperationInDto[] = []
   inRequest: boolean
 
@@ -68,20 +67,41 @@ export class OperationsComponent implements OnInit, OnDestroy {
   protected initFilterFields(): void {
     this.filterFields = [
       {
-        labelI18n: 'operations.table.id',
-        name: 'id'
-      },
-      {
-        labelI18n: 'operations.table.username',
-        name: 'username'
-      },
-      {
-        labelI18n: 'operations.table.amount',
-        name: 'amount'
-      },
-      {
-        labelI18n: 'operations.table.price',
-        name: 'price'
+        labelI18n: 'operations.table.status',
+        name: 'status',
+        type: EFilterType.SELECT,
+        options: [
+          {
+            value: EOperationStatus.IN_PAY,
+            titleI18n: 'operation.status.' + EOperationStatus.IN_PAY,
+            class: OPERATION_CLASS[EOperationStatus.IN_PAY]
+          },
+          {
+            value: EOperationStatus.SUCCESS,
+            titleI18n: 'operation.status.' + EOperationStatus.SUCCESS,
+            class: OPERATION_CLASS[EOperationStatus.SUCCESS]
+          },
+          {
+            value: EOperationStatus.ERROR,
+            titleI18n: 'operation.status.' + EOperationStatus.ERROR,
+            class: OPERATION_CLASS[EOperationStatus.ERROR]
+          },
+          {
+            value: EOperationStatus.IN_SEND_CHECK,
+            titleI18n: 'operation.status.' + EOperationStatus.IN_SEND_CHECK,
+            class: OPERATION_CLASS[EOperationStatus.IN_SEND_CHECK]
+          },
+          {
+            value: EOperationStatus.ON_CHECK,
+            titleI18n: 'operation.status.' + EOperationStatus.ON_CHECK,
+            class: OPERATION_CLASS[EOperationStatus.ON_CHECK]
+          },
+          {
+            value: EOperationStatus.CANCEL,
+            titleI18n: 'operation.status.' + EOperationStatus.CANCEL,
+            class: OPERATION_CLASS[EOperationStatus.CANCEL]
+          },
+        ]
       }
     ]
   }

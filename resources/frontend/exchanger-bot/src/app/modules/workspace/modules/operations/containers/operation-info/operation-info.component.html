@@ -5,9 +5,6 @@
   <ng-container content>
     <form [formGroup]="form" (ngSubmit)="addComment()" class="form">
 
-      <h3>{{ 'operation.info.user' | translate }}</h3>
-      <p><i>{{ operation?.username || operation?.firstName || operation?.lastName || operation?.telegramUserId }}</i></p>
-
       <h3>{{ 'operation.info.amount' | translate }}</h3>
       <p><i>{{ operation?.amount }}</i></p>
 

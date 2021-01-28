@@ -1,7 +1,7 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
-import { mergeMap, takeUntil } from 'rxjs/operators'
+import { finalize, mergeMap, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 import { TelegramUserApiService } from '@core/api'
@@ -17,6 +17,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   user: ITelegramUserInDto
   form: FormGroup
   showPassword: boolean
+  inRequest: boolean
 
   private destroy$ = new Subject()
 
@@ -36,15 +37,21 @@ export class UserEditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.paramMap.pipe(
       mergeMap((params: ParamMap) => this.telegramUserApiService.getUser(+params.get('id'))),
+      finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
-    ).subscribe(user =>  {
-      this.user = user
-      this.form.patchValue({
-        discount: user.discount,
-        comment: user.comment,
-        ban: user.ban,
-      })
-    })
+    ).subscribe(
+      (user) => {
+        this.user = user
+        this.form.patchValue({
+          discount: user.discount,
+          comment: user.comment,
+          ban: user.ban,
+        })
+      },
+      (err) => {
+        this.uiFacade.addErrorNotification(err.message)
+      }
+    )
   }
 
   save(): void {
@@ -58,7 +65,15 @@ export class UserEditComponent implements OnInit, OnDestroy {
       comment,
       ban,
     }
-    this.telegramUserApiService.updateUser(userData).subscribe(res => this.router.navigateByUrl('/users'))
+    this.telegramUserApiService.updateUser(userData).pipe(
+      finalize(() => this.inRequest = false),
+      takeUntil(this.destroy$)
+    ).subscribe(
+      (res) => this.router.navigateByUrl('/users'),
+      (err) => {
+        this.uiFacade.addErrorNotification(err.message)
+      }
+    )
   }
 
   ngOnDestroy(): void {

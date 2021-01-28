@@ -1,10 +1,10 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
-import { filter, finalize, mergeMap, takeUntil, tap, withLatestFrom } from 'rxjs/operators'
+import { filter, finalize, mergeMap, takeUntil, tap } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
-import { EUserRoleDto, IUiFacade, IUserFacade, IUserInDto, UI_FACADE, USER_FACADE } from '@core/features'
 import { ETableColumnActionEventType, IRequestApiDto, ITableActionEvent } from '@core/models'
+import { IUiFacade, IUserFacade, IUserInDto, UI_FACADE, USER_FACADE } from '@core/features'
 import { ConfirmModalService, IConfirmModal } from '@ui/confirm-modal'
 import { IPaginator, IFilterField } from '@ui/table-filter-paginator'
 
@@ -16,7 +16,6 @@ import { TABLE_COLUMNS } from '../../constants/table-columns'
 })
 export class AdminsComponent implements OnInit, OnDestroy {
 
-  currentUserRole: EUserRoleDto = EUserRoleDto.ADMIN // TODO: User role
   users: IUserInDto[] = []
   inRequest: boolean
 
@@ -43,11 +42,10 @@ export class AdminsComponent implements OnInit, OnDestroy {
     this.requestApiQuery = requestApiQuery
     this.inRequest = true
     this.adminApiService.getList(requestApiQuery).pipe(
-      withLatestFrom(this.userFacade.user$),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      ([res, user]) => { // TODO: User role
+      (res) => {
         this.users = res.data
         this.paginator = {
           length: res.total,
@@ -56,7 +54,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
         }
       },
       (err) => {
-        this.userFacade.logout()
+        // this.userFacade.logout()
         this.uiFacade.addErrorNotification(err.message)
       }
     )

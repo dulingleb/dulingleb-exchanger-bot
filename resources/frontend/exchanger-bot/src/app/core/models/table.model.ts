@@ -2,8 +2,11 @@ import { EUserRoleDto } from '../features/user'
 
 export interface ITableColumn {
   name: string;
+  value?: (...args: any) => string;
   nameI18n: string;
   type: ETableColumnType;
+  icon?: (...args: any) => string;
+  class?: (...args: any) => string;
   allowedForRoles: EUserRoleDto[];
   translate?: (...args: any) => string;
   actionData?: {

@@ -5,7 +5,7 @@ import { Subject } from 'rxjs'
 
 import { ISettingInDto } from '@core/models'
 import { SettingApiService } from '@core/api'
-import { EUserRoleDto, IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
+import { IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
 
 @Component({
   selector: 'app-settings-common',
@@ -13,7 +13,6 @@ import { EUserRoleDto, IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@c
 })
 export class SettingsCommonComponent implements OnInit, OnDestroy {
 
-  currentUserRole: EUserRoleDto = EUserRoleDto.ADMIN
   formLimits: FormGroup
   formTelegram: FormGroup
   formKeys: FormGroup

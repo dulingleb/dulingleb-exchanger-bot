@@ -1,9 +1,14 @@
 <mat-nav-list class="app-side-nav">
   <mat-list-item class="nav-item user-profile-nav-item">
-    <a mat-button disableRipple="true" class="nav-link three-dots-btn" [routerLink]="['admins', (userFacade.user$ | async)?.id, 'info']">
+    <a mat-button disableRipple="true" class="nav-link three-dots-btn" routerLink="/profile">
       <span class="mat-button-wrapper">
-        <span class="user-logo">{{ userFacade.user$ | async | logoName }}</span>
-        <span class="fio">{{ (userFacade.user$ | async)?.name }}</span>
+        <span class="info-wrapper">
+          <span class="user-logo">{{ userFacade.user$ | async | logoName }}</span>
+          <span class="fio">{{ (userFacade.user$ | async)?.name }}</span>
+        </span>
+        <span class="subscription-wrapper" [title]="'sideNav.userInfo.hoverTitle' | translate">
+          <span class="subscription">{{ 'sideNav.userInfo.subscription' | translate: { days: 7 } }}</span>
+        </span>
       </span>
     </a>
  </mat-list-item>
@@ -14,7 +19,7 @@
      <span>{{ 'sideNav.dashboard' | translate }}</span>
   </a>
 </mat-list-item>
-  <mat-list-item class="nav-item">
+  <mat-list-item class="nav-item" *ngIf="(userFacade.user$ | async)?.role === EUserRoleDto.SUPER_ADMIN">
   <a mat-icon-button disableRipple="true" class="nav-link" routerLink="/admins">
      <mat-icon>supervisor_account</mat-icon>
      <span>{{ 'sideNav.admins' | translate }}</span>
@@ -75,5 +80,14 @@
   </mat-list-item>
 
 </mat-expansion-panel>
+
+<div class="bottom-items">
+  <mat-list-item class="nav-item">
+    <button mat-icon-button disableRipple="true" class="nav-link" (click)="userFacade.logout()">
+       <mat-icon>exit_to_app</mat-icon>
+       <span>{{ 'sideNav.logout' | translate }}</span>
+    </button>
+  </mat-list-item>
+</div>
 
 </mat-nav-list>

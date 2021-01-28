@@ -1,6 +1,8 @@
 import { EUserRoleDto } from '@core/features'
 import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, IOperationInDto, ITableColumn } from '@core/models'
 
+import { OPERATION_CLASS } from './operation.model'
+
 export const TABLE_COLUMNS: ITableColumn[] = [
   {
     name: 'id',
@@ -10,6 +12,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
   },
   {
     name: 'username',
+    value: (operation: IOperationInDto): string => operation.telegramUser.username || operation.telegramUser.firstName || operation.telegramUser.lastName,
     nameI18n: 'operations.table.username',
     type: ETableColumnType.STRING,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
@@ -30,6 +33,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     name: 'status',
     nameI18n: 'operations.table.status',
     type: ETableColumnType.STRING,
+    class: (operation: IOperationInDto): string => OPERATION_CLASS[operation.status],
     translate: (operation: IOperationInDto): string => `operation.status.${operation.status}`,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },

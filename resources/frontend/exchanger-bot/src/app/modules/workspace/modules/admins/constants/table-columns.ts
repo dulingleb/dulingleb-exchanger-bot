@@ -6,26 +6,26 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     name: 'name',
     nameI18n: 'admins.table.name',
     type: ETableColumnType.STRING,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EUserRoleDto.SUPER_ADMIN],
   },
   {
     name: 'email',
     nameI18n: 'admins.table.email',
     type: ETableColumnType.STRING,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EUserRoleDto.SUPER_ADMIN],
   },
   {
     name: 'role',
     nameI18n: 'admins.table.role',
     type: ETableColumnType.STRING,
     translate: (user: IUserInDto): string => `common.roles.${user.role}`,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EUserRoleDto.SUPER_ADMIN],
   },
   {
     name: 'createdAt',
     nameI18n: 'admins.table.createdAt',
     type: ETableColumnType.DATE,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EUserRoleDto.SUPER_ADMIN],
   },
   {
     name: 'info',
@@ -36,7 +36,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.INFO
     },
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EUserRoleDto.SUPER_ADMIN],
   },
   {
     name: 'edit',
@@ -47,7 +47,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.EDIT
     },
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EUserRoleDto.SUPER_ADMIN],
   },
   {
     name: 'delete',
@@ -58,6 +58,6 @@ export const TABLE_COLUMNS: ITableColumn[] = [
       eventType: ETableColumnActionEventType.DELETE,
       hide: (user: IUserInDto, currentUserId: number): boolean => user?.id === currentUserId
     },
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN]
+    allowedForRoles: [EUserRoleDto.SUPER_ADMIN]
   }
 ]

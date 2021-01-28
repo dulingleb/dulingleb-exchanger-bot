@@ -2,6 +2,8 @@
 
 .app-side-nav {
   position: relative;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   padding-top: $app_header_width;
 
@@ -19,6 +21,10 @@
     opacity: 0.09;
   }
 
+  .bottom-items {
+    margin-top: auto;
+  }
+
   .nav-item, .nav-group-item {
     position: relative;
     z-index: 2;
@@ -33,6 +39,13 @@
   }
 
   .nav-item {
+    opacity: 1;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
     &.user-profile-nav-item {
       height: $app_sidenav_size / 2;
 
@@ -41,13 +54,26 @@
         align-items: center;
         height: $app_sidenav_size / 2;
 
-        .user-logo {
-          margin-right: 0.5rem;
-        }
+        .mat-button-wrapper {
+          display: block;
 
-        .fio {
-          @include threeDots;
-          font-size: 1.1rem;
+          .info-wrapper {
+            display: flex;
+            align-items: center;
+
+            .user-logo {
+              margin-right: 0.5rem;
+            }
+
+            .fio {
+              @include threeDots;
+              font-size: 1.1rem;
+            }
+          }
+
+          .subscription-wrapper {
+            display: block;
+          }
         }
       }
     }

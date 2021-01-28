@@ -7,7 +7,12 @@ import { TranslateModule } from '@ngx-translate/core'
 import { SnackBarModule } from '@ui/snack-bar'
 import { StatusInfoBlockModule } from '@ui/status-info-block'
 
-import { StatusInfoBlockStatisticComponent, StatusInfoBlockUsersComponent } from './containers'
+import {
+  StatusInfoBlockOperationsCountComponent,
+  StatusInfoBlockOperationsSummComponent,
+  StatusInfoBlockStatisticComponent,
+  StatusInfoBlockUsersComponent
+} from './containers'
 
 import { WorkspaceRoutingModule } from './workspace-routing.module'
 import { WorkspaceComponent } from './workspace.component'
@@ -15,8 +20,10 @@ import { WorkspaceComponent } from './workspace.component'
 @NgModule({
   declarations: [
     WorkspaceComponent,
-    StatusInfoBlockStatisticComponent,
     StatusInfoBlockUsersComponent,
+    StatusInfoBlockStatisticComponent,
+    StatusInfoBlockOperationsSummComponent,
+    StatusInfoBlockOperationsCountComponent,
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,4 @@
-import { IRequestApiDto, IResponseApiInDto, IResponseApiOutDto } from '@core/models'
+import { IRequestApiDto, IResponseApiInDto, IResponseApiOutDto, ITelegramUserInDto, ITelegramUserOutDto } from '@core/models'
 
 export const apiQueryToParams = (apiQuery: IRequestApiDto, EFilterInToOutDto = {}): { [key: string]: string } => {
   const params: { [key: string]: string } = {}
@@ -27,3 +27,19 @@ export const operationOutToInDto = (res: IResponseApiOutDto<any>): IResponseApiI
   total: res.total,
   data: res.data
 })
+
+export const telegramUserOutToInDto = (user: ITelegramUserOutDto): ITelegramUserInDto => {
+  if (!user) { return null }
+  return {
+    id: user.id,
+    username: user.username,
+    firstName: user.first_name,
+    lastName: user.last_name,
+    exchangerId: user.exchanger_id,
+    telegramUserId: user.telegram_user_id,
+    operationsCount: user.operations_count,
+    discount: +user.discount,
+    comment: user.comment,
+    ban: !!user.ban
+  }
+}

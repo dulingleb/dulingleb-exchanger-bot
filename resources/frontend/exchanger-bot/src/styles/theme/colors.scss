@@ -2,6 +2,7 @@
 
 :root {
   --primary-color: #{map-get($mat-primary, 500)};
+  --success-color: #{$success-color};
   --accent-color: #{map-get($mat-accent, 500)};
   --warn-color: #{map-get($mat-warn, 500)};
   --font-color: #{$dark-primary-text};

@@ -1,9 +1,9 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
-import { takeUntil, withLatestFrom } from 'rxjs/operators'
+import { finalize, takeUntil, withLatestFrom } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
-import { EUserRoleDto, IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
-import { IPaginator, IFilterField } from '@ui/table-filter-paginator'
+import { IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
+import { IPaginator, IFilterField, EFilterType } from '@ui/table-filter-paginator'
 import { IRequestApiDto, ITelegramUserInDto } from '@core/models'
 import { TelegramUserApiService } from '@core/api'
 
@@ -15,7 +15,6 @@ import { TABLE_COLUMNS } from '../../constants/table-columns'
 })
 export class UsersComponent implements OnInit, OnDestroy {
 
-  currentUserRole: EUserRoleDto = EUserRoleDto.ADMIN
   users: ITelegramUserInDto[] = []
   inRequest: boolean
 
@@ -40,6 +39,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.inRequest = true
     this.adminApiService.getList(requestApiQuery).pipe(
       withLatestFrom(this.userFacade.user$),
+      finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
       ([res, user]) => {
@@ -51,7 +51,6 @@ export class UsersComponent implements OnInit, OnDestroy {
         }
       },
       (err) => this.uiFacade.addErrorNotification(err.message),
-      () => this.inRequest = false
     )
   }
 
@@ -64,15 +63,25 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.filterFields = [
       {
         labelI18n: 'users.table.username',
-        name: 'username'
+        name: 'username',
+        type: EFilterType.INPUT
       },
       {
-        labelI18n: 'users.table.telegramUserId',
-        name: 'telegramUserId'
-      },
-      {
-        labelI18n: 'users.table.operationsCount',
-        name: 'operationsCount'
+        labelI18n: 'users.table.ban',
+        name: 'ban',
+        type: EFilterType.SELECT,
+        options: [
+          {
+            value: false,
+            titleI18n: 'user.ban.0',
+            class: 'text-success'
+          },
+          {
+            value: true,
+            titleI18n: 'user.ban.1',
+            class: 'text-warn'
+          }
+        ]
       }
     ]
   }

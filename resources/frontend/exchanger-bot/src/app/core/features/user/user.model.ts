@@ -10,8 +10,8 @@ export interface IUserInDto {
 }
 
 export enum EUserRoleDto {
-  ADMIN = 1,
-  SUPER_ADMIN = 2
+  SUPER_ADMIN = 1,
+  ADMIN = 2,
 }
 
 export interface IUserOutDto {

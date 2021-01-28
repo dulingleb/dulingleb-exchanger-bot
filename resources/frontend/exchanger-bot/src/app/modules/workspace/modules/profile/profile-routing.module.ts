@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { ProfileComponent } from './profile.component'
+import { ProfileComponent, ProfileEditComponent } from './containers'
 
-const routes: Routes = [ { path: '', component: ProfileComponent } ]
+const routes: Routes = [
+  { path: '', component: ProfileComponent },
+  { path: 'edit', component: ProfileEditComponent }
+]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

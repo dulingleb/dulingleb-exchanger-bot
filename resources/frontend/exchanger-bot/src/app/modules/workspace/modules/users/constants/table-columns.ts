@@ -1,16 +1,10 @@
 import { EUserRoleDto } from '@core/features'
-import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, ITableColumn } from '@core/models'
+import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, ITableColumn, ITelegramUserInDto } from '@core/models'
 
 export const TABLE_COLUMNS: ITableColumn[] = [
   {
     name: 'username',
     nameI18n: 'users.table.username',
-    type: ETableColumnType.STRING,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
-  },
-  {
-    name: 'telegramUserId',
-    nameI18n: 'users.table.telegramUserId',
     type: ETableColumnType.STRING,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
@@ -21,14 +15,17 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
   {
-    name: 'info',
-    nameI18n: 'table.action.info',
+    name: 'operationsSumm',
+    nameI18n: 'users.table.operationsSumm',
     type: ETableColumnType.STRING,
-    actionData: {
-      link: (item: any): string => `/users/${item.id}/info`,
-      actionType: ETableColumnActionType.LINK,
-      eventType: ETableColumnActionEventType.INFO
-    },
+    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+  },
+  {
+    name: 'ban',
+    nameI18n: 'users.table.ban',
+    type: ETableColumnType.STRING,
+    icon: (item: ITelegramUserInDto): string => item.ban ? 'clear' : 'done',
+    class: (item: ITelegramUserInDto): string => item.ban ? 'text-warn' : 'text-success',
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
   {
@@ -36,7 +33,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     nameI18n: 'table.action.edit',
     type: ETableColumnType.STRING,
     actionData: {
-      link: (item: any): string => `/users/${item.id}/edit`,
+      link: (item: ITelegramUserInDto): string => `/users/${item.id}/edit`,
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.EDIT
     },

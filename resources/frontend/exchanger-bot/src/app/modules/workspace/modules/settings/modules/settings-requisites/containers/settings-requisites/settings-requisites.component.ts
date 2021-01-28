@@ -4,7 +4,7 @@ import { filter, finalize, mergeMap, takeUntil, tap, withLatestFrom } from 'rxjs
 import { Subject } from 'rxjs'
 
 import { ETableColumnActionEventType, IRequestApiDto, ISettingRequisiteDto, ITableActionEvent } from '@core/models'
-import { EUserRoleDto, IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
+import { IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
 import { ConfirmModalService, IConfirmModal } from '@ui/confirm-modal'
 import { IPaginator, IFilterField } from '@ui/table-filter-paginator'
 import { SettingApiService } from '@core/api'
@@ -17,7 +17,6 @@ import { TABLE_COLUMNS } from '../../constants/table-columns'
 })
 export class SettingsRequisitesComponent implements OnInit, OnDestroy {
 
-  currentUserRole: EUserRoleDto = EUserRoleDto.ADMIN // TODO: User role
   requisites: ISettingRequisiteDto[] = []
   inRequest: boolean
 
@@ -57,7 +56,7 @@ export class SettingsRequisitesComponent implements OnInit, OnDestroy {
         }
       },
       (err) => {
-        this.userFacade.logout()
+        // this.userFacade.logout()
         this.uiFacade.addErrorNotification(err.message)
       }
     )

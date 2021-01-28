@@ -35,7 +35,18 @@ export class AdminApiService {
   }
 
   updateUser(user: IUserInDto): Observable<IUserInDto> {
-    return this.http.put<ICommonResponseDto<IUserOutDto>>(`${ENV.api}/users/${user.id}`, user).pipe(
+    const userOutDto: IUserOutDto = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    }
+
+    if (user.password && user.cPassword) {
+      userOutDto.password = user.password
+      userOutDto.c_password = user.cPassword
+    }
+
+    return this.http.put<ICommonResponseDto<IUserOutDto>>(`${ENV.api}/users/${user.id}`, userOutDto).pipe(
       mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: user }) => this.userOutToInDto(user))
     )

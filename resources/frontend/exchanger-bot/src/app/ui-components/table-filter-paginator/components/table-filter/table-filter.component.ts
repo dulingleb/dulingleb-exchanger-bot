@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core'
 
-import { IFilterField, IFilterValues } from '../../models'
+import { EFilterType, IFilterField, IFilterValues } from '../../models'
 
 @Component({
   selector: 'app-table-filter',
@@ -15,30 +15,34 @@ export class TableFilterComponent implements OnChanges {
   @Input() showFilter: boolean
 
   filterValues: IFilterValues[] = []
+  EFilterType = EFilterType
   disabledFilter = true
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.filterFields?.currentValue) {
-      this.filterValues = this.filterFields.map(f => ({ name: f.name, value: '' }))
+      this.filterValues = this.filterFields.map(f => ({ name: f.name, value: undefined }))
     }
   }
 
-  onChangeValue(): void {
+  onChangeValue(filter = false): void {
     this.disabledFilter = true
     this.filterValues.forEach(f => {
-      if (f.value) { this.disabledFilter = false }
+      if (f.value !== undefined) { this.disabledFilter = false }
     })
+    if (filter) {
+      this.onFilter()
+    }
   }
 
   clearValues(): void {
     this.disabledFilter = true
-    this.filterValues = this.filterValues.map(f => ({ ...f, value: '' }))
+    this.filterValues = this.filterValues.map(f => ({ ...f, value: undefined }))
     this.filter.emit([])
   }
 
   onFilter(): void {
     this.filter.emit(this.filterValues.reduce((filterValues, filterValue) => {
-      if (filterValue.value) { filterValues.push(filterValue) }
+      if (filterValue.value !== undefined && filterValue.value !== '') { filterValues.push(filterValue) }
       return filterValues
     }, []))
   }

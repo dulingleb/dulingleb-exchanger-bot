@@ -13,15 +13,18 @@
     </ng-container>
 
     <ng-container *ngIf="!tableColumn.actionData">
-      <mat-cell *matCellDef="let row" [class]>
-        <ng-container *ngIf="!tableColumn.translate">
-          <span class="bold" *ngIf="tableColumn.type === ETableColumnType.STRING">{{ row[tableColumn.name] }}</span>
-          <span class="bold" *ngIf="tableColumn.type === ETableColumnType.DATE">{{ row[tableColumn.name] | date: 'd.MM.yyyy hh:mm' }}</span>
+      <mat-cell *matCellDef="let row">
+        <ng-container *ngIf="!tableColumn.translate && !tableColumn.icon">
+          <span class="bold" [ngClass]="tableColumn.class ? tableColumn.class(row) : ''" *ngIf="tableColumn.type === ETableColumnType.STRING">{{ tableColumn.value ? tableColumn.value(row) : row[tableColumn.name] }}</span>
+          <span class="bold" [ngClass]="tableColumn.class ? tableColumn.class(row) : ''" *ngIf="tableColumn.type === ETableColumnType.DATE">{{ (tableColumn.value ? tableColumn.value(row) : row[tableColumn.name]) | date: 'd.MM.yyyy hh:mm' }}</span>
         </ng-container>
-        <ng-container *ngIf="tableColumn.translate">
-          <span class="bold">{{ tableColumn.translate(row) | translate }}</span>
+        <ng-container *ngIf="tableColumn.translate && !tableColumn.icon">
+          <span class="bold" [ngClass]="tableColumn.class ? tableColumn.class(row) : ''">{{ tableColumn.translate(row) | translate }}</span>
         </ng-container>
-        </mat-cell>
+        <ng-container *ngIf="tableColumn.icon">
+          <button mat-icon-button><mat-icon [ngClass]="tableColumn.class ? tableColumn.class(row) : ''">{{ tableColumn.icon(row) }}</mat-icon></button>
+        </ng-container>
+      </mat-cell>
     </ng-container>
 
     <ng-container *ngIf="tableColumn.actionData">

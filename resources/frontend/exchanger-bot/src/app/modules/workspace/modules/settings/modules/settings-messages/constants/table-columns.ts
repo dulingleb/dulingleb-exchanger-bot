@@ -35,16 +35,6 @@ export const TABLE_COLUMNS: ITableColumn[] = [
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.EDIT
     },
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
-  },
-  {
-    name: 'delete',
-    nameI18n: 'table.action.delete',
-    type: ETableColumnType.STRING,
-    actionData: {
-      actionType: ETableColumnActionType.EVENT,
-      eventType: ETableColumnActionEventType.DELETE,
-    },
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN]
+    allowedForRoles: [EUserRoleDto.SUPER_ADMIN],
   }
 ]

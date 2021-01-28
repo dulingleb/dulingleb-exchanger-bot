@@ -13,6 +13,10 @@
     }
   },
   "sideNav": {
+    "userInfo": {
+      "subscription": "Осталось {{days}} дней",
+      "hoverTitle": "Подписка"
+    },
     "dashboard": "Доска",
     "admins": "Администраторы",
     "users": "Пользователи",
@@ -24,7 +28,8 @@
       "messages": "Сообщения",
       "commission": "Коммиссии",
       "requisites": "Реквизиты"
-    }
+    },
+    "logout": "Выход"
   },
   "statusInfoBlock": {
     "status": {
@@ -37,6 +42,14 @@
     "users": {
       "title": "Пользователи",
       "today": "За сегодня"
+    },
+    "operationsCount": {
+      "title": "Количества операций",
+      "week": "За неделю"
+    },
+    "operationsSumm": {
+      "title": "Сумма операций",
+      "week": "За неделю"
     }
   },
   "confirm": {
@@ -108,21 +121,30 @@
     "info": {
       "pageTitle": "Информация об администраторе",
       "editAdmin": "Редактировать"
+    },
+    "profile": {
+      "pageTitle": "Привет, ",
+      "editAdmin": "Редактировать"
     }
   },
   "users": {
     "tableHeader": {
-      "addBtn": "Добавить",
       "title": "Пользователи"
     },
     "table": {
       "username": "Имя",
       "exchangerId": "id обменника",
       "telegramUserId": "id",
-      "operationsCount": "Количество операций"
+      "operationsCount": "Количество операций",
+      "operationsSumm": "Сумма операций",
+      "ban": "Активный"
     }
   },
   "user": {
+    "ban": {
+      "0": "Активен",
+      "1": "Забанен"
+    },
     "edit": {
       "pageTitle": "Редактирование пользователя",
       "input": {

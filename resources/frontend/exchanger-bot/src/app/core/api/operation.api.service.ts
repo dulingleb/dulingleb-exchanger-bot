@@ -4,7 +4,7 @@ import { map, mergeMap } from 'rxjs/operators'
 import { Observable, of, throwError } from 'rxjs'
 
 import { ENV } from '@env/environment'
-import { apiQueryToParams, operationOutToInDto } from '@utils/index'
+import { apiQueryToParams, operationOutToInDto, telegramUserOutToInDto } from '@utils/index'
 import { EFilterOperationInOut, ICommonResponseDto, IOperationInDto, IOperationOutDto, IRequestApiDto, IResponseApiInDto, IResponseApiOutDto } from '@core/models'
 
 @Injectable({
@@ -43,12 +43,9 @@ export class OperationApiService {
   private operationOutToInDto(operation: IOperationOutDto): IOperationInDto {
     return {
       id: operation.id,
-      username: operation.username,
       amount: operation.amount,
       price: operation.price,
       telegramUserId: operation.telegram_user_id,
-      firstName: operation.first_name,
-      lastName: operation.last_name,
       bankDetailId: operation.bank_detail_id,
       btcAddress: operation.btc_address,
       comment: operation.comment,
@@ -56,8 +53,10 @@ export class OperationApiService {
       files: operation.files,
       linkTransaction: operation.link_transaction,
       status: operation.status,
+      messageId: operation.message_id,
       createdAt: new Date(operation.created_at),
-      updatedAt: new Date(operation.updated_at)
+      updatedAt: new Date(operation.updated_at),
+      telegramUser: telegramUserOutToInDto(operation.telegram_user)
     }
   }
 

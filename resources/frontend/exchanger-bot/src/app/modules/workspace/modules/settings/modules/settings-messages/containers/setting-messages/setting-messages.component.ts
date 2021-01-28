@@ -2,8 +2,8 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { filter, finalize, mergeMap, takeUntil, tap, withLatestFrom } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
-import { EUserRoleDto, IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
 import { ETableColumnActionEventType, IRequestApiDto, ISettingMessageDto, ITableActionEvent } from '@core/models'
+import { EUserRoleDto, IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
 import { ConfirmModalService, IConfirmModal } from '@ui/confirm-modal'
 import { IPaginator, IFilterField } from '@ui/table-filter-paginator'
 import { SettingApiService } from '@core/api'
@@ -16,7 +16,6 @@ import { TABLE_COLUMNS } from '../../constants/table-columns'
 })
 export class SettingMessagesComponent implements OnInit, OnDestroy {
 
-  currentUserRole: EUserRoleDto = EUserRoleDto.ADMIN // TODO: User role
   messages: ISettingMessageDto[] = []
   inRequest: boolean
 
@@ -24,6 +23,7 @@ export class SettingMessagesComponent implements OnInit, OnDestroy {
   filterFields: IFilterField[]
 
   tableColumns = TABLE_COLUMNS
+  EUserRoleDto = EUserRoleDto
 
   private destroy$ = new Subject()
   private requestApiQuery: IRequestApiDto
@@ -56,7 +56,7 @@ export class SettingMessagesComponent implements OnInit, OnDestroy {
         }
       },
       (err) => {
-        this.userFacade.logout()
+        // this.userFacade.logout()
         this.uiFacade.addErrorNotification(err.message)
       }
     )
@@ -102,10 +102,6 @@ export class SettingMessagesComponent implements OnInit, OnDestroy {
       {
         labelI18n: 'settings.messages.table.title',
         name: 'title'
-      },
-      {
-        labelI18n: 'settings.messages.table.slug',
-        name: 'slug'
       }
     ]
   }

@@ -38,6 +38,22 @@ a, button {
   padding: 1rem;
 }
 
+.text-primary {
+  color: var(--primary-color);
+}
+
+.text-success {
+  color: var(--success-color);
+}
+
+.text-accent {
+  color: var(--accent-color);
+}
+
+.text-warn {
+  color: var(--warn-color);
+}
+
 .user-logo {
   $logo_size: 2.8rem;
   display: inline-flex;
