@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\QueryBuilder;
 use Telegram;
 
@@ -20,25 +21,31 @@ class TelegramUserController extends Controller
     {
         $users = QueryBuilder::for(TelegramUserSetting::class)
             ->join('telegram_users', 'telegram_users.id', 'telegram_user_settings.telegram_user_id')
-            ->allowedFilters([AllowedFilter::exact('username', 'telegram_users.username'), 'ban'])
-            ->defaultSort('-operations_count')
-            ->allowedSorts('operations_count', 'username', 'telegram_user_id')
+            ->allowedFilters([AllowedFilter::exact('username', 'telegram_users.username'), 'ban', 'discount'])
+            ->defaultSort('-telegram_user_settings.created_at')
+            ->allowedSorts('operations_count', 'username', 'telegram_user_id', 'operations_sum', AllowedSort::field('created_at', 'telegram_user_settings.created_at'))
             ->select([
                 'telegram_user_settings.id',
                 'telegram_user_settings.telegram_user_id',
                 'telegram_user_settings.exchanger_id',
                 'telegram_user_settings.ban',
                 'telegram_users.username'])
-            ->addSelect(DB::raw('(SELECT COUNT(*) FROM operations WHERE (operations.telegram_user_id = telegram_user_settings.telegram_user_id) AND (operations.exchanger_id = telegram_user_settings.exchanger_id) AND (operations.status = ' . Operation::STATUS_SUCCESS . ') ) AS operations_count'))
+            ->withCountOperations()
+            ->withSumOperations()
             ->where('telegram_user_settings.exchanger_id', auth()->user()->exchanger->id)
             ->jsonPaginate();
 
         return $this->response($users);
     }
 
-    public function show(TelegramUserSetting $userSetting): \Illuminate\Http\JsonResponse
+    public function show($id): \Illuminate\Http\JsonResponse
     {
-        $this->checkUser($userSetting);
+        $userSetting = TelegramUserSetting::select('telegram_user_settings.*')
+            ->withCountOperations()
+            ->withSumOperations()
+            ->where('id', $id)
+            ->where('exchanger_id', auth()->user()->exchanger->id)
+            ->firstOrFail();
 
         return $this->response($userSetting);
     }
@@ -107,7 +114,7 @@ class TelegramUserController extends Controller
 
     private function checkUser(TelegramUserSetting $userSetting) {
         if ($userSetting->exchanger_id != auth()->user()->exchanger->id) {
-            abort(404);
+            abort(422);
         }
     }
 }

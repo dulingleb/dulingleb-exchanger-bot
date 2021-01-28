@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Lcobucci\JWT\Builder;
 
 class TelegramUserSetting extends Model
 {
@@ -55,5 +57,15 @@ class TelegramUserSetting extends Model
     public function telegramUser()
     {
         return $this->hasOne(TelegramUser::class, 'id', 'telegram_user_id');
+    }
+
+    public function scopeWithSumOperations($query)
+    {
+        return $query->addSelect(DB::raw('(SELECT sum(price) FROM operations WHERE operations.status=' . Operation::STATUS_SUCCESS . ' AND operations.telegram_user_id = telegram_user_settings.telegram_user_id) AS operations_sum'));
+    }
+
+    public function scopeWithCountOperations($query)
+    {
+        return $query->addSelect(DB::raw('(SELECT COUNT(*) FROM operations WHERE (operations.telegram_user_id = telegram_user_settings.telegram_user_id) AND (operations.exchanger_id = telegram_user_settings.exchanger_id) AND (operations.status = ' . Operation::STATUS_SUCCESS . ') ) AS operations_count'));
     }
 }
