@@ -23,7 +23,7 @@ class TelegramUserController extends Controller
             ->join('telegram_users', 'telegram_users.id', 'telegram_user_settings.telegram_user_id')
             ->allowedFilters([AllowedFilter::exact('username', 'telegram_users.username'), 'ban', 'discount'])
             ->defaultSort('-telegram_user_settings.created_at')
-            ->allowedSorts('operations_count', 'username', 'telegram_user_id', 'operations_sum', AllowedSort::field('created_at', 'telegram_user_settings.created_at'))
+            ->allowedSorts('operations_count', 'operations_sum', 'username', 'telegram_user_id', 'operations_sum', AllowedSort::field('created_at', 'telegram_user_settings.created_at'))
             ->select([
                 'telegram_user_settings.id',
                 'telegram_user_settings.telegram_user_id',
@@ -41,8 +41,12 @@ class TelegramUserController extends Controller
     public function show($id): \Illuminate\Http\JsonResponse
     {
         $userSetting = TelegramUserSetting::select('telegram_user_settings.*')
+            ->with('telegram_user')
             ->withCountOperations()
             ->withSumOperations()
+            ->withCountRef()
+            ->withCountOperationsRef()
+            ->withSumOperationsRef()
             ->where('id', $id)
             ->where('exchanger_id', auth()->user()->exchanger->id)
             ->firstOrFail();
