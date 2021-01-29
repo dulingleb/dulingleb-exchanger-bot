@@ -27,6 +27,11 @@ class TelegramUserSetting extends Model
         self::where('telegram_user_id', $userId)->where('exchanger_id', $exchangerId)->first()->update(['transaction' => $transaction ? json_encode($transaction) : null]);
     }
 
+    public function telegram_user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(TelegramUser::class);
+    }
+
     public function referrals()
     {
         $set = TelegramUserSetting::where('referer_id', $this->id)->get()->pluck('telegram_user_id')->toArray();
@@ -67,5 +72,20 @@ class TelegramUserSetting extends Model
     public function scopeWithCountOperations($query)
     {
         return $query->addSelect(DB::raw('(SELECT COUNT(*) FROM operations WHERE (operations.telegram_user_id = telegram_user_settings.telegram_user_id) AND (operations.exchanger_id = telegram_user_settings.exchanger_id) AND (operations.status = ' . Operation::STATUS_SUCCESS . ') ) AS operations_count'));
+    }
+
+    public function scopeWithCountRef($query)
+    {
+        return $query->addSelect(DB::raw('(SELECT COUNT(*) FROM telegram_user_settings tus WHERE (tus.referer_id=telegram_user_settings.id)) AS ref_count'));
+    }
+
+    public function scopeWithCountOperationsRef($query)
+    {
+        return $query->addSelect(DB::raw('(SELECT COUNT(*) FROM operations WHERE operations.exchanger_id=telegram_user_settings.exchanger_id AND operations.status=' . Operation::STATUS_SUCCESS . ' AND operations.telegram_user_id IN (SELECT telegram_user_settings.telegram_user_id FROM telegram_user_settings tus WHERE tus.referer_id = telegram_user_settings.id)) AS ref_operations_count'));
+    }
+
+    public function scopeWithSumOperationsRef($query)
+    {
+        return $query->addSelect(DB::raw('(SELECT SUM(price) FROM operations WHERE operations.exchanger_id=telegram_user_settings.exchanger_id AND operations.status=' . Operation::STATUS_SUCCESS . ' AND  operations.telegram_user_id IN (SELECT telegram_user_settings.telegram_user_id FROM telegram_user_settings tus WHERE tus.referer_id = telegram_user_settings.id)) AS ref_operations_sum'));
     }
 }
