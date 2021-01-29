@@ -5,16 +5,19 @@
   --success-color: #{$success-color};
   --accent-color: #{map-get($mat-accent, 500)};
   --warn-color: #{map-get($mat-warn, 500)};
-  --font-color: #{$dark-primary-text};
-  --bg-color: #{$light-base-color};
+
   --grey-color: #{map-get($mat-grey, 800)};
   --light-color: #{$light-base-color};
   --dark-color: #{$dark-base-color};
+
+  --font-color: #{$dark-primary-text};
+  --bg-color: #{$light-base-color};
+  --border-color: #{$dark-border-color};
 }
 
 .dark-mode {
   --primary-color: #{map-get($mat-primary-dark, 500)};
   --accent-color: #{map-get($mat-accent-dark, 500)};
   --font-color: #{$light-primary-text};
-  --bg-color: #{map-get($mat-grey, 800)};
+  --border-color: #{$light-border-color};
 }

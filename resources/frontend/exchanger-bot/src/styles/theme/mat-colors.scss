@@ -7,11 +7,14 @@ $dark-secondary-text: rgba($dark-base-color, 0.54);
 $dark-disabled-text: rgba($dark-base-color, 0.38);
 $dark-dividers: rgba($dark-base-color, 0.12);
 $dark-focused: rgba($dark-base-color, 0.12);
+$dark-border-color: rgba($dark-base-color, 0.12);
+
 $light-primary-text: $light-base-color;
 $light-secondary-text: rgba($light-base-color, 0.7);
 $light-disabled-text: rgba($light-base-color, 0.5);
 $light-dividers: rgba($light-base-color, 0.12);
 $light-focused: rgba($light-base-color, 0.12);
+$light-border-color: rgba($light-base-color, 0.12);
 
 $mat-primary: (
   50: #ede7f6,

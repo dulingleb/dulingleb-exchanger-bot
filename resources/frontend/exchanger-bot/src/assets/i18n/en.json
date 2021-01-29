@@ -137,7 +137,7 @@
       "telegramUserId": "id",
       "operationsCount": "Количество операций",
       "operationsSumm": "Сумма операций",
-      "ban": "Активный"
+      "ban": "Статус"
     }
   },
   "user": {
@@ -156,6 +156,16 @@
         "discount": "Некорректная скидка"
       },
       "save": "Сохранить"
+    },
+    "info": {
+      "id": "id",
+      "username": "username",
+      "name": "Имя Фамилия",
+      "operationsCount": "Подтвержденных сделок",
+      "operationsSumm": "Сделок на сумму",
+      "ref": "Рефералов",
+      "operationsRef": "Сделок рефов",
+      "operationsREfSumm": "Сделок рефов на сумму"
     }
   },
   "operations": {

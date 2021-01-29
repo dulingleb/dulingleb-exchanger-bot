@@ -1,0 +1,18 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 1.5rem;
+
+  .info-block {
+    .item {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-column-gap: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+
+      &:first-child {
+        border-top: 1px solid var(--border-color);
+      }
+    }
+  }
+}
