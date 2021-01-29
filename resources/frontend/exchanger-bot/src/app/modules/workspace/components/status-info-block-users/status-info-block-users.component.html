@@ -1,10 +1,10 @@
 <app-status-info-block
                       class="status-info-block"
                       blockNameI18n="statusInfoBlock.users.title"
-                      [blockInfo]="123"
+                      [blockInfo]="countUsers"
                       icon="show_chart"
 >
   <ng-container actions>
-    <span mat-button class="text-success">+0 {{ 'statusInfoBlock.users.today' | translate }}</span>
+    <span mat-button class="text-success">+{{ countUsers }} {{ 'statusInfoBlock.users.today' | translate }}</span>
   </ng-container>
 </app-status-info-block>

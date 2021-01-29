@@ -4,9 +4,9 @@ import { catchError, map, mergeMap } from 'rxjs/operators'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 
 import { LocalStorageService } from '@core/services'
+import { AdminApiService } from '@core/api/admin.api.service'
 
 import { USER_ACTIONS } from './user.actions'
-import { UserService } from './user.service'
 
 @Injectable()
 export class UserEffects {
@@ -14,7 +14,7 @@ export class UserEffects {
   constructor(
     private router: Router,
     private actions$: Actions,
-    private userService: UserService,
+    private adminApiService: AdminApiService,
     private localStorageService: LocalStorageService
   ) {}
 
@@ -31,7 +31,7 @@ export class UserEffects {
 
   getAuthUser$ = createEffect(() => this.actions$.pipe(
     ofType(USER_ACTIONS.getAuthUser),
-    mergeMap(() => this.userService.getAuthUser().pipe(
+    mergeMap(() => this.adminApiService.getAuthUser().pipe(
       map(user => USER_ACTIONS.saveUser({ user })),
       catchError(error => [USER_ACTIONS.loginError({ error })])
     ))
@@ -39,7 +39,7 @@ export class UserEffects {
 
   login$ = createEffect(() => this.actions$.pipe(
     ofType(USER_ACTIONS.login),
-    mergeMap(({ email, password }) => this.userService.login(email, password).pipe(
+    mergeMap(({ email, password }) => this.adminApiService.login(email, password).pipe(
       map(userData => USER_ACTIONS.loginSuccess({ userData })),
       catchError(error => [USER_ACTIONS.loginError({ error })])
     ))
@@ -61,7 +61,7 @@ export class UserEffects {
 
   redirectAfterAuth$ = createEffect(() => this.actions$.pipe(
     ofType(USER_ACTIONS.redirectAfterAuth),
-    map(() => this.router.navigateByUrl('/dashboard'))
+    map(() => this.router.navigateByUrl('/'))
   ), { dispatch: false })
 
   redirectAfterLogout$ = createEffect(() => this.actions$.pipe(

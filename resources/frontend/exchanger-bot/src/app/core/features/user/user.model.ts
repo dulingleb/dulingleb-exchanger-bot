@@ -5,6 +5,10 @@ export interface IUserInDto {
   cPassword?: string;
   email: string;
   role?: EUserRoleDto;
+  operationsCountToday?: number;
+  operationsSumToday?: number;
+  usersCountToday?: number;
+  operationsWait?: number;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -21,6 +25,10 @@ export interface IUserOutDto {
   password?: string;
   c_password?: string;
   role_id?: EUserRoleDto;
+  operations_count_today?: number;
+  operations_sum_today?: number;
+  users_count_today?: number;
+  operations_wait?: number;
   created_at?: Date;
   updated_at?: Date;
 }

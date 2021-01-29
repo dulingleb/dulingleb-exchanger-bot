@@ -45,11 +45,11 @@
     },
     "operationsCount": {
       "title": "Количества операций",
-      "week": "За неделю"
+      "today": "За сегодня"
     },
     "operationsSumm": {
       "title": "Сумма операций",
-      "week": "За неделю"
+      "today": "За сегодня"
     }
   },
   "confirm": {

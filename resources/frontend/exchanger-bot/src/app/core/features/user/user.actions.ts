@@ -43,6 +43,10 @@ const saveUser = createAction(
   props<{ user: IUserInDto }>()
 )
 
+const changeStatus = createAction(
+  '[User exchanger bot] Change status'
+)
+
 const redirectAfterAuth = createAction(
   '[User exchanger bot] Redirect after auth'
 )
@@ -62,6 +66,7 @@ export const USER_ACTIONS = {
 
   saveToken,
   saveUser,
+  changeStatus,
   redirectAfterAuth,
   redirectAfterLogout
 }

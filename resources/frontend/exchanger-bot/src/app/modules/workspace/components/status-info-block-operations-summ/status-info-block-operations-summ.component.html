@@ -1,10 +1,10 @@
 <app-status-info-block
                       class="status-info-block"
                       blockNameI18n="statusInfoBlock.operationsSumm.title"
-                      [blockInfo]="789"
+                      [blockInfo]="operationsSumm"
                       icon="show_chart"
 >
   <ng-container actions>
-    <span mat-button class="text-success">+0 {{ 'statusInfoBlock.operationsSumm.week' | translate }}</span>
+    <span mat-button class="text-success">+{{ operationsSumm }} {{ 'statusInfoBlock.operationsSumm.today' | translate }}</span>
   </ng-container>
 </app-status-info-block>

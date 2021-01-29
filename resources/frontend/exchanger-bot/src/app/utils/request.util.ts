@@ -1,4 +1,11 @@
-import { IRequestApiDto, IResponseApiInDto, IResponseApiOutDto, ITelegramUserInDto, ITelegramUserOutDto } from '@core/models'
+import {
+  IRequestApiDto,
+  IResponseApiInDto,
+  IResponseApiOutDto,
+  ITelegramUserInDto,
+  ITelegramUserOutDto,
+} from '@core/models'
+
 
 export const apiQueryToParams = (apiQuery: IRequestApiDto, EFilterInToOutDto = {}): { [key: string]: string } => {
   const params: { [key: string]: string } = {}

@@ -7,7 +7,7 @@
           <span class="fio">{{ (userFacade.user$ | async)?.name }}</span>
         </span>
         <span class="subscription-wrapper" [title]="'sideNav.userInfo.hoverTitle' | translate">
-          <span class="subscription">{{ 'sideNav.userInfo.subscription' | translate: { days: 7 } }}</span>
+          <span class="subscription">{{ 'sideNav.userInfo.subscription' | translate: { days: (userFacade.user$ | async)?.operationsCountToday } }}</span>
         </span>
       </span>
     </a>

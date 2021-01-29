@@ -1,10 +1,10 @@
 <app-status-info-block
                       class="status-info-block"
                       blockNameI18n="statusInfoBlock.status.title"
-                      [blockInfo]="'statusInfoBlock.status.inWork' | translate"
+                      [blockInfo]="('statusInfoBlock.status.inWork' | translate) + status"
                       icon="show_chart"
 >
   <ng-container actions>
-    <button mat-button color="primary">{{ 'statusInfoBlock.status.stopBtn' | translate }}</button>
+    <button mat-button color="primary" (click)="changeStatus.emit()">{{ 'statusInfoBlock.status.stopBtn' | translate }}</button>
   </ng-container>
 </app-status-info-block>

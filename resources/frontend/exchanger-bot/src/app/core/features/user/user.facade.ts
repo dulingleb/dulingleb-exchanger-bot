@@ -18,6 +18,7 @@ export interface IUserFacade {
   init(): void;
   login(email: string, password: string): void;
   logout(): void;
+  changeStatus(): void;
 
 }
 
@@ -44,6 +45,10 @@ export class UserFacade {
 
   logout(): void {
     this.store$.dispatch(USER_ACTIONS.logout())
+  }
+
+  changeStatus(): void {
+    this.store$.dispatch(USER_ACTIONS.changeStatus())
   }
 
 }

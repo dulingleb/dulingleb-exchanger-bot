@@ -12,7 +12,7 @@ import {
   StatusInfoBlockOperationsSummComponent,
   StatusInfoBlockStatisticComponent,
   StatusInfoBlockUsersComponent
-} from './containers'
+} from './components'
 
 import { WorkspaceRoutingModule } from './workspace-routing.module'
 import { WorkspaceComponent } from './workspace.component'

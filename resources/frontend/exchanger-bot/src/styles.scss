@@ -54,6 +54,14 @@ a, button {
   color: var(--warn-color);
 }
 
+.text-gray {
+  color: var(--gray-color);
+}
+
+.text-black {
+  color: #000; // TODO: Use vars
+}
+
 .user-logo {
   $logo_size: 2.8rem;
   display: inline-flex;

@@ -10,8 +10,9 @@ export interface IRequestApiDto {
 
 export interface ICommonResponseDto<T> {
   status: boolean;
+  statusCode?: number;
   message: string;
-  data: T;
+  data?: T;
 }
 
 export interface IResponseApiDto<T> {

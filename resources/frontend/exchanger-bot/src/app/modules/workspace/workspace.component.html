@@ -1,10 +1,14 @@
 <mat-card class="workspace-wrapper">
 
   <header class="workspace-header">
-    <app-status-info-block-statistic class="status-info-block"></app-status-info-block-statistic>
-    <app-status-info-block-users class="status-info-block"></app-status-info-block-users>
-    <app-status-info-block-operations-count class="status-info-block"></app-status-info-block-operations-count>
-    <app-status-info-block-operations-summ class="status-info-block"></app-status-info-block-operations-summ>
+    <app-status-info-block-statistic
+                                    class="status-info-block"
+                                    [status]="123"
+                                    (changeStatus)="userFacade.changeStatus()"
+    ></app-status-info-block-statistic>
+    <app-status-info-block-users class="status-info-block" [countUsers]="(userFacade.user$ | async)?.usersCountToday"></app-status-info-block-users>
+    <app-status-info-block-operations-count class="status-info-block" [countOperations]="(userFacade.user$ | async)?.operationsCountToday"></app-status-info-block-operations-count>
+    <app-status-info-block-operations-summ class="status-info-block" [operationsSumm]="(userFacade.user$ | async)?.operationsSumToday"></app-status-info-block-operations-summ>
   </header>
 
   <div class="workspace-content">
