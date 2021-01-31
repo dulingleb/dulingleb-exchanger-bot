@@ -9,6 +9,7 @@ export interface ITableColumn {
   class?: (...args: any) => string;
   allowedForRoles: EUserRoleDto[];
   translate?: (...args: any) => string;
+  sort?: boolean;
   actionData?: {
     icon?: string;
     link?: (...args: any) => string;

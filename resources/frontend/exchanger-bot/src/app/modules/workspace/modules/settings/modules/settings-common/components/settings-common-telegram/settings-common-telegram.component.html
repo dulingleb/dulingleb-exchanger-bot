@@ -1,0 +1,26 @@
+<app-page-content>
+  <ng-container header>
+    {{ 'settings.telegram.pageTitle' | translate }}
+  </ng-container>
+  <ng-container content>
+    <form [formGroup]="form" (ngSubmit)="saveTelegram()" class="form">
+
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'settings.telegram.telegramToken' | translate }}</mat-label>
+          <input formControlName="telegramToken" type="text" matInput>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'settings.telegram.username' | translate }}</mat-label>
+          <input formControlName="username" type="text" matInput>
+        </mat-form-field>
+      </div>
+
+      <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'settings.saveBtn' | translate }}</button>
+
+    </form>
+  </ng-container>
+</app-page-content>

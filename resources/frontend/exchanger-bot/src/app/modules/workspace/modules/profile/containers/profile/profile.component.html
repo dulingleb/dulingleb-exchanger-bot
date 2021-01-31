@@ -9,13 +9,19 @@
     </a>
   </ng-container>
   <ng-container content>
-    <h3>{{ 'common.name' | translate }}</h3>
-    <p><i>{{ user?.name }}</i></p>
-
-    <h3>{{ 'common.email' | translate }}</h3>
-    <p><i>{{ user?.email }}</i></p>
-
-    <h3>{{ 'common.role' | translate }}</h3>
-    <p><i>{{ ('common.roles.' + user?.role) | translate }}</i></p>
+    <section class="info-table-block">
+      <div class="item">
+        <p class="title">{{ 'common.name' | translate }}</p>
+        <p class="value">{{ user?.name }}</p>
+      </div>
+      <div class="item">
+        <p class="title">{{ 'common.email' | translate }}</p>
+        <p class="value">{{ user?.email }}</p>
+      </div>
+      <div class="item">
+        <p class="title">{{ 'common.role' | translate }}</p>
+        <p class="value" [ngClass]="{ 'text-primary': user?.role === EUserRoleDto.SUPER_ADMIN, 'text-success': user?.role === EUserRoleDto.ADMIN }">{{ ('common.roles.' + user?.role) | translate }}</p>
+      </div>
+    </section>
   </ng-container>
 </app-page-content>

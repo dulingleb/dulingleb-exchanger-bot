@@ -9,11 +9,17 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 
 import { PageContentLayoutModule } from '@ui/page-content-layout'
 
-import { SettingsCommonComponent } from './containers'
+import { SettingsCommonKeysComponent, SettingsCommonLimitsComponent, SettingsCommonTelegramComponent } from './components'
 import { SettingsCommonRoutingModule } from './settings-common-routing.module'
+import { SettingsCommonComponent } from './containers'
 
 @NgModule({
-  declarations: [SettingsCommonComponent],
+  declarations: [
+    SettingsCommonTelegramComponent,
+    SettingsCommonLimitsComponent,
+    SettingsCommonKeysComponent,
+    SettingsCommonComponent
+  ],
   imports: [
     CommonModule,
     TranslateModule,

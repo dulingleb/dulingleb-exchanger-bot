@@ -6,11 +6,13 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     name: 'from',
     nameI18n: 'settings.commissions.table.from',
     type: ETableColumnType.STRING,
+    sort: true,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
   {
     name: 'to',
     nameI18n: 'settings.commissions.table.to',
+    sort: true,
     type: ETableColumnType.STRING,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
@@ -18,6 +20,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     name: 'percent',
     nameI18n: 'settings.commissions.table.percent',
     type: ETableColumnType.STRING,
+    sort: true,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
   {

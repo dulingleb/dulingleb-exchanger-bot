@@ -27,7 +27,10 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
   ) {
     this.form = new FormGroup({
-      email: new FormControl('', [
+      email: new FormControl({
+        value: '',
+        disabled: true
+      }, [
         Validators.required,
         Validators.email
       ]),

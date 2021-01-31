@@ -5,7 +5,7 @@
   <ng-container content>
 
     <div class="wrapper">
-      <div class="info-block">
+      <section class="info-table-block">
         <div class="item">
           <p class="title">{{ 'user.info.id' | translate }}</p>
           <p class="value">{{ user?.id }}</p>
@@ -38,7 +38,7 @@
           <p class="title">{{ 'user.info.operationsREfSumm' | translate }}</p>
           <p class="value">{{ user?.operationsSumm }}</p>
         </div>
-      </div>
+      </section>
       <div class="edit-info-block">
         <form [formGroup]="form" (ngSubmit)="save()" class="form">
 

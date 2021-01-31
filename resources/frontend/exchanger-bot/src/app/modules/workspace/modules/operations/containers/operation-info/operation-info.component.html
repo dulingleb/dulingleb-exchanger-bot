@@ -5,23 +5,32 @@
   <ng-container content>
     <form [formGroup]="form" (ngSubmit)="addComment()" class="form">
 
-      <h3>{{ 'operation.info.amount' | translate }}</h3>
-      <p><i>{{ operation?.amount }}</i></p>
-
-      <h3>{{ 'operation.info.price' | translate }}</h3>
-      <p><i>{{ operation?.price }}</i></p>
-
-      <h3>{{ 'operation.info.detail' | translate }}</h3>
-      <p><i>{{ operation?.bankDetailId }}</i></p>
-
-      <h3>{{ 'operation.info.btcAddress' | translate }}</h3>
-      <p><i>{{ operation?.btcAddress }}</i></p>
-
-      <h3>{{ 'operation.info.date' | translate }}</h3>
-      <p><i>{{ operation?.createdAt | date: 'd.MM.yyyy hh:mm' }}</i></p>
-
-      <h3>{{ 'operation.info.status' | translate }}</h3>
-      <p><i>{{ 'operation.status.' + operation?.status | translate }}</i></p>
+      <section class="info-table-block">
+        <div class="item">
+          <p class="title">{{ 'operation.info.amount' | translate }}</p>
+          <p class="value">{{ operation?.amount }}</p>
+        </div>
+        <div class="item">
+          <p class="title">{{ 'operation.info.price' | translate }}</p>
+          <p class="value">{{ operation?.price }}</p>
+        </div>
+        <div class="item">
+          <p class="title">{{ 'operation.info.detail' | translate }}</p>
+          <p class="value">{{ operation?.bankDetailId }}</p>
+        </div>
+        <div class="item">
+          <p class="title">{{ 'operation.info.btcAddress' | translate }}</p>
+          <p class="value">{{ operation?.btcAddress }}</p>
+        </div>
+        <div class="item">
+          <p class="title">{{ 'operation.info.date' | translate }}</p>
+          <p class="value">{{ operation?.createdAt | date: 'd.MM.yyyy hh:mm' }}</p>
+        </div>
+        <div class="item">
+          <p class="title">{{ 'operation.info.status' | translate }}</p>
+          <p class="value" [ngClass]="OPERATION_CLASS[operation?.status]">{{ 'operation.status.' + operation?.status | translate }}</p>
+        </div>
+      </section>
 
       <div class="form-group">
         <mat-form-field appearance="fill">

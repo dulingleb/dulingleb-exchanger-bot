@@ -4,9 +4,11 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { finalize, mergeMap, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
+import { IOperationInDto } from '@core/models'
 import { OperationApiService } from '@core/api'
 import { IUiFacade, UI_FACADE } from '@core/features'
-import { IOperationInDto, ITelegramUserDataDto } from '@core/models'
+
+import { OPERATION_CLASS } from '../../constants'
 
 @Component({
   selector: 'app-operation-info',
@@ -17,6 +19,7 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
   operation: IOperationInDto
   form: FormGroup
   inRequest: boolean
+  OPERATION_CLASS = OPERATION_CLASS
 
   private destroy$ = new Subject()
 

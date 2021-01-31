@@ -4,7 +4,7 @@ import { finalize, mergeMap, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
-import { IUiFacade, IUserInDto, UI_FACADE } from '@core/features'
+import { EUserRoleDto, IUiFacade, IUserInDto, UI_FACADE } from '@core/features'
 
 @Component({
   selector: 'app-admin-info',
@@ -14,6 +14,7 @@ export class AdminInfoComponent implements OnInit, OnDestroy {
 
   user: IUserInDto
   inRequest: boolean
+  EUserRoleDto = EUserRoleDto
 
   private destroy$ = new Subject()
 

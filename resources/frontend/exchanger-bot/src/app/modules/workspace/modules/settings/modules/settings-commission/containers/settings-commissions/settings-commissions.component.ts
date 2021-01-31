@@ -98,20 +98,7 @@ export class SettingsCommissionComponent implements OnInit, OnDestroy {
   }
 
   protected initFilterFields(): void {
-    this.filterFields = [
-      {
-        labelI18n: 'settings.commissions.table.from',
-        name: 'from'
-      },
-      {
-        labelI18n: 'settings.commissions.table.to',
-        name: 'to'
-      },
-      {
-        labelI18n: 'settings.commissions.table.percent',
-        name: 'percent'
-      }
-    ]
+    this.filterFields = []
   }
 
 }

@@ -9,14 +9,19 @@
     </a>
   </ng-container>
   <ng-container content>
-    <h3>{{ 'settings.commissions.edit.input.from' | translate }}</h3>
-    <p><i>{{ commission?.from }}</i></p>
-
-    <h3>{{ 'settings.commissions.edit.input.to' | translate }}</h3>
-    <p><i>{{ commission?.to }}</i></p>
-
-    <h3>{{ 'settings.commissions.edit.input.percent' | translate }}</h3>
-    <p><i>{{ commission?.percent }} %</i></p>
-
+    <section class="info-table-block">
+      <div class="item">
+        <p class="title">{{ 'settings.commissions.edit.input.from' | translate }}</p>
+        <p class="value">{{ commission?.from }}</p>
+      </div>
+      <div class="item">
+        <p class="title">{{ 'settings.commissions.edit.input.to' | translate }}</p>
+        <p class="value">{{ commission?.to }}</p>
+      </div>
+      <div class="item">
+        <p class="title">{{ 'settings.commissions.edit.input.percent' | translate }}</p>
+        <p class="value">{{ commission?.percent }}</p>
+      </div>
+    </section>
   </ng-container>
 </app-page-content>

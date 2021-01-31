@@ -55,7 +55,7 @@ a, button {
 }
 
 .text-gray {
-  color: var(--grey-color);
+  color: var(--grey-font-color);
 }
 
 .text-black {
@@ -77,6 +77,19 @@ a, button {
   text-transform: uppercase;
   border-radius: 50%;
   background: var(--primary-color);
+}
+
+.info-table-block {
+  .item {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-column-gap: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+
+    &:first-child {
+      border-top: 1px solid var(--border-color);
+    }
+  }
 }
 
 ckeditor .ck-content {

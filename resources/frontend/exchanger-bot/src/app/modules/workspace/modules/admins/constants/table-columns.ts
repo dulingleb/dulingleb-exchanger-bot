@@ -5,12 +5,14 @@ export const TABLE_COLUMNS: ITableColumn[] = [
   {
     name: 'name',
     nameI18n: 'admins.table.name',
+    sort: true,
     type: ETableColumnType.STRING,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN],
   },
   {
     name: 'email',
     nameI18n: 'admins.table.email',
+    sort: true,
     type: ETableColumnType.STRING,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN],
   },
@@ -18,6 +20,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     name: 'role',
     nameI18n: 'admins.table.role',
     type: ETableColumnType.STRING,
+    class: (user: IUserInDto): string => user.role === EUserRoleDto.SUPER_ADMIN ? 'text-primary': 'text-success',
     translate: (user: IUserInDto): string => `common.roles.${user.role}`,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN],
   },

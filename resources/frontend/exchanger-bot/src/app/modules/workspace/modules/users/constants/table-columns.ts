@@ -6,18 +6,21 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     name: 'username',
     nameI18n: 'users.table.username',
     type: ETableColumnType.STRING,
+    sort: true,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
   {
     name: 'operationsCount',
     nameI18n: 'users.table.operationsCount',
     type: ETableColumnType.STRING,
+    sort: true,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
   {
     name: 'operationsSumm',
     nameI18n: 'users.table.operationsSumm',
     type: ETableColumnType.STRING,
+    sort: true,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
   {

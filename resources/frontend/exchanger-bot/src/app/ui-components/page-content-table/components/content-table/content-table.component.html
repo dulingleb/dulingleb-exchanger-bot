@@ -3,7 +3,7 @@
   <ng-container *ngFor="let tableColumn of tableColumns" [matColumnDef]="tableColumn.name">
 
     <ng-container *ngIf="!tableColumn.actionData">
-      <mat-header-cell mat-sort-header *matHeaderCellDef>
+      <mat-header-cell mat-sort-header [disabled]="!tableColumn.sort" *matHeaderCellDef>
         {{ tableColumn.nameI18n | translate }}
       </mat-header-cell>
     </ng-container>

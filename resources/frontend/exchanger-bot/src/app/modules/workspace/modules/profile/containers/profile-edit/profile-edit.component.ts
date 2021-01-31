@@ -28,7 +28,10 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
   ) {
     this.form = new FormGroup({
-      email: new FormControl('', [
+      email: new FormControl({
+        value: '',
+        disabled: true
+      }, [
         Validators.required,
         Validators.email,
       ]),

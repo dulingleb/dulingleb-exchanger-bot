@@ -3,7 +3,7 @@ import { finalize, mergeMap, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
-import { IUiFacade, IUserFacade, IUserInDto, UI_FACADE, USER_FACADE } from '@core/features'
+import { EUserRoleDto, IUiFacade, IUserFacade, IUserInDto, UI_FACADE, USER_FACADE } from '@core/features'
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   user: IUserInDto
   inRequest: boolean
+  EUserRoleDto = EUserRoleDto
 
   private destroy$ = new Subject()
 

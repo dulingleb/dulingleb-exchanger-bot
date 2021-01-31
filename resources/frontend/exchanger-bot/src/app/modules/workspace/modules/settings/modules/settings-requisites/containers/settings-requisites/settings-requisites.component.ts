@@ -4,9 +4,9 @@ import { filter, finalize, mergeMap, takeUntil, tap, withLatestFrom } from 'rxjs
 import { Subject } from 'rxjs'
 
 import { ETableColumnActionEventType, IRequestApiDto, ISettingRequisiteDto, ITableActionEvent } from '@core/models'
+import { IPaginator, IFilterField, EFilterType } from '@ui/table-filter-paginator'
 import { IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
 import { ConfirmModalService, IConfirmModal } from '@ui/confirm-modal'
-import { IPaginator, IFilterField } from '@ui/table-filter-paginator'
 import { SettingApiService } from '@core/api'
 
 import { TABLE_COLUMNS } from '../../constants/table-columns'
@@ -106,7 +106,20 @@ export class SettingsRequisitesComponent implements OnInit, OnDestroy {
       },
       {
         labelI18n: 'settings.requisites.table.status',
-        name: 'status'
+        name: 'status',
+        type: EFilterType.SELECT,
+        options: [
+          {
+            value: 0,
+            titleI18n: 'settings.requisites.status.0',
+            class: 'text-success'
+          },
+          {
+            value: 1,
+            titleI18n: 'settings.requisites.status.1',
+            class: 'text-warn'
+          }
+        ]
       }
     ]
   }

@@ -6,12 +6,16 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     name: 'title',
     nameI18n: 'settings.requisites.table.title',
     type: ETableColumnType.STRING,
+    sort: true,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
   {
     name: 'status',
     nameI18n: 'settings.requisites.table.status',
+    icon: (item: ISettingRequisiteDto): string => item.status ? 'done' : 'clear',
+    class: (item: ISettingRequisiteDto): string => item.status ? 'text-success' : 'text-warn',
     type: ETableColumnType.STRING,
+    sort: true,
     allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
   },
   {

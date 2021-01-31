@@ -6,7 +6,6 @@ import { ESnackBarType, ISnackBar } from './snack-bar.model'
 @Component({
   selector: 'app-snack-bar',
   templateUrl: './snack-bar.component.html',
-  styleUrls: ['./snack-bar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SnackBarComponent {
