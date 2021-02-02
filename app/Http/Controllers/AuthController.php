@@ -88,13 +88,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function userProfile() {
-        $user = auth()->user()->toArray();
-        $n['operations_wait'] = Operation::where('exchanger_id', auth()->user()->exchanger->id)->where('status', Operation::STATUS_WAIT)->count();
-        $n['operations_sum_today'] = Operation::where('exchanger_id', auth()->user()->exchanger->id)->where('status', Operation::STATUS_SUCCESS)->where('updated_at', Carbon::now()->format('Y-m-d'))->sum('price');
-        $n['operations_count_today'] = Operation::where('exchanger_id', auth()->user()->exchanger->id)->where('status', Operation::STATUS_SUCCESS)->where('updated_at', Carbon::now()->format('Y-m-d'))->count();
-        $n['users_count_today'] = TelegramUserSetting::where('exchanger_id', \auth()->user()->exchanger->id)->where('created_at', Carbon::now()->format('Y-m-d'))->count();
-        $data = array_merge($user, $n);
-        return $this->response($data);
+        return $this->response(auth()->user());
     }
 
     /**
