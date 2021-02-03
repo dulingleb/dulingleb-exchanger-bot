@@ -3,11 +3,11 @@
     <a mat-button disableRipple="true" class="nav-link three-dots-btn" routerLink="/profile">
       <span class="mat-button-wrapper">
         <span class="info-wrapper">
-          <span class="user-logo">{{ userFacade.user$ | async | logoName }}</span>
-          <span class="fio">{{ (userFacade.user$ | async)?.name }}</span>
+          <span class="user-logo">{{ adminFacade.admin$ | async | logoName }}</span>
+          <span class="fio">{{ (adminFacade.admin$ | async)?.name }}</span>
         </span>
         <span class="subscription-wrapper" [title]="'sideNav.userInfo.hoverTitle' | translate">
-          <span class="subscription">{{ 'sideNav.userInfo.subscription' | translate: { days: (userFacade.user$ | async)?.operationsCountToday } }}</span>
+          <span class="subscription">{{ 'sideNav.userInfo.subscription' | translate: { days: (adminFacade.admin$ | async)?.operationsCountToday } }}</span>
         </span>
       </span>
     </a>
@@ -19,7 +19,7 @@
      <span>{{ 'sideNav.dashboard' | translate }}</span>
   </a>
 </mat-list-item>
-  <mat-list-item class="nav-item" *ngIf="(userFacade.user$ | async)?.role === EUserRoleDto.SUPER_ADMIN">
+  <mat-list-item class="nav-item" *ngIf="(adminFacade.admin$ | async)?.role === EUserRoleDto.SUPER_ADMIN">
   <a mat-icon-button disableRipple="true" class="nav-link" routerLink="/admins">
      <mat-icon>supervisor_account</mat-icon>
      <span>{{ 'sideNav.admins' | translate }}</span>
@@ -29,12 +29,14 @@
   <a mat-icon-button disableRipple="true" class="nav-link" routerLink="/users">
      <mat-icon>people</mat-icon>
      <span>{{ 'sideNav.users' | translate }}</span>
+     <span class="count">{{ (adminFacade.usersCountData$ | async)?.usersCountToday || '' }}</span>
   </a>
 </mat-list-item>
  <mat-list-item class="nav-item">
   <a mat-icon-button disableRipple="true" class="nav-link" routerLink="/operations">
      <mat-icon>attach_money</mat-icon>
      <span>{{ 'sideNav.operations' | translate }}</span>
+     <span class="count">{{ (adminFacade.operationCountData$ | async)?.operationsCountToday || '' }}</span>
   </a>
 </mat-list-item>
  <mat-list-item class="nav-item">
@@ -83,7 +85,7 @@
 
 <div class="bottom-items">
   <mat-list-item class="nav-item">
-    <button mat-icon-button disableRipple="true" class="nav-link" (click)="userFacade.logout()">
+    <button mat-icon-button disableRipple="true" class="nav-link" (click)="adminFacade.logout()">
        <mat-icon>exit_to_app</mat-icon>
        <span>{{ 'sideNav.logout' | translate }}</span>
     </button>

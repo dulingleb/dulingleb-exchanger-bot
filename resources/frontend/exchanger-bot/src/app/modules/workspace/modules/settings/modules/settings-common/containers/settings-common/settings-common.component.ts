@@ -5,7 +5,7 @@ import { Subject } from 'rxjs'
 
 import { ISettingInDto } from '@core/models'
 import { SettingApiService } from '@core/api'
-import { IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
+import { IUiFacade, IAdminFacade, UI_FACADE, ADMIN_FACADE } from '@core/features'
 
 import { ICommonKeysSetting, ICommonLimitSetting, ICommonTelegramSetting } from '../../constants'
 
@@ -25,7 +25,7 @@ export class SettingsCommonComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject()
 
   constructor(
-    @Inject(USER_FACADE) public userFacade: IUserFacade,
+    @Inject(ADMIN_FACADE) public adminFacade: IAdminFacade,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
     private settingApiService: SettingApiService,
   ) {}

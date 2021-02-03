@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core'
 
-import { IUserFacade, USER_FACADE } from '@core/features'
+import { IAdminFacade, ADMIN_FACADE } from '@core/features'
 
 @Component({
   selector: 'app-workspace',
@@ -9,7 +9,7 @@ import { IUserFacade, USER_FACADE } from '@core/features'
 })
 export class WorkspaceComponent implements OnInit {
 
-  constructor(@Inject(USER_FACADE) public userFacade: IUserFacade) {}
+  constructor(@Inject(ADMIN_FACADE) public adminFacade: IAdminFacade) {}
 
   ngOnInit(): void {}
 

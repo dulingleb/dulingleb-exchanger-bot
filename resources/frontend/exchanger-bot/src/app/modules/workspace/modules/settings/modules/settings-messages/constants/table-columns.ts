@@ -1,4 +1,4 @@
-import { EUserRoleDto } from '@core/features'
+import { EAdminRoleDto } from '@core/features'
 import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, ISettingMessageDto, ITableColumn } from '@core/models'
 
 export const TABLE_COLUMNS: ITableColumn[] = [
@@ -7,13 +7,13 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     nameI18n: 'settings.messages.table.title',
     type: ETableColumnType.STRING,
     sort: true,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
     name: 'slug',
     nameI18n: 'settings.messages.table.slug',
     type: ETableColumnType.STRING,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
     name: 'info',
@@ -24,7 +24,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.EDIT
     },
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
     name: 'edit',
@@ -36,6 +36,6 @@ export const TABLE_COLUMNS: ITableColumn[] = [
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.EDIT
     },
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN],
   }
 ]

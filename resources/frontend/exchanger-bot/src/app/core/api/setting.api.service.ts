@@ -22,7 +22,7 @@ import {
   ISettingTelegramOutDto
 } from '@core/models'
 import { apiQueryToParams, operationOutToInDto } from '@utils/index'
-import { EFilterUserInOut } from '@core/features'
+import { EFilterAdminInOut } from '@core/features'
 
 @Injectable({
   providedIn: 'root',
@@ -73,7 +73,7 @@ export class SettingApiService {
   }
 
   getMessageList(apiQuery: IRequestApiDto): Observable<IResponseApiInDto<ISettingMessageDto[]>> {
-    const params = apiQueryToParams(apiQuery, EFilterUserInOut)
+    const params = apiQueryToParams(apiQuery, EFilterAdminInOut)
     return this.http.get<ICommonResponseDto<IResponseApiOutDto<ISettingMessageDto[]>>>(`${ENV.api}/settings/messages`, { params }).pipe(
       mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: res }) => ({
@@ -122,7 +122,7 @@ export class SettingApiService {
   }
 
   getCommissionList(apiQuery: IRequestApiDto): Observable<IResponseApiInDto<ISettingCommissionDto[]>> {
-    const params = apiQueryToParams(apiQuery, EFilterUserInOut)
+    const params = apiQueryToParams(apiQuery, EFilterAdminInOut)
     return this.http.get<ICommonResponseDto<IResponseApiOutDto<ISettingCommissionDto[]>>>(`${ENV.api}/settings/commissions`, { params }).pipe(
       mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: res }) => ({
@@ -158,7 +158,7 @@ export class SettingApiService {
   }
 
   getRequisiteList(apiQuery: IRequestApiDto): Observable<IResponseApiInDto<ISettingRequisiteDto[]>> {
-    const params = apiQueryToParams(apiQuery, EFilterUserInOut)
+    const params = apiQueryToParams(apiQuery, EFilterAdminInOut)
     return this.http.get<ICommonResponseDto<IResponseApiOutDto<ISettingRequisiteDto[]>>>(`${ENV.api}/settings/bank-details`, { params }).pipe(
       mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: res }) => ({

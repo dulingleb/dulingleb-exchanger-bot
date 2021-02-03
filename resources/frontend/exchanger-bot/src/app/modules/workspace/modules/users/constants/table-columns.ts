@@ -1,4 +1,4 @@
-import { EUserRoleDto } from '@core/features'
+import { EAdminRoleDto } from '@core/features'
 import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, ITableColumn, ITelegramUserInDto } from '@core/models'
 
 export const TABLE_COLUMNS: ITableColumn[] = [
@@ -7,21 +7,21 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     nameI18n: 'users.table.username',
     type: ETableColumnType.STRING,
     sort: true,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
     name: 'operationsCount',
     nameI18n: 'users.table.operationsCount',
     type: ETableColumnType.STRING,
     sort: true,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
-    name: 'operationsSumm',
-    nameI18n: 'users.table.operationsSumm',
+    name: 'operationsSum',
+    nameI18n: 'users.table.operationsSum',
     type: ETableColumnType.STRING,
     sort: true,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
     name: 'ban',
@@ -29,7 +29,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     type: ETableColumnType.STRING,
     icon: (item: ITelegramUserInDto): string => item.ban ? 'clear' : 'done',
     class: (item: ITelegramUserInDto): string => item.ban ? 'text-warn' : 'text-success',
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
     name: 'edit',
@@ -40,6 +40,6 @@ export const TABLE_COLUMNS: ITableColumn[] = [
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.EDIT
     },
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   }
 ]

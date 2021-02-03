@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { finalize, takeUntil, withLatestFrom } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
-import { IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
+import { IUiFacade, IAdminFacade, UI_FACADE, ADMIN_FACADE } from '@core/features'
 import { IPaginator, IFilterField, EFilterType } from '@ui/table-filter-paginator'
 import { IOperationInDto, IRequestApiDto } from '@core/models'
 import { OperationApiService } from '@core/api'
@@ -27,7 +27,7 @@ export class OperationsComponent implements OnInit, OnDestroy {
   private requestApiQuery: IRequestApiDto
 
   constructor(
-    @Inject(USER_FACADE) public userFacade: IUserFacade,
+    @Inject(ADMIN_FACADE) public adminFacade: IAdminFacade,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
     private operationApiService: OperationApiService
   ) {}
@@ -40,7 +40,7 @@ export class OperationsComponent implements OnInit, OnDestroy {
     this.requestApiQuery = requestApiQuery
     this.inRequest = true
     this.operationApiService.getList(requestApiQuery).pipe(
-      withLatestFrom(this.userFacade.user$),
+      withLatestFrom(this.adminFacade.admin$),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
@@ -53,7 +53,7 @@ export class OperationsComponent implements OnInit, OnDestroy {
         }
       },
       (err) => {
-        // this.userFacade.logout()
+        // this.adminFacade.logout()
         this.uiFacade.addErrorNotification(err.message)
       }
     )

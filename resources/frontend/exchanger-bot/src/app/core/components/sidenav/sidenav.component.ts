@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy } from '@angular/core'
 import { Component, Inject } from '@angular/core'
 
-import { EUserRoleDto, IUserFacade, USER_FACADE } from '@core/features'
+import { EAdminRoleDto, IAdminFacade, ADMIN_FACADE } from '@core/features'
 
 @Component({
   selector: 'app-side-nav',
@@ -11,8 +11,8 @@ import { EUserRoleDto, IUserFacade, USER_FACADE } from '@core/features'
 })
 export class SidenavComponent {
 
-  EUserRoleDto = EUserRoleDto
+  EUserRoleDto = EAdminRoleDto
 
-  constructor(@Inject(USER_FACADE) public userFacade: IUserFacade) {}
+  constructor(@Inject(ADMIN_FACADE) public adminFacade: IAdminFacade) {}
 
 }

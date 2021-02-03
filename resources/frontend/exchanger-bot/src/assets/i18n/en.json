@@ -47,7 +47,7 @@
       "title": "Количества операций",
       "today": "За сегодня"
     },
-    "operationsSumm": {
+    "operationsSum": {
       "title": "Сумма операций",
       "today": "За сегодня"
     }
@@ -136,7 +136,7 @@
       "exchangerId": "id обменника",
       "telegramUserId": "id",
       "operationsCount": "Количество операций",
-      "operationsSumm": "Сумма операций",
+      "operationsSum": "Сумма операций",
       "ban": "Статус"
     }
   },
@@ -162,10 +162,10 @@
       "username": "username",
       "name": "Имя Фамилия",
       "operationsCount": "Подтвержденных сделок",
-      "operationsSumm": "Сделок на сумму",
+      "operationsSum": "Сделок на сумму",
       "ref": "Рефералов",
       "operationsRef": "Сделок рефов",
-      "operationsREfSumm": "Сделок рефов на сумму"
+      "operationsREfSum": "Сделок рефов на сумму"
     }
   },
   "operations": {

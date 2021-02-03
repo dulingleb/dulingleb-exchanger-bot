@@ -1,4 +1,4 @@
-import { EUserRoleDto, IUserInDto } from '@core/features'
+import { EAdminRoleDto, IAdminInDto } from '@core/features'
 import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, ITableColumn } from '@core/models'
 
 export const TABLE_COLUMNS: ITableColumn[] = [
@@ -7,50 +7,50 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     nameI18n: 'admins.table.name',
     sort: true,
     type: ETableColumnType.STRING,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN],
   },
   {
     name: 'email',
     nameI18n: 'admins.table.email',
     sort: true,
     type: ETableColumnType.STRING,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN],
   },
   {
     name: 'role',
     nameI18n: 'admins.table.role',
     type: ETableColumnType.STRING,
-    class: (user: IUserInDto): string => user.role === EUserRoleDto.SUPER_ADMIN ? 'text-primary': 'text-success',
-    translate: (user: IUserInDto): string => `common.roles.${user.role}`,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN],
+    class: (user: IAdminInDto): string => user.role === EAdminRoleDto.SUPER_ADMIN ? 'text-primary': 'text-success',
+    translate: (user: IAdminInDto): string => `common.roles.${user.role}`,
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN],
   },
   {
     name: 'createdAt',
     nameI18n: 'admins.table.createdAt',
     type: ETableColumnType.DATE,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN],
   },
   {
     name: 'info',
     nameI18n: 'table.action.info',
     type: ETableColumnType.STRING,
     actionData: {
-      link: (user: IUserInDto): string => `/admins/${user?.id}/info`,
+      link: (user: IAdminInDto): string => `/admins/${user?.id}/info`,
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.INFO
     },
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN],
   },
   {
     name: 'edit',
     nameI18n: 'table.action.edit',
     type: ETableColumnType.STRING,
     actionData: {
-      link: (user: IUserInDto): string => `/admins/${user?.id}/edit`,
+      link: (user: IAdminInDto): string => `/admins/${user?.id}/edit`,
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.EDIT
     },
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN],
   },
   {
     name: 'delete',
@@ -59,8 +59,8 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     actionData: {
       actionType: ETableColumnActionType.EVENT,
       eventType: ETableColumnActionEventType.DELETE,
-      hide: (user: IUserInDto, currentUserId: number): boolean => user?.id === currentUserId
+      hide: (user: IAdminInDto, currentUserId: number): boolean => user?.id === currentUserId
     },
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN]
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN]
   }
 ]

@@ -9,7 +9,7 @@ import { StatusInfoBlockModule } from '@ui/status-info-block'
 
 import {
   StatusInfoBlockOperationsCountComponent,
-  StatusInfoBlockOperationsSummComponent,
+  StatusInfoBlockOperationsSumComponent,
   StatusInfoBlockStatisticComponent,
   StatusInfoBlockUsersComponent
 } from './components'
@@ -22,7 +22,7 @@ import { WorkspaceComponent } from './workspace.component'
     WorkspaceComponent,
     StatusInfoBlockUsersComponent,
     StatusInfoBlockStatisticComponent,
-    StatusInfoBlockOperationsSummComponent,
+    StatusInfoBlockOperationsSumComponent,
     StatusInfoBlockOperationsCountComponent,
   ],
   imports: [

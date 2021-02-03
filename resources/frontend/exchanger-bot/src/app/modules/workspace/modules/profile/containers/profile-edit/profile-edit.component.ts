@@ -5,7 +5,7 @@ import { finalize, mergeMap, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
-import { IUiFacade, IUserFacade, IUserInDto, UI_FACADE, USER_FACADE } from '@core/features'
+import { IUiFacade, IAdminFacade, IAdminInDto, UI_FACADE, ADMIN_FACADE } from '@core/features'
 
 @Component({
   selector: 'app-profile-edit',
@@ -13,7 +13,7 @@ import { IUiFacade, IUserFacade, IUserInDto, UI_FACADE, USER_FACADE } from '@cor
 })
 export class ProfileEditComponent implements OnInit, OnDestroy {
 
-  user: IUserInDto
+  user: IAdminInDto
   form: FormGroup
   showPassword: boolean
   inRequest: boolean
@@ -24,7 +24,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private adminApiService: AdminApiService,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
-    @Inject(USER_FACADE) private userFacade: IUserFacade,
+    @Inject(ADMIN_FACADE) private adminFacade: IAdminFacade,
 
   ) {
     this.form = new FormGroup({
@@ -51,8 +51,8 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.inRequest = true
-    this.userFacade.user$.pipe(
-      mergeMap(user => this.adminApiService.getUser(+user.id)),
+    this.adminFacade.admin$.pipe(
+      mergeMap(user => this.adminApiService.getAdmin(+user.id)),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
@@ -85,12 +85,12 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   private updateUser(id: number, email: string, name: string, password: string, cPassword: string): void {
     this.inRequest = true
 
-    const user: IUserInDto = { id, email, name }
+    const user: IAdminInDto = { id, email, name }
     if (password && cPassword) {
       user.password = password
       user.cPassword = cPassword
     }
-    this.adminApiService.updateUser(user).pipe(
+    this.adminApiService.updateAdmin(user).pipe(
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(

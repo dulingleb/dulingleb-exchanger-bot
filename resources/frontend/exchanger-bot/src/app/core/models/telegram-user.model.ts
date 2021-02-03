@@ -6,7 +6,7 @@ export interface ITelegramUserInDto {
   exchangerId: number;
   telegramUserId: number;
   operationsCount: number;
-  operationsSumm: number;
+  operationsSum: number;
   discount?: number;
   comment?: string;
   ban?: boolean;
@@ -40,5 +40,5 @@ export enum EFilterTelegramUserInOut {
   exchangerId = 'exchanger_id',
   telegramUserId = 'telegram_user_id',
   operationsCount = 'operations_count',
-  operationsSumm = 'operations_summ'
+  operationsSum = 'operations_summ'
 }

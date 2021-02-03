@@ -4,7 +4,7 @@ import { finalize, mergeMap, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
-import { EUserRoleDto, IUiFacade, IUserInDto, UI_FACADE } from '@core/features'
+import { EAdminRoleDto, IUiFacade, IAdminInDto, UI_FACADE } from '@core/features'
 
 @Component({
   selector: 'app-admin-info',
@@ -12,9 +12,9 @@ import { EUserRoleDto, IUiFacade, IUserInDto, UI_FACADE } from '@core/features'
 })
 export class AdminInfoComponent implements OnInit, OnDestroy {
 
-  user: IUserInDto
+  user: IAdminInDto
   inRequest: boolean
-  EUserRoleDto = EUserRoleDto
+  EUserRoleDto = EAdminRoleDto
 
   private destroy$ = new Subject()
 
@@ -26,7 +26,7 @@ export class AdminInfoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
-      mergeMap((params: ParamMap) => this.adminApiService.getUser(+params.get('id'))),
+      mergeMap((params: ParamMap) => this.adminApiService.getAdmin(+params.get('id'))),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(

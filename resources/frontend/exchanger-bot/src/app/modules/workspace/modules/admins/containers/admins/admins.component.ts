@@ -4,7 +4,7 @@ import { Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
 import { ETableColumnActionEventType, IRequestApiDto, ITableActionEvent } from '@core/models'
-import { IUiFacade, IUserFacade, IUserInDto, UI_FACADE, USER_FACADE } from '@core/features'
+import { IUiFacade, IAdminFacade, IAdminInDto, UI_FACADE, ADMIN_FACADE } from '@core/features'
 import { ConfirmModalService, IConfirmModal } from '@ui/confirm-modal'
 import { IPaginator, IFilterField } from '@ui/table-filter-paginator'
 
@@ -16,7 +16,7 @@ import { TABLE_COLUMNS } from '../../constants/table-columns'
 })
 export class AdminsComponent implements OnInit, OnDestroy {
 
-  users: IUserInDto[] = []
+  users: IAdminInDto[] = []
   inRequest: boolean
 
   paginator: IPaginator
@@ -28,7 +28,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
   private requestApiQuery: IRequestApiDto
 
   constructor(
-    @Inject(USER_FACADE) public userFacade: IUserFacade,
+    @Inject(ADMIN_FACADE) public adminFacade: IAdminFacade,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
     private confirmModalService: ConfirmModalService,
     private adminApiService: AdminApiService,
@@ -54,7 +54,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
         }
       },
       (err) => {
-        // this.userFacade.logout()
+        // this.adminFacade.logout()
         this.uiFacade.addErrorNotification(err.message)
       }
     )
@@ -69,7 +69,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
     this.destroy$.complete()
   }
 
-  protected deleteUser(user: IUserInDto): void {
+  protected deleteUser(user: IAdminInDto): void {
     const data: IConfirmModal = {
       titleI18n: 'confirm.deleteModal.title',
       titleKeyI18n: user.name,
@@ -81,7 +81,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
     this.confirmModalService.openDialog(data).pipe(
       filter(res => res),
       tap(() => this.inRequest = true),
-      mergeMap(() => this.adminApiService.deleteUser(user.id)),
+      mergeMap(() => this.adminApiService.deleteAdmin(user.id)),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(

@@ -35,6 +35,19 @@
     .nav-link {
       flex: 1;
       text-align: left;
+
+      .count {
+        display: inline-block;
+        padding: 0.3rem;
+        line-height: 0.6;
+        border-radius: 50%;
+        color: var(--light-color);
+        background: var(--accent-color);
+
+        &:empty {
+          display: none;
+        }
+      }
     }
   }
 

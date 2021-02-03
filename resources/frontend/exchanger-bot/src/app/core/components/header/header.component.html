@@ -8,7 +8,7 @@
           {{ 'info.appName' | translate }}
         </a>
 
-        <button mat-icon-button (click)="uiFacade.toggleSideNav()" *ngIf="userFacade.user$ | async" class="toggle-side-wrapper">
+        <button mat-icon-button (click)="uiFacade.toggleSideNav()" *ngIf="adminFacade.admin$ | async" class="toggle-side-wrapper">
           <mat-icon aria-label="Menu" *ngIf="uiFacade.showSideNav$ | async">menu_open</mat-icon>
           <mat-icon aria-label="Menu" *ngIf="!(uiFacade.showSideNav$ | async)">menu</mat-icon>
        </button>

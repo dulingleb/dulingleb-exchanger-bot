@@ -10,6 +10,7 @@ export class StatusInfoBlockComponent implements OnInit {
   @Input() blockNameI18n: string
   @Input() blockInfo: string | number
   @Input() icon: string
+  @Input() infoAction: boolean
 
   constructor() {}
 

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Inject, Input, Output } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 
 import { SettingApiService } from '@core/api'
-import { IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
+import { IUiFacade, IAdminFacade, UI_FACADE, ADMIN_FACADE } from '@core/features'
 
 import { ICommonTelegramSetting } from '../../constants'
 
@@ -21,7 +21,7 @@ export class SettingsCommonTelegramComponent {
   form: FormGroup
 
   constructor(
-    @Inject(USER_FACADE) public userFacade: IUserFacade,
+    @Inject(ADMIN_FACADE) public adminFacade: IAdminFacade,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
     private settingApiService: SettingApiService,
   ) {

@@ -1,4 +1,4 @@
-import { EUserRoleDto } from '../features/user'
+import { EAdminRoleDto } from '../features/admin'
 
 export interface ITableColumn {
   name: string;
@@ -7,7 +7,7 @@ export interface ITableColumn {
   type: ETableColumnType;
   icon?: (...args: any) => string;
   class?: (...args: any) => string;
-  allowedForRoles: EUserRoleDto[];
+  allowedForRoles: EAdminRoleDto[];
   translate?: (...args: any) => string;
   sort?: boolean;
   actionData?: {

@@ -1,10 +1,10 @@
-export interface IUserInDto {
+export interface IAdminInDto {
   id?: number;
   name: string;
   password?: string;
   cPassword?: string;
   email: string;
-  role?: EUserRoleDto;
+  role?: EAdminRoleDto;
   operationsCountToday?: number;
   operationsSumToday?: number;
   usersCountToday?: number;
@@ -13,18 +13,18 @@ export interface IUserInDto {
   updatedAt?: Date;
 }
 
-export enum EUserRoleDto {
+export enum EAdminRoleDto {
   SUPER_ADMIN = 1,
   ADMIN = 2,
 }
 
-export interface IUserOutDto {
+export interface IAdminOutDto {
   id?: number;
   name: string;
   email: string;
   password?: string;
   c_password?: string;
-  role_id?: EUserRoleDto;
+  role_id?: EAdminRoleDto;
   operations_count_today?: number;
   operations_sum_today?: number;
   users_count_today?: number;
@@ -33,22 +33,22 @@ export interface IUserOutDto {
   updated_at?: Date;
 }
 
-export interface IUserLoginOutDto {
+export interface IAdminLoginOutDto {
   access_token: string;
   token_type: string;
   expires_in: number;
-  user: IUserOutDto;
+  user: IAdminOutDto;
 }
 
-export interface IUserLoginInDto {
+export interface IAdminLoginInDto {
   accessToken: string;
   tokenType: string;
   expiresIn: number;
-  user: IUserInDto;
+  user: IAdminInDto;
 }
 
 /* eslint-disable @typescript-eslint/naming-convention */
-export enum EFilterUserInOut {
+export enum EFilterAdminInOut {
   role = 'role_id',
   createdAt = 'created_at',
   updatedAt = 'updated_at'

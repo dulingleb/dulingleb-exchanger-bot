@@ -3,22 +3,22 @@ import { map, skipWhile, withLatestFrom } from 'rxjs/operators'
 import { Inject, Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 
-import { EUserRoleDto, IUserFacade, USER_FACADE } from '@core/features'
+import { EAdminRoleDto, IAdminFacade, ADMIN_FACADE } from '@core/features'
 
 @Injectable()
 export class SuperAdminGuard implements CanActivate {
 
   constructor(
     private router: Router,
-    @Inject(USER_FACADE) private userFacade: IUserFacade
+    @Inject(ADMIN_FACADE) private adminFacade: IAdminFacade
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean{
-    return this.userFacade.inRequest$.pipe(
+    return this.adminFacade.inRequest$.pipe(
       skipWhile(inRequest => inRequest),
-      withLatestFrom(this.userFacade.user$),
+      withLatestFrom(this.adminFacade.admin$),
       map(([, user]) => {
-        if (user?.role === EUserRoleDto.SUPER_ADMIN) { return true }
+        if (user?.role === EAdminRoleDto.SUPER_ADMIN) { return true }
 
         this.router.navigateByUrl('/')
         return false

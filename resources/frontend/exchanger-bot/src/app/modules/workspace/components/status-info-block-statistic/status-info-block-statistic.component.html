@@ -5,6 +5,8 @@
                       icon="show_chart"
 >
   <ng-container actions>
-    <button mat-button color="primary" (click)="changeStatus.emit()">{{ 'statusInfoBlock.status.stopBtn' | translate }}</button>
+    <div class="change-status-btn-wrapper">
+      <button class="change-status-btn" mat-button color="primary" (click)="changeStatus.emit()">{{ 'statusInfoBlock.status.stopBtn' | translate }}</button>
+    </div>
   </ng-container>
 </app-status-info-block>

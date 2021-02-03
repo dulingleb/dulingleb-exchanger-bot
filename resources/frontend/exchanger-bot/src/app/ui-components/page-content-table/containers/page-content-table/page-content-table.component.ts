@@ -2,7 +2,7 @@ import { Component, EventEmitter, Inject, Input, OnDestroy, AfterViewInit, Outpu
 import { debounceTime, takeUntil } from 'rxjs/operators'
 import { BehaviorSubject, Subject } from 'rxjs'
 
-import { IUserFacade, USER_FACADE } from '@core/features'
+import { IAdminFacade, ADMIN_FACADE } from '@core/features'
 import { IFilterField, IFilterValues, IPaginator } from '@ui/table-filter-paginator'
 import { IRequestApiDto, ISortEvent, ITableActionEvent, ITableColumn } from '@core/models'
 
@@ -30,7 +30,7 @@ export class PageContentTableComponent implements AfterViewInit, OnDestroy {
   })
   private destroy$ = new Subject()
 
-  constructor(@Inject(USER_FACADE) public userFacade: IUserFacade) {}
+  constructor(@Inject(ADMIN_FACADE) public adminFacade: IAdminFacade) {}
 
   ngAfterViewInit(): void {
     this.requestApiQuery$.pipe(

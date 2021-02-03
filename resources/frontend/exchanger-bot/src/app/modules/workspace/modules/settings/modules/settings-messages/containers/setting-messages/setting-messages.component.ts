@@ -3,7 +3,7 @@ import { filter, finalize, mergeMap, takeUntil, tap, withLatestFrom } from 'rxjs
 import { Subject } from 'rxjs'
 
 import { ETableColumnActionEventType, IRequestApiDto, ISettingMessageDto, ITableActionEvent } from '@core/models'
-import { EUserRoleDto, IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
+import { EAdminRoleDto, IUiFacade, IAdminFacade, UI_FACADE, ADMIN_FACADE } from '@core/features'
 import { ConfirmModalService, IConfirmModal } from '@ui/confirm-modal'
 import { IPaginator, IFilterField } from '@ui/table-filter-paginator'
 import { SettingApiService } from '@core/api'
@@ -23,13 +23,13 @@ export class SettingMessagesComponent implements OnInit, OnDestroy {
   filterFields: IFilterField[]
 
   tableColumns = TABLE_COLUMNS
-  EUserRoleDto = EUserRoleDto
+  EUserRoleDto = EAdminRoleDto
 
   private destroy$ = new Subject()
   private requestApiQuery: IRequestApiDto
 
   constructor(
-    @Inject(USER_FACADE) public userFacade: IUserFacade,
+    @Inject(ADMIN_FACADE) public adminFacade: IAdminFacade,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
     private confirmModalService: ConfirmModalService,
     private settingApiService: SettingApiService,
@@ -43,7 +43,7 @@ export class SettingMessagesComponent implements OnInit, OnDestroy {
     this.requestApiQuery = requestApiQuery
     this.inRequest = true
     this.settingApiService.getMessageList(requestApiQuery).pipe(
-      withLatestFrom(this.userFacade.user$),
+      withLatestFrom(this.adminFacade.admin$),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
@@ -56,7 +56,7 @@ export class SettingMessagesComponent implements OnInit, OnDestroy {
         }
       },
       (err) => {
-        // this.userFacade.logout()
+        // this.adminFacade.logout()
         this.uiFacade.addErrorNotification(err.message)
       }
     )

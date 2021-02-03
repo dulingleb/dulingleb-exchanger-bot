@@ -1,4 +1,4 @@
-import { EUserRoleDto } from '@core/features'
+import { EAdminRoleDto } from '@core/features'
 import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, ISettingCommissionDto, ITableColumn } from '@core/models'
 
 export const TABLE_COLUMNS: ITableColumn[] = [
@@ -7,21 +7,21 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     nameI18n: 'settings.commissions.table.from',
     type: ETableColumnType.STRING,
     sort: true,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
     name: 'to',
     nameI18n: 'settings.commissions.table.to',
     sort: true,
     type: ETableColumnType.STRING,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
     name: 'percent',
     nameI18n: 'settings.commissions.table.percent',
     type: ETableColumnType.STRING,
     sort: true,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
     name: 'info',
@@ -32,7 +32,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.INFO
     },
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
     name: 'edit',
@@ -43,7 +43,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.EDIT
     },
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
     name: 'delete',
@@ -53,6 +53,6 @@ export const TABLE_COLUMNS: ITableColumn[] = [
       actionType: ETableColumnActionType.EVENT,
       eventType: ETableColumnActionEventType.DELETE,
     },
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN]
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN]
   }
 ]

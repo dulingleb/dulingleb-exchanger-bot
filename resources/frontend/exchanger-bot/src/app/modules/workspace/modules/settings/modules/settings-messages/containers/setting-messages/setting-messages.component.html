@@ -10,7 +10,7 @@
     {{ 'settings.messages.tableHeader.title' | translate }}
   </ng-container>
 
-  <ng-container table-actions *ngIf="(userFacade.user$ | async)?.role === EUserRoleDto.SUPER_ADMIN">
+  <ng-container table-actions *ngIf="(adminFacade.admin$ | async)?.role === EUserRoleDto.SUPER_ADMIN">
     <a mat-raised-button color="primary" disableRipple="true" class="nav-link" routerLink="/settings/messages/template/new">
       <mat-icon>add</mat-icon>
       <span>{{ 'settings.messages.tableHeader.addBtn' | translate }}</span>

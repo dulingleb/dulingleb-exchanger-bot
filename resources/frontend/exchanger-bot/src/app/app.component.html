@@ -1,6 +1,6 @@
 <mat-drawer-container class="app-wrapper" autosize [ngClass]="{ 'dark-mode': uiFacade.isDarkTheme$ | async }">
 
-  <mat-drawer #drawer [opened]="uiFacade.showSideNav$ | async" *ngIf="userFacade.user$ | async" class="app-side-nav" mode="side">
+  <mat-drawer #drawer [opened]="uiFacade.showSideNav$ | async" *ngIf="adminFacade.admin$ | async" class="app-side-nav" mode="side">
     <app-side-nav></app-side-nav>
   </mat-drawer>
 

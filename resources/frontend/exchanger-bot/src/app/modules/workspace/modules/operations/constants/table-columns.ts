@@ -1,4 +1,4 @@
-import { EUserRoleDto } from '@core/features'
+import { EAdminRoleDto } from '@core/features'
 import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, IOperationInDto, ITableColumn } from '@core/models'
 
 import { OPERATION_CLASS } from './operation.model'
@@ -9,7 +9,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     nameI18n: 'operations.table.id',
     type: ETableColumnType.STRING,
     sort: true,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
     name: 'username',
@@ -17,21 +17,21 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     nameI18n: 'operations.table.username',
     type: ETableColumnType.STRING,
     sort: true,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
     name: 'amount',
     nameI18n: 'operations.table.amount',
     type: ETableColumnType.STRING,
     sort: true,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
     name: 'price',
     nameI18n: 'operations.table.price',
     type: ETableColumnType.STRING,
     sort: true,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
     name: 'status',
@@ -40,7 +40,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     class: (operation: IOperationInDto): string => OPERATION_CLASS[operation.status],
     translate: (operation: IOperationInDto): string => `operation.status.${operation.status}`,
     sort: true,
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
     name: 'info',
@@ -51,6 +51,6 @@ export const TABLE_COLUMNS: ITableColumn[] = [
       actionType: ETableColumnActionType.LINK,
       eventType: ETableColumnActionEventType.INFO
     },
-    allowedForRoles: [EUserRoleDto.SUPER_ADMIN, EUserRoleDto.ADMIN],
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   }
 ]

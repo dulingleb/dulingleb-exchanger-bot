@@ -5,7 +5,7 @@ import { mergeMap, takeUntil } from 'rxjs/operators'
 import { of, Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
-import { IUiFacade, IUserInDto, UI_FACADE } from '@core/features'
+import { IUiFacade, IAdminInDto, UI_FACADE } from '@core/features'
 
 @Component({
   selector: 'app-admin-edit',
@@ -13,7 +13,7 @@ import { IUiFacade, IUserInDto, UI_FACADE } from '@core/features'
 })
 export class AdminEditComponent implements OnInit, OnDestroy {
 
-  user: IUserInDto
+  user: IAdminInDto
   form: FormGroup
   showPassword: boolean
   inRequest: boolean
@@ -52,7 +52,7 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     this.route.paramMap.pipe(
       mergeMap((params: ParamMap) => {
         const id = +params.get('id')
-        return id ? this.adminApiService.getUser(id) : of({} as IUserInDto)
+        return id ? this.adminApiService.getAdmin(id) : of({} as IAdminInDto)
       }),
       takeUntil(this.destroy$)
     ).subscribe(
@@ -86,7 +86,7 @@ export class AdminEditComponent implements OnInit, OnDestroy {
   }
 
   private updateUser(id: number, email: string, name: string): void {
-    this.adminApiService.updateUser({ id, email, name}).subscribe(
+    this.adminApiService.updateAdmin({ id, email, name}).subscribe(
       () => this.router.navigateByUrl('/admins'),
       (err) => {
         this.uiFacade.addErrorNotification(err.message)
@@ -95,7 +95,7 @@ export class AdminEditComponent implements OnInit, OnDestroy {
   }
 
   private addUser(email: string, name: string, password: string, cPassword: string): void {
-    this.adminApiService.addUser({ email, name, password, cPassword}).subscribe(
+    this.adminApiService.addAdmin({ email, name, password, cPassword}).subscribe(
       () => this.router.navigateByUrl('/admins'),
       (err) => {
         this.uiFacade.addErrorNotification(err.message)

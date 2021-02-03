@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { finalize, takeUntil, withLatestFrom } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
-import { IUiFacade, IUserFacade, UI_FACADE, USER_FACADE } from '@core/features'
+import { IUiFacade, IAdminFacade, UI_FACADE, ADMIN_FACADE } from '@core/features'
 import { IPaginator, IFilterField, EFilterType } from '@ui/table-filter-paginator'
 import { IRequestApiDto, ITelegramUserInDto } from '@core/models'
 import { TelegramUserApiService } from '@core/api'
@@ -26,7 +26,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject()
 
   constructor(
-    @Inject(USER_FACADE) public userFacade: IUserFacade,
+    @Inject(ADMIN_FACADE) public adminFacade: IAdminFacade,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
     private adminApiService: TelegramUserApiService
   ) {}
@@ -38,7 +38,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   getAdminList(requestApiQuery: IRequestApiDto): void {
     this.inRequest = true
     this.adminApiService.getList(requestApiQuery).pipe(
-      withLatestFrom(this.userFacade.user$),
+      withLatestFrom(this.adminFacade.admin$),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
