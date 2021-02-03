@@ -58,13 +58,12 @@ class SettingController extends Controller
 
     public function startStop(): \Illuminate\Http\JsonResponse
     {
-        $status = '';
         if (auth()->user()->exchanger->status == Exchanger::STATUS_ACTIVE) {
             auth()->user()->exchanger->status = Exchanger::STATUS_CLOSED;
-            $status = 'Закрыто';
+            $status = false;
         } else {
             auth()->user()->exchanger->status = Exchanger::STATUS_ACTIVE;
-            $status = 'В работе';
+            $status = true;
         }
         auth()->user()->exchanger->save();
 

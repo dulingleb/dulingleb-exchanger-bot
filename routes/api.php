@@ -43,6 +43,12 @@ Route::group([
         Route::patch('settings/messages/template/{message}/update', ['as' => 'settings.messages.default.update', 'uses' => 'ExchangerDefaultMessageController@update']);
     });
 
+    // Инфо для карточек сверхку
+    Route::get('info/operations-count', ['uses' => 'OperationController@getOperationsCount']);
+    Route::get('info/operations-sum', ['uses' => 'OperationController@getOperationsSum']);
+    Route::get('info/operations-wait', ['uses' => 'OperationController@getOperationsWait']);
+    Route::get('info/users-count', ['uses' => 'TelegramUserController@getUsersCount']);
+
 
     // Телеграм пользователи
     Route::get('telegram-users', ['as' => 'telegramUser.index', 'uses' => 'TelegramUserController@index']);

@@ -6,6 +6,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -54,7 +55,8 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         $code = 422;
-        if ($exception instanceof ModelNotFoundException) {
+
+        if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
             return response()->json(['status' => false, 'message' => 'Not Found!'], 404);
         }
 

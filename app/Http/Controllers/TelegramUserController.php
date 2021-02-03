@@ -7,6 +7,7 @@ use App\Models\Operation;
 use App\Models\TelegramUser;
 use App\Models\TelegramUserSetting;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
@@ -114,6 +115,15 @@ class TelegramUserController extends Controller
         $userSetting->save();
 
         return $this->response($userSetting, 'Пользователь успешно назначен админом');
+    }
+
+    public function getUsersCount(): \Illuminate\Http\JsonResponse
+    {
+        $users = TelegramUserSetting::where('exchanger_id', \auth()->user()->exchanger->id);
+        $data['users_count'] = $users->count();
+        $data['users_count_today'] = $users->where('created_at', Carbon::now()->format('Y-m-d'))->count();
+
+        return $this->response($data);
     }
 
     private function checkUser(TelegramUserSetting $userSetting) {
