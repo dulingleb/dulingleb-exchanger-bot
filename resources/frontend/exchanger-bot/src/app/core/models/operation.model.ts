@@ -22,6 +22,7 @@ export interface IOperationInDto {
   id: number;
   exchangerId: number;
   telegramUserId: number;
+  telegramUserName?: number;
   bankDetailId: number;
   amount: number;
   price: number;
@@ -43,6 +44,7 @@ export enum EFilterOperationInOut {
   updatedAt = 'updated_at',
   createdAt = 'created_at',
   telegramUserId = 'telegram_user_id',
+  telegramUserName = 'telegram_user_name',
   btcAddress = 'btc_address',
   bankDetailId = 'bank_detail_id'
 }

@@ -1,9 +1,10 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { finalize, takeUntil, withLatestFrom } from 'rxjs/operators'
+import { ActivatedRoute } from '@angular/router'
 import { Subject } from 'rxjs'
 
 import { IUiFacade, IAdminFacade, UI_FACADE, ADMIN_FACADE } from '@core/features'
-import { IPaginator, IFilterField, EFilterType } from '@ui/table-filter-paginator'
+import { IPaginator, IFilterField, EFilterType, IFilterValues } from '@ui/table-filter-paginator'
 import { IOperationInDto, IRequestApiDto } from '@core/models'
 import { OperationApiService } from '@core/api'
 
@@ -18,8 +19,10 @@ export class OperationsComponent implements OnInit, OnDestroy {
   operations: IOperationInDto[] = []
   inRequest: boolean
 
+  userId: number
   paginator: IPaginator
   filterFields: IFilterField[]
+  initFilterValues: IFilterValues[] = []
 
   tableColumns = TABLE_COLUMNS
 
@@ -27,13 +30,23 @@ export class OperationsComponent implements OnInit, OnDestroy {
   private requestApiQuery: IRequestApiDto
 
   constructor(
+    private route: ActivatedRoute,
     @Inject(ADMIN_FACADE) public adminFacade: IAdminFacade,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
     private operationApiService: OperationApiService
   ) {}
 
   ngOnInit(): void {
-    this.initFilterFields()
+    this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe(params => {
+      if (params.user !== undefined) {
+        this.userId = +params.user
+        this.initFilterValues.push({
+          name: 'telegramUserId',
+          value: this.userId + ''
+        })
+      }
+      this.initFilterFields()
+    })
   }
 
   getOperationsList(requestApiQuery: IRequestApiDto = this.requestApiQuery): void {
@@ -66,6 +79,16 @@ export class OperationsComponent implements OnInit, OnDestroy {
 
   protected initFilterFields(): void {
     this.filterFields = [
+      {
+        labelI18n: 'operations.table.telegramUserId',
+        name: 'telegramUserId',
+        type: EFilterType.INPUT,
+      },
+      {
+        labelI18n: 'operations.table.username',
+        name: 'telegramUserName',
+        type: EFilterType.INPUT,
+      },
       {
         labelI18n: 'operations.table.status',
         name: 'status',

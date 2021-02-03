@@ -11,6 +11,7 @@ import { ISettingCommissionDto } from '@core/models'
 @Component({
   selector: 'app-settings-commission-edit',
   templateUrl: './settings-commission-edit.component.html',
+  styleUrls: ['./settings-commission-edit.component.scss']
 })
 export class SettingsCommissionEditComponent implements OnInit, OnDestroy {
 

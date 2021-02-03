@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
 import { MatInputModule } from '@angular/material/input'
 import { ReactiveFormsModule } from '@angular/forms'
+import { RouterModule } from '@angular/router'
 
 import { PageContentLayoutModule } from '@ui/page-content-layout'
 import { PageContentTableModule } from '@ui/page-content-table'
@@ -26,6 +27,7 @@ import { OperationsRoutingModule } from './operations-routing.module'
     MatInputModule,
     ReactiveFormsModule,
     TranslateModule,
+    RouterModule,
     OperationsRoutingModule,
 
     PageContentTableModule,

@@ -24,6 +24,7 @@ export class TableFilterPaginatorComponent implements OnChanges {
   @Input() pageSize: number
   @Input() pageIndex: number
   @Input() filterFields: IFilterField[]
+  @Input() initFilterValues: IFilterValues[]
 
   showFilter: boolean
   tableWithFilter: boolean
@@ -31,6 +32,9 @@ export class TableFilterPaginatorComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.filterFields?.currentValue) {
       this.tableWithFilter = !!this.filterFields?.length
+    }
+    if (changes.initFilterValues?.currentValue) {
+      this.showFilter = !!this.initFilterValues?.length
     }
   }
 

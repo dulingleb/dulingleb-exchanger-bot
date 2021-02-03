@@ -14,6 +14,7 @@
             [pageSize]="paginator?.pageSize"
             [pageIndex]="paginator?.page"
             [filterFields]="filterFields"
+            [initFilterValues]="initFilterValues"
             (filter)="filter($event)"
             (changePaginator)="changePaginator($event)"
       ></app-table-filter-paginator>

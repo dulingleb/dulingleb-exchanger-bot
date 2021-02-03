@@ -20,6 +20,7 @@ export class PageContentTableComponent implements AfterViewInit, OnDestroy {
   @Input() paginator: IPaginator
   @Input() tableColumns: ITableColumn[]
   @Input() filterFields: IFilterField[]
+  @Input() initFilterValues: IFilterValues[]
 
   private requestApiQuery$ = new BehaviorSubject<IRequestApiDto>({
     page: 0,

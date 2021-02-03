@@ -15,8 +15,12 @@
           <p class="value">{{ operation?.price }}</p>
         </div>
         <div class="item">
+          <p class="title">{{ 'operation.info.user' | translate }}</p>
+          <p class="value"><a [routerLink]="['/operations']" [queryParams]="{ user: operation?.telegramUserId }">#{{ operation?.telegramUserId }}</a></p>
+        </div>
+        <div class="item">
           <p class="title">{{ 'operation.info.detail' | translate }}</p>
-          <p class="value">{{ operation?.bankDetailId }}</p>
+          <p class="value"><a [routerLink]="['/settings/requisites', operation?.bankDetailId, 'info']">#{{ operation?.bankDetailId }}</a></p>
         </div>
         <div class="item">
           <p class="title">{{ 'operation.info.btcAddress' | translate }}</p>

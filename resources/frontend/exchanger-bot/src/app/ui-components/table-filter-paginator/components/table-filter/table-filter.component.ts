@@ -12,6 +12,7 @@ export class TableFilterComponent implements OnChanges {
   @Output() filter = new EventEmitter<IFilterValues[]>()
 
   @Input() filterFields: IFilterField[]
+  @Input() initFilterValues: IFilterValues[]
   @Input() showFilter: boolean
 
   filterValues: IFilterValues[] = []
@@ -21,6 +22,14 @@ export class TableFilterComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.filterFields?.currentValue) {
       this.filterValues = this.filterFields.map(f => ({ name: f.name, value: undefined }))
+    }
+    if (changes.initFilterValues?.currentValue) {
+      for (const initFilterValue of this.initFilterValues) {
+        const filterValue = this.filterValues.find(f => f.name === initFilterValue.name)
+        if (!filterValue) { continue }
+        filterValue.value = initFilterValue.value
+      }
+      this.onChangeValue(true)
     }
   }
 

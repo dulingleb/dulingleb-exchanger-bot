@@ -110,13 +110,13 @@ export class SettingsRequisitesComponent implements OnInit, OnDestroy {
         type: EFilterType.SELECT,
         options: [
           {
-            value: 0,
-            titleI18n: 'settings.requisites.status.0',
+            value: 1,
+            titleI18n: 'settings.requisites.status.1',
             class: 'text-success'
           },
           {
-            value: 1,
-            titleI18n: 'settings.requisites.status.1',
+            value: 0,
+            titleI18n: 'settings.requisites.status.0',
             class: 'text-warn'
           }
         ]

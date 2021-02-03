@@ -21,8 +21,8 @@ class OperationController extends Controller
             ->allowedSorts([AllowedSort::field('id', 'operations.id'), 'status', 'amount', 'price'])
             ->defaultSort('-operations.id')
             ->allowedFilters([
-                AllowedFilter::scope('user_id', 'telegram_user_id'),
-                AllowedFilter::scope('user', 'telegram_user'),
+                'telegram_user_id',
+                AllowedFilter::scope('telegram_user_name', 'telegram_user'),
                 'status'
             ])
             ->where('exchanger_id', auth()->user()->exchanger->id)

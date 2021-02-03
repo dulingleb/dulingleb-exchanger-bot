@@ -9,6 +9,6 @@
                   (changePaginator)="changePaginator.emit($event)"
   ></app-table-paginator>
 
-  <app-table-filter *ngIf="tableWithFilter" [filterFields]="filterFields" [showFilter]="showFilter" (filter)="filter.emit($event)"></app-table-filter>
+  <app-table-filter *ngIf="tableWithFilter" [filterFields]="filterFields" [initFilterValues]="initFilterValues" [showFilter]="showFilter" (filter)="filter.emit($event)"></app-table-filter>
 </div>
 
