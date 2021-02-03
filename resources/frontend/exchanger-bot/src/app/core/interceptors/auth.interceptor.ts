@@ -1,7 +1,7 @@
 import { HttpHandler, HttpInterceptor, HttpRequest, HttpErrorResponse } from '@angular/common/http'
 import { Inject, Injectable } from '@angular/core'
 import { catchError, first, mergeMap } from 'rxjs/operators'
-import { Observable, throwError } from 'rxjs'
+import { throwError } from 'rxjs'
 
 import { IAdminFacade, ADMIN_FACADE } from '@core/features'
 import { ICommonResponseDto } from '@core/models'
@@ -21,18 +21,24 @@ export class AuthInterceptor implements HttpInterceptor {
             }
           })
           return next.handle(req).pipe(
-            catchError(this.handleError)
+            catchError(error => {
+              const handleError = this.handleError(error)
+              if (handleError.statusCode === 422) {
+                this.adminFacade.logout()
+              }
+              return throwError(handleError)
+            })
           )
         })
       )
     }
 
-    private handleError(error: HttpErrorResponse): Observable<ICommonResponseDto<null>> {
+    private handleError(error: HttpErrorResponse): ICommonResponseDto<null> {
       const res: ICommonResponseDto<null> = {
         status: false,
-        message: error.error.massage || error.message,
+        message: error.error?.message || error.message,
         statusCode: error.status
       }
-      return throwError(res)
+      return res
     }
 }

@@ -4,6 +4,7 @@
   </ng-container>
   <ng-container content>
     <form [formGroup]="form" (ngSubmit)="addComment()" class="form">
+      <app-loading-spinner *ngIf="inRequest"></app-loading-spinner>
 
       <section class="info-table-block">
         <div class="item">
@@ -16,11 +17,11 @@
         </div>
         <div class="item">
           <p class="title">{{ 'operation.info.user' | translate }}</p>
-          <p class="value"><a [routerLink]="['/operations']" [queryParams]="{ user: operation?.telegramUserId }">#{{ operation?.telegramUserId }}</a></p>
+          <p class="value"><a [routerLink]="['/operations']" [queryParams]="{ user: operation?.telegramUserId }">{{ operation?.telegramUser | userName }}</a></p>
         </div>
         <div class="item">
           <p class="title">{{ 'operation.info.detail' | translate }}</p>
-          <p class="value"><a [routerLink]="['/settings/requisites', operation?.bankDetailId, 'info']">#{{ operation?.bankDetailId }}</a></p>
+          <p class="value"><a [routerLink]="['/settings/requisites', operation?.bankDetailId, 'info']">{{ operation?.bankDetails?.title }}</a></p>
         </div>
         <div class="item">
           <p class="title">{{ 'operation.info.btcAddress' | translate }}</p>
@@ -43,7 +44,12 @@
         </mat-form-field>
       </div>
 
-      <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'operation.info.save' | translate }}</button>
+      <div class="form-group btn-group">
+        <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'operation.info.saveBtn' | translate }}</button>
+        <button type="button" mat-raised-button color="basic" *ngIf="operation?.status === EOperationStatus.ON_CHECK" (click)="setSuccess()">{{ 'operation.info.confirmBtn' | translate }}</button>
+        <button type="button" mat-raised-button color="basic" *ngIf="operation?.status === EOperationStatus.ON_CHECK" (click)="setCancel()">{{ 'operation.info.operatorBtn' | translate }}</button>
+        <button type="button" mat-raised-button color="warn" *ngIf="operation?.status === EOperationStatus.ON_CHECK" (click)="setToOperator()">{{ 'operation.info.cancelBtn' | translate }}</button>
+      </div>
 
     </form>
   </ng-container>

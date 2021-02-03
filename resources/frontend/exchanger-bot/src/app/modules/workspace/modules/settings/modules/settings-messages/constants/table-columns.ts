@@ -6,7 +6,6 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     name: 'title',
     nameI18n: 'settings.messages.table.title',
     type: ETableColumnType.STRING,
-    sort: true,
     allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {

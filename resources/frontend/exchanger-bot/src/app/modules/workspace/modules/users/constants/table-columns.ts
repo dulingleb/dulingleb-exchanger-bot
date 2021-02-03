@@ -24,6 +24,13 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {
+    name: 'discount',
+    nameI18n: 'users.table.discount',
+    type: ETableColumnType.STRING,
+    sort: true,
+    allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
+  },
+  {
     name: 'ban',
     nameI18n: 'users.table.ban',
     type: ETableColumnType.STRING,
