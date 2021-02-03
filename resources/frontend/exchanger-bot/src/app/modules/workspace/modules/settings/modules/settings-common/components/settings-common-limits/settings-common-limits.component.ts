@@ -36,9 +36,9 @@ export class SettingsCommonLimitsComponent {
 
   private initFormFields(settings: ICommonLimitSetting): void {
     this.form.patchValue({
-      course: settings.course,
-      minExchange: settings.minExchange,
-      maxExchange: settings.maxExchange
+      course: settings?.course,
+      minExchange: settings?.minExchange,
+      maxExchange: settings?.maxExchange
     })
   }
 

@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 
-import { LogoNamePipe } from './pipes'
+import { LogoNamePipe, DecimalPipe, UserNamePipe } from './pipes'
 
 @NgModule({
   declarations: [
     LogoNamePipe,
+    UserNamePipe,
+    DecimalPipe,
   ],
   imports: [
     CommonModule,
-    MatProgressSpinnerModule
   ],
   exports: [
     LogoNamePipe,
+    UserNamePipe,
+    DecimalPipe,
   ],
 })
 export class SharedModule {}

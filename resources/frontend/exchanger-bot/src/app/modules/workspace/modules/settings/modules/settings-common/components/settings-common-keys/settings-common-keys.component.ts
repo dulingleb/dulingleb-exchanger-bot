@@ -32,8 +32,8 @@ export class SettingsCommonKeysComponent {
 
   private initFormFields(settings: ICommonKeysSetting): void {
     this.form.patchValue({
-      coinbaseKey: settings.coinbaseKey,
-      coinbaseSecret: settings.coinbaseSecret,
+      coinbaseKey: settings?.coinbaseKey,
+      coinbaseSecret: settings?.coinbaseSecret,
     })
   }
 

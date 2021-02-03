@@ -40,6 +40,27 @@ export class OperationApiService {
     )
   }
 
+  setSuccess(id: number): Observable<ICommonResponseDto<any>> {
+    return this.http.put<ICommonResponseDto<any>>(`${ENV.api}/operations/${id}/success`, {}).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(res => ({ ...res }))
+    )
+  }
+
+  setCancel(id: number): Observable<ICommonResponseDto<any>> {
+    return this.http.put<ICommonResponseDto<any>>(`${ENV.api}/operations/${id}/cancel`, {}).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(res => ({ ...res }))
+    )
+  }
+
+  setToOperator(id: number): Observable<ICommonResponseDto<any>> {
+    return this.http.post<ICommonResponseDto<any>>(`${ENV.api}/operations/${id}/direct-to-operator`, {}).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(res => ({ ...res }))
+    )
+  }
+
   private operationOutToInDto(operation: IOperationOutDto): IOperationInDto {
     return {
       id: operation.id,
@@ -56,7 +77,8 @@ export class OperationApiService {
       messageId: operation.message_id,
       createdAt: new Date(operation.created_at),
       updatedAt: new Date(operation.updated_at),
-      telegramUser: telegramUserOutToInDto(operation.telegram_user)
+      telegramUser: telegramUserOutToInDto(operation.telegram_user),
+      bankDetails: operation.bank_details
     }
   }
 

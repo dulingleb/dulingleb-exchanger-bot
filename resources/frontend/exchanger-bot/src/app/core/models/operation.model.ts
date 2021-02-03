@@ -1,4 +1,5 @@
 import { ITelegramUserInDto, ITelegramUserOutDto } from './telegram-user.model'
+import { ISettingRequisiteDto } from './setting.model'
 
 export interface IOperationOutDto {
   id: number;
@@ -16,6 +17,7 @@ export interface IOperationOutDto {
   created_at: Date;
   files: [];
   telegram_user?: ITelegramUserOutDto;
+  bank_details?: ISettingRequisiteDto;
 }
 
 export interface IOperationInDto {
@@ -35,6 +37,7 @@ export interface IOperationInDto {
   createdAt: Date;
   files: [];
   telegramUser?: ITelegramUserInDto;
+  bankDetails?: ISettingRequisiteDto;
 }
 
 /* eslint-disable @typescript-eslint/naming-convention */
