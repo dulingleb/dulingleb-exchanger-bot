@@ -112,7 +112,7 @@ export class SettingsRequisitesComponent implements OnInit, OnDestroy {
           {
             value: 1,
             titleI18n: 'settings.requisites.status.1',
-            class: 'text-success'
+            class: 'text-accent'
           },
           {
             value: 0,

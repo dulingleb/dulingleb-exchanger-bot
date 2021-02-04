@@ -8,9 +8,9 @@ import { MatInputModule } from '@angular/material/input'
 import { TranslateModule } from '@ngx-translate/core'
 import { ReactiveFormsModule } from '@angular/forms'
 
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular'
 
 import { PageContentLayoutModule } from '@ui/page-content-layout'
+import { FormatEditorModule } from '@ui/format-editor'
 
 import { MailingComponent } from './mailing.component'
 import { MailingRoutingModule } from './mailing-routing.module'
@@ -25,13 +25,12 @@ import { MailingRoutingModule } from './mailing-routing.module'
     MatButtonModule,
     MatFormFieldModule,
 
-    CKEditorModule,
-
     TranslateModule,
     ReactiveFormsModule,
 
     PageContentLayoutModule,
-    MailingRoutingModule
+    MailingRoutingModule,
+    FormatEditorModule,
   ],
   exports: [MailingComponent]
 })

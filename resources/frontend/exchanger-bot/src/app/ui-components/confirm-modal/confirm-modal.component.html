@@ -3,6 +3,6 @@
   <p>{{ data.messageI18n | translate: { messageKey: data.messageKeyI18n } }}</p>
 </mat-dialog-content>
 <mat-dialog-actions class="actions">
-  <button *ngIf="data.confirmBtn" mat-button [mat-dialog-close]="true" cdkFocusInitial>{{ 'confirm.ok' | translate }}</button>
-  <button *ngIf="data.cancelBtn" mat-button mat-dialog-close>{{ 'confirm.cancel' | translate }}</button>
+  <button *ngIf="data.confirmBtn" mat-button [mat-dialog-close]="true" color="primary" cdkFocusInitial>{{ 'confirm.ok' | translate }}</button>
+  <button *ngIf="data.cancelBtn" mat-button mat-dialog-close color="warn">{{ 'confirm.cancel' | translate }}</button>
 </mat-dialog-actions>

@@ -53,7 +53,7 @@ $app-warn:    mat-palette($mat-warn);
 
 $app-dark-primary: mat-palette($mat-primary-dark);
 $app-dark-accent:  mat-palette($mat-accent-dark);
-$app-dark-warn:    mat-palette($mat-warn);
+$app-dark-warn:    mat-palette($mat-warn-dark);
 
 $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 $app-dark-theme: mat-dark-theme($app-dark-primary, $app-dark-accent, $app-dark-warn);

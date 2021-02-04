@@ -1,17 +1,27 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { MatCardModule } from '@angular/material/card'
+import { ChartsModule } from 'ng2-charts'
 
-import { DashboardComponent } from './dashboard.component'
+import { PageContentLayoutModule } from '@ui/page-content-layout'
+import { TranslateModule } from '@ngx-translate/core'
+
 import { DashboardRoutingModule } from './dashboard-routing.module'
+import { BarChartComponent, LineChartComponent } from './components'
+import { DashboardComponent } from './containers'
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [
+    DashboardComponent,
+    LineChartComponent,
+    BarChartComponent
+  ],
   imports: [
     CommonModule,
-    MatCardModule,
-    DashboardRoutingModule
-  ],
-  exports: [DashboardComponent]
+    ChartsModule,
+    TranslateModule,
+
+    DashboardRoutingModule,
+    PageContentLayoutModule
+  ]
 })
 export class DashboardModule {}

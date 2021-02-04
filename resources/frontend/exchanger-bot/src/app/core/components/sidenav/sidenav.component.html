@@ -36,7 +36,7 @@
   <a mat-icon-button disableRipple="true" class="nav-link" routerLink="/operations">
      <mat-icon>attach_money</mat-icon>
      <span>{{ 'sideNav.operations' | translate }}</span>
-     <span class="count">{{ (adminFacade.operationCountData$ | async)?.operationsCountToday || '' }}</span>
+     <span class="count">{{ (adminFacade.operationsWait$ | async) || '' }}</span>
   </a>
 </mat-list-item>
  <mat-list-item class="nav-item">

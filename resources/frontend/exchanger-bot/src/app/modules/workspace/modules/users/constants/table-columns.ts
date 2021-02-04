@@ -35,7 +35,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     nameI18n: 'users.table.ban',
     type: ETableColumnType.STRING,
     icon: (item: ITelegramUserInDto): string => item.ban ? 'clear' : 'done',
-    class: (item: ITelegramUserInDto): string => item.ban ? 'text-warn' : 'text-success',
+    class: (item: ITelegramUserInDto): string => item.ban ? 'text-warn' : 'text-accent',
     allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {

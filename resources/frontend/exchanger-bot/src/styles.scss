@@ -42,10 +42,6 @@ a, button {
   color: var(--primary-color) !important;
 }
 
-.text-success {
-  color: var(--success-color) !important;
-}
-
 .text-accent {
   color: var(--accent-color) !important;
 }
@@ -96,4 +92,8 @@ a, button {
 
 ckeditor .ck-content {
   background: transparent !important;
+}
+
+.tox .tox-edit-area__iframe {
+  background: rgba(255, 255, 255, 0.2) !important;
 }

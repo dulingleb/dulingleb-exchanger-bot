@@ -1,6 +1,6 @@
 <app-page-content>
   <ng-container header>
-    {{ 'admin.profile.pageTitle' | translate }} <i>{{ user?.name }}</i>
+    {{ 'admin.profile.pageTitle' | translate }} <i>{{ admin?.name }}</i>
   </ng-container>
   <ng-container content>
     <form [formGroup]="form" (ngSubmit)="save()" class="form">
@@ -17,7 +17,7 @@
       <div class="form-group">
         <mat-form-field appearance="fill">
           <mat-label>{{ 'admin.edit.input.email' | translate }}</mat-label>
-          <input formControlName="email" matInput disabled>
+          <input formControlName="email" matInput>
         </mat-form-field>
       </div>
 

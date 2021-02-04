@@ -20,7 +20,7 @@
       </div>
       <div class="item">
         <p class="title">{{ 'common.role' | translate }}</p>
-        <p class="value" [ngClass]="{ 'text-primary': user?.role === EUserRoleDto.SUPER_ADMIN, 'text-success': user?.role === EUserRoleDto.ADMIN }">{{ ('common.roles.' + user?.role) | translate }}</p>
+        <p class="value" [ngClass]="{ 'text-primary': user?.role === EUserRoleDto.SUPER_ADMIN, 'text-accent': user?.role === EUserRoleDto.ADMIN }">{{ ('common.roles.' + user?.role) | translate }}</p>
       </div>
     </section>
   </ng-container>
