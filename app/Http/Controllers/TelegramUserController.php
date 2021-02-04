@@ -24,12 +24,13 @@ class TelegramUserController extends Controller
             ->join('telegram_users', 'telegram_users.id', 'telegram_user_settings.telegram_user_id')
             ->allowedFilters([AllowedFilter::exact('username', 'telegram_users.username'), 'ban', 'discount'])
             ->defaultSort('-telegram_user_settings.created_at')
-            ->allowedSorts('operations_count', 'operations_sum', 'username', 'telegram_user_id', 'operations_sum', AllowedSort::field('created_at', 'telegram_user_settings.created_at'))
+            ->allowedSorts('operations_count', 'operations_sum', 'username', 'telegram_user_id', 'operations_sum', 'discount', AllowedSort::field('created_at', 'telegram_user_settings.created_at'))
             ->select([
                 'telegram_user_settings.id',
                 'telegram_user_settings.telegram_user_id',
                 'telegram_user_settings.exchanger_id',
                 'telegram_user_settings.ban',
+                'telegram_user_settings.discount',
                 'telegram_users.username'])
             ->withCountOperations()
             ->withSumOperations()

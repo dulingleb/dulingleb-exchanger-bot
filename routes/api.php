@@ -64,7 +64,8 @@ Route::group([
     Route::get('settings', ['as' => 'settings.index', 'uses' => 'SettingController@settingsIndex']);
     Route::patch('settings/set/telegram-token', ['as' => 'settings.set.telegram-token', 'uses' => 'SettingController@updateTelegramToken']);
     Route::patch('settings/set/coinbase-key', ['as' => 'settings.set.coinbaseKey', 'uses' => 'SettingController@updateCoinbaseKey']);
-    Route::post('settings/status/status', ['as' => 'settings.set.status', 'uses' => 'SettingController@startStop']);
+    Route::post('settings/status', ['as' => 'settings.set.status', 'uses' => 'SettingController@setStatus']);
+    Route::get('settings/status', ['as' => 'settings.set.status', 'uses' => 'SettingController@getStatus']);
     Route::patch('settings/set/limits', ['as' => 'settings.set.limits', 'uses' => 'SettingController@limits']);
 
     // Настройки сообщения

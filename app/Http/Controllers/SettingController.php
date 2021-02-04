@@ -56,7 +56,7 @@ class SettingController extends Controller
         return $this->response($exchanger, 'Ключ успещно сохранен');
     }
 
-    public function startStop(): \Illuminate\Http\JsonResponse
+    public function setStatus(): \Illuminate\Http\JsonResponse
     {
         if (auth()->user()->exchanger->status == Exchanger::STATUS_ACTIVE) {
             auth()->user()->exchanger->status = Exchanger::STATUS_CLOSED;
@@ -67,7 +67,12 @@ class SettingController extends Controller
         }
         auth()->user()->exchanger->save();
 
-        return $this->response(null, $status);
+        return $this->response($status);
+    }
+
+    public function getStatus()
+    {
+        return $this->response((bool)auth()->user()->exchanger->status);
     }
 
     public function limits(Request $request): \Illuminate\Http\JsonResponse
