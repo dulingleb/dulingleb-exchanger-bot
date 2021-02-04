@@ -79,7 +79,7 @@ export class UsersComponent implements OnInit, OnDestroy {
           {
             value: false,
             titleI18n: 'user.ban.0',
-            class: 'text-success'
+            class: 'text-accent'
           },
           {
             value: true,

@@ -20,7 +20,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     name: 'role',
     nameI18n: 'admins.table.role',
     type: ETableColumnType.STRING,
-    class: (user: IAdminInDto): string => user.role === EAdminRoleDto.SUPER_ADMIN ? 'text-primary': 'text-success',
+    class: (user: IAdminInDto): string => user.role === EAdminRoleDto.SUPER_ADMIN ? 'text-primary': 'text-accent',
     translate: (user: IAdminInDto): string => `common.roles.${user.role}`,
     allowedForRoles: [EAdminRoleDto.SUPER_ADMIN],
   },

@@ -93,7 +93,7 @@ class OperationController extends Controller
 
     public function getOperationsWait(): \Illuminate\Http\JsonResponse
     {
-        $data = Operation::where('exchanger_id', auth()->user()->exchanger->id)->where('status', Operation::STATUS_WAIT)->count();
+        $data = Operation::where('exchanger_id', auth()->user()->exchanger->id)->where('status', Operation::STATUS_CHECKING)->count();
         return $this->response($data);
     }
 

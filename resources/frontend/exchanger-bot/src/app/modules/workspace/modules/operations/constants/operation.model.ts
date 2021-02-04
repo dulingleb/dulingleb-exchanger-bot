@@ -9,10 +9,10 @@ export enum EOperationStatus {
 
 export const OPERATION_CLASS = {
   [EOperationStatus.IN_PAY]: 'text-black',
-  [EOperationStatus.SUCCESS]: 'text-success',
+  [EOperationStatus.SUCCESS]: 'text-accent',
   [EOperationStatus.ERROR]: 'text-warn',
-  [EOperationStatus.IN_SEND_CHECK]: 'text-primary',
-  [EOperationStatus.ON_CHECK]: 'text-primary',
+  [EOperationStatus.IN_SEND_CHECK]: 'text-gray',
+  [EOperationStatus.ON_CHECK]: 'text-gray',
   [EOperationStatus.CANCEL]: 'text-gray'
 }
 

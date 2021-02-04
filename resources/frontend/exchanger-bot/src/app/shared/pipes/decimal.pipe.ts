@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core'
 export class DecimalPipe implements PipeTransform {
 
   transform(data: number): string {
-    return String(data).replace(/(\d{3})/g, '$1 ').replace(' .', '.').trim()
+    return new Intl.NumberFormat('ru-RU', { style: 'decimal' }).format(data)
   }
 
 }

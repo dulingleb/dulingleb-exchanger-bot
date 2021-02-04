@@ -62,9 +62,9 @@ export class FormatEditorComponent implements ControlValueAccessor {
 
       valid_children: 'body[span,strong,em,u,del]',
 
-      plugins: [ 'code help wordcount' ],
+      plugins: [ 'code help wordcount emoticons' ],
 
-      toolbar: 'undo redo | styleselect | bold italic underline strikethrough | removeformat | code',
+      toolbar: 'undo redo | styleselect | bold italic underline strikethrough | emoticons | removeformat | code',
 
       init_instance_callback: (): void => {
         const freeTiny = document.querySelector('.tox .tox-notification--in') as HTMLElement
