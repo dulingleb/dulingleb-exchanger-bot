@@ -27,8 +27,7 @@
       </div>
 
       <div class="form-group">
-        <label>{{ 'settings.messages.edit.input.text' | translate }}</label>
-        <ckeditor formControlName="text" [editor]="Editor" [config]="config"></ckeditor>
+        <app-format-editor formControlName="text" [label]="'settings.messages.edit.input.text' | translate" [height]=300></app-format-editor>
       </div>
 
       <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'settings.messages.edit.saveBtn' | translate }}</button>

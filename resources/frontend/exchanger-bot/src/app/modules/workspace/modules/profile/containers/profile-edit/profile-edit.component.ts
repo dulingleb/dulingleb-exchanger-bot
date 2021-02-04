@@ -5,7 +5,7 @@ import { finalize, mergeMap, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
-import { IUiFacade, IAdminFacade, IAdminInDto, UI_FACADE, ADMIN_FACADE } from '@core/features'
+import { IUiFacade, IAdminFacade, IAdminInDto, UI_FACADE, ADMIN_FACADE, EAdminRoleDto } from '@core/features'
 
 @Component({
   selector: 'app-profile-edit',
@@ -13,7 +13,7 @@ import { IUiFacade, IAdminFacade, IAdminInDto, UI_FACADE, ADMIN_FACADE } from '@
 })
 export class ProfileEditComponent implements OnInit, OnDestroy {
 
-  user: IAdminInDto
+  admin: IAdminInDto
   form: FormGroup
   showPassword: boolean
   inRequest: boolean
@@ -39,11 +39,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         Validators.required
       ]),
       password: new FormControl('', [
-        // Validators.required,
         Validators.minLength(3)
       ]),
       confirmPassword: new FormControl('', [
-        // Validators.required,
         Validators.minLength(3)
       ])
     })
@@ -52,16 +50,19 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.inRequest = true
     this.adminFacade.admin$.pipe(
-      mergeMap(user => this.adminApiService.getAdmin(+user.id)),
+      mergeMap(admin => this.adminApiService.getAdmin(+admin.id)),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      (user) =>  {
-      this.user = user
+      (admin) =>  {
+      this.admin = admin
         this.form.patchValue({
-          email: user.email,
-          name: user.name
+          email: admin.email,
+          name: admin.name
         })
+        if (this.admin.role === EAdminRoleDto.SUPER_ADMIN) {
+          this.form.get('email').enable()
+        }
       },
       (err) => {
         this.uiFacade.addErrorNotification(err.message)
@@ -71,10 +72,11 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
   save(): void {
     const name = this.form.get('name').value
+    const email = this.form.get('email').value
     const password = this.form.get('password').value
     const cPassword = this.form.get('confirmPassword').value
 
-    this.updateUser(this.user.id, this.user.email, name || this.user.name, password, cPassword)
+    this.updateAdmin(this.admin.id, email || this.admin.email, name || this.admin.name, password, cPassword)
   }
 
   ngOnDestroy(): void {
@@ -82,15 +84,15 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     this.destroy$.complete()
   }
 
-  private updateUser(id: number, email: string, name: string, password: string, cPassword: string): void {
+  private updateAdmin(id: number, email: string, name: string, password: string, cPassword: string): void {
     this.inRequest = true
 
-    const user: IAdminInDto = { id, email, name }
+    const admin: IAdminInDto = { id, email, name }
     if (password && cPassword) {
-      user.password = password
-      user.cPassword = cPassword
+      admin.password = password
+      admin.cPassword = cPassword
     }
-    this.adminApiService.updateAdmin(user).pipe(
+    this.adminApiService.updateAdmin(admin).pipe(
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(

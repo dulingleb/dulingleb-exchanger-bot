@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatCardModule } from '@angular/material/card'
 import { TranslateModule } from '@ngx-translate/core'
 
+import { SharedModule } from '@shared/index'
 import { SnackBarModule } from '@ui/snack-bar'
 import { StatusInfoBlockModule } from '@ui/status-info-block'
 
@@ -31,6 +32,7 @@ import { WorkspaceComponent } from './workspace.component'
     MatButtonModule,
     TranslateModule,
 
+    SharedModule,
     StatusInfoBlockModule,
     SnackBarModule,
     WorkspaceRoutingModule

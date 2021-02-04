@@ -1,11 +1,11 @@
 <app-status-info-block
                       class="status-info-block"
                       blockNameI18n="statusInfoBlock.operationsSum.title"
-                      [blockInfo]="operationsSumInfo?.operationsSum"
+                      [blockInfo]="(operationsSumInfo?.operationsSum | decimal) + ' ' + ('statusInfoBlock.operationsSum.price' | translate)"
                       [infoAction]="true"
                       icon="show_chart"
 >
   <ng-container actions>
-    <span mat-button class="text-success">+{{ operationsSumInfo?.operationsSumToday }} {{ 'statusInfoBlock.operationsSum.today' | translate }}</span>
+    <span mat-button class="text-accent">+{{ operationsSumInfo?.operationsSumToday | decimal }} {{ 'statusInfoBlock.operationsSum.price' | translate }} {{ 'statusInfoBlock.operationsSum.today' | translate }}</span>
   </ng-container>
 </app-status-info-block>

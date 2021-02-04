@@ -39,27 +39,23 @@ a, button {
 }
 
 .text-primary {
-  color: var(--primary-color);
-}
-
-.text-success {
-  color: var(--success-color);
+  color: var(--primary-color) !important;
 }
 
 .text-accent {
-  color: var(--accent-color);
+  color: var(--accent-color) !important;
 }
 
 .text-warn {
-  color: var(--warn-color);
+  color: var(--warn-color) !important;
 }
 
 .text-gray {
-  color: var(--grey-font-color);
+  color: var(--grey-font-color) !important;
 }
 
 .text-black {
-  color: #000; // TODO: Use vars
+  color: #000 !important; // TODO: Use vars
 }
 
 .user-logo {
@@ -80,9 +76,11 @@ a, button {
 }
 
 .info-table-block {
+  max-width: 1000px;
+
   .item {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 2fr;
     grid-column-gap: 1.5rem;
     border-bottom: 1px solid var(--border-color);
 
@@ -94,4 +92,8 @@ a, button {
 
 ckeditor .ck-content {
   background: transparent !important;
+}
+
+.tox .tox-edit-area__iframe {
+  background: rgba(255, 255, 255, 0.2) !important;
 }

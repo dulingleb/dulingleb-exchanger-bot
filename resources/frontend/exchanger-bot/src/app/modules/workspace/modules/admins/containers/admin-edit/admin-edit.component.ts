@@ -1,11 +1,11 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
-import { mergeMap, takeUntil } from 'rxjs/operators'
+import { mergeMap, takeUntil, withLatestFrom } from 'rxjs/operators'
 import { of, Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
-import { IUiFacade, IAdminInDto, UI_FACADE } from '@core/features'
+import { IUiFacade, IAdminInDto, UI_FACADE, EAdminRoleDto, ADMIN_FACADE, IAdminFacade } from '@core/features'
 
 @Component({
   selector: 'app-admin-edit',
@@ -13,7 +13,7 @@ import { IUiFacade, IAdminInDto, UI_FACADE } from '@core/features'
 })
 export class AdminEditComponent implements OnInit, OnDestroy {
 
-  user: IAdminInDto
+  admin: IAdminInDto
   form: FormGroup
   showPassword: boolean
   inRequest: boolean
@@ -25,6 +25,7 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private adminApiService: AdminApiService,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
+    @Inject(ADMIN_FACADE) private adminFacade: IAdminFacade,
   ) {
     this.form = new FormGroup({
       email: new FormControl({
@@ -54,14 +55,18 @@ export class AdminEditComponent implements OnInit, OnDestroy {
         const id = +params.get('id')
         return id ? this.adminApiService.getAdmin(id) : of({} as IAdminInDto)
       }),
+      withLatestFrom(this.adminFacade.admin$),
       takeUntil(this.destroy$)
     ).subscribe(
-      (user) =>  {
-      this.user = user
+      ([admin, currentAdmin]) =>  {
+      this.admin = admin
         this.form.patchValue({
-          email: user.email,
-          name: user.name
+          email: admin.email,
+          name: admin.name
         })
+        if (currentAdmin.role === EAdminRoleDto.SUPER_ADMIN) {
+          this.form.get('email').enable()
+        }
       },
       (err) => {
         this.uiFacade.addErrorNotification(err.message)
@@ -75,9 +80,9 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     const password = this.form.get('password').value
     const cPassword = this.form.get('confirmPassword').value
 
-    this.user.id
-      ? this.updateUser(this.user.id, email || this.user.email, name || this.user.name)
-      : this.addUser(email, name, password, cPassword)
+    this.admin.id
+      ? this.updateAdmin(this.admin.id, email || this.admin.email, name || this.admin.name)
+      : this.addAdmin(email, name, password, cPassword)
   }
 
   ngOnDestroy(): void {
@@ -85,7 +90,7 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     this.destroy$.complete()
   }
 
-  private updateUser(id: number, email: string, name: string): void {
+  private updateAdmin(id: number, email: string, name: string): void {
     this.adminApiService.updateAdmin({ id, email, name}).subscribe(
       () => this.router.navigateByUrl('/admins'),
       (err) => {
@@ -94,7 +99,7 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     )
   }
 
-  private addUser(email: string, name: string, password: string, cPassword: string): void {
+  private addAdmin(email: string, name: string, password: string, cPassword: string): void {
     this.adminApiService.addAdmin({ email, name, password, cPassword}).subscribe(
       () => this.router.navigateByUrl('/admins'),
       (err) => {

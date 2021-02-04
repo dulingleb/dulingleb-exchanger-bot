@@ -13,7 +13,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     name: 'status',
     nameI18n: 'settings.requisites.table.status',
     icon: (item: ISettingRequisiteDto): string => item.status ? 'done' : 'clear',
-    class: (item: ISettingRequisiteDto): string => item.status ? 'text-success' : 'text-warn',
+    class: (item: ISettingRequisiteDto): string => item.status ? 'text-accent' : 'text-warn',
     type: ETableColumnType.STRING,
     sort: true,
     allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],

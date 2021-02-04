@@ -8,7 +8,7 @@ import { IOperationInDto } from '@core/models'
 import { OperationApiService } from '@core/api'
 import { IUiFacade, UI_FACADE } from '@core/features'
 
-import { OPERATION_CLASS } from '../../constants'
+import { EOperationStatus, OPERATION_CLASS } from '../../constants'
 
 @Component({
   selector: 'app-operation-info',
@@ -20,6 +20,7 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
   form: FormGroup
   inRequest: boolean
   OPERATION_CLASS = OPERATION_CLASS
+  EOperationStatus = EOperationStatus
 
   private destroy$ = new Subject()
 
@@ -36,10 +37,12 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.inRequest = true
     this.route.paramMap.pipe(
-      mergeMap((params: ParamMap) => this.operationApiService.getOperation(+params.get('id'))),
-      finalize(() => this.inRequest = false),
+      mergeMap((params: ParamMap) => this.operationApiService.getOperation(+params.get('id')).pipe(
+        finalize(() => this.inRequest = false)
+      )),
       takeUntil(this.destroy$)
     ).subscribe(operation =>  {
+      console.log('this.inRequest', this.inRequest)
       this.operation = operation
       this.initFormData()
     })
@@ -51,12 +54,50 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
     this.operationApiService.addComment(this.operation.id, comment).pipe(
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
-    )
-    .subscribe(
+    ).subscribe(
       (res) => {
         this.operation = res.data
         this.initFormData()
         this.uiFacade.addInfoNotification(res.message)
+      },
+      (err) => this.uiFacade.addErrorNotification(err.message)
+    )
+  }
+
+  setSuccess(): void {
+    this.inRequest = true
+    this.operationApiService.setSuccess(this.operation.id).pipe(
+      finalize(() => this.inRequest = false),
+      takeUntil(this.destroy$)
+    ).subscribe(
+      (res) => {
+        console.log('res', res)
+      },
+      (err) => this.uiFacade.addErrorNotification(err.message)
+    )
+  }
+
+  setCancel(): void {
+    this.inRequest = true
+    this.operationApiService.setCancel(this.operation.id).pipe(
+      finalize(() => this.inRequest = false),
+      takeUntil(this.destroy$)
+    ).subscribe(
+      (res) => {
+        console.log('res', res)
+      },
+      (err) => this.uiFacade.addErrorNotification(err.message)
+    )
+  }
+
+  setToOperator(): void {
+    this.inRequest = true
+    this.operationApiService.setToOperator(this.operation.id).pipe(
+      finalize(() => this.inRequest = false),
+      takeUntil(this.destroy$)
+    ).subscribe(
+      (res) => {
+        console.log('res', res)
       },
       (err) => this.uiFacade.addErrorNotification(err.message)
     )

@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router'
 
 import { PageContentLayoutModule } from '@ui/page-content-layout'
 import { PageContentTableModule } from '@ui/page-content-table'
+import { LoadingSpinnerModule } from '@ui/loading-spinner'
+import { SharedModule } from '@shared/index'
 
 import { OperationInfoComponent, OperationsComponent } from './containers'
 import { OperationsRoutingModule } from './operations-routing.module'
@@ -30,6 +32,8 @@ import { OperationsRoutingModule } from './operations-routing.module'
     RouterModule,
     OperationsRoutingModule,
 
+    SharedModule,
+    LoadingSpinnerModule,
     PageContentTableModule,
     PageContentLayoutModule
   ],

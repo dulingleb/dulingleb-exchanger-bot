@@ -20,7 +20,9 @@ export const apiQueryToParams = (apiQuery: IRequestApiDto, EFilterInToOutDto = {
     params.sort += apiQuery.order ? EFilterInToOutDto[apiQuery.sort] || apiQuery.sort : ''
   }
   for (const filterValue of apiQuery.filterValues) {
-    params[`filter[${EFilterInToOutDto[filterValue.name] || filterValue.name}]`] = filterValue.value
+    params[`filter[${EFilterInToOutDto[filterValue.name] || filterValue.name}]`] = typeof filterValue.value === 'boolean'
+      ? String(+filterValue.value)
+      : filterValue.value
   }
   return params
 }
@@ -45,7 +47,7 @@ export const telegramUserOutToInDto = (user: ITelegramUserOutDto): ITelegramUser
     exchangerId: user.exchanger_id,
     telegramUserId: user.telegram_user_id,
     operationsCount: user.operations_count,
-    operationsSum: user.operations_summ,
+    operationsSum: user.operations_sum,
     discount: +user.discount,
     comment: user.comment,
     ban: !!user.ban

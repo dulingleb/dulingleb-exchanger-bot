@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 
-import { SettingApiService } from '@core/api'
-import { IUiFacade, IAdminFacade, UI_FACADE, ADMIN_FACADE } from '@core/features'
+import { IAdminFacade, ADMIN_FACADE } from '@core/features'
 
 import { ICommonTelegramSetting } from '../../constants'
 
@@ -20,11 +19,7 @@ export class SettingsCommonTelegramComponent {
 
   form: FormGroup
 
-  constructor(
-    @Inject(ADMIN_FACADE) public adminFacade: IAdminFacade,
-    @Inject(UI_FACADE) private uiFacade: IUiFacade,
-    private settingApiService: SettingApiService,
-  ) {
+  constructor(@Inject(ADMIN_FACADE) public adminFacade: IAdminFacade) {
     this.form = new FormGroup({
       telegramToken: new FormControl(''),
       username: new FormControl(''),
@@ -40,8 +35,8 @@ export class SettingsCommonTelegramComponent {
 
   private initFormFields(settings: ICommonTelegramSetting): void {
     this.form.patchValue({
-      telegramToken: settings.telegramToken,
-      username: settings.username,
+      telegramToken: settings?.telegramToken,
+      username: settings?.username,
     })
   }
 

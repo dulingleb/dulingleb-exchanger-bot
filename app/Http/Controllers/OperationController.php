@@ -35,7 +35,7 @@ class OperationController extends Controller
     {
         $this->checkOwnerOperation($operation);
 
-        return $this->response($operation);
+        return $this->response($operation->load(['telegram_user', 'bank_details']));
     }
 
     public function addComment(Request $request, Operation $operation): \Illuminate\Http\JsonResponse

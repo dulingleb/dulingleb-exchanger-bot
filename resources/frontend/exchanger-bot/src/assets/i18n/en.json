@@ -10,6 +10,9 @@
     "roles": {
       "1": "Супер администратор",
       "2": "Администратор"
+    },
+    "month": {
+
     }
   },
   "sideNav": {
@@ -49,7 +52,8 @@
     },
     "operationsSum": {
       "title": "Сумма операций",
-      "today": "За сегодня"
+      "today": "За сегодня",
+      "price": "р."
     }
   },
   "confirm": {
@@ -136,6 +140,7 @@
       "exchangerId": "id обменника",
       "telegramUserId": "id",
       "operationsCount": "Количество операций",
+      "discount": "Скидка",
       "operationsSum": "Сумма операций",
       "ban": "Статус"
     }
@@ -200,7 +205,10 @@
       "date": "Дата:",
       "status": "Статус:",
       "comment": "Комментарий к сделке",
-      "save": "Отправить"
+      "saveBtn": "Отправить",
+      "confirmBtn": "Подтвердить",
+      "cancelBtn": "Отмена",
+      "operatorBtn": "К оператору"
     }
   },
   "mailing": {

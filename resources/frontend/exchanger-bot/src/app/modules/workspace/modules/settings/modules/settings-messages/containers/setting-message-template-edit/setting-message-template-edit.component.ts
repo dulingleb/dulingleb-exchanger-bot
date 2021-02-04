@@ -4,9 +4,6 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { finalize, mergeMap, takeUntil } from 'rxjs/operators'
 import { of, Subject } from 'rxjs'
 
-import { CKEditor5 } from '@ckeditor/ckeditor5-angular'
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-
 import { SettingApiService } from '@core/api'
 import { IUiFacade, UI_FACADE } from '@core/features'
 import { ISettingMessageDto } from '@core/models'
@@ -20,12 +17,6 @@ export class SettingMessageTemplateEditComponent implements OnInit, OnDestroy {
   form: FormGroup
   message: ISettingMessageDto
   inRequest: boolean
-
-  Editor = ClassicEditor
-
-  config: CKEditor5.Config = {
-    toolbar: [ 'bold', 'italic', '|', 'undo', 'redo' ]
-  }
 
   private destroy$ = new Subject()
 

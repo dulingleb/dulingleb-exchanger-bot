@@ -1,4 +1,5 @@
 import { EAdminRoleDto } from '@core/features'
+import { getTelegramUserName } from '@utils/index'
 import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, IOperationInDto, ITableColumn } from '@core/models'
 
 import { OPERATION_CLASS } from './operation.model'
@@ -13,10 +14,9 @@ export const TABLE_COLUMNS: ITableColumn[] = [
   },
   {
     name: 'username',
-    value: (operation: IOperationInDto): string => operation.telegramUser.username || (operation.telegramUser.firstName || '') + ' ' + (operation.telegramUser.lastName || ''),
+    value: (operation: IOperationInDto): string => getTelegramUserName(operation.telegramUser),
     nameI18n: 'operations.table.username',
     type: ETableColumnType.STRING,
-    sort: true,
     allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   },
   {

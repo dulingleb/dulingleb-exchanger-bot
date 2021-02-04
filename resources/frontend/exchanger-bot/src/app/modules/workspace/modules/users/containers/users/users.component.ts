@@ -67,6 +67,11 @@ export class UsersComponent implements OnInit, OnDestroy {
         type: EFilterType.INPUT
       },
       {
+        labelI18n: 'users.table.discount',
+        name: 'discount',
+        type: EFilterType.INPUT
+      },
+      {
         labelI18n: 'users.table.ban',
         name: 'ban',
         type: EFilterType.SELECT,
@@ -74,7 +79,7 @@ export class UsersComponent implements OnInit, OnDestroy {
           {
             value: false,
             titleI18n: 'user.ban.0',
-            class: 'text-success'
+            class: 'text-accent'
           },
           {
             value: true,

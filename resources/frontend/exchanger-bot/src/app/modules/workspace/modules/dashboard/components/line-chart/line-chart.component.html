@@ -1,0 +1,18 @@
+<app-page-content class="page-content">
+  <ng-container header>
+    {{ 'settings.telegram.pageTitle' | translate }}
+  </ng-container>
+  <ng-container content>
+    <div class="line-chart" *ngIf="isInit">
+      <canvas baseChart
+        [datasets]="lineChartData"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins">
+    </canvas>
+    </div>
+  </ng-container>
+</app-page-content>
