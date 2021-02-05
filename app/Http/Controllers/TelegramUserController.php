@@ -127,6 +127,39 @@ class TelegramUserController extends Controller
         return $this->response($data);
     }
 
+    public function chart(Request $request)
+    {
+        $data = [];
+        $month = Carbon::now()->month;
+        $year = Carbon::now()->year;
+
+        if ($request->period == 'month') {
+            $i = $month;
+            do {
+                if ($i == 0) {
+                    $i = 12;
+                    $year--;
+                }
+
+                $counts = TelegramUserSetting::where('exchanger_id', auth()->user()->exchanger->id)->whereYear('updated_at', $year)->whereMonth('updated_at', $i)->count();
+
+                $data[$i] = $counts;
+
+                $i--;
+            } while ($i != $month);
+        } else {
+            for ($i = 0; $i < 7; $i++) {
+
+                $counts = TelegramUserSetting::where('exchanger_id', auth()->user()->exchanger->id)
+                    ->whereBetween('updated_at', [Carbon::now()->subDay($i)->format('Y-m-d 00:00:00'), Carbon::now()->subDay($i)->format('Y-m-d 23:59:59')])->count();
+
+                $data[Carbon::now()->subDay($i)->dayOfWeek] = $counts;
+            }
+        }
+
+        return $this->response($data);
+    }
+
     private function checkUser(TelegramUserSetting $userSetting) {
         if ($userSetting->exchanger_id != auth()->user()->exchanger->id) {
             abort(422);

@@ -79,7 +79,8 @@ Route::group([
     Route::resource('settings/bank-details', 'BankDetailController', ['except' => ['edit', 'create']]);
 
     // Графики
-    Route::get('dashboard/operations', ['uses' => 'OperationController@chartCount']);
+    Route::get('dashboard/operations', ['uses' => 'OperationController@chart']);
+    Route::get('dashboard/users', ['uses' => 'TelegramUserController@chart']);
 
     // Операции
     Route::get('operations', ['as' => 'operations.index', 'uses' => 'OperationController@index']);

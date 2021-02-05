@@ -97,9 +97,8 @@ class OperationController extends Controller
         return $this->response($data);
     }
 
-    public function chartCount(Request $request)
+    public function chart(Request $request)
     {
-
         $data = [];
         $month = Carbon::now()->month;
         $year = Carbon::now()->year;
@@ -125,7 +124,6 @@ class OperationController extends Controller
             } while ($i != $month);
         } else {
             for ($i = 0; $i < 7; $i++) {
-
 
                 $counts = Operation::where('exchanger_id', auth()->user()->exchanger->id)->where('status', Operation::STATUS_SUCCESS)
                     ->whereBetween('updated_at', [Carbon::now()->subDay($i)->format('Y-m-d 00:00:00'), Carbon::now()->subDay($i)->format('Y-m-d 23:59:59')]);
