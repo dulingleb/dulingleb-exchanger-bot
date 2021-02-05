@@ -141,7 +141,7 @@ class TelegramUserController extends Controller
                     $year--;
                 }
 
-                $counts = TelegramUserSetting::where('exchanger_id', auth()->user()->exchanger->id)->whereYear('updated_at', $year)->whereMonth('updated_at', $i)->count();
+                $counts = TelegramUserSetting::where('exchanger_id', auth()->user()->exchanger->id)->whereYear('created_at', $year)->whereMonth('created_at', $i)->count();
 
                 $data[$i] = $counts;
 
@@ -151,7 +151,7 @@ class TelegramUserController extends Controller
             for ($i = 0; $i < 7; $i++) {
 
                 $counts = TelegramUserSetting::where('exchanger_id', auth()->user()->exchanger->id)
-                    ->whereBetween('updated_at', [Carbon::now()->subDay($i)->format('Y-m-d 00:00:00'), Carbon::now()->subDay($i)->format('Y-m-d 23:59:59')])->count();
+                    ->whereBetween('created_at', [Carbon::now()->subDay($i)->format('Y-m-d 00:00:00'), Carbon::now()->subDay($i)->format('Y-m-d 23:59:59')])->count();
 
                 $data[Carbon::now()->subDay($i)->dayOfWeek] = $counts;
             }

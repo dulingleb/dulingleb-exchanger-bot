@@ -111,7 +111,7 @@ class OperationController extends Controller
                     $year--;
                 }
 
-                $counts = Operation::where('exchanger_id', auth()->user()->exchanger->id)->where('status', Operation::STATUS_SUCCESS)->whereYear('created_at', $year)->whereMonth('created_at', $i);
+                $counts = Operation::where('exchanger_id', auth()->user()->exchanger->id)->where('status', Operation::STATUS_SUCCESS)->whereYear('updated_at', $year)->whereMonth('updated_at', $i);
                 if ($request->type == 'sum') {
                     $counts = $counts->sum('price');
                 } else {
@@ -126,7 +126,7 @@ class OperationController extends Controller
             for ($i = 0; $i < 7; $i++) {
 
                 $counts = Operation::where('exchanger_id', auth()->user()->exchanger->id)->where('status', Operation::STATUS_SUCCESS)
-                    ->whereBetween('created_at', [Carbon::now()->subDay($i)->format('Y-m-d 00:00:00'), Carbon::now()->subDay($i)->format('Y-m-d 23:59:59')]);
+                    ->whereBetween('updated_at', [Carbon::now()->subDay($i)->format('Y-m-d 00:00:00'), Carbon::now()->subDay($i)->format('Y-m-d 23:59:59')]);
                 if ($request->type == 'sum') {
                     $counts = $counts->sum('price');
                 } else {
