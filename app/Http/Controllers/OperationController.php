@@ -97,6 +97,51 @@ class OperationController extends Controller
         return $this->response($data);
     }
 
+    public function chartCount(Request $request)
+    {
+
+        $data = [];
+        $month = Carbon::now()->month;
+        $year = Carbon::now()->year;
+
+        if ($request->period == 'month') {
+            $i = $month;
+            do {
+                if ($i == 0) {
+                    $i = 12;
+                    $year--;
+                }
+
+                $counts = Operation::where('exchanger_id', auth()->user()->exchanger->id)->where('status', Operation::STATUS_SUCCESS)->whereYear('updated_at', $year)->whereMonth('updated_at', $i);
+                if ($request->type == 'sum') {
+                    $counts = $counts->sum('price');
+                } else {
+                    $counts = $counts->count();
+                }
+
+                $data[$i] = $counts;
+
+                $i--;
+            } while ($i != $month);
+        } else {
+            for ($i = 0; $i < 7; $i++) {
+
+
+                $counts = Operation::where('exchanger_id', auth()->user()->exchanger->id)->where('status', Operation::STATUS_SUCCESS)
+                    ->whereBetween('updated_at', [Carbon::now()->subDay($i)->format('Y-m-d 00:00:00'), Carbon::now()->subDay($i)->format('Y-m-d 23:59:59')]);
+                if ($request->type == 'sum') {
+                    $counts = $counts->sum('price');
+                } else {
+                    $counts = $counts->count();
+                }
+
+                $data[Carbon::now()->subDay($i)->dayOfWeek] = $counts;
+            }
+        }
+
+        return $this->response($data);
+    }
+
     private function checkStatusOperation(Operation $operation)
     {
         if (auth()->user()->exchanger->id != $operation->exchanger_id ||

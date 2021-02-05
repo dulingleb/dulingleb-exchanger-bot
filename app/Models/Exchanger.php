@@ -9,8 +9,8 @@ class Exchanger extends Model
 {
     protected $guarded = [];
 
-    const STATUS_ACTIVE = 0;
-    const STATUS_CLOSED = 1;
+    const STATUS_ACTIVE = 1;
+    const STATUS_CLOSED = 0;
 
     public function scopeOperationsWait($query)
     {
