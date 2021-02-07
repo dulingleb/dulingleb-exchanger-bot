@@ -3,7 +3,7 @@
                       blockNameI18n="statusInfoBlock.operationsSum.title"
                       [blockInfo]="(operationsSumInfo?.operationsSum | decimal) + ' ' + ('statusInfoBlock.operationsSum.price' | translate)"
                       [infoAction]="true"
-                      icon="show_chart"
+                      icon="app_registration"
 >
   <ng-container actions>
     <span mat-button class="text-accent">+{{ operationsSumInfo?.operationsSumToday | decimal }} {{ 'statusInfoBlock.operationsSum.price' | translate }} {{ 'statusInfoBlock.operationsSum.today' | translate }}</span>

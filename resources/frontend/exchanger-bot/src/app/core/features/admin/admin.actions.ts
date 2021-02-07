@@ -44,10 +44,6 @@ const saveAdmin = createAction(
   props<{ admin: IAdminInDto }>()
 )
 
-const changeStatus = createAction(
-  '[Admin exchanger bot] Change status'
-)
-
 const redirectAfterAuth = createAction(
   '[Admin exchanger bot] Redirect after auth'
 )
@@ -108,7 +104,6 @@ export const ADMIN_ACTIONS = {
 
   saveToken,
   saveAdmin,
-  changeStatus,
   redirectAfterAuth,
   redirectAfterLogout,
 

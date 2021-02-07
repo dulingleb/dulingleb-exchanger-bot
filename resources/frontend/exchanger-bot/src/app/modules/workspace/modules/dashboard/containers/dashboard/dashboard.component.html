@@ -1,4 +1,18 @@
 <div class="dashboard">
-  <app-line-chart class="test"></app-line-chart>
-  <app-bar-chart class="test"></app-bar-chart>
+  <app-operations-chart
+                      class="chart"
+                      [inRequest]="inRequest"
+                      [type]="typeOperations"
+                      [period]="periodOperations"
+                      [operationsCharts]="operationsCharts"
+                      (changeType)="changeTypeOperations($event)"
+                      (changePeriod)="changePeriodOperations($event)"
+  ></app-operations-chart>
+  <app-users-chart
+                class="chart"
+                [inRequest]="inRequest"
+                [period]="periodUsers"
+                [usersCharts]="usersCharts"
+                (changePeriod)="changePeriodUsers($event)"
+  ></app-users-chart>
 </div>

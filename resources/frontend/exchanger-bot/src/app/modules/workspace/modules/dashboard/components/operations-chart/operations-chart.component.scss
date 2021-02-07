@@ -1,0 +1,12 @@
+.line-chart {
+  height: 400px;
+  width: 100%;
+}
+
+.btn {
+  transition: color 0.5s;
+
+  &:hover {
+    color: var(--accent-color);
+  }
+}

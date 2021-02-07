@@ -193,6 +193,20 @@ export class SettingApiService {
     )
   }
 
+  getStatus(): Observable<boolean> {
+    return this.http.get<ICommonResponseDto<boolean>>(`${ENV.api}/settings/status`).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data: status }) => !!status)
+    )
+  }
+
+  changeStatus(): Observable<boolean> {
+    return this.http.post<ICommonResponseDto<boolean>>(`${ENV.api}/settings/status`, {}).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data: status }) => !!status)
+    )
+  }
+
   private settingOutToInDto(setting: ISettingOutDto): ISettingInDto {
     return {
       id: setting.id,

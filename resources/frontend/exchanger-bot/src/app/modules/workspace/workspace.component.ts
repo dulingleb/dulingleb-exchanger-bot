@@ -1,16 +1,53 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import { finalize, takeUntil } from 'rxjs/operators'
+import { Subject } from 'rxjs'
 
-import { IAdminFacade, ADMIN_FACADE } from '@core/features'
+import { IAdminFacade, ADMIN_FACADE, IUiFacade, UI_FACADE } from '@core/features'
+import { SettingApiService } from '@core/api'
 
 @Component({
   selector: 'app-workspace',
   templateUrl: './workspace.component.html',
   styleUrls: ['./workspace.component.scss']
 })
-export class WorkspaceComponent implements OnInit {
+export class WorkspaceComponent implements OnInit, OnDestroy {
 
-  constructor(@Inject(ADMIN_FACADE) public adminFacade: IAdminFacade) {}
+  inRequest: boolean
+  status: boolean
 
-  ngOnInit(): void {}
+  private destroy$ = new Subject()
+
+  constructor(
+    public settingApiService: SettingApiService,
+    @Inject(UI_FACADE) private uiFacade: IUiFacade,
+    @Inject(ADMIN_FACADE) public adminFacade: IAdminFacade
+  ) {}
+
+  ngOnInit(): void {
+    this.inRequest = true
+    this.settingApiService.getStatus().pipe(
+      finalize(() => this.inRequest = false),
+      takeUntil(this.destroy$)
+    ).subscribe(
+      (status) => this.status = status,
+      (err) => this.uiFacade.addErrorNotification(err.message)
+    )
+  }
+
+  changeStatus(): void {
+    this.inRequest = true
+    this.settingApiService.changeStatus().pipe(
+      finalize(() => this.inRequest = false),
+      takeUntil(this.destroy$)
+    ).subscribe(
+      (status) => this.status = status,
+      (err) => this.uiFacade.addErrorNotification(err.message)
+    )
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next()
+    this.destroy$.complete()
+  }
 
 }

@@ -34,7 +34,6 @@ export interface IAdminFacade {
   init(): void;
   login(email: string, password: string): void;
   logout(): void;
-  changeStatus(): void;
 
 }
 
@@ -66,10 +65,6 @@ export class AdminFacade {
 
   logout(): void {
     this.store$.dispatch(ADMIN_ACTIONS.logout())
-  }
-
-  changeStatus(): void {
-    this.store$.dispatch(ADMIN_ACTIONS.changeStatus())
   }
 
 }
