@@ -137,7 +137,7 @@ class OperationController extends Controller
             }
         }
 
-        $data = array_reverse($data);
+        $data = array_reverse($data, true);
 
         return $this->response($data);
     }
