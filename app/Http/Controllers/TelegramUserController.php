@@ -157,6 +157,8 @@ class TelegramUserController extends Controller
             }
         }
 
+        $data = array_reverse($data);
+
         return $this->response($data);
     }
 
