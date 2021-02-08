@@ -118,7 +118,7 @@ class OperationController extends Controller
                     $counts = $counts->count();
                 }
 
-                $data[$i] = $counts;
+                $data[] = ['period' => $i, 'value' => $counts];
 
                 $i--;
             } while ($i != $month);
@@ -133,11 +133,11 @@ class OperationController extends Controller
                     $counts = $counts->count();
                 }
 
-                $data[Carbon::now()->subDay($i)->dayOfWeek] = $counts;
+                $data[] = ['period' => Carbon::now()->subDay($i)->dayOfWeek, 'value' => $counts];
             }
         }
 
-        $data = array_reverse($data, true);
+        $data = array_reverse($data);
 
         return $this->response($data);
     }
