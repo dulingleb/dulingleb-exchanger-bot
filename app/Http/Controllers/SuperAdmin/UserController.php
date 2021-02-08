@@ -28,6 +28,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|min:2|max:198|string',
             'email' => 'required|email|unique:users',
+            'subscribe' => 'nullable|date',
             'password' => 'required|min:4|max:32',
             'c_password' => 'required|same:password'
         ]);
@@ -35,7 +36,8 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'subscribe' => $request->subscribe ?? null
         ]);
 
         Exchanger::create([
@@ -43,7 +45,7 @@ class UserController extends Controller
             'status' => \App\Models\Exchanger::STATUS_CLOSED,
             'course' => 40000,
             'min_exchange' => '0.001',
-            'max_exchange' => '0.1',
+            'max_exchange' => '0.1'
         ]);
 
         return $this->response(null, 'Пользователь успешно добавлен');
@@ -59,6 +61,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|min:2|max:198|string',
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'subscribe' => 'nullable|date',
             'password' => 'nullable|min:4|max:32',
             'c_password' => 'same:password'
         ]);
@@ -67,6 +70,9 @@ class UserController extends Controller
         $user->email = $request->email;
         if ($request->c_password) {
             $user->password = bcrypt($request->c_password);
+        }
+        if ($request->subscribe) {
+            $user->sibscribe = $request->subscribe;
         }
         $user->save();
 
