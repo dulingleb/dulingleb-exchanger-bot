@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\Exchanger;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -37,7 +38,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'subscribe' => $request->subscribe ?? null
+            'subscribe' => $request->subscribe ? Carbon::make($request->subscribe)->format('Y-m-d H:i') : null
         ]);
 
         Exchanger::create([
@@ -72,7 +73,7 @@ class UserController extends Controller
             $user->password = bcrypt($request->c_password);
         }
         if ($request->subscribe) {
-            $user->subscribe = $request->subscribe;
+            $user->subscribe = Carbon::make($request->subscribe)->format('Y-m-d H:i');
         }
         $user->save();
 
