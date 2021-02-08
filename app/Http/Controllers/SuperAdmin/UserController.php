@@ -38,7 +38,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'subscribe' => $request->subscribe ? Carbon::make($request->subscribe)->format('Y-m-d H:i') : null
+            'subscribe' => $request->subscribe ? Carbon::make($request->subscribe)->format('Y-m-d H:i:s') : null
         ]);
 
         Exchanger::create([
@@ -73,7 +73,7 @@ class UserController extends Controller
             $user->password = bcrypt($request->c_password);
         }
         if ($request->subscribe) {
-            $user->subscribe = Carbon::make($request->subscribe)->format('Y-m-d H:i');
+            $user->subscribe = Carbon::make($request->subscribe)->format('Y-m-d H:i:s');
         }
         $user->save();
 
