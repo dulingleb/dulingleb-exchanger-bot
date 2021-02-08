@@ -4,7 +4,7 @@ import { Subject } from 'rxjs'
 
 import { DashboardApiService } from '@core/api'
 import { UI_FACADE, IUiFacade } from '@core/features'
-import { EChartsPeriod, EChartsType } from '../../models'
+import { EChartsPeriod, EChartsType, IDashboardChart } from '@core/models'
 
 @Component({
   selector: 'app-dashboard',
@@ -19,8 +19,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   periodOperations = EChartsPeriod.MONTH
   periodUsers = EChartsPeriod.MONTH
 
-  operationsCharts: { [key: number]: number }
-  usersCharts: { [key: number]: number }
+  operationsCharts: IDashboardChart[]
+  usersCharts: IDashboardChart[]
 
   private destroy$ = new Subject()
 

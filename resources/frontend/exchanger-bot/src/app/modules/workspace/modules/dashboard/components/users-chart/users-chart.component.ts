@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { Label } from 'ng2-charts'
 
-import { EChartsPeriod } from '../../models'
+import { EChartsPeriod, EChartsType, IDashboardChart } from '@core/models'
 
 @Component({
   selector: 'app-users-chart',
@@ -16,7 +16,7 @@ export class UsersChartComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() inRequest: boolean
   @Input() period: EChartsPeriod
-  @Input() usersCharts: { [key: number]: number }
+  @Input() usersCharts: IDashboardChart[]
 
   @Output() changePeriod = new EventEmitter<EChartsPeriod>()
 
@@ -27,14 +27,14 @@ export class UsersChartComponent implements OnInit, OnChanges, OnDestroy {
     maintainAspectRatio: false,
     legend: { display: false }
   }
-  barChartLabels: Label[] = []
+  chartLabels: Label[] = []
   barChartType: ChartType = 'bar'
   barChartLegend = true
   barChartPlugins = []
 
-  barChartData: ChartDataSets[] = []
+  chartData: ChartDataSets[] = []
 
-  chartData$ = new BehaviorSubject<{ [key: number]: number }>(null)
+  chartData$ = new BehaviorSubject<IDashboardChart[]>(null)
   private destroy$ = new Subject()
 
   constructor(private translateService: TranslateService) {}
@@ -43,12 +43,12 @@ export class UsersChartComponent implements OnInit, OnChanges, OnDestroy {
     this.chartData$.pipe(
       debounceTime(500),
       filter(data => !!data),
-      mergeMap(lineChartData => this.translateService.get(this.getPeriodTranslateKey()).pipe(
-        map(translate => ({ lineChartData, translate }))
+      mergeMap(chartData => this.translateService.get(this.getPeriodTranslateKey()).pipe(
+        map(translate => ({ chartData, translate }))
       )),
       takeUntil(this.destroy$)
-    ).subscribe(({ lineChartData, translate }) => {
-      this.getLineChartLabels(lineChartData, translate)
+    ).subscribe(({ chartData, translate }) => {
+      this.getLineChartLabels(chartData, translate)
     })
   }
 
@@ -65,15 +65,15 @@ export class UsersChartComponent implements OnInit, OnChanges, OnDestroy {
     this.destroy$.complete()
   }
 
-  private getLineChartLabels(lineChartData: { [key: number]: number }, translate: { [key: number]: string }): void {
-    const barChartLabels = []
+  private getLineChartLabels(chartData: IDashboardChart[], translate: { [key: number]: string }): void {
+    const chartLabels = []
     const data = []
-    for (const key of Object.keys(lineChartData)) {
-      barChartLabels.push(translate[+key])
-      data.push(lineChartData[key])
+    for (const cData of chartData){
+      chartLabels.push(translate[cData.period])
+      data.push(cData.value)
     }
-    this.barChartLabels = barChartLabels
-    this.barChartData = [{ data }]
+    this.chartLabels = chartLabels
+    this.chartData = [{ data }]
   }
 
   private getPeriodTranslateKey(): string {

@@ -3,24 +3,27 @@
     {{ 'dashboard.operations.title' | translate }}
   </ng-container>
   <ng-container actions>
-    <button mat-icon-button class="btn" [color]="type === EChartsType.COUNT ? 'accent' : ''" (click)="changeType.emit(EChartsType.COUNT)" [disabled]="inRequest" [title]="'dashboard.countBtn' | translate">
-      <mat-icon>apps</mat-icon>
+    <button mat-button class="btn" [color]="type === EChartsType.COUNT ? 'accent' : ''" (click)="changeType.emit(EChartsType.COUNT)" [disabled]="inRequest">
+      {{ 'dashboard.countBtn' | translate }}
     </button>
-    <button mat-icon-button class="btn" [color]="type === EChartsType.SUM ? 'accent' : ''" (click)="changeType.emit(EChartsType.SUM)" [disabled]="inRequest" [title]="'dashboard.sumBtn' | translate">
-      <mat-icon>app_registration</mat-icon>
+    <button mat-button class="btn" [color]="type === EChartsType.SUM ? 'accent' : ''" (click)="changeType.emit(EChartsType.SUM)" [disabled]="inRequest">
+      {{ 'dashboard.sumBtn' | translate }}
     </button>
-    <button mat-icon-button class="btn" [color]="period === EChartsPeriod.WEEK ? 'accent' : ''" (click)="changePeriod.emit(EChartsPeriod.WEEK)" [disabled]="inRequest" [title]="'dashboard.weekBtn' | translate">
-      <mat-icon>today</mat-icon>
+
+    |
+
+    <button mat-button class="btn" [color]="period === EChartsPeriod.WEEK ? 'accent' : ''" (click)="changePeriod.emit(EChartsPeriod.WEEK)" [disabled]="inRequest">
+      {{ 'dashboard.weekBtn' | translate }}
     </button>
-    <button mat-icon-button class="btn" [color]="period === EChartsPeriod.MONTH ? 'accent' : ''" (click)="changePeriod.emit(EChartsPeriod.MONTH)" [disabled]="inRequest" [title]="'dashboard.monthBtn' | translate">
-      <mat-icon>event_note</mat-icon>
+    <button mat-button class="btn" [color]="period === EChartsPeriod.MONTH ? 'accent' : ''" (click)="changePeriod.emit(EChartsPeriod.MONTH)" [disabled]="inRequest">
+      {{ 'dashboard.monthBtn' | translate }}
     </button>
   </ng-container>
   <ng-container content>
     <div class="line-chart" *ngIf="chartData$ | async">
       <canvas baseChart
-        [datasets]="lineChartData"
-        [labels]="lineChartLabels"
+        [datasets]="chartData"
+        [labels]="chartLabels"
         [options]="lineChartOptions"
         [colors]="lineChartColors"
         [legend]="lineChartLegend"

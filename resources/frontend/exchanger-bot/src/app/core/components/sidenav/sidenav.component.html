@@ -7,7 +7,11 @@
           <span class="fio">{{ (adminFacade.admin$ | async)?.name }}</span>
         </span>
         <span class="subscription-wrapper" [title]="'sideNav.userInfo.hoverTitle' | translate">
-          <span class="subscription">{{ 'sideNav.userInfo.subscription' | translate: { days: (adminFacade.admin$ | async)?.operationsCountToday } }}</span>
+          {{ 'sideNav.userInfo.subscription' | translate }}
+          <span class="subscription-info" [ngClass]="(adminFacade.admin$ | async)?.operationsCountToday || 0 > APP_COMMON.subscriptionMinDays ? 'text-accent' : 'text-warn'">
+            <span class="time">{{ (adminFacade.admin$ | async)?.operationsCountToday || 0 }} </span>
+            <span class="info">{{ (adminFacade.admin$ | async)?.operationsCountToday | dayFormat | async }}</span>
+          </span>
         </span>
       </span>
     </a>

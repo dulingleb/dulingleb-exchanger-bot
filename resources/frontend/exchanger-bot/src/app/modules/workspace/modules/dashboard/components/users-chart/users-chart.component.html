@@ -3,18 +3,18 @@
     {{ 'dashboard.users.title' | translate }}
   </ng-container>
   <ng-container actions>
-    <button mat-icon-button class="btn" [color]="period === EChartsPeriod.WEEK ? 'accent' : ''" (click)="changePeriod.emit(EChartsPeriod.WEEK)" [disabled]="inRequest" [title]="'dashboard.weekBtn' | translate">
-      <mat-icon>today</mat-icon>
+    <button mat-button class="btn" [color]="period === EChartsPeriod.WEEK ? 'accent' : ''" (click)="changePeriod.emit(EChartsPeriod.WEEK)" [disabled]="inRequest">
+      {{ 'dashboard.weekBtn' | translate }}
     </button>
-    <button mat-icon-button class="btn" [color]="period === EChartsPeriod.MONTH ? 'accent' : ''" (click)="changePeriod.emit(EChartsPeriod.MONTH)" [disabled]="inRequest" [title]="'dashboard.monthBtn' | translate">
-      <mat-icon>event_note</mat-icon>
+    <button mat-button class="btn" [color]="period === EChartsPeriod.MONTH ? 'accent' : ''" (click)="changePeriod.emit(EChartsPeriod.MONTH)" [disabled]="inRequest">
+      {{ 'dashboard.monthBtn' | translate }}
     </button>
   </ng-container>
   <ng-container content>
     <div class="line-chart" *ngIf="chartData$ | async">
       <canvas baseChart
-        [datasets]="barChartData"
-        [labels]="barChartLabels"
+        [datasets]="chartData"
+        [labels]="chartLabels"
         [options]="barChartOptions"
         [plugins]="barChartPlugins"
         [legend]="barChartLegend"

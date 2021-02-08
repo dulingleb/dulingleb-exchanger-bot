@@ -1,12 +1,4 @@
-export enum EChartsPeriod {
-  MONTH = 'month',
-  WEEK = 'week'
-}
-
-export enum EChartsType {
-  SUM = 'sum',
-  COUNT = 'count'
-}
+import { EChartsPeriod, EChartsType } from '@core/models'
 
 export interface IOperationChartSettings {
   type: EChartsType;

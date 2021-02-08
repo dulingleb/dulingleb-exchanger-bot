@@ -5,7 +5,7 @@ import { ChartDataSets, ChartOptions } from 'chart.js'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { Color, Label } from 'ng2-charts'
 
-import { EChartsPeriod, EChartsType } from '../../models'
+import { EChartsPeriod, EChartsType, IDashboardChart } from '@core/models'
 
 @Component({
   selector: 'app-operations-chart',
@@ -17,16 +17,16 @@ export class OperationsChartComponent implements OnInit, OnChanges, OnDestroy {
   @Input() inRequest: boolean
   @Input() type: EChartsType
   @Input() period: EChartsPeriod
-  @Input() operationsCharts: { [key: number]: number }
+  @Input() operationsCharts: IDashboardChart[]
   @Output() changeType = new EventEmitter<EChartsType>()
   @Output() changePeriod = new EventEmitter<EChartsPeriod>()
 
   EChartsType = EChartsType
   EChartsPeriod = EChartsPeriod
 
-  lineChartData: ChartDataSets[] = []
+  chartData: ChartDataSets[] = []
 
-  lineChartLabels: Label[] = []
+  chartLabels: Label[] = []
 
   lineChartOptions: ChartOptions = {
     responsive: true,
@@ -45,7 +45,7 @@ export class OperationsChartComponent implements OnInit, OnChanges, OnDestroy {
   lineChartPlugins = []
   lineChartType = 'line'
 
-  chartData$ = new BehaviorSubject<{ [key: number]: number }>(null)
+  chartData$ = new BehaviorSubject<IDashboardChart[]>(null)
   private destroy$ = new Subject()
 
   constructor(private translateService: TranslateService) {}
@@ -54,12 +54,12 @@ export class OperationsChartComponent implements OnInit, OnChanges, OnDestroy {
     this.chartData$.pipe(
       debounceTime(500),
       filter(data => !!data),
-      mergeMap(lineChartData => this.translateService.get(this.getPeriodTranslateKey()).pipe(
-        map(translate => ({ lineChartData, translate }))
+      mergeMap(chartData => this.translateService.get(this.getPeriodTranslateKey()).pipe(
+        map(translate => ({ chartData, translate }))
       )),
       takeUntil(this.destroy$)
-    ).subscribe(({ lineChartData, translate }) => {
-      this.getLineChartLabels(lineChartData, translate)
+    ).subscribe(({ chartData, translate }) => {
+      this.getLineChartLabels(chartData, translate)
     })
   }
 
@@ -76,15 +76,15 @@ export class OperationsChartComponent implements OnInit, OnChanges, OnDestroy {
     this.destroy$.complete()
   }
 
-  private getLineChartLabels(lineChartData: { [key: number]: number }, translate: { [key: number]: string }): void {
-    const lineChartLabels = []
+  private getLineChartLabels(chartData: IDashboardChart[], translate: { [key: number]: string }): void {
+    const chartLabels = []
     const data = []
-    for (const key of Object.keys(lineChartData)) {
-      lineChartLabels.push(translate[+key])
-      data.push(lineChartData[key])
+    for (const cData of chartData){
+      chartLabels.push(translate[cData.period])
+      data.push(cData.value)
     }
-    this.lineChartLabels = lineChartLabels
-    this.lineChartData = [{ data }]
+    this.chartLabels = chartLabels
+    this.chartData = [{ data }]
   }
 
   private getPeriodTranslateKey(): string {
