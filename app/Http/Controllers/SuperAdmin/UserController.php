@@ -48,7 +48,7 @@ class UserController extends Controller
             'max_exchange' => '0.1'
         ]);
 
-        return $this->response(null, 'Пользователь успешно добавлен');
+        return $this->response($user, 'Пользователь успешно добавлен');
     }
 
     public function show(User $user): \Illuminate\Http\JsonResponse
@@ -72,7 +72,7 @@ class UserController extends Controller
             $user->password = bcrypt($request->c_password);
         }
         if ($request->subscribe) {
-            $user->sibscribe = $request->subscribe;
+            $user->subscribe = $request->subscribe;
         }
         $user->save();
 
@@ -87,6 +87,6 @@ class UserController extends Controller
 
         $user->delete();
 
-        return $this->response(null, 'Пользователь успешно удален');
+        return $this->response($user, 'Пользователь успешно удален');
     }
 }
