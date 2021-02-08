@@ -77,7 +77,7 @@ class UserController extends Controller
         }
         $user->save();
 
-        return $this->response(null, 'Данные успешно сохранены');
+        return $this->response($user, 'Данные успешно сохранены');
     }
 
     public function destroy(User $user): \Illuminate\Http\JsonResponse
