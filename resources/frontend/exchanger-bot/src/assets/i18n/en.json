@@ -4,363 +4,363 @@
     "appName": "bot"
   },
   "common": {
-    "name": "Имя",
+    "name": "Name",
     "email": "Email",
-    "role": "Роль",
+    "role": "Role",
     "roles": {
-      "1": "Супер администратор",
-      "2": "Администратор"
+      "1": "Super admin",
+      "2": "Admin"
     },
     "day": {
-      "day1": "дня",
-      "day2": "дней"
+      "day1": "days",
+      "day2": "days"
     },
     "month": {
-      "1": "Январь",
-      "2": "Февраль",
-      "3": "Март",
-      "4": "Апрель",
-      "5": "Май",
-      "6": "Июнь",
-      "7": "Июль",
-      "8": "Август",
-      "9": "Сентябрь",
-      "10": "Октябрь",
-      "11": "Ноябрь",
-      "12": "Декабрь"
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
     },
     "week": {
-      "0": "Понедельник",
-      "1": "Вторник",
-      "2": "Среда",
-      "3": "Четверг",
-      "4": "Пятница",
-      "5": "Суббота",
-      "6": "Воскресенье"
+      "0": "Monday",
+      "1": "Tuesday",
+      "2": "Wednesday",
+      "3": "Thursday",
+      "4": "Friday",
+      "5": "Saturday",
+      "6": "Sunday"
     }
   },
   "sideNav": {
     "userInfo": {
-      "subscription": "Осталось:",
-      "hoverTitle": "Подписка"
+      "subscription": "You have:",
+      "hoverTitle": "Subscription"
     },
-    "dashboard": "Доска",
-    "admins": "Администраторы",
-    "users": "Пользователи",
-    "operations": "Сделки",
-    "mailing": "Рассылка",
+    "dashboard": "Dashboard",
+    "admins": "Admins",
+    "users": "Users",
+    "operations": "Operations",
+    "mailing": "Mailing",
     "settings": {
-      "title": "Настройки",
-      "common": "Общие",
-      "messages": "Сообщения",
-      "commission": "Коммиссии",
-      "requisites": "Реквизиты"
+      "title": "Settings",
+      "common": "Common",
+      "messages": "Messages",
+      "commission": "Commission",
+      "requisites": "Bank details"
     },
-    "logout": "Выход"
+    "logout": "Logout"
   },
   "statusInfoBlock": {
     "status": {
-      "title": "Статус",
-      "inWork": "В работе",
-      "inPause": "На паузе",
-      "stopBtn": "Остановить",
-      "startBtn": "Возобновить"
+      "title": "Status",
+      "inWork": "In work",
+      "onPause": "On pause",
+      "stopBtn": "Stop",
+      "startBtn": "Start"
     },
     "users": {
-      "title": "Пользователи",
-      "today": "За сегодня"
+      "title": "Users",
+      "today": "Today"
     },
     "operationsCount": {
-      "title": "Количества операций",
-      "today": "За сегодня"
+      "title": "Operations count",
+      "today": "Today"
     },
     "operationsSum": {
-      "title": "Сумма операций",
-      "today": "За сегодня",
-      "price": "р."
+      "title": "Amount of Operations",
+      "today": "Today",
+      "price": "r."
     }
   },
   "confirm": {
-    "ok": "Да",
-    "cancel": "Отмена",
+    "ok": "Ok",
+    "cancel": "Cancel",
     "deleteModal": {
-      "title": "Удаление {{titleKey}}",
-      "message": "Вы действительно хотите удалить {{messageKey}}"
+      "title": "Removing {{titleKey}}",
+      "message": "Do you really want to remove {{messageKey}}"
     }
   },
   "sevenDaysPopup": {
-    "title": "Осталось",
-    "endTitle": "7 дней"
+    "title": "You have",
+    "endTitle": "7 days"
   },
   "table": {
     "filter": {
-      "showFilter": "Показать фильтр",
-      "done": "Показать",
-      "clear": "Очистить"
+      "showFilter": "Show filter",
+      "done": "Filter",
+      "clear": "Clear"
     },
     "action": {
-      "info": "Просмотреть информацию",
-      "edit": "Редактировать",
-      "delete": "Удалить"
+      "info": "Get information",
+      "edit": "Edit",
+      "delete": "Remove"
     }
   },
   "auth": {
     "input": {
-      "email": "Введите Email",
-      "password": "Введите пароль"
+      "email": "Enter Email",
+      "password": "Enter password"
     },
     "error": {
-      "email": "Некорректный Email",
-      "password": "Некорректный пароль",
-      "emailRequired": "Введите Email",
-      "passwordRequired": "Введите пароль"
+      "email": "Incorrect Email",
+      "password": "Incorrect password",
+      "emailRequired": "Enter Email",
+      "passwordRequired": "Enter password"
     },
-    "loginBtn": "Вход"
+    "loginBtn": "Login"
   },
   "dashboard": {
-    "countBtn": "Количество",
-    "sumBtn": "Сумма",
-    "weekBtn": "Неделя",
-    "monthBtn": "Месяц",
+    "countBtn": "Count",
+    "sumBtn": "Amount",
+    "weekBtn": "Week",
+    "monthBtn": "Month",
     "operations": {
-      "title": "Операции"
+      "title": "Operations"
     },
     "users": {
-      "title": "Пользователи"
+      "title": "Users"
     }
   },
   "admins": {
     "tableHeader": {
-      "addBtn": "Добавить",
-      "title": "Администраторы"
+      "addBtn": "Add",
+      "title": "Admins"
     },
     "table": {
-      "name": "Имя",
+      "name": "Name",
       "email": "Email",
-      "role": "Роль",
-      "subscribe": "Подписка",
-      "createdAt": "Дата регистрации"
+      "role": "Role",
+      "subscribe": "Subscription",
+      "createdAt": "Date od registration"
     }
   },
   "admin": {
     "edit": {
-      "pageTitle": "Редактирование администратора",
-      "pageNewTitle": "Добавление администратора",
+      "pageTitle": "Edit admin",
+      "pageNewTitle": "Add admin",
       "input": {
-        "name": "Введите имя",
-        "email": "Введите Email",
-        "password": "Введите пароль",
-        "confirmPassword": "Повторите пароль",
-        "subscribe": "Дата подписки"
+        "name": "Enter name",
+        "email": "Enter Email",
+        "password": "Enter password",
+        "confirmPassword": "Confirm password",
+        "subscribe": "Subscription"
       },
       "error": {
-        "name": "Некорректное имя",
-        "email": "Некорректный Email",
-        "password": "Некорректный пароль",
+        "name": "Incorrect name",
+        "email": "Incorrect Email",
+        "password": "Incorrect password",
 
-        "nameRequired": "Введите имя",
-        "emailRequired": "Введите Email",
-        "passwordRequired": "Введите пароль"
+        "nameRequired": "Enter name",
+        "emailRequired": "Enter Email",
+        "passwordRequired": "Enter password"
       },
-      "save": "Сохранить"
+      "save": "Save"
     },
     "info": {
-      "pageTitle": "Информация об администраторе",
-      "editAdmin": "Редактировать"
+      "pageTitle": "Admin info",
+      "editAdmin": "Edit"
     },
     "profile": {
-      "pageTitle": "Привет, ",
-      "editAdmin": "Редактировать"
+      "pageTitle": "Hello, ",
+      "editAdmin": "Edit"
     }
   },
   "users": {
     "tableHeader": {
-      "title": "Пользователи"
+      "title": "Users"
     },
     "table": {
-      "username": "Имя",
-      "exchangerId": "id обменника",
+      "username": "Name",
+      "exchangerId": "Exchanger id",
       "telegramUserId": "id",
-      "operationsCount": "Количество операций",
-      "discount": "Скидка",
-      "operationsSum": "Сумма операций",
-      "ban": "Статус"
+      "operationsCount": "Operations count",
+      "discount": "Discount",
+      "operationsSum": "Amount of operations",
+      "ban": "Status"
     }
   },
   "user": {
     "ban": {
-      "0": "Активен",
-      "1": "Забанен"
+      "0": "Active",
+      "1": "Banned"
     },
     "edit": {
-      "pageTitle": "Редактирование пользователя",
+      "pageTitle": "Edit user",
       "input": {
-        "discount": "Персональная скидка",
-        "comment": "Примечание",
-        "ban": "Бан"
+        "discount": "Personal discount",
+        "comment": "Comment",
+        "ban": "Ban"
       },
       "error": {
-        "discount": "Некорректная скидка"
+        "discount": "Incorrect discount"
       },
-      "save": "Сохранить"
+      "save": "Save"
     },
     "info": {
       "id": "id",
       "username": "username",
-      "name": "Имя Фамилия",
-      "operationsCount": "Подтвержденных сделок",
-      "operationsSum": "Сделок на сумму",
-      "ref": "Рефералов",
-      "operationsRef": "Сделок рефов",
-      "operationsREfSum": "Сделок рефов на сумму"
+      "name": "Name",
+      "operationsCount": "Confirm operations",
+      "operationsSum": "Amount of operations",
+      "ref": "Referrals count",
+      "operationsRef": "Referrals operations",
+      "operationsREfSum": "Amount of referrals operations"
     }
   },
   "operations": {
     "tableHeader": {
-      "title": "Сделки"
+      "title": "Operations"
     },
     "table": {
       "id": "#",
-      "telegramUserId": "Id полюзователя",
-      "username": "Имя",
+      "telegramUserId": "User id",
+      "username": "Username",
       "amount": "BTC",
-      "price": "Руб.",
-      "status": "Статус"
+      "price": "Rub.",
+      "status": "Status"
     }
   },
   "operation": {
     "status": {
-      "1": "оплата",
-      "2": "успех",
-      "3": "ошибка",
-      "4": "отправка чека",
-      "5": "на проверке",
-      "6": "отменено"
+      "1": "payment",
+      "2": "success",
+      "3": "error",
+      "4": "sending check",
+      "5": "on check",
+      "6": "cancel"
     },
     "info": {
-      "pageTitle": "Сделка",
-      "user": "Пользователь:",
-      "amount": "Сумма:",
-      "price": "Стоимость:",
-      "detail": "Реквезиты:",
-      "btcAddress": "Кошелёк:",
-      "date": "Дата:",
-      "status": "Статус:",
-      "comment": "Комментарий к сделке",
-      "saveBtn": "Отправить",
-      "confirmBtn": "Подтвердить",
-      "cancelBtn": "Отмена",
-      "operatorBtn": "К оператору"
+      "pageTitle": "Operation",
+      "user": "User:",
+      "amount": "Amount:",
+      "price": "Price:",
+      "detail": "Details:",
+      "btcAddress": "btc address:",
+      "date": "Date:",
+      "status": "Status:",
+      "comment": "Comment",
+      "saveBtn": "Send",
+      "confirmBtn": "Confirm",
+      "cancelBtn": "Cancel",
+      "operatorBtn": "Send to operator"
     }
   },
   "mailing": {
-    "pageTitle": "Рассылка",
-    "message": "Сообщение",
-    "send": "Разослать"
+    "pageTitle": "Mailing",
+    "message": "Message",
+    "send": "Send"
   },
   "settings": {
     "btn": "btn",
-    "rub": "руб.",
-    "saveBtn": "Сохранить",
+    "rub": "rub.",
+    "saveBtn": "Save",
     "limits": {
-      "pageTitle": "Лимиты",
-      "course": "Курс",
-      "minExchange": "Мин. покупка",
-      "maxExchange": "Макс. покупка"
+      "pageTitle": "Limits",
+      "course": "Course",
+      "minExchange": "Min exchange",
+      "maxExchange": "Max exchange"
     },
     "telegram": {
-      "pageTitle": "Телеграм",
-      "telegramToken": "Токен",
-      "username": "Логин"
+      "pageTitle": "Telegram",
+      "telegramToken": "Token",
+      "username": "Username"
     },
     "keys": {
-      "pageTitle": "Ключи coinbase",
+      "pageTitle": "Coinbase keys",
       "coinbaseKey": "Key",
       "coinbaseSecret": "Secret"
     },
     "messages": {
       "tableHeader": {
-        "title": "Сообщения",
-        "addBtn": "Добавить"
+        "title": "Message",
+        "addBtn": "Add"
       },
       "table": {
-        "title": "Сообщение",
-        "slug": "slug"
+        "title": "Message",
+        "slug": "Slug"
       },
       "edit": {
-        "pageTitle": "Редактирование сообщения",
+        "pageTitle": "Edit message",
         "input": {
           "title": "Title",
           "slug": "Slug",
-          "description": "Описание",
-          "text": "Сообщение"
+          "description": "Description",
+          "text": "Message"
         },
-        "saveBtn": "Сохранить"
+        "saveBtn": "Save"
       },
       "template": {
         "edit": {
-          "pageTitle": "Редактирование шаблона сообщения"
+          "pageTitle": "Edit message template"
         },
         "new": {
-          "pageTitle": "Создание шаблона сообщения"
+          "pageTitle": "Create message template"
         }
       }
     },
     "commissions": {
       "tableHeader": {
-        "title": "Комиссии",
-        "addBtn": "Добавить"
+        "title": "Commissions",
+        "addBtn": "Add"
       },
       "table": {
-        "from": "От",
-        "to": "До",
-        "percent": "Процент"
+        "from": "From",
+        "to": "To",
+        "percent": "Commission"
       },
       "edit": {
-        "pageTitle": "Редактирование комиссии",
+        "pageTitle": "Edit commission",
         "input": {
-          "from": "От, btc",
-          "to": "До, btc",
-          "percent": "Комиссия, %"
+          "from": "From, btc",
+          "to": "To, btc",
+          "percent": "Commission, %"
         },
-        "saveBtn": "Сохранить"
+        "saveBtn": "Save"
       },
       "info": {
-        "pageTitle": "Комиссия",
-        "editBtn": "Редактировать"
+        "pageTitle": "Commission",
+        "editBtn": "Edit"
       },
       "new": {
-        "pageTitle": "Добавление комиссии"
+        "pageTitle": "Add commission"
       }
     },
     "requisites": {
       "tableHeader": {
-        "title": "Реквизиты",
-        "addBtn": "Добавить"
+        "title": "Bank details",
+        "addBtn": "Add"
       },
       "table": {
-        "title": "Банк",
-        "status": "Статус"
+        "title": "Bank",
+        "status": "Status"
       },
       "edit": {
-        "pageTitle": "Редактирование реквезита",
+        "pageTitle": "Edit bank details",
         "input": {
-          "title": "Заголовок",
-          "text": "Подробности",
-          "status": "Показывать"
+          "title": "Title",
+          "text": "Details",
+          "status": "Show"
         },
-        "saveBtn": "Сохранить"
+        "saveBtn": "Save"
       },
       "info": {
-        "pageTitle": "Реквизит",
-        "editBtn": "Редактировать"
+        "pageTitle": "Bank",
+        "editBtn": "Edit"
       },
       "new": {
-        "pageTitle": "Добавление реквезита"
+        "pageTitle": "Add bank"
       },
       "status": {
-        "1": "Показывать",
-        "0": "Не показывать"
+        "1": "Show",
+        "0": "Hide"
       }
     }
   }

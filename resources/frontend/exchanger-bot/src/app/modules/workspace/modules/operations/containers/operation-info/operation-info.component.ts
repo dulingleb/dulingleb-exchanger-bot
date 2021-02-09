@@ -42,7 +42,6 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
       )),
       takeUntil(this.destroy$)
     ).subscribe(operation =>  {
-      console.log('this.inRequest', this.inRequest)
       this.operation = operation
       this.initFormData()
     })
@@ -70,9 +69,7 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      (res) => {
-        console.log('res', res)
-      },
+      (res) => this.uiFacade.addInfoNotification(res.message),
       (err) => this.uiFacade.addErrorNotification(err.message)
     )
   }
@@ -83,9 +80,7 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      (res) => {
-        console.log('res', res)
-      },
+      (res) => this.uiFacade.addInfoNotification(res.message),
       (err) => this.uiFacade.addErrorNotification(err.message)
     )
   }
@@ -96,9 +91,7 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      (res) => {
-        console.log('res', res)
-      },
+      (res) => this.uiFacade.addInfoNotification(res.message),
       (err) => this.uiFacade.addErrorNotification(err.message)
     )
   }

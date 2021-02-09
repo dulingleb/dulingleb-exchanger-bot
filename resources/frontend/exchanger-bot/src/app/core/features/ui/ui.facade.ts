@@ -4,17 +4,20 @@ import { Observable } from 'rxjs'
 
 import { ISnackBar } from '@ui/snack-bar'
 
+import { ELanguage } from './ui.model'
 import { UI_ACTIONS } from './ui.actions'
 import { IAppWithUiState } from './ui.reducer'
-import { selectUiShowSideNav, selectUiThemeMode } from './ui.selectors'
+import { selectUiLanguage, selectUiShowSideNav, selectUiThemeMode } from './ui.selectors'
 
 export interface IUiFacade {
 
   isDarkTheme$: Observable<boolean>;
   showSideNav$: Observable<boolean>;
+  language$: Observable<ELanguage>;
 
   init(): void;
   changeThemeMode(isDarkTheme: boolean): void;
+  changeLanguage(): void;
   toggleSideNav(): void;
   showSevenDaysPopup(): void;
   addNotification(snackBarData: ISnackBar): void;
@@ -30,6 +33,7 @@ export class UiFacade {
 
   isDarkTheme$ = this.store$.select(selectUiThemeMode)
   showSideNav$ = this.store$.select(selectUiShowSideNav)
+  language$ = this.store$.select(selectUiLanguage)
 
   constructor(private store$: Store<IAppWithUiState>) {}
 
@@ -39,6 +43,10 @@ export class UiFacade {
 
   changeThemeMode(isDarkTheme: boolean): void {
     this.store$.dispatch(UI_ACTIONS.changeThemeMode({ isDarkTheme }))
+  }
+
+  changeLanguage(): void {
+    this.store$.dispatch(UI_ACTIONS.changeLanguage())
   }
 
   toggleSideNav(): void {

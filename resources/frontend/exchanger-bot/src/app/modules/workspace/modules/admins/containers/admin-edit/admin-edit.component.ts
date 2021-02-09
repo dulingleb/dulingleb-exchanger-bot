@@ -61,7 +61,6 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     ).subscribe(
       ([admin, currentAdmin]) =>  {
         this.admin = admin
-        console.log(admin)
         this.form.patchValue({
           email: admin.email,
           name: admin.name,

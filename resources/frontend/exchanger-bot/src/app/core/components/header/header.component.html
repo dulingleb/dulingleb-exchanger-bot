@@ -14,10 +14,12 @@
        </button>
       </div>
 
-
-      <mat-slide-toggle labelPosition="before" color="accent" [(ngModel)]="isDarkTheme" (ngModelChange)="uiFacade.changeThemeMode($event)">
-        <mat-icon class="theme-icon" aria-label="Dark theme">bedtime</mat-icon>
-      </mat-slide-toggle>
+      <div class="side-block">
+        <button mat-button class="language" type="button" (click)="uiFacade.changeLanguage()">{{ uiFacade.language$ | async }}</button>
+        <mat-slide-toggle labelPosition="before" color="accent" [(ngModel)]="isDarkTheme" (ngModelChange)="uiFacade.changeThemeMode($event)">
+          <mat-icon class="theme-icon" aria-label="Dark theme">bedtime</mat-icon>
+        </mat-slide-toggle>
+      </div>
 
     </div>
   </mat-toolbar>
