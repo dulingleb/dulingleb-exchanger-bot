@@ -61,6 +61,11 @@ const saveOperationsCount = createAction(
   props<{ operationsData: IAdminOperationsCountInfoInDto }>()
 )
 
+const saveSubscribeLeft = createAction(
+  '[Admin exchanger bot] Save subscribe left',
+  props<{ subscribeLeft: number }>()
+)
+
 const getOperationsSum = createAction(
   '[Admin exchanger bot] Get operation sum'
 )
@@ -109,6 +114,7 @@ export const ADMIN_ACTIONS = {
 
   getOperationsCount,
   saveOperationsCount,
+  saveSubscribeLeft,
   getOperationsSum,
   saveOperationsSum,
   getOperationsWait,

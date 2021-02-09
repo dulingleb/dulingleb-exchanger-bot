@@ -16,7 +16,7 @@
       <mat-cell *matCellDef="let row">
         <ng-container *ngIf="!tableColumn.translate && !tableColumn.icon">
           <span class="bold" [ngClass]="tableColumn.class ? tableColumn.class(row) : ''" *ngIf="tableColumn.type === ETableColumnType.STRING">{{ tableColumn.value ? tableColumn.value(row) : row[tableColumn.name] }}</span>
-          <span class="bold" [ngClass]="tableColumn.class ? tableColumn.class(row) : ''" *ngIf="tableColumn.type === ETableColumnType.DATE">{{ (tableColumn.value ? tableColumn.value(row) : row[tableColumn.name]) | date: 'd.MM.yyyy hh:mm' }}</span>
+          <span class="bold" [ngClass]="tableColumn.class ? tableColumn.class(row) : ''" *ngIf="tableColumn.type === ETableColumnType.DATE">{{ (tableColumn.value ? tableColumn.value(row) : row[tableColumn.name]) | date: 'd.MM.yyyy' }}</span>
         </ng-container>
         <ng-container *ngIf="tableColumn.translate && !tableColumn.icon">
           <span class="bold" [ngClass]="tableColumn.class ? tableColumn.class(row) : ''">{{ tableColumn.translate(row) | translate }}</span>

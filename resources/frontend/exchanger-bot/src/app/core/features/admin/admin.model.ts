@@ -11,6 +11,7 @@ export interface IAdminInDto {
   operationsWait?: number;
   createdAt?: Date;
   updatedAt?: Date;
+  subscribe?: Date;
 }
 
 export enum EAdminRoleDto {
@@ -31,6 +32,7 @@ export interface IAdminOutDto {
   operations_wait?: number;
   created_at?: Date;
   updated_at?: Date;
+  subscribe?: Date;
 }
 
 export interface IAdminLoginOutDto {

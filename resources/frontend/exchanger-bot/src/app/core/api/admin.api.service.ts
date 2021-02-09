@@ -58,6 +58,7 @@ export class AdminApiService {
       id: user.id,
       name: user.name,
       email: user.email,
+      subscribe: user.subscribe
     }
 
     if (user.password && user.cPassword) {
@@ -76,7 +77,8 @@ export class AdminApiService {
       name: user.name,
       email: user.email,
       password: user.password,
-      c_password: user.cPassword
+      c_password: user.cPassword,
+      subscribe: user.subscribe
     }
     return this.http.post<ICommonResponseDto<IAdminOutDto>>(`${ENV.api}/users`, userOutDto).pipe(
       mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
@@ -101,7 +103,8 @@ export class AdminApiService {
       usersCountToday: user.users_count_today,
       operationsWait: user.operations_wait,
       createdAt: new Date(user.created_at),
-      updatedAt: new Date(user.updated_at)
+      updatedAt: new Date(user.updated_at),
+      subscribe: user.subscribe ? new Date(user.subscribe) : null
     }
   }
 

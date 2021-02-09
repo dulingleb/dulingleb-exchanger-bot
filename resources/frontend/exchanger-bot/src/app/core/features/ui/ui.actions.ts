@@ -41,6 +41,10 @@ const addInfoNotification = createAction(
   }>()
 )
 
+const showSevenDaysPopup = createAction(
+  '[UI exchanger bot] show seven days popup'
+)
+
 export const UI_ACTIONS = {
   initUi,
   changeThemeMode,
@@ -49,5 +53,6 @@ export const UI_ACTIONS = {
 
   addNotification,
   addErrorNotification,
-  addInfoNotification
+  addInfoNotification,
+  showSevenDaysPopup,
 }

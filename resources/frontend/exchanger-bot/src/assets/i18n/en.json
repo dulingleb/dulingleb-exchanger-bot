@@ -41,7 +41,7 @@
   },
   "sideNav": {
     "userInfo": {
-      "subscription": "Подписка:",
+      "subscription": "Осталось:",
       "hoverTitle": "Подписка"
     },
     "dashboard": "Доска",
@@ -87,6 +87,10 @@
       "title": "Удаление {{titleKey}}",
       "message": "Вы действительно хотите удалить {{messageKey}}"
     }
+  },
+  "sevenDaysPopup": {
+    "title": "Осталось",
+    "endTitle": "7 дней"
   },
   "table": {
     "filter": {
@@ -134,6 +138,7 @@
       "name": "Имя",
       "email": "Email",
       "role": "Роль",
+      "subscribe": "Подписка",
       "createdAt": "Дата регистрации"
     }
   },
@@ -145,7 +150,8 @@
         "name": "Введите имя",
         "email": "Введите Email",
         "password": "Введите пароль",
-        "confirmPassword": "Повторите пароль"
+        "confirmPassword": "Повторите пароль",
+        "subscribe": "Дата подписки"
       },
       "error": {
         "name": "Некорректное имя",

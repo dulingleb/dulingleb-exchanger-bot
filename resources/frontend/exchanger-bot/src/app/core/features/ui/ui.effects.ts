@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
-import { map } from 'rxjs/operators'
+import { debounceTime, map, tap } from 'rxjs/operators'
 
+import { APP_COMMON } from '@const/app.constant'
 import { LocalStorageService } from '@core/services'
+import { SevenDaysModalService } from '@ui/seven-days-modal'
 import { ESnackBarType, SnackBarService } from '@ui/snack-bar'
 
 import { UI_ACTIONS } from './ui.actions'
@@ -13,7 +15,8 @@ export class UiEffects {
   constructor(
     private actions$: Actions,
     private snackBarService: SnackBarService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private sevenDaysModalService: SevenDaysModalService,
   ) {}
 
   initUi$ = createEffect(() => this.actions$.pipe(
@@ -53,6 +56,17 @@ export class UiEffects {
       }
     }))
   ))
+
+  showSevenDaysPopup$ = createEffect(() => this.actions$.pipe(
+    ofType(UI_ACTIONS.showSevenDaysPopup),
+    debounceTime(APP_COMMON.sevenDaysPopupDelay),
+    tap(() => {
+      if (!this.localStorageService.isShowedSevenDaysPopup()) {
+        this.sevenDaysModalService.openDialog()
+        this.localStorageService.saveSevenDaysPopup()
+      }
+    })
+  ), { dispatch: false })
 
   addNotification$ = createEffect(() => this.actions$.pipe(
     ofType(UI_ACTIONS.addNotification),

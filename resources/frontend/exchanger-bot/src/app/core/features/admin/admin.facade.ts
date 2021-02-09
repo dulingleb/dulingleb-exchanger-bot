@@ -11,6 +11,7 @@ import {
   selectAdmin,
   selectAdminError,
   selectAdminInError,
+  selectSubscribeLeft,
   selectAdminInRequest,
   selectUsersCountData,
   selectOperationsSumData,
@@ -24,6 +25,7 @@ export interface IAdminFacade {
   inError$: Observable<boolean>;
   admin$: Observable<IAdminInDto>;
   token$: Observable<string>;
+  subscribeLeft$: Observable<number>;
   error$: Observable<Error>;
 
   operationCountData$: Observable<IAdminOperationsCountInfoInDto>;
@@ -52,6 +54,7 @@ export class AdminFacade {
   operationsSumData$ = this.store$.select(selectOperationsSumData)
   operationsWait$ = this.store$.select(selectOperationsWaitData)
   usersCountData$ = this.store$.select(selectUsersCountData)
+  subscribeLeft$ = this.store$.select(selectSubscribeLeft)
 
   constructor(private store$: Store<IAppWithAdminState>) {}
 

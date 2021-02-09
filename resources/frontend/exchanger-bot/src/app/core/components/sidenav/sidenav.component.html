@@ -8,9 +8,9 @@
         </span>
         <span class="subscription-wrapper" [title]="'sideNav.userInfo.hoverTitle' | translate">
           {{ 'sideNav.userInfo.subscription' | translate }}
-          <span class="subscription-info" [ngClass]="(adminFacade.admin$ | async)?.operationsCountToday || 0 > APP_COMMON.subscriptionMinDays ? 'text-accent' : 'text-warn'">
-            <span class="time">{{ (adminFacade.admin$ | async)?.operationsCountToday || 0 }} </span>
-            <span class="info">{{ (adminFacade.admin$ | async)?.operationsCountToday | dayFormat | async }}</span>
+          <span class="subscription-info" [ngClass]="(adminFacade.subscribeLeft$ | async) === null || (adminFacade.subscribeLeft$ | async) > APP_COMMON.subscriptionMinDays ? 'text-accent' : 'text-warn'">
+            <span class="time">{{ (adminFacade.subscribeLeft$ | async) === null ? '∞' : (adminFacade.subscribeLeft$ | async) }} </span>
+            <span class="info">{{ adminFacade.subscribeLeft$ | async | dayFormat | async }}</span>
           </span>
         </span>
       </span>

@@ -35,14 +35,17 @@
           <p class="title">{{ 'operation.info.status' | translate }}</p>
           <p class="value" [ngClass]="OPERATION_CLASS[operation?.status]">{{ 'operation.status.' + operation?.status | translate }}</p>
         </div>
+        <div class="item item-form-group">
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>{{ 'operation.info.comment' | translate }}</mat-label>
+              <textarea formControlName="comment" matInput></textarea>
+            </mat-form-field>
+          </div>
+        </div>
       </section>
 
-      <div class="form-group">
-        <mat-form-field appearance="fill">
-          <mat-label>{{ 'operation.info.comment' | translate }}</mat-label>
-          <textarea formControlName="comment" matInput></textarea>
-        </mat-form-field>
-      </div>
+
 
       <div class="form-group btn-group">
         <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'operation.info.saveBtn' | translate }}</button>

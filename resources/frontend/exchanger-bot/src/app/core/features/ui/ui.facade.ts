@@ -16,6 +16,7 @@ export interface IUiFacade {
   init(): void;
   changeThemeMode(isDarkTheme: boolean): void;
   toggleSideNav(): void;
+  showSevenDaysPopup(): void;
   addNotification(snackBarData: ISnackBar): void;
   addErrorNotification(messageI18n: string, messageKeyI18n?: { [key: string]: string }): void;
   addInfoNotification(messageI18n: string, messageKeyI18n?: { [key: string]: string }): void;
@@ -42,6 +43,10 @@ export class UiFacade {
 
   toggleSideNav(): void {
     this.store$.dispatch(UI_ACTIONS.toggleSideNav())
+  }
+
+  showSevenDaysPopup(): void {
+    this.store$.dispatch(UI_ACTIONS.showSevenDaysPopup())
   }
 
   addNotification(snackBarData: ISnackBar): void {

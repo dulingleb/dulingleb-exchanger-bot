@@ -25,8 +25,8 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     allowedForRoles: [EAdminRoleDto.SUPER_ADMIN],
   },
   {
-    name: 'createdAt',
-    nameI18n: 'admins.table.createdAt',
+    name: 'subscribe',
+    nameI18n: 'admins.table.subscribe',
     type: ETableColumnType.DATE,
     allowedForRoles: [EAdminRoleDto.SUPER_ADMIN],
   },

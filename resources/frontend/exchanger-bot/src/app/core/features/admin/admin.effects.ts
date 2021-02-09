@@ -6,8 +6,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { LocalStorageService } from '@core/services'
 import { AdminApiService } from '@core/api/admin.api.service'
 
-import { ADMIN_ACTIONS } from './admin.actions'
 import { AdminInfoService } from './admin.info.service'
+import { ADMIN_ACTIONS } from './admin.actions'
+import { IAdminInDto } from './admin.model'
 
 @Injectable()
 export class AdminEffects {
@@ -60,12 +61,15 @@ export class AdminEffects {
     ofType(ADMIN_ACTIONS.saveAdmin),
     mergeMap(({ admin }) => admin
         ? [
+          ADMIN_ACTIONS.saveSubscribeLeft({ subscribeLeft: this.getAdminSubscribeLeft(admin) }),
           ADMIN_ACTIONS.getOperationsCount(),
           ADMIN_ACTIONS.getOperationsWait(),
           ADMIN_ACTIONS.getOperationsSum(),
           ADMIN_ACTIONS.getUsersCount()
         ]
-        : []
+        : [
+          ADMIN_ACTIONS.saveSubscribeLeft({ subscribeLeft: this.getAdminSubscribeLeft(admin) }),
+        ]
     )
   ))
 
@@ -124,5 +128,21 @@ export class AdminEffects {
       catchError(error => [ADMIN_ACTIONS.infoError({ error })])
     ))
   ))
+
+  private getAdminSubscribeLeft(admin: IAdminInDto): number {
+      const subscribe = admin?.subscribe
+      if (subscribe === null) {
+        return Infinity
+      }
+
+      if (!subscribe?.getMonth) {
+        return null
+      }
+
+      const diffTime = Math.abs(subscribe.getTime() - (new Date()).getTime())
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+
+      return diffDays < 0 ? 0 : diffDays
+  }
 
 }

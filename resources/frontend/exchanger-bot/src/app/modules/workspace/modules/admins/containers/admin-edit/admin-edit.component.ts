@@ -45,7 +45,8 @@ export class AdminEditComponent implements OnInit, OnDestroy {
       confirmPassword: new FormControl('', [
         // Validators.required,
         Validators.minLength(3)
-      ])
+      ]),
+      subscribe: new FormControl('')
     })
   }
 
@@ -59,10 +60,12 @@ export class AdminEditComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(
       ([admin, currentAdmin]) =>  {
-      this.admin = admin
+        this.admin = admin
+        console.log(admin)
         this.form.patchValue({
           email: admin.email,
-          name: admin.name
+          name: admin.name,
+          subscribe: admin.subscribe || ''
         })
         if (currentAdmin.role === EAdminRoleDto.SUPER_ADMIN) {
           this.form.get('email').enable()
@@ -79,10 +82,11 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     const email = this.form.get('email').value
     const password = this.form.get('password').value
     const cPassword = this.form.get('confirmPassword').value
+    const subscribe = this.form.get('subscribe').value
 
     this.admin.id
-      ? this.updateAdmin(this.admin.id, email || this.admin.email, name || this.admin.name)
-      : this.addAdmin(email, name, password, cPassword)
+      ? this.updateAdmin(this.admin.id, email || this.admin.email, name || this.admin.name, subscribe)
+      : this.addAdmin(email, name, password, cPassword, subscribe)
   }
 
   ngOnDestroy(): void {
@@ -90,8 +94,12 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     this.destroy$.complete()
   }
 
-  private updateAdmin(id: number, email: string, name: string): void {
-    this.adminApiService.updateAdmin({ id, email, name}).subscribe(
+  get startAt(): Date {
+    return new Date()
+  }
+
+  private updateAdmin(id: number, email: string, name: string, subscribe: Date): void {
+    this.adminApiService.updateAdmin({ id, email, name, subscribe }).subscribe(
       () => this.router.navigateByUrl('/admins'),
       (err) => {
         this.uiFacade.addErrorNotification(err.message)
@@ -99,8 +107,8 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     )
   }
 
-  private addAdmin(email: string, name: string, password: string, cPassword: string): void {
-    this.adminApiService.addAdmin({ email, name, password, cPassword}).subscribe(
+  private addAdmin(email: string, name: string, password: string, cPassword: string, subscribe: Date): void {
+    this.adminApiService.addAdmin({ email, name, password, cPassword, subscribe }).subscribe(
       () => this.router.navigateByUrl('/admins'),
       (err) => {
         this.uiFacade.addErrorNotification(err.message)

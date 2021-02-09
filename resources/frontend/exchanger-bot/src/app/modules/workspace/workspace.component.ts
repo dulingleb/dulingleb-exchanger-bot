@@ -32,6 +32,12 @@ export class WorkspaceComponent implements OnInit, OnDestroy {
       (status) => this.status = status,
       (err) => this.uiFacade.addErrorNotification(err.message)
     )
+
+    this.adminFacade.subscribeLeft$.pipe(takeUntil(this.destroy$)).subscribe(subscribeLeft => {
+      if (subscribeLeft === 7) {
+        this.uiFacade.showSevenDaysPopup()
+      }
+    })
   }
 
   changeStatus(): void {

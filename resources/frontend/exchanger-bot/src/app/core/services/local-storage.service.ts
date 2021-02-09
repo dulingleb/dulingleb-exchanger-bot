@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 
+const SEVEN_DAYS_POPUP = 'SEVEN_DAYS_POPUP'
 const IS_DARK_THEME = 'IS_DARK_THEME'
 const TOKEN = 'TOKEN'
 
@@ -28,6 +29,14 @@ export class LocalStorageService {
 
   clearToken(): void {
     localStorage.removeItem(TOKEN)
+  }
+
+  saveSevenDaysPopup(): void {
+    localStorage.setItem(SEVEN_DAYS_POPUP, String(true))
+  }
+
+  isShowedSevenDaysPopup(): boolean {
+    return !!localStorage.getItem(SEVEN_DAYS_POPUP)
   }
 
 }
