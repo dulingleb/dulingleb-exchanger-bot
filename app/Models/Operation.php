@@ -71,11 +71,13 @@ class Operation extends Model
 
     public function successOperation()
     {
-        $coinbase = new Coinbase($this->exchanger->coinbase_key, $this->exchanger->coinbase_secret);
-        $send = $coinbase->sendBtc($this->btc_address, floatval($this->amount));
+        if (!$this->exchanger->demo) {
+            $coinbase = new Coinbase($this->exchanger->coinbase_key, $this->exchanger->coinbase_secret);
+            $send = $coinbase->sendBtc($this->btc_address, floatval($this->amount));
 
-        if (isset($send->errors)) {
-            return $send->errors;
+            if (isset($send->errors)) {
+                return $send->errors;
+            }
         }
 
         $this->status = Operation::STATUS_SUCCESS;

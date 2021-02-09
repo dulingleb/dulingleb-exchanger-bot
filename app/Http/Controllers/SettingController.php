@@ -70,6 +70,14 @@ class SettingController extends Controller
         return $this->response($status);
     }
 
+    public function setDemo(Request $request)
+    {
+        auth()->exchanger->demo = $request->demo ? 1 : 0;
+        auth()->exchanger->save();
+
+        return $this->response(auth()->exchanger, 'Режим демо успешно включен');
+    }
+
     public function getStatus()
     {
         return $this->response((bool)auth()->user()->exchanger->status);
