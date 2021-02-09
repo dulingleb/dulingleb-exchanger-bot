@@ -34,7 +34,7 @@ class AuthController extends Controller
         ]);
 
         if (! $token = auth()->attempt($request->only(['email', 'password']))) {
-            return $this->responseError('Unauthorized', null, 401);
+            return $this->responseError('Неверный логин или пароль', null, 422);
         }
 
         return $this->createNewToken($token);
