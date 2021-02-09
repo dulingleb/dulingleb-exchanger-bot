@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 
-import { ICommonLimitSetting } from '../../constants'
+import { ISettingLimitInDto } from '@core/models'
 
 @Component({
   selector: 'app-settings-common-limits',
@@ -11,10 +11,10 @@ import { ICommonLimitSetting } from '../../constants'
 export class SettingsCommonLimitsComponent {
 
   @Input() inRequest: boolean
-  @Input() set limitSettings(settings: ICommonLimitSetting) {
+  @Input() set limitSettings(settings: ISettingLimitInDto) {
     this.initFormFields(settings)
   }
-  @Output() changeValue = new EventEmitter<ICommonLimitSetting>()
+  @Output() changeValue = new EventEmitter<ISettingLimitInDto>()
 
   form: FormGroup
 
@@ -34,7 +34,7 @@ export class SettingsCommonLimitsComponent {
   }
 
 
-  private initFormFields(settings: ICommonLimitSetting): void {
+  private initFormFields(settings: ISettingLimitInDto): void {
     this.form.patchValue({
       course: settings?.course,
       minExchange: settings?.minExchange,

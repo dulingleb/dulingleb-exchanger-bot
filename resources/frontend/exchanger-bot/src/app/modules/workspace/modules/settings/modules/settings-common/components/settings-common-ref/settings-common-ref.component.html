@@ -1,0 +1,30 @@
+<app-page-content>
+  <ng-container header>
+    {{ 'settings.ref.pageTitle' | translate }}
+  </ng-container>
+  <ng-container content>
+    <form [formGroup]="form" (ngSubmit)="save()" class="form">
+
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'settings.ref.refUsersCount' | translate }}</mat-label>
+          <input formControlName="refUsersCount" type="number" min="1" matInput>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'settings.ref.refPercent' | translate }}</mat-label>
+          <input formControlName="refPercent" type="number" min="0" matInput>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'settings.saveBtn' | translate }}</button>
+      </div>
+
+    </form>
+  </ng-container>
+</app-page-content>
+
+

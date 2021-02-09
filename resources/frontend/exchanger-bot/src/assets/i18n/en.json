@@ -268,6 +268,15 @@
       "minExchange": "Min exchange",
       "maxExchange": "Max exchange"
     },
+    "mode": {
+      "pageTitle": "Mode",
+      "isDemo": "Demo"
+    },
+    "ref": {
+      "pageTitle": "Referral system",
+      "refUsersCount": "Number of referrals to reward",
+      "refPercent": "Percent"
+    },
     "telegram": {
       "pageTitle": "Telegram",
       "telegramToken": "Token",

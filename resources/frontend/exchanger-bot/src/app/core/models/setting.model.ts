@@ -30,19 +30,31 @@ export interface ISettingKeysInDto {
   coinbaseSecret: string;
 }
 
-export interface ISettingOutDto extends ISettingLimitOutDto, ISettingTelegramOutDto, ISettingKeysOutDto {
+export interface ISettingRefOutDto {
+  ref_users_count: number;
+  ref_percent: number;
+}
+
+export interface ISettingRefInDto {
+  refUsersCount: number;
+  refPercent: number;
+}
+
+export interface ISettingOutDto extends ISettingLimitOutDto, ISettingTelegramOutDto, ISettingKeysOutDto, ISettingRefOutDto {
   id: number;
   status: number;
+  demo: boolean;
   user_id: number;
   created_at: Date;
   updated_at: Date;
   deleted_at: Date;
 }
 
-export interface ISettingInDto extends ISettingLimitInDto, ISettingTelegramInDto, ISettingKeysInDto {
+export interface ISettingInDto extends ISettingLimitInDto, ISettingTelegramInDto, ISettingKeysInDto, ISettingRefInDto {
   id: number;
   status: number;
   userId: number;
+  demo: boolean;
   updatedAt: Date;
   createdAt: Date;
   deletedAt: Date;

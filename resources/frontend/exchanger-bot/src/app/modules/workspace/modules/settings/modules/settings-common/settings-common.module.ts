@@ -6,10 +6,11 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button'
 import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 
 import { PageContentLayoutModule } from '@ui/page-content-layout'
 
-import { SettingsCommonKeysComponent, SettingsCommonLimitsComponent, SettingsCommonTelegramComponent } from './components'
+import { SettingsCommonKeysComponent, SettingsCommonLimitsComponent, SettingsCommonModeComponent, SettingsCommonRefComponent, SettingsCommonTelegramComponent } from './components'
 import { SettingsCommonRoutingModule } from './settings-common-routing.module'
 import { SettingsCommonComponent } from './containers'
 
@@ -17,7 +18,9 @@ import { SettingsCommonComponent } from './containers'
   declarations: [
     SettingsCommonTelegramComponent,
     SettingsCommonLimitsComponent,
+    SettingsCommonModeComponent,
     SettingsCommonKeysComponent,
+    SettingsCommonRefComponent,
     SettingsCommonComponent
   ],
   imports: [
@@ -26,9 +29,10 @@ import { SettingsCommonComponent } from './containers'
     ReactiveFormsModule,
 
     MatIconModule,
+    MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule,
+    MatSlideToggleModule,
 
     PageContentLayoutModule,
     SettingsCommonRoutingModule
