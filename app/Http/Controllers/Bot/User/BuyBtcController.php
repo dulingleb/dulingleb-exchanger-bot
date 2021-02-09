@@ -176,7 +176,7 @@ class BuyBtcController extends BaseController
             }
 
             if ($discount = TelegramUserSetting::where('exchanger_id', $this->chatData['exchanger']->id)->where('telegram_user_id', $this->chatData['chat_id'])->first()->discount) {
-                $price += ($discount / 100) * $price;
+                $price -= ($discount / 100) * $price;
             }
 
             $price = round($price, 5, PHP_ROUND_HALF_DOWN);
@@ -203,7 +203,7 @@ class BuyBtcController extends BaseController
             }
 
             if ($discount = TelegramUserSetting::where('exchanger_id', $this->chatData['exchanger']->id)->where('telegram_user_id', $this->chatData['chat_id'])->first()->discount) {
-                $price += ($discount / 100) * $price;
+                $price -= ($discount / 100) * $price;
             }
 
             $price = $this->mod5($price);
