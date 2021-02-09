@@ -1,0 +1,376 @@
+{
+  "info": {
+    "copyright": "© 2020-{{year}} Created by Andrey Lebedev, Gleb Dulin",
+    "appName": "bot"
+  },
+  "common": {
+    "name": "Имя",
+    "email": "Email",
+    "role": "Роль",
+    "roles": {
+      "1": "Супер администратор",
+      "2": "Администратор"
+    },
+    "day": {
+      "day1": "дня",
+      "day2": "дней"
+    },
+    "month": {
+      "1": "Январь",
+      "2": "Февраль",
+      "3": "Март",
+      "4": "Апрель",
+      "5": "Май",
+      "6": "Июнь",
+      "7": "Июль",
+      "8": "Август",
+      "9": "Сентябрь",
+      "10": "Октябрь",
+      "11": "Ноябрь",
+      "12": "Декабрь"
+    },
+    "week": {
+      "0": "Понедельник",
+      "1": "Вторник",
+      "2": "Среда",
+      "3": "Четверг",
+      "4": "Пятница",
+      "5": "Суббота",
+      "6": "Воскресенье"
+    }
+  },
+  "sideNav": {
+    "userInfo": {
+      "subscription": "Осталось:",
+      "hoverTitle": "Подписка"
+    },
+    "dashboard": "Доска",
+    "admins": "Администраторы",
+    "users": "Пользователи",
+    "operations": "Сделки",
+    "mailing": "Рассылка",
+    "settings": {
+      "title": "Настройки",
+      "common": "Общие",
+      "messages": "Сообщения",
+      "commission": "Коммиссии",
+      "requisites": "Реквизиты"
+    },
+    "logout": "Выход"
+  },
+  "statusInfoBlock": {
+    "status": {
+      "title": "Статус",
+      "inWork": "В работе",
+      "onPause": "На паузе",
+      "stopBtn": "Остановить",
+      "startBtn": "Возобновить"
+    },
+    "users": {
+      "title": "Пользователи",
+      "today": "За сегодня"
+    },
+    "operationsCount": {
+      "title": "Количества операций",
+      "today": "За сегодня"
+    },
+    "operationsSum": {
+      "title": "Сумма операций",
+      "today": "За сегодня",
+      "price": "р."
+    }
+  },
+  "confirm": {
+    "ok": "Да",
+    "cancel": "Отмена",
+    "deleteModal": {
+      "title": "Удаление {{titleKey}}",
+      "message": "Вы действительно хотите удалить {{messageKey}}"
+    }
+  },
+  "sevenDaysPopup": {
+    "title": "Осталось",
+    "endTitle": "7 дней"
+  },
+  "table": {
+    "filter": {
+      "showFilter": "Показать фильтр",
+      "done": "Показать",
+      "clear": "Очистить"
+    },
+    "action": {
+      "info": "Просмотреть информацию",
+      "edit": "Редактировать",
+      "delete": "Удалить"
+    }
+  },
+  "auth": {
+    "input": {
+      "email": "Введите Email",
+      "password": "Введите пароль"
+    },
+    "error": {
+      "email": "Некорректный Email",
+      "password": "Некорректный пароль",
+      "emailRequired": "Введите Email",
+      "passwordRequired": "Введите пароль"
+    },
+    "loginBtn": "Вход"
+  },
+  "dashboard": {
+    "countBtn": "Количество",
+    "sumBtn": "Сумма",
+    "weekBtn": "Неделя",
+    "monthBtn": "Месяц",
+    "operations": {
+      "title": "Операции"
+    },
+    "users": {
+      "title": "Пользователи"
+    }
+  },
+  "admins": {
+    "tableHeader": {
+      "addBtn": "Добавить",
+      "title": "Администраторы"
+    },
+    "table": {
+      "name": "Имя",
+      "email": "Email",
+      "role": "Роль",
+      "subscribe": "Подписка",
+      "createdAt": "Дата регистрации"
+    }
+  },
+  "admin": {
+    "edit": {
+      "pageTitle": "Редактирование администратора",
+      "pageNewTitle": "Добавление администратора",
+      "input": {
+        "name": "Введите имя",
+        "email": "Введите Email",
+        "password": "Введите пароль",
+        "confirmPassword": "Повторите пароль",
+        "subscribe": "Дата подписки"
+      },
+      "error": {
+        "name": "Некорректное имя",
+        "email": "Некорректный Email",
+        "password": "Некорректный пароль",
+
+        "nameRequired": "Введите имя",
+        "emailRequired": "Введите Email",
+        "passwordRequired": "Введите пароль"
+      },
+      "save": "Сохранить"
+    },
+    "info": {
+      "pageTitle": "Информация об администраторе",
+      "editAdmin": "Редактировать"
+    },
+    "profile": {
+      "pageTitle": "Привет, ",
+      "editAdmin": "Редактировать"
+    }
+  },
+  "users": {
+    "tableHeader": {
+      "title": "Пользователи"
+    },
+    "table": {
+      "username": "Имя",
+      "exchangerId": "id обменника",
+      "telegramUserId": "id",
+      "operationsCount": "Количество операций",
+      "discount": "Скидка",
+      "operationsSum": "Сумма операций",
+      "ban": "Статус"
+    }
+  },
+  "user": {
+    "ban": {
+      "0": "Активен",
+      "1": "Забанен"
+    },
+    "edit": {
+      "pageTitle": "Редактирование пользователя",
+      "input": {
+        "discount": "Персональная скидка",
+        "comment": "Примечание",
+        "ban": "Бан"
+      },
+      "error": {
+        "discount": "Некорректная скидка"
+      },
+      "save": "Сохранить"
+    },
+    "info": {
+      "id": "id",
+      "username": "username",
+      "name": "Имя Фамилия",
+      "operationsCount": "Подтвержденных сделок",
+      "operationsSum": "Сделок на сумму",
+      "ref": "Рефералов",
+      "operationsRef": "Сделок рефов",
+      "operationsREfSum": "Сделок рефов на сумму"
+    }
+  },
+  "operations": {
+    "tableHeader": {
+      "title": "Сделки"
+    },
+    "table": {
+      "id": "#",
+      "telegramUserId": "Id полюзователя",
+      "username": "Имя",
+      "amount": "BTC",
+      "price": "Руб.",
+      "status": "Статус"
+    }
+  },
+  "operation": {
+    "status": {
+      "1": "оплата",
+      "2": "успех",
+      "3": "ошибка",
+      "4": "отправка чека",
+      "5": "на проверке",
+      "6": "отменено"
+    },
+    "info": {
+      "pageTitle": "Сделка",
+      "user": "Пользователь:",
+      "amount": "Сумма:",
+      "price": "Стоимость:",
+      "detail": "Реквезиты:",
+      "btcAddress": "Кошелёк:",
+      "date": "Дата:",
+      "status": "Статус:",
+      "comment": "Комментарий к сделке",
+      "saveBtn": "Отправить",
+      "confirmBtn": "Подтвердить",
+      "cancelBtn": "Отмена",
+      "operatorBtn": "К оператору"
+    }
+  },
+  "mailing": {
+    "pageTitle": "Рассылка",
+    "message": "Сообщение",
+    "send": "Разослать"
+  },
+  "settings": {
+    "btn": "btn",
+    "rub": "руб.",
+    "saveBtn": "Сохранить",
+    "limits": {
+      "pageTitle": "Лимиты",
+      "course": "Курс",
+      "minExchange": "Мин. покупка",
+      "maxExchange": "Макс. покупка"
+    },
+    "mode": {
+      "pageTitle": "Mode",
+      "isDemo": "Демо"
+    },
+    "ref": {
+      "pageTitle": "Реферальная система",
+      "refUsersCount": "Количество рефералов для вознаграждения",
+      "refPercent": "Процент"
+    },
+    "telegram": {
+      "pageTitle": "Телеграм",
+      "telegramToken": "Токен",
+      "username": "Логин"
+    },
+    "keys": {
+      "pageTitle": "Ключи coinbase",
+      "coinbaseKey": "Key",
+      "coinbaseSecret": "Secret"
+    },
+    "messages": {
+      "tableHeader": {
+        "title": "Сообщения",
+        "addBtn": "Добавить"
+      },
+      "table": {
+        "title": "Сообщение",
+        "slug": "slug"
+      },
+      "edit": {
+        "pageTitle": "Редактирование сообщения",
+        "input": {
+          "title": "Title",
+          "slug": "Slug",
+          "description": "Описание",
+          "text": "Сообщение"
+        },
+        "saveBtn": "Сохранить"
+      },
+      "template": {
+        "edit": {
+          "pageTitle": "Редактирование шаблона сообщения"
+        },
+        "new": {
+          "pageTitle": "Создание шаблона сообщения"
+        }
+      }
+    },
+    "commissions": {
+      "tableHeader": {
+        "title": "Комиссии",
+        "addBtn": "Добавить"
+      },
+      "table": {
+        "from": "От",
+        "to": "До",
+        "percent": "Процент"
+      },
+      "edit": {
+        "pageTitle": "Редактирование комиссии",
+        "input": {
+          "from": "От, btc",
+          "to": "До, btc",
+          "percent": "Комиссия, %"
+        },
+        "saveBtn": "Сохранить"
+      },
+      "info": {
+        "pageTitle": "Комиссия",
+        "editBtn": "Редактировать"
+      },
+      "new": {
+        "pageTitle": "Добавление комиссии"
+      }
+    },
+    "requisites": {
+      "tableHeader": {
+        "title": "Реквизиты",
+        "addBtn": "Добавить"
+      },
+      "table": {
+        "title": "Банк",
+        "status": "Статус"
+      },
+      "edit": {
+        "pageTitle": "Редактирование реквезита",
+        "input": {
+          "title": "Заголовок",
+          "text": "Подробности",
+          "status": "Показывать"
+        },
+        "saveBtn": "Сохранить"
+      },
+      "info": {
+        "pageTitle": "Реквизит",
+        "editBtn": "Редактировать"
+      },
+      "new": {
+        "pageTitle": "Добавление реквезита"
+      },
+      "status": {
+        "1": "Показывать",
+        "0": "Не показывать"
+      }
+    }
+  }
+}
