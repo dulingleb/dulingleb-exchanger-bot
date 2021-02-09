@@ -1,0 +1,68 @@
+@import '~@angular/material/theming';
+@import './mat-colors';
+@import './mat-components/mat-components';
+
+@include mat-core();
+
+@function my-mat-light-theme-foreground($color) {
+  @return (
+    base:              $color,
+    divider:           rgba($color, 0.12),
+    dividers:          rgba($color, 0.12),
+    disabled:          rgba($color, 0.38),
+    disabled-button:   rgba($color, 0.38),
+    disabled-text:     rgba($color, 0.38),
+    elevation:         black,
+    hint-text:         rgba($color, 0.38),
+    secondary-text:    rgba($color, 0.54),
+    icon:              rgba($color, 0.54),
+    icons:             rgba($color, 0.54),
+    text:              rgba($color, 0.87),
+    slider-off:        rgba($color, 0.26),
+    slider-off-active: rgba($color, 0.38),
+    slider-min:        rgba($color, 0.38)
+  );
+}
+
+@function my-mat-dark-theme-foreground($color) {
+  @return (
+    base:              $color,
+    divider:           rgba($color, 0.12),
+    dividers:          rgba($color, 0.12),
+    disabled:          rgba($color, 0.5),
+    disabled-button:   rgba($color, 0.3),
+    disabled-text:     rgba($color, 0.5),
+    elevation:         black,
+    hint-text:         rgba($color, 0.5),
+    secondary-text:    rgba($color, 0.7),
+    icon:              $color,
+    icons:             $color,
+    text:              $color,
+    slider-min:        $color,
+    slider-off:        rgba($color, 0.3),
+    slider-off-active: rgba($color, 0.3),
+  );
+}
+
+$light-foreground: my-mat-light-theme-foreground($dark-base-color);
+$dark-foreground: my-mat-dark-theme-foreground($light-base-color);
+
+$app-primary: mat-palette($mat-primary);
+$app-accent:  mat-palette($mat-accent);
+$app-warn:    mat-palette($mat-warn);
+
+$app-dark-primary: mat-palette($mat-primary-dark);
+$app-dark-accent:  mat-palette($mat-accent-dark);
+$app-dark-warn:    mat-palette($mat-warn-dark);
+
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+$app-dark-theme: mat-dark-theme($app-dark-primary, $app-dark-accent, $app-dark-warn);
+
+$app-theme-foreground: map-merge($app-theme, (foreground: $light-foreground));
+$app-theme-dark-foreground: map-merge($app-dark-theme, (foreground: $dark-foreground));
+
+@include angular-material-theme($app-theme-foreground);
+
+.dark-mode {
+  @include angular-material-theme($app-theme-dark-foreground);
+}

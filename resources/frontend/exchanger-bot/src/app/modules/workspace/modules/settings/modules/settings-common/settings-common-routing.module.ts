@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { SettingsCommonComponent } from './settings-common.component'
+import { SettingsCommonComponent } from './containers'
 
 const routes: Routes = [ { path: '', component: SettingsCommonComponent } ]
 

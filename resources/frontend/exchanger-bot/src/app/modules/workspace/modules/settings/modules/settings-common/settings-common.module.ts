@@ -1,17 +1,41 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { MatCardModule } from '@angular/material/card'
+import { ReactiveFormsModule } from '@angular/forms'
+import { TranslateModule } from '@ngx-translate/core'
+import { MatIconModule } from '@angular/material/icon'
+import { MatInputModule } from '@angular/material/input'
+import { MatButtonModule } from '@angular/material/button'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 
-import { SettingsCommonComponent } from './settings-common.component'
+import { PageContentLayoutModule } from '@ui/page-content-layout'
+
+import { SettingsCommonKeysComponent, SettingsCommonLimitsComponent, SettingsCommonModeComponent, SettingsCommonRefComponent, SettingsCommonTelegramComponent } from './components'
 import { SettingsCommonRoutingModule } from './settings-common-routing.module'
+import { SettingsCommonComponent } from './containers'
 
 @NgModule({
-  declarations: [SettingsCommonComponent],
+  declarations: [
+    SettingsCommonTelegramComponent,
+    SettingsCommonLimitsComponent,
+    SettingsCommonModeComponent,
+    SettingsCommonKeysComponent,
+    SettingsCommonRefComponent,
+    SettingsCommonComponent
+  ],
   imports: [
     CommonModule,
-    MatCardModule,
+    TranslateModule,
+    ReactiveFormsModule,
+
+    MatIconModule,
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSlideToggleModule,
+
+    PageContentLayoutModule,
     SettingsCommonRoutingModule
-  ],
-  exports: [SettingsCommonComponent]
+  ]
 })
 export class SettingsCommonModule {}

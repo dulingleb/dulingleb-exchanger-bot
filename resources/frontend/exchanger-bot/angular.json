@@ -24,7 +24,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/exchanger-bot",
+            "outputPath": "../../../public/assets",
+            "deployUrl": "/assets/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -35,7 +36,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/theme.scss",
+              "src/styles/theme/mat-theme.scss",
               "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
@@ -108,7 +109,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/theme.scss",
+              "src/styles/theme/mat-theme.scss",
               "src/styles.scss"
             ],
             "scripts": []

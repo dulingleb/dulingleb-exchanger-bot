@@ -1,0 +1,19 @@
+<app-page-content-table
+                        [tableColumns]="tableColumns"
+                        [inRequest]="inRequest" [items]="requisites"
+                        [filterFields]="filterFields"
+                        [paginator]="paginator"
+                        (getList)="getSettingRequisiteList($event)"
+                        (eventData)="setEventData($event)"
+>
+  <ng-container table-title>
+    {{ 'settings.requisites.tableHeader.title' | translate }}
+  </ng-container>
+
+  <ng-container table-actions>
+    <a mat-raised-button color="primary" disableRipple="true" class="nav-link" routerLink="/settings/requisites/new">
+      <mat-icon>add</mat-icon>
+      <span>{{ 'settings.requisites.tableHeader.addBtn' | translate }}</span>
+   </a>
+  </ng-container>
+</app-page-content-table>

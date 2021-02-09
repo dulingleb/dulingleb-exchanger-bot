@@ -1,17 +1,42 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { MatCardModule } from '@angular/material/card'
+import { ReactiveFormsModule } from '@angular/forms'
+import { MatButtonModule } from '@angular/material/button'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatIconModule } from '@angular/material/icon'
+import { MatInputModule } from '@angular/material/input'
+import { TranslateModule } from '@ngx-translate/core'
 
-import { SettingsMessagesComponent } from './settings-messages.component'
+import { ConfirmModalModule } from '@ui/confirm-modal'
+import { FormatEditorModule } from '@ui/format-editor'
+import { PageContentTableModule } from '@ui/page-content-table'
+import { PageContentLayoutModule } from '@ui/page-content-layout'
+
+import { SettingMessageEditComponent, SettingMessagesComponent, SettingMessageTemplateEditComponent } from './containers'
 import { SettingsMessagesRoutingModule } from './settings-messages-routing.module'
 
 @NgModule({
-  declarations: [SettingsMessagesComponent],
+  declarations: [
+    SettingMessagesComponent,
+    SettingMessageEditComponent,
+    SettingMessageTemplateEditComponent
+  ],
   imports: [
     CommonModule,
-    MatCardModule,
-    SettingsMessagesRoutingModule
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+
+    TranslateModule,
+    ReactiveFormsModule,
+
+    FormatEditorModule,
+    ConfirmModalModule,
+    PageContentTableModule,
+    PageContentLayoutModule,
+
+    SettingsMessagesRoutingModule,
   ],
-  exports: [SettingsMessagesComponent]
 })
 export class SettingsMessagesModule {}

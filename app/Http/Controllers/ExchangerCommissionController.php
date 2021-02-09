@@ -4,23 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\ExchangerCommission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ExchangerCommissionController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
-        $commissions = ExchangerCommission::where('exchanger_id', auth()->user()->exchanger->id)->get();
-        return view('commissions.index', compact('commissions'));
+        $commissions = QueryBuilder::for(ExchangerCommission::class)
+            ->allowedSorts(['from', 'to', 'percent'])
+            ->select(['id', 'from', 'to', 'percent'])
+            ->where('exchanger_id', auth()->user()->exchanger->id)
+            ->jsonPaginate();
+
+        return $this->response($commissions);
     }
 
-    public function create()
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        return view('commissions.create');
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
+        $this->validate($request, [
             'from' => ['required', 'numeric', 'min:0', function($a, $value, $fail) {
                 if (ExchangerCommission::where('from', '<=', $value)->where('to', '>', $value)->where('exchanger_id', auth()->user()->exchanger->id)->exists()) {
                     $fail('Значение в данном диапазоне уже существует.');
@@ -34,26 +36,26 @@ class ExchangerCommissionController extends Controller
             'percent' => 'required|numeric|min:0|max:99'
         ]);
 
-        ExchangerCommission::create([
+        $commission = ExchangerCommission::create([
             'exchanger_id' => auth()->user()->exchanger->id,
             'from' => $request->from,
             'to' => $request->to,
             'percent' => $request->percent
         ]);
 
-        return redirect()->route('commission.index')->with(['success' => 'Комиссия успешно добавлена']);
+        return $this->response($commission, 'Комиссия успешно добавлена');
     }
 
-    public function edit(ExchangerCommission $commission)
+    public function show(ExchangerCommission $commission): \Illuminate\Http\JsonResponse
     {
-        return view('commissions.edit', compact('commission'));
+        return $this->response($commission);
     }
 
-    public function update(Request $request, ExchangerCommission $commission)
+    public function update(Request $request, ExchangerCommission $commission): \Illuminate\Http\JsonResponse
     {
         $this->check($commission);
 
-        $request->validate([
+        $this->validate($request, [
             'from' => ['required', 'numeric', 'min:0', function($a, $value, $fail) use ($commission) {
                 if (ExchangerCommission::where('from', '<=', $value)->where('to', '>', $value)->where('id', '!=', $commission->id)->where('exchanger_id', auth()->user()->exchanger->id)->exists()) {
                     $fail('Значение в данном диапазоне уже существует.');
@@ -72,7 +74,7 @@ class ExchangerCommissionController extends Controller
         $commission->percent = $request->percent;
         $commission->save();
 
-        return redirect()->route('commission.index')->with(['success' => 'Комиссия успешно сохранена!']);
+        return $this->response($commission, 'Комиссия успешно сохранена');
     }
 
     public function destroy(ExchangerCommission $commission)
@@ -81,7 +83,7 @@ class ExchangerCommissionController extends Controller
 
         $commission->delete();
 
-        return redirect()->route('commission.index')->with(['success' => 'Комиссия успешно удалена']);
+        return $this->response(null, 'Комиссия успешно удалена');
     }
 
     private function check(ExchangerCommission $commission)

@@ -4,11 +4,15 @@ namespace App\Models;
 
 use App\Func\Coinbase;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Telegram;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Operation extends Model
 {
     protected $guarded = [];
+
+    protected $appends = ['files'];
 
     const STATUS_WAIT = 1;
     const STATUS_SUCCESS = 2;
@@ -18,20 +22,20 @@ class Operation extends Model
     const STATUS_CANCELED = 6;
 
     const STATUSES = [
-        1 => ['text' =>'оплата', 'class_color' => ''],
-        2 => ['text' =>'успех', 'class_color' => 'text-success'],
-        3 => ['text' =>'ошибка', 'class_color' => 'text-danger'],
-        4 => ['text' =>'отправка чека', 'class_color' => 'text-secondary'],
-        5 => ['text' =>'на проверке', 'class_color' => 'text-primary'],
-        6 => ['text' =>'отменено', 'class_color' => 'text-muted'],
+        1 => ['text' => 'оплата', 'class_color' => ''],
+        2 => ['text' => 'успех', 'class_color' => 'text-success'],
+        3 => ['text' => 'ошибка', 'class_color' => 'text-danger'],
+        4 => ['text' => 'отправка чека', 'class_color' => 'text-secondary'],
+        5 => ['text' => 'на проверке', 'class_color' => 'text-primary'],
+        6 => ['text' => 'отменено', 'class_color' => 'text-muted'],
     ];
 
-    public function bank_detail()
+    public function bank_detail(): BelongsTo
     {
         return $this->belongsTo(BankDetail::class);
     }
 
-    public function telegram_user()
+    public function telegram_user(): BelongsTo
     {
         return $this->belongsTo(TelegramUser::class);
     }
@@ -67,11 +71,13 @@ class Operation extends Model
 
     public function successOperation()
     {
-        $coinbase = new Coinbase($this->exchanger->coinbase_key, $this->exchanger->coinbase_secret);
-        $send = $coinbase->sendBtc($this->btc_address, floatval($this->amount));
+        if (!$this->exchanger->demo) {
+            $coinbase = new Coinbase($this->exchanger->coinbase_key, $this->exchanger->coinbase_secret);
+            $send = $coinbase->sendBtc($this->btc_address, floatval($this->amount));
 
-        if (isset($send->errors)) {
-            return $send->errors;
+            if (isset($send->errors)) {
+                return $send->errors;
+            }
         }
 
         $this->status = Operation::STATUS_SUCCESS;
@@ -100,11 +106,11 @@ class Operation extends Model
         }
     }
 
-    public static function getCheckLinks($operation_id) : array
+    public static function getCheckLinks($operation_id): array
     {
         $links = [];
 
-        for ($i=0; $i<3; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             if (!file_exists(public_path() . '/storage/images/' . $operation_id . '_' . $i . '.jpg')) {
                 break;
             }
@@ -112,5 +118,32 @@ class Operation extends Model
         }
 
         return $links;
+    }
+
+    // SCOPES
+    public function scopeTelegramUser(Builder $query, $username): Builder
+    {
+        return $query->whereHas('telegram_user', function ($q) use ($username) {
+            $q->where('username', 'LIKE',  '%' . $username . '%')->orWhere('first_name', 'LIKE',  '%' . $username . '%')->orWhere('last_name', 'LIKE',  '%' . $username . '%');
+        });
+    }
+
+    public function scopeTelegramUserId(Builder $query, $userId): Builder
+    {
+        return $query->where('telegram_user_id', $userId);
+    }
+
+    public function getFilesAttribute()
+    {
+        $files = [];
+        for ($i=0; $i<3; $i++) {
+            if (file_exists(public_path() . '/storage/images/' . $this->id . '_' . $i . '.jpg')) {
+                $files[] = '/storage/images/' . $this->id . '_' . $i . '.jpg';
+            } else {
+                break;
+            }
+        }
+
+        return $files;
     }
 }

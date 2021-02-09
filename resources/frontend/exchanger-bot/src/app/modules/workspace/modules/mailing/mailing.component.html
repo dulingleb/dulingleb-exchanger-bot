@@ -1,5 +1,13 @@
-<section class="app-container">
-  <mat-card class="mailing-content">
-    mailing
-  </mat-card>
-</section>
+<app-page-content>
+  <ng-container header>
+    {{ 'mailing.pageTitle' | translate }}
+  </ng-container>
+  <ng-container content>
+
+    <form [formGroup]="form" (ngSubmit)="addMessage()" class="form">
+      <app-format-editor formControlName="message" [label]="'mailing.message' | translate" [height]=300></app-format-editor>
+      <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'mailing.send' | translate }}</button>
+    </form>
+
+  </ng-container>
+</app-page-content>

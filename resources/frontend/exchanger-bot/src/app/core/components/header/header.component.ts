@@ -1,11 +1,12 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core'
 
-import { IUiFacade, UI_FACADE, IUserFacade, USER_FACADE } from '@core/features'
+import { IUiFacade, UI_FACADE, IAdminFacade, ADMIN_FACADE } from '@core/features'
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
 
@@ -13,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     @Inject(UI_FACADE) public uiFacade: IUiFacade,
-    @Inject(USER_FACADE) public userFacade: IUserFacade
+    @Inject(ADMIN_FACADE) public adminFacade: IAdminFacade
   ) {}
 
   ngOnInit(): void {

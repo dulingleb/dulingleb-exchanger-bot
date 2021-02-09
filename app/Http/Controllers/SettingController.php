@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-    public function settingsIndex()
+    public function settingsIndex(): \Illuminate\Http\JsonResponse
     {
-        $exchanger = auth()->user()->exchanger;
-        return view('settings.index', compact('exchanger'));
+        $exchanger = Exchanger::find(auth()->id());
+
+        return $this->response($exchanger);
     }
 
-    public function updateTelegramToken(Request $request)
+    public function updateTelegramToken(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
             'telegram_token' => 'required|string',
@@ -29,7 +30,7 @@ class SettingController extends Controller
         $res = json_decode($res->getBody()->getContents());
 
         if ($res->ok === false) {
-            return redirect()->route('settings.index')->withErrors(['Ошибка установки токена: ' . $res->description]);
+            return $this->responseError('Ошибка установки токена: ' . $res->description);
         }
 
         $exchanger = Exchanger::where('user_id', auth()->id())->first();
@@ -37,10 +38,10 @@ class SettingController extends Controller
         $exchanger->username = $request->username;
         $exchanger->save();
 
-        return redirect()->route('settings.index')->with(['success' => 'Токен успещно сохранен']);
+        return $this->response($exchanger, 'Токен успешно сохранен');
     }
 
-    public function updateCoinbaseKey(Request $request)
+    public function updateCoinbaseKey(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
             'coinbase_key' => 'required|string',
@@ -52,50 +53,51 @@ class SettingController extends Controller
         $exchanger->coinbase_secret = $request->coinbase_secret;
         $exchanger->save();
 
-        return redirect()->route('settings.index')->with(['success' => 'Ключ успещно сохранен']);
+        return $this->response($exchanger, 'Ключ успещно сохранен');
     }
 
-    public function startStop()
+    public function setStatus(): \Illuminate\Http\JsonResponse
     {
-        $status = '';
         if (auth()->user()->exchanger->status == Exchanger::STATUS_ACTIVE) {
             auth()->user()->exchanger->status = Exchanger::STATUS_CLOSED;
-            $status = 'Закрыто';
+            $status = false;
         } else {
             auth()->user()->exchanger->status = Exchanger::STATUS_ACTIVE;
-            $status = 'В работе';
+            $status = true;
         }
         auth()->user()->exchanger->save();
 
-        return $status;
+        return $this->response($status);
     }
 
-    public function buttonsIndex()
-    {
-        $buttons = json_decode(Exchanger::where('id', auth()->user()->exchanger->id)->first()->main_menu_links);
-        return view('settings.buttons', compact('buttons'));
-    }
-
-    public function buttonsUpdate(Request $request)
+    public function setRef(Request $request)
     {
         $request->validate([
-            'button' => 'array',
-            'button.*.text' => 'required|string',
-            'button.*.link' => 'required|url',
+            'ref_users_count' => 'required|numeric|min:1',
+            'ref_percent' => 'required|numeric',
         ]);
 
-        $arr = [];
-        foreach ($request->input('button') as $button) {
-            $arr[] = ['text' => $button['text'], 'url' => $button['link']];
-        }
-
-        auth()->user()->exchanger->main_menu_links = json_encode($arr);
+        auth()->user()->exchanger->ref_users_count = $request->ref_users_count;
+        auth()->user()->exchanger->ref_percent = $request->ref_percent;
         auth()->user()->exchanger->save();
 
-        return redirect()->route('settings.buttons.index')->with(['success' => 'Кнопки успешно сохранены']);
+        return $this->response(auth()->user()->exchanger, 'Рефка успешно сохранена');
     }
 
-    public function limits(Request $request)
+    public function setDemo(Request $request)
+    {
+        auth()->user()->exchanger->demo = $request->demo ? 1 : 0;
+        auth()->user()->exchanger->save();
+
+        return $this->response(auth()->user()->exchanger, $request->demo ? 'Режим демо успешно включен' : 'Режим демо успешно выключен');
+    }
+
+    public function getStatus()
+    {
+        return $this->response((bool)auth()->user()->exchanger->status);
+    }
+
+    public function limits(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
             'course' => 'required|numeric|min:0',
@@ -109,6 +111,6 @@ class SettingController extends Controller
         $exchanger->max_exchange = $request->max_exchange;
         $exchanger->save();
 
-        return redirect()->route('settings.index')->with(['success' => 'Лимиты успешно сохранены']);
+        return $this->response($exchanger, 'Лимиты успешно установлены');
     }
 }

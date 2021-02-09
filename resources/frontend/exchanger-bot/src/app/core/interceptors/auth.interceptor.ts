@@ -1,17 +1,18 @@
-import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http'
+import { HttpHandler, HttpInterceptor, HttpRequest, HttpErrorResponse } from '@angular/common/http'
 import { Inject, Injectable } from '@angular/core'
-import { first, mergeMap } from 'rxjs/operators'
+import { catchError, first, mergeMap } from 'rxjs/operators'
+import { throwError } from 'rxjs'
 
-import { IUserFacade, USER_FACADE } from '@core/features'
+import { IAdminFacade, ADMIN_FACADE } from '@core/features'
+import { ICommonResponseDto } from '@core/models'
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    constructor(@Inject(USER_FACADE) private userFacade: IUserFacade) {}
+    constructor(@Inject(ADMIN_FACADE) private adminFacade: IAdminFacade) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): any {
-
-      return this.userFacade.token$.pipe(
+      return this.adminFacade.token$.pipe(
         first(),
         mergeMap(token => {
           req = req.clone({
@@ -19,8 +20,25 @@ export class AuthInterceptor implements HttpInterceptor {
                 Authorization: `Bearer ${token}`
             }
           })
-          return next.handle(req)
+          return next.handle(req).pipe(
+            catchError(error => {
+              const handleError = this.handleError(error)
+              if (handleError.statusCode === 401) {
+                this.adminFacade.logout()
+              }
+              return throwError(handleError)
+            })
+          )
         })
       )
+    }
+
+    private handleError(error: HttpErrorResponse): ICommonResponseDto<null> {
+      const res: ICommonResponseDto<null> = {
+        status: false,
+        message: error.error?.message || error.message,
+        statusCode: error.status
+      }
+      return res
     }
 }

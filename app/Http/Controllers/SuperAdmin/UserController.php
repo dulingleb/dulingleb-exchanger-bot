@@ -5,26 +5,31 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\Exchanger;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\QueryBuilderRequest;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request): \Illuminate\Http\JsonResponse
     {
-        $users = User::all();
-        return view('users.index', compact('users'));
+        $users = QueryBuilder::for(User::class)
+            ->allowedFilters(['name', 'email'])
+            ->defaultSort('-id')
+            ->allowedSorts('id', 'name', 'email')
+            ->jsonPaginate();
+
+        return $this->response($users);
     }
 
-    public function create()
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        return view('users.create');
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
+        $this->validate($request, [
             'name' => 'required|min:2|max:198|string',
             'email' => 'required|email|unique:users',
+            'subscribe' => 'nullable|date',
             'password' => 'required|min:4|max:32',
             'c_password' => 'required|same:password'
         ]);
@@ -32,7 +37,8 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'subscribe' => $request->subscribe ? Carbon::make($request->subscribe)->format('Y-m-d H:i:s') : null
         ]);
 
         Exchanger::create([
@@ -40,22 +46,23 @@ class UserController extends Controller
             'status' => \App\Models\Exchanger::STATUS_CLOSED,
             'course' => 40000,
             'min_exchange' => '0.001',
-            'max_exchange' => '0.1',
+            'max_exchange' => '0.1'
         ]);
 
-        return redirect()->route('user.index')->with(['success' => 'Пользователь успешно добавлен']);
+        return $this->response($user, 'Пользователь успешно добавлен');
     }
 
-    public function edit(User $user)
+    public function show(User $user): \Illuminate\Http\JsonResponse
     {
-        return view('users.edit', compact('user'));
+        return $this->response($user);
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user): \Illuminate\Http\JsonResponse
     {
-        $request->validate([
+        $this->validate($request, [
             'name' => 'required|min:2|max:198|string',
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'subscribe' => 'nullable|date',
             'password' => 'nullable|min:4|max:32',
             'c_password' => 'same:password'
         ]);
@@ -65,19 +72,22 @@ class UserController extends Controller
         if ($request->c_password) {
             $user->password = bcrypt($request->c_password);
         }
+        if ($request->subscribe) {
+            $user->subscribe = Carbon::make($request->subscribe)->format('Y-m-d H:i:s');
+        }
         $user->save();
 
-        return redirect()->route('user.edit', $user)->with(['success' => 'Данные успешно сохранены!']);
+        return $this->response($user, 'Данные успешно сохранены');
     }
 
-    public function destroy(User $user)
+    public function destroy(User $user): \Illuminate\Http\JsonResponse
     {
         if (auth()->id() === $user->id) {
-            return redirect()->route('user.index')->withErrors(['Нельзя удалить самого себя']);
+            return $this->responseError('Нельзя удалить самого себя', null, 400);
         }
 
         $user->delete();
 
-        return redirect()->route('user.index')->with(['success' => 'Пользователь успещно удален']);
+        return $this->response($user, 'Пользователь успешно удален');
     }
 }

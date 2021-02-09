@@ -1,0 +1,36 @@
+<div class="filter-wrapper" [class.show-filter]="showFilter">
+  <form (ngSubmit)="onFilter()">
+    <div class="form-fields-wrapper">
+
+      <ng-container *ngFor="let filterValue of filterValues; let i = index">
+        <mat-form-field *ngIf="!filterFields[i].type || filterFields[i].type === EFilterType.INPUT" class="form-field">
+          <mat-label>{{ filterFields[i].labelI18n | translate }}</mat-label>
+          <input matInput type="text" [name]="filterValue.name" [(ngModel)]="filterValue.value" (ngModelChange)="onChangeValue()">
+          <button mat-button type="button" *ngIf="filterValue.value" matSuffix mat-icon-button aria-label="Clear" (click)="filterValue.value=''; onChangeValue()" [title]="'table.filter.clear' | translate">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="filterFields[i].type === EFilterType.SELECT" class="form-field">
+          <mat-label>{{ filterFields[i].labelI18n | translate }}</mat-label>
+          <mat-select [name]="filterValue.name" [(ngModel)]="filterValue.value" (selectionChange)="onChangeValue(true)">
+            <mat-option></mat-option>
+            <mat-option *ngFor="let option of filterFields[i].options" [value]="option.value" [ngClass]="option.class">{{ option.titleI18n | translate }}</mat-option>
+          </mat-select>
+          <button mat-button type="button" *ngIf="filterValue.value !== undefined" matSuffix mat-icon-button aria-label="Clear" (click)="filterValue.value=''; onChangeValue()" [title]="'table.filter.clear' | translate">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </ng-container>
+
+      <button mat-icon-button [title]="'table.filter.done' | translate">
+        <mat-icon>done</mat-icon>
+      </button>
+
+      <button mat-icon-button type="button" [disabled]="disabledFilter" (click)="clearValues()" [title]="'table.filter.clear' | translate">
+        <mat-icon>clear</mat-icon>
+      </button>
+
+    </div>
+  </form>
+</div>

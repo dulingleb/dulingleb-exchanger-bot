@@ -1,0 +1,12 @@
+<app-status-info-block
+                      class="status-info-block"
+                      blockNameI18n="statusInfoBlock.status.title"
+                      [blockInfo]="(status ? 'statusInfoBlock.status.inWork' : 'statusInfoBlock.status.onPause') | translate"
+                      icon="near_me"
+>
+  <ng-container actions>
+    <div class="change-status-btn-wrapper">
+      <button class="change-status-btn" mat-button color="primary" [disabled]="inRequest" (click)="changeStatus.emit()">{{ 'statusInfoBlock.status.stopBtn' | translate }}</button>
+    </div>
+  </ng-container>
+</app-status-info-block>

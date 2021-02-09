@@ -1,0 +1,11 @@
+<app-status-info-block
+                      class="status-info-block"
+                      blockNameI18n="statusInfoBlock.users.title"
+                      [blockInfo]="countUsersInfo?.usersCount | decimal"
+                      [infoAction]="true"
+                      icon="people"
+>
+  <ng-container actions>
+    <span mat-button class="text-accent">+{{ countUsersInfo?.usersCountToday | decimal }} {{ 'statusInfoBlock.users.today' | translate }}</span>
+  </ng-container>
+</app-status-info-block>

@@ -7,7 +7,7 @@
           <mat-form-field appearance="fill">
             <mat-label>{{ 'auth.input.email' | translate }}</mat-label>
             <input formControlName="email" matInput placeholder="pat@example.com">
-            <mat-error *ngIf="authForm.get('email').hasError('required')">{{ 'auth.error.email-required' | translate }}</mat-error>
+            <mat-error *ngIf="authForm.get('email').hasError('required')">{{ 'auth.error.emailRequired' | translate }}</mat-error>
             <mat-error *ngIf="authForm.get('email').hasError('email')">{{ 'auth.error.email' | translate }}</mat-error>
           </mat-form-field>
         </div>
@@ -19,12 +19,12 @@
             <button type="button" mat-icon-button matSuffix (click)="showPassword = !showPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showPassword">
               <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
             </button>
-            <mat-error *ngIf="authForm.get('password').hasError('required')">{{ 'auth.error.password-required' | translate }}</mat-error>
+            <mat-error *ngIf="authForm.get('password').hasError('required')">{{ 'auth.error.passwordRequired' | translate }}</mat-error>
             <mat-error *ngIf="authForm.get('password').hasError('minlength')">{{ 'auth.error.password' | translate }}</mat-error>
           </mat-form-field>
         </div>
 
-        <button mat-raised-button color="primary" [disabled]="authForm.invalid">{{ 'auth.login-btn' | translate }}</button>
+        <button mat-raised-button color="primary" [disabled]="authForm.invalid">{{ 'auth.loginBtn' | translate }}</button>
 
       </form>
     </mat-card>

@@ -1,0 +1,11 @@
+.seven-day-popup {
+  .mat-dialog-container {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .mat-dialog-content {
+    display: flex;
+    overflow: hidden;
+  }
+}

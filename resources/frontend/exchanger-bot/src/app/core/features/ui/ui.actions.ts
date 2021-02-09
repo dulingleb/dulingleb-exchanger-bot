@@ -1,6 +1,8 @@
 import { createAction, props } from '@ngrx/store'
 
-import { IGlobalNotification } from './ui.model'
+import { ISnackBar } from '@ui/snack-bar'
+
+import { ELanguage } from './ui.model'
 
 const initUi = createAction(
   '[UI exchanger bot] Init UI'
@@ -16,31 +18,54 @@ const saveThemeMode = createAction(
   props<{ isDarkTheme: boolean }>()
 )
 
+const changeLanguage = createAction(
+  '[UI exchanger bot] Change language'
+)
+
+const saveLanguage = createAction(
+  '[UI exchanger bot] Save language',
+  props<{ language: ELanguage }>()
+)
+
 const toggleSideNav = createAction(
   '[UI exchanger bot] Toggle side nav'
 )
 
 const addNotification = createAction(
   '[UI banner admin] Add Notification',
-  props<{ notification: IGlobalNotification }>()
+  props<{ snackBarData: ISnackBar }>()
 )
 
-const closeNotification = createAction(
-  '[UI banner admin] Close Notification',
-  props<{ notification: IGlobalNotification }>()
+const addErrorNotification = createAction(
+  '[UI banner admin] Add Error Notification',
+  props<{
+    messageI18n?: string;
+    messageKeyI18n?: { [key: string]: string };
+  }>()
 )
 
-const clearNotifications = createAction(
-  '[UI banner admin] Clear Notifications'
+const addInfoNotification = createAction(
+  '[UI banner admin] Add Info Notification',
+  props<{
+    messageI18n?: string;
+    messageKeyI18n?: { [key: string]: string };
+  }>()
+)
+
+const showSevenDaysPopup = createAction(
+  '[UI exchanger bot] show seven days popup'
 )
 
 export const UI_ACTIONS = {
   initUi,
   changeThemeMode,
   saveThemeMode,
+  changeLanguage,
+  saveLanguage,
   toggleSideNav,
 
   addNotification,
-  closeNotification,
-  clearNotifications
+  addErrorNotification,
+  addInfoNotification,
+  showSevenDaysPopup,
 }

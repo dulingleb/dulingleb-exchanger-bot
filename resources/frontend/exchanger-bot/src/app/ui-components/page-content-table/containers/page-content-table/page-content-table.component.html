@@ -1,0 +1,36 @@
+<app-page-content-layout>
+  <app-page-layout-table-template layout-content>
+    <ng-container table-title>
+      <ng-content select="[table-title]"></ng-content>
+    </ng-container>
+
+    <ng-container table-actions>
+      <ng-content select="[table-actions]"></ng-content>
+    </ng-container>
+
+    <ng-container paginator>
+      <app-table-filter-paginator
+            [length]="paginator?.length"
+            [pageSize]="paginator?.pageSize"
+            [pageIndex]="paginator?.page"
+            [filterFields]="filterFields"
+            [initFilterValues]="initFilterValues"
+            (filter)="filter($event)"
+            (changePaginator)="changePaginator($event)"
+      ></app-table-filter-paginator>
+    </ng-container>
+
+    <ng-container table>
+      <app-loading-spinner *ngIf="inRequest"></app-loading-spinner>
+      <app-content-table
+            [items]="items"
+            [tableColumns]="tableColumns"
+            [currentUserRole]="(adminFacade.admin$ | async)?.role"
+            [currentUserId]="(adminFacade.admin$ | async)?.id"
+            (eventData)="eventData.emit($event)"
+            (sortData)="sortData($event)"
+      ></app-content-table>
+    </ng-container>
+
+  </app-page-layout-table-template>
+</app-page-content-layout>

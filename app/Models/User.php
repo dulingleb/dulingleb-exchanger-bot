@@ -22,7 +22,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'subscribe'
     ];
 
     /**
@@ -68,6 +68,6 @@ class User extends Authenticatable implements JWTSubject
 
     public function exchanger()
     {
-        return $this->belongsTo(Exchanger::class, 'id', 'user_id');
+        return $this->hasOne(Exchanger::class);
     }
 }

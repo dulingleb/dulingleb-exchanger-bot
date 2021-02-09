@@ -1,10 +1,12 @@
 @import "./styles/styles";
+@import "./styles/theme/colors";
 
 html, body { height: 100%; }
 
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: var(--font-color);
 }
 
 a, button {
@@ -16,18 +18,10 @@ a, button {
   scrollbar-width: thin;
 }
 
-mat-cell {
-  box-sizing: content-box;
-}
-
 /* width */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-  // background: map-get($map: $gray-palette, $key: 400);
 }
 
 .container {
@@ -44,44 +38,24 @@ mat-cell {
   padding: 1rem;
 }
 
-.mat-button-base {
-  .mat-icon ~ * {
-    margin-left: 1rem;
-  }
-
-  &.three-dots-btn {
-    .mat-button-wrapper {
-      display: flex;
-      align-items: center;
-      width: 100%;
-    }
-  }
+.text-primary {
+  color: var(--primary-color) !important;
 }
 
-.app-side-nav {
-  .mat-expansion-panel {
-    .mat-expansion-panel-body {
-      padding: 0;
-    }
-  }
+.text-accent {
+  color: var(--accent-color) !important;
+}
 
-  .mat-list-item {
-    .mat-list-base .mat-list-option .mat-list-item-content {
-      padding: 0;
+.text-warn {
+  color: var(--warn-color) !important;
+}
 
-      .nav-link {
-        padding: 0 1rem;
-      }
-    }
-  }
+.text-gray {
+  color: var(--grey-font-color) !important;
+}
 
-  .nav-group-item {
-    .mat-expansion-panel-content {
-      .nav-link {
-        padding: 0 1rem 0 1.5rem;
-      }
-    }
-  }
+.text-black {
+  color: #000 !important; // TODO: Use vars
 }
 
 .user-logo {
@@ -94,9 +68,39 @@ mat-cell {
   min-width: $logo_size;
   min-height: $logo_size;
 
-  color: $white;
+  color: var(--light-color);
   font-size: 1.3rem;
   text-transform: uppercase;
   border-radius: 50%;
-  background: $primary;
+  background: var(--primary-color);
+}
+
+.info-block, .info-table-block {
+  max-width: var(--info-block-width);
+}
+
+.info-table-block {
+  .item {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-column-gap: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+
+    &:first-child {
+      border-top: 1px solid var(--border-color);
+    }
+
+    &.item-form-group {
+      display: block;
+      border-bottom: none;
+    }
+  }
+}
+
+ckeditor .ck-content {
+  background: transparent !important;
+}
+
+.tox .tox-edit-area__iframe {
+  background: rgba(255, 255, 255, 0.2) !important;
 }

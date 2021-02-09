@@ -1,12 +1,6 @@
-export enum EGlobalNotificationType {
-  SUCCESS = 'success',
-  WARNING = 'warning',
-  DANGER = 'danger',
-  INFO = 'info'
+export enum ELanguage {
+  EN = 'en',
+  RU = 'ru'
 }
 
-export interface IGlobalNotification {
-  type: EGlobalNotificationType;
-  timeout?: number;
-  msg: string;
-}
+export const APP_DEFAULT_LANGUAGE = ELanguage.RU

@@ -1,0 +1,32 @@
+<app-page-content>
+  <ng-container header>
+    {{ (requisite?.id ? 'settings.requisites.edit.pageTitle' : 'settings.requisites.new.pageTitle') | translate }} <i>{{ requisite?.title }}</i>
+  </ng-container>
+  <ng-container content>
+    <form [formGroup]="form" (ngSubmit)="save()" class="form">
+
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'settings.requisites.edit.input.title' | translate }}</mat-label>
+          <input formControlName="title" type="text" matInput>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'settings.requisites.edit.input.text' | translate }}</mat-label>
+          <textarea formControlName="text" matInput rows="20"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-slide-toggle labelPosition="before" color="primary" formControlName="status">
+          <mat-label>{{ 'settings.requisites.edit.input.status' | translate }}</mat-label>
+        </mat-slide-toggle>
+      </div>
+
+      <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'settings.requisites.edit.saveBtn' | translate }}</button>
+
+    </form>
+  </ng-container>
+</app-page-content>

@@ -1,0 +1,11 @@
+<app-page-content-table
+                        [tableColumns]="tableColumns"
+                        [inRequest]="inRequest" [items]="users"
+                        [filterFields]="filterFields"
+                        [paginator]="paginator"
+                        (getList)="getAdminList($event)"
+>
+  <ng-container table-title>
+    {{ 'users.tableHeader.title' | translate }}
+  </ng-container>
+</app-page-content-table>

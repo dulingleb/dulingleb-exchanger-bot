@@ -1,0 +1,30 @@
+@import './mat-colors';
+
+:root {
+  --primary-color: #{map-get($mat-primary, 500)};
+  --accent-color: #{map-get($mat-accent, 500)};
+  --warn-color: #{map-get($mat-warn, 500)};
+
+  --grey-color: #{map-get($mat-grey, 800)};
+  --light-color: #{$light-base-color};
+  --dark-color: #{$dark-base-color};
+
+  --font-color: #{$dark-primary-text};
+  --grey-font-color: #{map-get($mat-grey, 800)};
+  --bg-color: #fff;
+  --border-color: #{$dark-border-color};
+  --common-linear-gradient: linear-gradient(135deg, #{map-get($mat-accent, 800)} 0%, #{map-get($mat-accent, 700)} 11%, transparent 11%, transparent 75%, #{map-get($mat-primary, 300)} 75%, #{map-get($mat-primary, 200)} 80%, #{map-get($mat-primary, 500)} 80%, #{map-get($mat-primary, 400)} 90%, #{map-get($mat-primary, 800)} 90%, #{map-get($mat-primary, 700)} 100%);
+}
+
+.dark-mode {
+  --primary-color: #{map-get($mat-primary-dark, 500)};
+  --accent-color: #{map-get($mat-accent-dark, 500)};
+  --warn-color: #{map-get($mat-warn-dark, 500)};
+
+  --grey-font-color: $light-base-color;
+
+  --font-color: #{$light-primary-text};
+  --bg-color: #{map-get($mat-grey, 800)};
+  --border-color: #{$light-border-color};
+  --common-linear-gradient: linear-gradient(135deg, #{map-get($mat-accent-dark, 800)} 0%, #{map-get($mat-accent-dark, 700)} 11%, transparent 11%, transparent 75%, #{map-get($mat-primary-dark, 300)} 75%, #{map-get($mat-primary-dark, 200)} 80%, #{map-get($mat-primary-dark, 500)} 80%, #{map-get($mat-primary-dark, 400)} 90%, #{map-get($mat-primary-dark, 800)} 90%, #{map-get($mat-primary-dark, 700)} 100%);
+}

@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 
-import { UserFacade, USER_FACADE } from '@core/features'
+import { AdminFacade, ADMIN_FACADE } from '@core/features'
 
 @Component({
   selector: 'app-auth',
@@ -13,7 +13,7 @@ export class AuthComponent {
   showPassword: boolean
   authForm: FormGroup
 
-  constructor(@Inject(USER_FACADE) public userFacade: UserFacade) {
+  constructor(@Inject(ADMIN_FACADE) public adminFacade: AdminFacade) {
     this.authForm = new FormGroup({
       email: new FormControl('', [
         Validators.required,
@@ -29,7 +29,7 @@ export class AuthComponent {
   login(): void {
     const email = this.authForm.get('email').value
     const password = this.authForm.get('password').value
-    this.userFacade.login(email, password)
+    this.adminFacade.login(email, password)
   }
 
 }

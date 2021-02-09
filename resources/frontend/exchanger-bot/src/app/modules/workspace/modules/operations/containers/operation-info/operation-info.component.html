@@ -1,0 +1,59 @@
+<app-page-content>
+  <ng-container header>
+    {{ 'operation.info.pageTitle' | translate }} <i>#{{ operation?.id }}</i>
+  </ng-container>
+  <ng-container content>
+    <form [formGroup]="form" (ngSubmit)="addComment()" class="form">
+      <app-loading-spinner *ngIf="inRequest"></app-loading-spinner>
+
+      <section class="info-table-block">
+        <div class="item">
+          <p class="title">{{ 'operation.info.amount' | translate }}</p>
+          <p class="value">{{ operation?.amount }}</p>
+        </div>
+        <div class="item">
+          <p class="title">{{ 'operation.info.price' | translate }}</p>
+          <p class="value">{{ operation?.price }}</p>
+        </div>
+        <div class="item">
+          <p class="title">{{ 'operation.info.user' | translate }}</p>
+          <p class="value"><a [routerLink]="['/operations']" [queryParams]="{ user: operation?.telegramUserId }">{{ operation?.telegramUser | userName }}</a></p>
+        </div>
+        <div class="item">
+          <p class="title">{{ 'operation.info.detail' | translate }}</p>
+          <p class="value"><a [routerLink]="['/settings/requisites', operation?.bankDetailId, 'info']">{{ operation?.bankDetails?.title }}</a></p>
+        </div>
+        <div class="item">
+          <p class="title">{{ 'operation.info.btcAddress' | translate }}</p>
+          <p class="value">{{ operation?.btcAddress }}</p>
+        </div>
+        <div class="item">
+          <p class="title">{{ 'operation.info.date' | translate }}</p>
+          <p class="value">{{ operation?.createdAt | date: 'd.MM.yyyy hh:mm' }}</p>
+        </div>
+        <div class="item">
+          <p class="title">{{ 'operation.info.status' | translate }}</p>
+          <p class="value" [ngClass]="OPERATION_CLASS[operation?.status]">{{ 'operation.status.' + operation?.status | translate }}</p>
+        </div>
+        <div class="item item-form-group">
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>{{ 'operation.info.comment' | translate }}</mat-label>
+              <textarea formControlName="comment" matInput></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </section>
+
+
+
+      <div class="form-group btn-group">
+        <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'operation.info.saveBtn' | translate }}</button>
+        <button type="button" mat-raised-button color="basic" *ngIf="operation?.status === EOperationStatus.ON_CHECK" (click)="setSuccess()">{{ 'operation.info.confirmBtn' | translate }}</button>
+        <button type="button" mat-raised-button color="basic" *ngIf="operation?.status === EOperationStatus.ON_CHECK" (click)="setCancel()">{{ 'operation.info.operatorBtn' | translate }}</button>
+        <button type="button" mat-raised-button color="warn" *ngIf="operation?.status === EOperationStatus.ON_CHECK" (click)="setToOperator()">{{ 'operation.info.cancelBtn' | translate }}</button>
+      </div>
+
+    </form>
+  </ng-container>
+</app-page-content>

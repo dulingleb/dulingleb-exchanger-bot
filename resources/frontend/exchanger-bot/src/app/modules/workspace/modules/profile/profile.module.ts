@@ -1,17 +1,34 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { MatCardModule } from '@angular/material/card'
+import { ReactiveFormsModule } from '@angular/forms'
+import { MatButtonModule } from '@angular/material/button'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { MatIconModule } from '@angular/material/icon'
+import { TranslateModule } from '@ngx-translate/core'
 
-import { ProfileComponent } from './profile.component'
+import { PageContentLayoutModule } from '@ui/page-content-layout'
+
+import { ProfileComponent, ProfileEditComponent } from './containers'
 import { ProfileRoutingModule } from './profile-routing.module'
 
 @NgModule({
-  declarations: [ProfileComponent],
+  declarations: [
+    ProfileComponent,
+    ProfileEditComponent
+  ],
   imports: [
     CommonModule,
-    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    TranslateModule,
+    ReactiveFormsModule,
+
+    PageContentLayoutModule,
+
     ProfileRoutingModule
   ],
-  exports: [ProfileComponent]
 })
 export class ProfileModule {}

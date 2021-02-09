@@ -1,0 +1,12 @@
+<div class="paginator-wrapper">
+  <button mat-icon-button (click)="changeFilter.emit()" *ngIf="tableWithFilter" class="toggle-side-wrapper" [title]="'table.filter.showFilter' | translate">
+    <mat-icon aria-label="Filter" [color]="showFilter ? 'primary' : ''">filter_alt</mat-icon>
+ </button>
+  <mat-paginator class="paginator"
+                 [length]="length"
+                 [pageIndex]="pageIndex"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="[10, 25, 50, 75, 100]"
+                 (page)="paginatorChanged($event)">
+  </mat-paginator>
+</div>

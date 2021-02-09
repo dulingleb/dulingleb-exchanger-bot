@@ -2,7 +2,12 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -50,6 +55,21 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        return parent::render($request, $exception);
+        $code = 422;
+
+        if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
+            return response()->json(['status' => false, 'message' => 'Not Found!'], 404);
+        }
+
+        if ($exception instanceof AuthenticationException) {
+            $code = 401;
+        }
+
+        if ($exception instanceof ValidationException) {
+            return response()->json(['status' => false, 'message' => $exception->getMessage(), 'errors' => $exception->validator->errors()]);
+        }
+
+        return response()->json(['status' => false, 'message' => $exception->getMessage(), 'file' => $exception->getFile(), 'line' => $exception->getLine(), 'trace' => $exception->getTrace()], $code);
+        //return parent::prepareJsonResponse($request, $exception);
     }
 }

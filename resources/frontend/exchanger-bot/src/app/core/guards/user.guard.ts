@@ -3,20 +3,20 @@ import { map, skipWhile, withLatestFrom } from 'rxjs/operators'
 import { Inject, Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 
-import { IUserFacade, USER_FACADE } from '@core/features'
+import { IAdminFacade, ADMIN_FACADE } from '@core/features'
 
 @Injectable()
 export class UserGuard implements CanActivate {
 
   constructor(
     private router: Router,
-    @Inject(USER_FACADE) private userFacade: IUserFacade
+    @Inject(ADMIN_FACADE) private adminFacade: IAdminFacade
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean{
-    return this.userFacade.inRequest$.pipe(
+    return this.adminFacade.inRequest$.pipe(
       skipWhile(inRequest => inRequest),
-      withLatestFrom(this.userFacade.user$),
+      withLatestFrom(this.adminFacade.admin$),
       map(([, user]) => {
         if (user) { return true }
 

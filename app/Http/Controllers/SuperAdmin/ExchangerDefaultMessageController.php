@@ -9,38 +9,33 @@ use Illuminate\Http\Request;
 
 class ExchangerDefaultMessageController extends Controller
 {
-    public function create()
-    {
-        return view('exchangerMessages.templates.create');
-    }
-
     public function store(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'title' => 'required|string',
             'slug' => 'required|string|unique:exchanger_default_messages',
             'description' => 'nullable',
             'text' => 'required|string'
         ]);
 
-        ExchangerDefaultMessage::create([
+        $message = ExchangerDefaultMessage::create([
             'title' => $request->title,
             'slug' => $request->slug,
             'description' => $request->description,
             'text' => str_replace('&nbsp;', ' ', $request->text)
         ]);
 
-        return redirect()->route('settings.messages.index')->with(['success' => 'Сообщение успещно добавлено']);
+        return $this->response($message, 'Сообщение успешно добавлено');
     }
 
-    public function edit(ExchangerDefaultMessage $message)
+    public function show(ExchangerDefaultMessage $message)
     {
-        return view('exchangerMessages.templates.edit', compact('message'));
+        return $this->response($message);
     }
 
     public function update(Request $request, ExchangerDefaultMessage $message)
     {
-        $request->validate([
+        $this->validate($request, [
             'title' => 'required|string',
             'slug' => 'required|string|unique:exchanger_default_messages,slug,' . $message->id,
             'description' => 'nullable',
@@ -53,6 +48,6 @@ class ExchangerDefaultMessageController extends Controller
         $message->text = str_replace('&nbsp;', ' ', $request->text);
         $message->save();
 
-        return redirect()->route('settings.messages.default.edit', ['message' => $message->id])->with(['success' => 'Сообщение успешно сохранено']);
+        return $this->response($message, 'Сообщение успешно сохранено');
     }
 }
