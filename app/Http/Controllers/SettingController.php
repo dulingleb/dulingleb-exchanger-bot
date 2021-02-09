@@ -70,6 +70,20 @@ class SettingController extends Controller
         return $this->response($status);
     }
 
+    public function setRef(Request $request)
+    {
+        $request->validate([
+            'ref_users_count' => 'required|numeric|min:1',
+            'ref_percent' => 'required|numeric',
+        ]);
+
+        auth()->user()->exchanger->ref_users_count = $request->ref_users_count;
+        auth()->user()->exchanger->ref_percent = $request->ref_percent;
+        auth()->user()->exchanger->save();
+
+        return $this->response(auth()->user()->exchanger, 'Рефка успешно сохранена');
+    }
+
     public function setDemo(Request $request)
     {
         auth()->user()->exchanger->demo = $request->demo ? 1 : 0;
