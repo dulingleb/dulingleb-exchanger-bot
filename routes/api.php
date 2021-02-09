@@ -68,6 +68,7 @@ Route::group([
     Route::get('settings/status', ['as' => 'settings.set.status', 'uses' => 'SettingController@getStatus']);
     Route::patch('settings/set/limits', ['as' => 'settings.set.limits', 'uses' => 'SettingController@limits']);
     Route::patch('/settings/set/demo', ['uses' => 'SettingController@setDemo']);
+    Route::patch('/settings/set/ref', ['uses' => 'SettingController@setRef']);
 
     // Настройки сообщения
     Route::get('settings/messages', ['as' => 'settings.messages.index', 'uses' => 'ExchangerMessageController@index']);
