@@ -21,6 +21,8 @@ use App\Http\Controllers\AngularController;
 // Route::any('/{any}', function () {
 //     return File::get(public_path() . '/exchanger-bot/index.html');
 // })->where('any', '^(?!api).*$');
-
+Route::post('telegram_callback/{token}', function () {
+    app('App\Http\Controllers\TelegramController')->webhook();
+});
 
 Route::any('/{any}', [AngularController::class, 'index'])->where('any', '^(?!api).*$');
