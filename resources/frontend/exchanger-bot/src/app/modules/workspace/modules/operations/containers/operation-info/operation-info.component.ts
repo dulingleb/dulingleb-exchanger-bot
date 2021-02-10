@@ -2,10 +2,12 @@ import { FormControl, FormGroup } from '@angular/forms'
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { finalize, mergeMap, takeUntil } from 'rxjs/operators'
+import { OwlOptions } from 'ngx-owl-carousel-o'
 import { Subject } from 'rxjs'
 
 import { ICommonResponseDto, IOperationInDto } from '@core/models'
 import { IUiFacade, UI_FACADE } from '@core/features'
+import { ImageModalService } from '@ui/image-modal'
 import { OperationApiService } from '@core/api'
 
 import { EOperationStatus, OPERATION_CLASS } from '../../constants'
@@ -13,6 +15,7 @@ import { EOperationStatus, OPERATION_CLASS } from '../../constants'
 @Component({
   selector: 'app-operation-info',
   templateUrl: './operation-info.component.html',
+  styleUrls: ['./operation-info.component.scss']
 })
 export class OperationInfoComponent implements OnInit, OnDestroy {
 
@@ -23,10 +26,30 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
   OPERATION_CLASS = OPERATION_CLASS
   EOperationStatus = EOperationStatus
 
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: true,
+    navSpeed: 700,
+    navText: [ '<button><</button>', '<button>></button>' ],
+    responsive: {
+      0: {
+        items: 1
+      },
+      1440: {
+        items: 2
+      }
+    },
+    nav: true
+  }
+
   private destroy$ = new Subject()
 
   constructor(
     private route: ActivatedRoute,
+    public imageModalService: ImageModalService,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
     private operationApiService: OperationApiService
   ) {

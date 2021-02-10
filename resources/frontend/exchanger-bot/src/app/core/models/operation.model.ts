@@ -15,7 +15,7 @@ export interface IOperationOutDto {
   message_id: string;
   updated_at: Date;
   created_at: Date;
-  files: [];
+  files: string[];
   telegram_user?: ITelegramUserOutDto;
   bank_details?: ISettingRequisiteDto;
 }
@@ -35,7 +35,7 @@ export interface IOperationInDto {
   messageId: string;
   updatedAt: Date;
   createdAt: Date;
-  files: [];
+  files: string[];
   telegramUser?: ITelegramUserInDto;
   bankDetails?: ISettingRequisiteDto;
 }
