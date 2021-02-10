@@ -29,8 +29,8 @@ export class AuthComponent implements OnInit, OnDestroy {
         Validators.email
       ]),
       password: new FormControl('', [
-        // Validators.required,
-        // Validators.minLength(3)
+        Validators.required,
+        Validators.minLength(3)
       ])
     })
   }

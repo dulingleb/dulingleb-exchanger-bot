@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod && copy ../../../public/angular/index.html ../../views/angular.blade.php",
+    "build": "ng build --prod && copy ../../../public/index.html ../../views/angular.blade.php",
     "test": "ng test",
     "lint": "ng lint && yarn lint:styles",
     "lint:styles": "stylelint \"src/app/**/*.scss\"",
