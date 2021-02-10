@@ -9,6 +9,7 @@
         <mat-form-field appearance="fill">
           <mat-label>{{ 'settings.telegram.telegramToken' | translate }}</mat-label>
           <input formControlName="telegramToken" type="text" matInput>
+          <mat-error><app-input-error name='telegramToken' [errors]="errors"></app-input-error></mat-error>
         </mat-form-field>
       </div>
 
@@ -16,10 +17,11 @@
         <mat-form-field appearance="fill">
           <mat-label>{{ 'settings.telegram.username' | translate }}</mat-label>
           <input formControlName="username" type="text" matInput>
+          <mat-error><app-input-error name='username' [errors]="errors"></app-input-error></mat-error>
         </mat-form-field>
       </div>
 
-      <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'settings.saveBtn' | translate }}</button>
+      <button mat-raised-button color="primary" [disabled]="form.invalid || inRequest">{{ 'settings.saveBtn' | translate }}</button>
 
     </form>
   </ng-container>

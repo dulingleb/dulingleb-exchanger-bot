@@ -150,7 +150,7 @@
         "name": "Введите имя",
         "email": "Введите Email",
         "password": "Введите пароль",
-        "confirmPassword": "Повторите пароль",
+        "cPassword": "Повторите пароль",
         "subscribe": "Дата подписки"
       },
       "error": {

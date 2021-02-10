@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router'
 import { PageContentLayoutModule } from '@ui/page-content-layout'
 import { PageContentTableModule } from '@ui/page-content-table'
 import { LoadingSpinnerModule } from '@ui/loading-spinner'
+import { InputErrorModule } from '@ui/input-error'
 import { SharedModule } from '@shared/index'
 
 import { OperationInfoComponent, OperationsComponent } from './containers'
@@ -33,6 +34,7 @@ import { OperationsRoutingModule } from './operations-routing.module'
     OperationsRoutingModule,
 
     SharedModule,
+    InputErrorModule,
     LoadingSpinnerModule,
     PageContentTableModule,
     PageContentLayoutModule

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 
 import { ISettingKeysInDto } from '@core/models'
@@ -7,9 +7,10 @@ import { ISettingKeysInDto } from '@core/models'
   selector: 'app-settings-common-keys',
   templateUrl: './settings-common-keys.component.html',
 })
-export class SettingsCommonKeysComponent {
+export class SettingsCommonKeysComponent implements OnChanges {
 
   @Input() inRequest: boolean
+  @Input() errors: { [key: string]: string[] }
   @Input() set keysSetting(settings: ISettingKeysInDto) {
     this.initFormFields(settings)
   }
@@ -24,6 +25,12 @@ export class SettingsCommonKeysComponent {
     })
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.errors?.currentValue !== undefined) {
+      this.showError()
+    }
+  }
+
   saveKeys(): void {
     const coinbaseKey = this.form.get('coinbaseKey').value
     const coinbaseSecret = this.form.get('coinbaseSecret').value
@@ -35,6 +42,12 @@ export class SettingsCommonKeysComponent {
       coinbaseKey: settings?.coinbaseKey,
       coinbaseSecret: settings?.coinbaseSecret,
     })
+  }
+
+  private showError(): void {
+    for (const errKey of Object.keys(this.errors)) {
+      this.form.get(errKey)?.setErrors({ valid: false })
+    }
   }
 
 }

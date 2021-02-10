@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { SimpleChanges } from '@angular/core'
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 
 @Component({
@@ -6,9 +7,10 @@ import { FormControl, FormGroup } from '@angular/forms'
   templateUrl: './settings-common-mode.component.html',
   styleUrls: ['./settings-common-mode.component.scss']
 })
-export class SettingsCommonModeComponent {
+export class SettingsCommonModeComponent implements OnChanges {
 
   @Input() inRequest: boolean
+  @Input() errors: { [key: string]: string[] }
   @Input() set isDemo(isDemo: boolean) {
     this.initFormFields(isDemo)
   }
@@ -22,6 +24,12 @@ export class SettingsCommonModeComponent {
     })
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.errors?.currentValue !== undefined) {
+      this.showError()
+    }
+  }
+
   save(): void {
     const isDemo = this.form.get('isDemo').value
     this.changeMode.emit(isDemo)
@@ -29,6 +37,12 @@ export class SettingsCommonModeComponent {
 
   private initFormFields(isDemo: boolean): void {
     this.form.patchValue({ isDemo })
+  }
+
+  private showError(): void {
+    for (const errKey of Object.keys(this.errors)) {
+      this.form.get(errKey)?.setErrors({ valid: false })
+    }
   }
 
 }
