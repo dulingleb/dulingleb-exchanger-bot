@@ -210,9 +210,10 @@
       "name": "Name",
       "operationsCount": "Confirm operations",
       "operationsSum": "Amount of operations",
-      "ref": "Referrals count",
-      "operationsRef": "Referrals operations",
-      "operationsREfSum": "Amount of referrals operations"
+      "refCount": "Referrals count",
+      "refActiveCount": "Active referrals",
+      "refOperationsCount": "Referrals operations",
+      "refOperationsSum": "Amount of referrals operations"
     }
   },
   "operations": {

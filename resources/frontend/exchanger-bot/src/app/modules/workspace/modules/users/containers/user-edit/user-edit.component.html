@@ -27,16 +27,20 @@
           <p class="value">{{ user?.operationsSum }}</p>
         </div>
         <div class="item">
-          <p class="title">{{ 'user.info.ref' | translate }}</p>
-          <p class="value">{{ user?.operationsSum }}</p>
+          <p class="title">{{ 'user.info.refCount' | translate }}</p>
+          <p class="value">{{ user?.refCount }}</p>
         </div>
         <div class="item">
-          <p class="title">{{ 'user.info.operationsRef' | translate }}</p>
-          <p class="value">{{ user?.operationsSum }}</p>
+          <p class="title">{{ 'user.info.refActiveCount' | translate }}</p>
+          <p class="value">{{ user?.refActiveCount }}</p>
         </div>
         <div class="item">
-          <p class="title">{{ 'user.info.operationsREfSum' | translate }}</p>
-          <p class="value">{{ user?.operationsSum }}</p>
+          <p class="title">{{ 'user.info.refOperationsCount' | translate }}</p>
+          <p class="value">{{ user?.refOperationsCount }}</p>
+        </div>
+        <div class="item">
+          <p class="title">{{ 'user.info.refOperationsSum' | translate }}</p>
+          <p class="value">{{ user?.refOperationsSum }}</p>
         </div>
       </section>
       <div class="edit-info-block">

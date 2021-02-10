@@ -1,6 +1,6 @@
 export const ENV = {
   production: true,
-  api: 'http://dul.bot/api'
+  api: 'http://dulingleb-bot.ru/api'
 }
 
 export const ROOT_MODULES = []

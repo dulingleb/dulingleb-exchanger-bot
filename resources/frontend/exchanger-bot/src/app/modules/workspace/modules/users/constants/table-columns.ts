@@ -45,7 +45,7 @@ export const TABLE_COLUMNS: ITableColumn[] = [
     actionData: {
       link: (item: ITelegramUserInDto): string => `/users/${item.id}/edit`,
       actionType: ETableColumnActionType.LINK,
-      eventType: ETableColumnActionEventType.EDIT
+      eventType: ETableColumnActionEventType.INFO
     },
     allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],
   }

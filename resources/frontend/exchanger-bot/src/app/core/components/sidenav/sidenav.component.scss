@@ -86,6 +86,13 @@
 
           .subscription-wrapper {
             display: block;
+
+            .subscription-info {
+              .time {
+                position: relative;
+                top: 1px;
+              }
+            }
           }
         }
       }

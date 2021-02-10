@@ -38,6 +38,10 @@ export class SidenavComponent implements OnInit, OnDestroy {
     })
   }
 
+  getSubscriptionDays(subscribeLeft: number): string | number {
+    return subscribeLeft === Infinity ? '∞' : (subscribeLeft || 0)
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next()
     this.destroy$.complete()
