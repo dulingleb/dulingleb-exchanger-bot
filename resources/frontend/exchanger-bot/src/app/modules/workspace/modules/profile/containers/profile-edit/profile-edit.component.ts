@@ -5,6 +5,7 @@ import { finalize, mergeMap, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
+import { ICommonResponseDto } from '@core/models'
 import { IUiFacade, IAdminFacade, IAdminInDto, UI_FACADE, ADMIN_FACADE, EAdminRoleDto } from '@core/features'
 
 @Component({
@@ -17,6 +18,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   form: FormGroup
   showPassword: boolean
   inRequest: boolean
+  errors: { [key: string]: string[] } = {}
 
   private destroy$ = new Subject()
 
@@ -41,7 +43,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       password: new FormControl('', [
         Validators.minLength(3)
       ]),
-      confirmPassword: new FormControl('', [
+      cPassword: new FormControl('', [
         Validators.minLength(3)
       ])
     })
@@ -51,11 +53,11 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     this.inRequest = true
     this.adminFacade.admin$.pipe(
       mergeMap(admin => this.adminApiService.getAdmin(+admin.id)),
-      finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
       (admin) =>  {
-      this.admin = admin
+        this.inRequest = false
+        this.admin = admin
         this.form.patchValue({
           email: admin.email,
           name: admin.name
@@ -64,9 +66,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
           this.form.get('email').enable()
         }
       },
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.showError(err)
     )
   }
 
@@ -74,7 +74,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     const name = this.form.get('name').value
     const email = this.form.get('email').value
     const password = this.form.get('password').value
-    const cPassword = this.form.get('confirmPassword').value
+    const cPassword = this.form.get('cPassword').value
 
     this.updateAdmin(this.admin.id, email || this.admin.email, name || this.admin.name, password, cPassword)
   }
@@ -97,10 +97,17 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(
       () => this.router.navigateByUrl('/profile'),
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.showError(err)
     )
+  }
+
+  private showError(err: ICommonResponseDto<null>): void {
+    this.inRequest = false
+    this.errors = err?.errors || {}
+    for (const errKey of Object.keys(this.errors)) {
+      this.form.get(errKey)?.setErrors({ valid: false })
+    }
+    this.uiFacade.addErrorNotification(err.message)
   }
 
 }

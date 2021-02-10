@@ -4,6 +4,7 @@ import { finalize, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 import { MailingApiService } from '@core/api'
+import { ICommonResponseDto } from '@core/models'
 import { IUiFacade, UI_FACADE } from '@core/features'
 
 @Component({
@@ -14,6 +15,7 @@ export class MailingComponent implements OnDestroy {
 
   form: FormGroup
   inRequest: boolean
+  errors: { [key: string]: string[] } = {}
 
   private destroy$ = new Subject()
 
@@ -37,13 +39,22 @@ export class MailingComponent implements OnDestroy {
       (res) => {
         this.uiFacade.addInfoNotification(res.message)
       },
-      (err) => this.uiFacade.addErrorNotification(err.message)
+      (err) => this.showError(err)
     )
   }
 
   ngOnDestroy(): void {
     this.destroy$.next()
     this.destroy$.complete()
+  }
+
+  private showError(err: ICommonResponseDto<null>): void {
+    this.inRequest = false
+    this.errors = err?.errors || {}
+    for (const errKey of Object.keys(this.errors)) {
+      this.form.get(errKey)?.setErrors({ valid: false })
+    }
+    this.uiFacade.addErrorNotification(err.message)
   }
 
 }

@@ -1,13 +1,13 @@
 <section class="settings-block">
-  <app-settings-common-limits class="limits-form" [inRequest]="inRequest" [limitSettings]="limitSettings" (changeValue)="saveLimits($event)"></app-settings-common-limits>
-  <app-settings-common-mode class="limits-form" [inRequest]="inRequest" [isDemo]="isDemo" (changeMode)="saveMode($event)"></app-settings-common-mode>
+  <app-settings-common-limits class="limits-form" [inRequest]="inRequest" [limitSettings]="limitSettings" [errors]="errors" (changeValue)="saveLimits($event)"></app-settings-common-limits>
+  <app-settings-common-mode class="limits-form" [inRequest]="inRequest" [isDemo]="isDemo" [errors]="errors" (changeMode)="saveMode($event)"></app-settings-common-mode>
 </section>
 
 <section class="settings-block">
-  <app-settings-common-telegram class="telegram-form" [inRequest]="inRequest" [telegramSettings]="telegramSettings" (changeValue)="saveTelegram($event)"></app-settings-common-telegram>
-  <app-settings-common-keys class="keys-form" [inRequest]="inRequest" [keysSetting]="keysSetting" (changeValue)="saveKeys($event)"></app-settings-common-keys>
+  <app-settings-common-telegram class="telegram-form" [inRequest]="inRequest" [telegramSettings]="telegramSettings" [errors]="errors" (changeValue)="saveTelegram($event)"></app-settings-common-telegram>
+  <app-settings-common-keys class="keys-form" [inRequest]="inRequest" [keysSetting]="keysSetting" [errors]="errors" (changeValue)="saveKeys($event)"></app-settings-common-keys>
 </section>
 
 <section class="settings-block">
-  <app-settings-common-ref class="telegram-form" [inRequest]="inRequest" [refSettings]="refSettings" (changeValue)="saveRef($event)"></app-settings-common-ref>
+  <app-settings-common-ref class="telegram-form" [inRequest]="inRequest" [refSettings]="refSettings" [errors]="errors" (changeValue)="saveRef($event)"></app-settings-common-ref>
 </section>

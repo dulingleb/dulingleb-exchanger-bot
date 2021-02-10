@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 
 import { ISettingLimitInDto } from '@core/models'
@@ -8,9 +8,10 @@ import { ISettingLimitInDto } from '@core/models'
   templateUrl: './settings-common-limits.component.html',
   styleUrls: ['./settings-common-limits.component.scss']
 })
-export class SettingsCommonLimitsComponent {
+export class SettingsCommonLimitsComponent implements OnChanges {
 
   @Input() inRequest: boolean
+  @Input() errors: { [key: string]: string[] }
   @Input() set limitSettings(settings: ISettingLimitInDto) {
     this.initFormFields(settings)
   }
@@ -24,6 +25,12 @@ export class SettingsCommonLimitsComponent {
       minExchange: new FormControl('', [Validators.min(0)]),
       maxExchange: new FormControl('', [Validators.min(0)]),
     })
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.errors?.currentValue !== undefined) {
+      this.showError()
+    }
   }
 
   save(): void {
@@ -40,6 +47,12 @@ export class SettingsCommonLimitsComponent {
       minExchange: settings?.minExchange,
       maxExchange: settings?.maxExchange
     })
+  }
+
+  private showError(): void {
+    for (const errKey of Object.keys(this.errors)) {
+      this.form.get(errKey)?.setErrors({ valid: false })
+    }
   }
 
 }

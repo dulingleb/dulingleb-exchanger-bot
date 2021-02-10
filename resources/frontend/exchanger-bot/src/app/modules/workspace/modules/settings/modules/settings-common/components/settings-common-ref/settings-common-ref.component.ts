@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 
 import { ISettingRefInDto } from '@core/models'
@@ -7,9 +7,10 @@ import { ISettingRefInDto } from '@core/models'
   selector: 'app-settings-common-ref',
   templateUrl: './settings-common-ref.component.html',
 })
-export class SettingsCommonRefComponent {
+export class SettingsCommonRefComponent implements OnChanges {
 
   @Input() inRequest: boolean
+  @Input() errors: { [key: string]: string[] }
   @Input() set refSettings(settings: ISettingRefInDto) {
     this.initFormFields(settings)
   }
@@ -24,6 +25,12 @@ export class SettingsCommonRefComponent {
     })
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.errors?.currentValue !== undefined) {
+      this.showError()
+    }
+  }
+
   save(): void {
     const refUsersCount = this.form.get('refUsersCount').value
     const refPercent = this.form.get('refPercent').value
@@ -32,9 +39,15 @@ export class SettingsCommonRefComponent {
 
   private initFormFields(settings: ISettingRefInDto): void {
     this.form.patchValue({
-      refUsersCount: settings.refUsersCount,
-      refPercent: settings.refPercent
+      refUsersCount: settings?.refUsersCount,
+      refPercent: settings?.refPercent
     })
+  }
+
+  private showError(): void {
+    for (const errKey of Object.keys(this.errors)) {
+      this.form.get(errKey)?.setErrors({ valid: false })
+    }
   }
 
 }

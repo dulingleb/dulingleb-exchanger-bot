@@ -12,6 +12,7 @@ export interface ICommonResponseDto<T> {
   status: boolean;
   statusCode?: number;
   message: string;
+  errors?: { [key: string]: string[] };
   data?: T;
 }
 

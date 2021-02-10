@@ -41,7 +41,7 @@
   },
   "sideNav": {
     "userInfo": {
-      "subscription": "You have:",
+      "subscription": "Subscription:",
       "hoverTitle": "Subscription"
     },
     "dashboard": "Dashboard",
@@ -150,7 +150,7 @@
         "name": "Enter name",
         "email": "Enter Email",
         "password": "Enter password",
-        "confirmPassword": "Confirm password",
+        "cPassword": "Confirm password",
         "subscribe": "Subscription"
       },
       "error": {

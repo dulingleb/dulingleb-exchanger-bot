@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 
 import { PageContentLayoutModule } from '@ui/page-content-layout'
 import { PageContentTableModule } from '@ui/page-content-table'
+import { InputErrorModule } from '@ui/input-error'
 
 import { UserEditComponent, UsersComponent } from './containers'
 import { UsersRoutingModule } from './users-routing.module'
@@ -32,7 +33,8 @@ import { UsersRoutingModule } from './users-routing.module'
 
     PageContentTableModule,
     PageContentLayoutModule,
-    UsersRoutingModule
+    UsersRoutingModule,
+    InputErrorModule,
   ],
 })
 export class UsersModule {}

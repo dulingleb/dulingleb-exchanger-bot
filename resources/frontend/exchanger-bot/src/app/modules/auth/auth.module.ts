@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatInputModule } from '@angular/material/input'
 import { MatIconModule } from '@angular/material/icon'
 
+import { InputErrorModule } from '@ui/input-error'
+
 import { AuthComponent } from './auth.component'
 import { AuthRoutingModule } from './auth-routing.module'
 
@@ -18,12 +20,15 @@ import { AuthRoutingModule } from './auth-routing.module'
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,
+
     MatCardModule,
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    AuthRoutingModule
+
+    AuthRoutingModule,
+    InputErrorModule,
   ],
 })
 export class AuthModule {}

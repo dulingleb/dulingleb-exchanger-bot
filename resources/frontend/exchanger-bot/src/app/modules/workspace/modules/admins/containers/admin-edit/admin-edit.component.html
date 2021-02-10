@@ -11,7 +11,7 @@
             <mat-label>{{ 'admin.edit.input.name' | translate }}</mat-label>
             <input formControlName="name" matInput>
             <mat-error *ngIf="form.get('name').hasError('required')">{{ 'admin.edit.error.nameRequired' | translate }}</mat-error>
-            <mat-error *ngIf="form.get('name').hasError('name')">{{ 'admin.edit.error.name' | translate }}</mat-error>
+            <mat-error><app-input-error name='name' [errors]="errors"></app-input-error></mat-error>
           </mat-form-field>
         </div>
 
@@ -21,6 +21,7 @@
             <input formControlName="email" matInput placeholder="pat@example.com">
             <mat-error *ngIf="form.get('email').hasError('required')">{{ 'admin.edit.error.emailRequired' | translate }}</mat-error>
             <mat-error *ngIf="form.get('email').hasError('email')">{{ 'admin.edit.error.email' | translate }}</mat-error>
+            <mat-error><app-input-error name='email' [errors]="errors"></app-input-error></mat-error>
           </mat-form-field>
         </div>
 
@@ -33,18 +34,20 @@
             </button>
             <mat-error *ngIf="form.get('password').hasError('required')">{{ 'admin.edit.error.passwordRequired' | translate }}</mat-error>
             <mat-error *ngIf="form.get('password').hasError('minlength')">{{ 'admin.edit.error.password' | translate }}</mat-error>
+            <mat-error><app-input-error name='password' [errors]="errors"></app-input-error></mat-error>
           </mat-form-field>
         </div>
 
         <div class="form-group">
           <mat-form-field appearance="fill">
-            <mat-label>{{ 'admin.edit.input.confirmPassword' | translate }}</mat-label>
-            <input formControlName="confirmPassword" [type]="showPassword ? 'text' : 'password'" matInput>
+            <mat-label>{{ 'admin.edit.input.cPassword' | translate }}</mat-label>
+            <input formControlName="cPassword" [type]="showPassword ? 'text' : 'password'" matInput>
             <button type="button" mat-icon-button matSuffix (click)="showPassword = !showPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showPassword">
               <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
             </button>
-            <mat-error *ngIf="form.get('confirmPassword').hasError('required')">{{ 'admin.edit.error.passwordRequired' | translate }}</mat-error>
-            <mat-error *ngIf="form.get('confirmPassword').hasError('minlength')">{{ 'admin.edit.error.password' | translate }}</mat-error>
+            <mat-error *ngIf="form.get('cPassword').hasError('required')">{{ 'admin.edit.error.passwordRequired' | translate }}</mat-error>
+            <mat-error *ngIf="form.get('cPassword').hasError('minlength')">{{ 'admin.edit.error.password' | translate }}</mat-error>
+            <mat-error><app-input-error name='cPassword' [errors]="errors"></app-input-error></mat-error>
           </mat-form-field>
         </div>
 
@@ -54,12 +57,11 @@
             <input matInput [matDatepicker]="picker" formControlName="subscribe">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker [startAt]="startAt"></mat-datepicker>
-            <mat-error *ngIf="form.get('subscribe').hasError('required')">{{ 'admin.edit.error.passwordRequired' | translate }}</mat-error>
-            <mat-error *ngIf="form.get('subscribe').hasError('minlength')">{{ 'admin.edit.error.password' | translate }}</mat-error>
+            <mat-error><app-input-error name='subscribe' [errors]="errors"></app-input-error></mat-error>
           </mat-form-field>
         </div>
 
-        <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'admin.edit.save' | translate }}</button>
+        <button mat-raised-button color="primary" [disabled]="form.invalid || inRequest">{{ 'admin.edit.save' | translate }}</button>
 
       </form>
     </section>

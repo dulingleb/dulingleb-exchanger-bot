@@ -4,9 +4,9 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { finalize, mergeMap, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
-import { IOperationInDto } from '@core/models'
-import { OperationApiService } from '@core/api'
+import { ICommonResponseDto, IOperationInDto } from '@core/models'
 import { IUiFacade, UI_FACADE } from '@core/features'
+import { OperationApiService } from '@core/api'
 
 import { EOperationStatus, OPERATION_CLASS } from '../../constants'
 
@@ -19,6 +19,7 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
   operation: IOperationInDto
   form: FormGroup
   inRequest: boolean
+  errors: { [key: string]: string[] } = {}
   OPERATION_CLASS = OPERATION_CLASS
   EOperationStatus = EOperationStatus
 
@@ -59,7 +60,7 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
         this.initFormData()
         this.uiFacade.addInfoNotification(res.message)
       },
-      (err) => this.uiFacade.addErrorNotification(err.message)
+      (err) => this.showError(err)
     )
   }
 
@@ -105,6 +106,15 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
     this.form.patchValue({
       comment: this.operation.comment,
     })
+  }
+
+  private showError(err: ICommonResponseDto<null>): void {
+    this.inRequest = false
+    this.errors = err?.errors || {}
+    for (const errKey of Object.keys(this.errors)) {
+      this.form.get(errKey)?.setErrors({ valid: false })
+    }
+    this.uiFacade.addErrorNotification(err.message)
   }
 
 }

@@ -1,3 +1,4 @@
+import { ICommonResponseDto } from '@core/models'
 import { createAction, props } from '@ngrx/store'
 
 import { IAdminOperationsCountInfoInDto, IAdminOperationsSumInfoInDto, IAdminUsersCountInfoInDto } from './admin.info.model'
@@ -27,7 +28,7 @@ const loginSuccess = createAction(
 
 const loginError = createAction(
   '[Admin exchanger bot] Login error',
-  props<{ error: Error }>()
+  props<{ error: ICommonResponseDto<null> }>()
 )
 
 const logout = createAction(
@@ -95,7 +96,7 @@ const saveUsersCount = createAction(
 
 const infoError = createAction(
   '[Admin exchanger bot] Info error',
-  props<{ error: Error }>()
+  props<{ error: ICommonResponseDto<null> }>()
 )
 
 export const ADMIN_ACTIONS = {

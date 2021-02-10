@@ -9,6 +9,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatInputModule } from '@angular/material/input'
 import { ReactiveFormsModule } from '@angular/forms'
 
+import { InputErrorModule } from '@ui/input-error'
 import { ConfirmModalModule } from '@ui/confirm-modal'
 import { PageContentTableModule } from '@ui/page-content-table'
 import { PageContentLayoutModule } from '@ui/page-content-layout'
@@ -36,6 +37,7 @@ import { AdminsRoutingModule } from './admins-routing.module'
     ConfirmModalModule,
     PageContentTableModule,
     PageContentLayoutModule,
+    InputErrorModule,
 
     AdminsRoutingModule,
   ],

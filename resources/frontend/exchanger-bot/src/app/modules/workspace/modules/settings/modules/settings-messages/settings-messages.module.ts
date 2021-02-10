@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input'
 import { TranslateModule } from '@ngx-translate/core'
 
+import { InputErrorModule } from '@ui/input-error'
 import { ConfirmModalModule } from '@ui/confirm-modal'
 import { FormatEditorModule } from '@ui/format-editor'
 import { PageContentTableModule } from '@ui/page-content-table'
@@ -31,6 +32,7 @@ import { SettingsMessagesRoutingModule } from './settings-messages-routing.modul
     TranslateModule,
     ReactiveFormsModule,
 
+    InputErrorModule,
     FormatEditorModule,
     ConfirmModalModule,
     PageContentTableModule,

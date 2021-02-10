@@ -35,7 +35,6 @@ export class SettingApiService {
 
   getSettings(): Observable<ISettingInDto> {
     return this.http.get<ICommonResponseDto<ISettingOutDto>>(`${ENV.api}/settings`).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data }) => this.settingOutToInDto(data))
     )
   }
@@ -47,7 +46,6 @@ export class SettingApiService {
       max_exchange: settingLimitInDto.maxExchange
     }
     return this.http.patch<ICommonResponseDto<ISettingOutDto>>(`${ENV.api}/settings/set/limits`, data).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data }) => this.settingOutToInDto(data))
     )
   }
@@ -58,7 +56,6 @@ export class SettingApiService {
       ref_users_count: settingRefInDto.refUsersCount
     }
     return this.http.patch<ICommonResponseDto<ISettingOutDto>>(`${ENV.api}/settings/set/ref`, data).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data }) => this.settingOutToInDto(data))
     )
   }
@@ -66,7 +63,6 @@ export class SettingApiService {
   saveMode(demo: boolean): Observable<ISettingInDto> {
     const data = { demo }
     return this.http.patch<ICommonResponseDto<ISettingOutDto>>(`${ENV.api}/settings/set/demo`, data).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data }) => this.settingOutToInDto(data))
     )
   }
@@ -77,7 +73,6 @@ export class SettingApiService {
       telegram_token: settingTelegramInDto.telegramToken
     }
     return this.http.patch<ICommonResponseDto<ISettingOutDto>>(`${ENV.api}/settings/set/telegram-token`, data).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data }) => this.settingOutToInDto(data))
     )
   }
@@ -88,7 +83,6 @@ export class SettingApiService {
       coinbase_secret: settingKeysInDto.coinbaseSecret
     }
     return this.http.patch<ICommonResponseDto<ISettingOutDto>>(`${ENV.api}/settings/set/coinbase-key`, data).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data }) => this.settingOutToInDto(data))
     )
   }
@@ -96,7 +90,6 @@ export class SettingApiService {
   getMessageList(apiQuery: IRequestApiDto): Observable<IResponseApiInDto<ISettingMessageDto[]>> {
     const params = apiQueryToParams(apiQuery, EFilterAdminInOut)
     return this.http.get<ICommonResponseDto<IResponseApiOutDto<ISettingMessageDto[]>>>(`${ENV.api}/settings/messages`, { params }).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: res }) => ({
         ...operationOutToInDto(res),
         sort: apiQuery.sort
@@ -106,7 +99,6 @@ export class SettingApiService {
 
   getMessage(slug: string): Observable<ISettingMessageDto> {
     return this.http.get<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/${slug}`).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: message }) => message)
     )
   }
@@ -119,7 +111,6 @@ export class SettingApiService {
 
   getMessageTemplate(id: number): Observable<ISettingMessageDto> {
     return this.http.get<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/template/${id}`).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: message }) => message)
     )
   }
@@ -145,7 +136,6 @@ export class SettingApiService {
   getCommissionList(apiQuery: IRequestApiDto): Observable<IResponseApiInDto<ISettingCommissionDto[]>> {
     const params = apiQueryToParams(apiQuery, EFilterAdminInOut)
     return this.http.get<ICommonResponseDto<IResponseApiOutDto<ISettingCommissionDto[]>>>(`${ENV.api}/settings/commissions`, { params }).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: res }) => ({
         ...operationOutToInDto(res),
         sort: apiQuery.sort
@@ -155,7 +145,6 @@ export class SettingApiService {
 
   getCommission(id: number): Observable<ISettingCommissionDto> {
     return this.http.get<ICommonResponseDto<ISettingCommissionDto>>(`${ENV.api}/settings/commissions/${id}`).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: message }) => message)
     )
   }
@@ -181,7 +170,6 @@ export class SettingApiService {
   getRequisiteList(apiQuery: IRequestApiDto): Observable<IResponseApiInDto<ISettingRequisiteDto[]>> {
     const params = apiQueryToParams(apiQuery, EFilterAdminInOut)
     return this.http.get<ICommonResponseDto<IResponseApiOutDto<ISettingRequisiteDto[]>>>(`${ENV.api}/settings/bank-details`, { params }).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: res }) => ({
         ...operationOutToInDto(res),
         sort: apiQuery.sort
@@ -191,7 +179,6 @@ export class SettingApiService {
 
   getRequisite(id: number): Observable<ISettingRequisiteDto> {
     return this.http.get<ICommonResponseDto<ISettingRequisiteDto>>(`${ENV.api}/settings/bank-details/${id}`).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: message }) => message)
     )
   }
@@ -216,14 +203,12 @@ export class SettingApiService {
 
   getStatus(): Observable<boolean> {
     return this.http.get<ICommonResponseDto<boolean>>(`${ENV.api}/settings/status`).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: status }) => !!status)
     )
   }
 
   changeStatus(): Observable<boolean> {
     return this.http.post<ICommonResponseDto<boolean>>(`${ENV.api}/settings/status`, {}).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: status }) => !!status)
     )
   }

@@ -6,7 +6,7 @@ import { Subject } from 'rxjs'
 
 import { TelegramUserApiService } from '@core/api'
 import { IUiFacade, UI_FACADE } from '@core/features'
-import { ITelegramUserDataDto, ITelegramUserInDto } from '@core/models'
+import { ICommonResponseDto, ITelegramUserDataDto, ITelegramUserInDto } from '@core/models'
 
 @Component({
   selector: 'app-user-edit',
@@ -19,6 +19,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   form: FormGroup
   showPassword: boolean
   inRequest: boolean
+  errors: { [key: string]: string[] } = {}
 
   private destroy$ = new Subject()
 
@@ -49,13 +50,12 @@ export class UserEditComponent implements OnInit, OnDestroy {
           ban: user.ban,
         })
       },
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.uiFacade.addErrorNotification(err.message)
     )
   }
 
   save(): void {
+    this.inRequest = true
     const discount = this.form.get('discount').value
     const comment = this.form.get('comment').value
     const ban = this.form.get('ban').value
@@ -71,15 +71,22 @@ export class UserEditComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(
       (res) => this.router.navigateByUrl('/users'),
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.showError(err),
     )
   }
 
   ngOnDestroy(): void {
     this.destroy$.next()
     this.destroy$.complete()
+  }
+
+  private showError(err: ICommonResponseDto<null>): void {
+    this.inRequest = false
+    this.errors = err?.errors || {}
+    for (const errKey of Object.keys(this.errors)) {
+      this.form.get(errKey)?.setErrors({ valid: false })
+    }
+    this.uiFacade.addErrorNotification(err.message)
   }
 
 }

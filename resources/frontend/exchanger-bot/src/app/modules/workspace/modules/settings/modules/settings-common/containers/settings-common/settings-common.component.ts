@@ -3,7 +3,7 @@ import { finalize, takeUntil } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 import { SettingApiService } from '@core/api'
-import { ISettingInDto, ISettingKeysInDto, ISettingLimitInDto, ISettingRefInDto, ISettingTelegramInDto } from '@core/models'
+import { ICommonResponseDto, ISettingInDto, ISettingKeysInDto, ISettingLimitInDto, ISettingRefInDto, ISettingTelegramInDto } from '@core/models'
 import { IUiFacade, IAdminFacade, UI_FACADE, ADMIN_FACADE } from '@core/features'
 
 @Component({
@@ -14,6 +14,7 @@ import { IUiFacade, IAdminFacade, UI_FACADE, ADMIN_FACADE } from '@core/features
 export class SettingsCommonComponent implements OnInit, OnDestroy {
 
   inRequest: boolean
+  errors: { [key: string]: string[] } = {}
 
   limitSettings: ISettingLimitInDto
   telegramSettings: ISettingTelegramInDto
@@ -36,7 +37,7 @@ export class SettingsCommonComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(
       (settings) => this.initFormFields(settings),
-      (err) => this.uiFacade.addErrorNotification(err.message)
+      (err) => this.showError(err)
     )
   }
 
@@ -47,7 +48,7 @@ export class SettingsCommonComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(
       (settings) => this.initFormFields(settings),
-      (err) => this.uiFacade.addErrorNotification(err.message)
+      (err) => this.showError(err)
     )
   }
 
@@ -58,7 +59,7 @@ export class SettingsCommonComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(
       (settings) => this.initFormFields(settings),
-      (err) => this.uiFacade.addErrorNotification(err.message)
+      (err) => this.showError(err)
     )
   }
 
@@ -69,7 +70,7 @@ export class SettingsCommonComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(
       (settings) => this.initFormFields(settings),
-      (err) => this.uiFacade.addErrorNotification(err.message)
+      (err) => this.showError(err)
     )
   }
 
@@ -80,7 +81,7 @@ export class SettingsCommonComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(
       (settings) => this.initFormFields(settings),
-      (err) => this.uiFacade.addErrorNotification(err.message)
+      (err) => this.showError(err)
     )
   }
 
@@ -91,7 +92,7 @@ export class SettingsCommonComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(
       (settings) => this.initFormFields(settings),
-      (err) => this.uiFacade.addErrorNotification(err.message)
+      (err) => this.showError(err)
     )
   }
 
@@ -119,6 +120,12 @@ export class SettingsCommonComponent implements OnInit, OnDestroy {
       coinbaseKey: settings.coinbaseKey,
       coinbaseSecret: settings.coinbaseSecret,
     }
+  }
+
+  private showError(err: ICommonResponseDto<null>): void {
+    this.inRequest = false
+    this.errors = err?.errors || {}
+    this.uiFacade.addErrorNotification(err.message)
   }
 
 }

@@ -1,12 +1,12 @@
 import { FormControl, FormGroup } from '@angular/forms'
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
-import { finalize, mergeMap, takeUntil } from 'rxjs/operators'
+import { mergeMap, takeUntil } from 'rxjs/operators'
 import { of, Subject } from 'rxjs'
 
 import { SettingApiService } from '@core/api'
 import { IUiFacade, UI_FACADE } from '@core/features'
-import { ISettingMessageDto } from '@core/models'
+import { ICommonResponseDto, ISettingMessageDto } from '@core/models'
 
 @Component({
   selector: 'app-setting-message-template-edit',
@@ -17,6 +17,7 @@ export class SettingMessageTemplateEditComponent implements OnInit, OnDestroy {
   form: FormGroup
   message: ISettingMessageDto
   inRequest: boolean
+  errors: { [key: string]: string[] } = {}
 
   private destroy$ = new Subject()
 
@@ -35,15 +36,16 @@ export class SettingMessageTemplateEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.inRequest = true
     this.route.paramMap.pipe(
       mergeMap((params: ParamMap) => {
         const id = +params.get('id')
         return id ? this.settingApiService.getMessageTemplate(id) : of({} as ISettingMessageDto)
       }),
-      finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
       (message) => {
+        this.inRequest = false
         this.message = message
         this.form.patchValue({
           title: message.title,
@@ -52,7 +54,7 @@ export class SettingMessageTemplateEditComponent implements OnInit, OnDestroy {
           text: message.text,
         })
       },
-      (err) => this.uiFacade.addErrorNotification(err.message)
+      (err) => this.showError(err)
     )
   }
 
@@ -81,23 +83,34 @@ export class SettingMessageTemplateEditComponent implements OnInit, OnDestroy {
   }
 
   private addMessageTemplate(message: ISettingMessageDto): void {
+    this.inRequest = true
     this.settingApiService.addMessageTemplate(message).subscribe(
       (res) => {
         this.router.navigateByUrl('/settings/messages')
         this.uiFacade.addInfoNotification(res.message)
       },
-      (err) => this.uiFacade.addErrorNotification(err.message)
+      (err) => this.showError(err)
     )
   }
 
   private updateMessageTemplate(message: ISettingMessageDto): void {
+    this.inRequest = true
     this.settingApiService.updateMessageTemplate(message).subscribe(
       (res) => {
         this.router.navigateByUrl('/settings/messages')
         this.uiFacade.addInfoNotification(res.message)
       },
-      (err) => this.uiFacade.addErrorNotification(err.message)
+      (err) => this.showError(err)
     )
+  }
+
+  private showError(err: ICommonResponseDto<null>): void {
+    this.inRequest = false
+    this.errors = err?.errors || {}
+    for (const errKey of Object.keys(this.errors)) {
+      this.form.get(errKey)?.setErrors({ valid: false })
+    }
+    this.uiFacade.addErrorNotification(err.message)
   }
 
 }

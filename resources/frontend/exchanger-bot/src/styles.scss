@@ -30,6 +30,10 @@ a, button {
   max-width: 1200px;
 }
 
+a, a:focus, a:active, a:visited, a:hover {
+  color: var(--accent-color);
+}
+
 .text-center {
   text-align: center;
 }

@@ -1,11 +1,12 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
-import { mergeMap, takeUntil, withLatestFrom } from 'rxjs/operators'
+import { finalize, mergeMap, takeUntil, withLatestFrom } from 'rxjs/operators'
 import { of, Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
 import { IUiFacade, IAdminInDto, UI_FACADE, EAdminRoleDto, ADMIN_FACADE, IAdminFacade } from '@core/features'
+import { ICommonResponseDto } from '@core/models'
 
 @Component({
   selector: 'app-admin-edit',
@@ -17,6 +18,7 @@ export class AdminEditComponent implements OnInit, OnDestroy {
   form: FormGroup
   showPassword: boolean
   inRequest: boolean
+  errors: { [key: string]: string[] } = {}
 
   private destroy$ = new Subject()
 
@@ -39,11 +41,9 @@ export class AdminEditComponent implements OnInit, OnDestroy {
         Validators.required
       ]),
       password: new FormControl('', [
-        // Validators.required,
         Validators.minLength(3)
       ]),
-      confirmPassword: new FormControl('', [
-        // Validators.required,
+      cPassword: new FormControl('', [
         Validators.minLength(3)
       ]),
       subscribe: new FormControl('')
@@ -59,7 +59,7 @@ export class AdminEditComponent implements OnInit, OnDestroy {
       withLatestFrom(this.adminFacade.admin$),
       takeUntil(this.destroy$)
     ).subscribe(
-      ([admin, currentAdmin]) =>  {
+      ([admin, currentAdmin]) => {
         this.admin = admin
         this.form.patchValue({
           email: admin.email,
@@ -80,11 +80,11 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     const name = this.form.get('name').value
     const email = this.form.get('email').value
     const password = this.form.get('password').value
-    const cPassword = this.form.get('confirmPassword').value
+    const cPassword = this.form.get('cPassword').value
     const subscribe = this.form.get('subscribe').value
 
     this.admin.id
-      ? this.updateAdmin(this.admin.id, email || this.admin.email, name || this.admin.name, subscribe)
+      ? this.updateAdmin(this.admin.id, email || this.admin.email, password, cPassword, name || this.admin.name, subscribe)
       : this.addAdmin(email, name, password, cPassword, subscribe)
   }
 
@@ -97,22 +97,35 @@ export class AdminEditComponent implements OnInit, OnDestroy {
     return new Date()
   }
 
-  private updateAdmin(id: number, email: string, name: string, subscribe: Date): void {
-    this.adminApiService.updateAdmin({ id, email, name, subscribe }).subscribe(
+  private updateAdmin(id: number, email: string, password: string, cPassword: string, name: string, subscribe: Date): void {
+    this.inRequest = true
+    this.adminApiService.updateAdmin({ id, email, name, password, cPassword, subscribe }).pipe(
+      finalize(() => this.inRequest = false),
+      takeUntil(this.destroy$)
+    ).subscribe(
       () => this.router.navigateByUrl('/admins'),
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.showError(err),
     )
   }
 
   private addAdmin(email: string, name: string, password: string, cPassword: string, subscribe: Date): void {
-    this.adminApiService.addAdmin({ email, name, password, cPassword, subscribe }).subscribe(
+    this.inRequest = true
+    this.adminApiService.addAdmin({ email, name, password, cPassword, subscribe }).pipe(
+      finalize(() => this.inRequest = false),
+      takeUntil(this.destroy$)
+    ).subscribe(
       () => this.router.navigateByUrl('/admins'),
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.showError(err),
     )
+  }
+
+  private showError(err: ICommonResponseDto<null>): void {
+    this.inRequest = false
+    this.errors = err?.errors || {}
+    for (const errKey of Object.keys(this.errors)) {
+      this.form.get(errKey)?.setErrors({ valid: false })
+    }
+    this.uiFacade.addErrorNotification(err.message)
   }
 
 }
