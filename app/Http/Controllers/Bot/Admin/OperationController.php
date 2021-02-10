@@ -20,6 +20,10 @@ class OperationController extends BaseController
         }
 
         switch ($callback) {
+            case 'confirm':
+                TelegramUserSetting::setTransaction($this->chatData['exchanger']->id, $this->chatData['chat_id'], ['step' => 'confirm', 'operation_id' => $id, 'name' => 'Admin\OperationController']);
+                $this->confirmMessage('Вы действительно хотите подтвердить сделку?');
+                break;
             case 'toOperator':
                 TelegramUserSetting::setTransaction($this->chatData['exchanger']->id, $this->chatData['chat_id'], ['step' => 'toOperator', 'operation_id' => $id, 'name' => 'Admin\OperationController']);
                 $this->confirmMessage('Вы действительно хотите направить сделку к оператору?');

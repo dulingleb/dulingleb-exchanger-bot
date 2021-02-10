@@ -47,6 +47,7 @@ class TelegramUserController extends Controller
             ->withCountOperations()
             ->withSumOperations()
             ->withCountRef()
+            ->withCountActiveRef()
             ->withCountOperationsRef()
             ->withSumOperationsRef()
             ->where('id', $id)

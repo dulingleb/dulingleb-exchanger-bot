@@ -10,10 +10,12 @@ class ProfileController extends BaseController
 {
     public function showProfile()
     {
-        $userSet = TelegramUserSetting::where('exchanger_id', $this->chatData['exchanger']->id)->where('telegram_user_id', $this->chatData['chat_id'])->first();
-        $refs = TelegramUserSetting::where('exchanger_id', $this->chatData['exchanger']->id)->where('referer_id', $userSet->id)->count();
+        $userSet = TelegramUserSetting::select('discount')->where('exchanger_id', $this->chatData['exchanger']->id)->where('telegram_user_id', $this->chatData['chat_id'])->withCountRef()->withCountActiveRef()->first();
 
-        $message = '<strong>Рефералов:</strong> ' . $refs . PHP_EOL . '<strong>Реф ссылка:</strong> https://t.me/' . $this->chatData['exchanger']->username . '?start=' . $this->chatData['chat_id'];
+        $message = '<strong>Ваша скидка: </strong>' . $userSet->discount . ' %'
+            . PHP_EOL . PHP_EOL .'<strong>Рефералов:</strong> ' . $userSet->ref_count
+            . PHP_EOL .'<strong>Активных:</strong> ' . $userSet->ref_active_count
+            . PHP_EOL . '<strong>Реф ссылка:</strong> https://t.me/' . $this->chatData['exchanger']->username . '?start=' . $this->chatData['chat_id'];
 
         $this->telegram->sendMessage([
             'chat_id' => $this->chatData['chat_id'],
