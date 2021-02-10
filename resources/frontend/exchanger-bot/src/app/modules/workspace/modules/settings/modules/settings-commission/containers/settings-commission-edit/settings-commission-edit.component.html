@@ -9,6 +9,7 @@
         <mat-form-field appearance="fill">
           <mat-label>{{ 'settings.commissions.edit.input.from' | translate }}</mat-label>
           <input formControlName="from" type="number" min="0" step="0.0001" matInput>
+          <mat-error><app-input-error name='from' [errors]="errors"></app-input-error></mat-error>
         </mat-form-field>
       </div>
 
@@ -16,6 +17,7 @@
         <mat-form-field appearance="fill">
           <mat-label>{{ 'settings.commissions.edit.input.to' | translate }}</mat-label>
           <input formControlName="to" type="number" min="0" step="0.0015" matInput>
+          <mat-error><app-input-error name='to' [errors]="errors"></app-input-error></mat-error>
         </mat-form-field>
       </div>
 
@@ -23,11 +25,12 @@
         <mat-form-field appearance="fill">
           <mat-label>{{ 'settings.commissions.edit.input.percent' | translate }}</mat-label>
           <input formControlName="percent" type="number" min="0" step="0.1" matInput>
+          <mat-error><app-input-error name='percent' [errors]="errors"></app-input-error></mat-error>
         </mat-form-field>
       </div>
 
       <div class="form-group">
-        <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'settings.commissions.edit.saveBtn' | translate }}</button>
+        <button mat-raised-button color="primary" [disabled]="form.invalid || inRequest">{{ 'settings.commissions.edit.saveBtn' | translate }}</button>
       </div>
 
     </form>

@@ -6,7 +6,7 @@ import { of, Subject } from 'rxjs'
 
 import { SettingApiService } from '@core/api'
 import { IUiFacade, UI_FACADE } from '@core/features'
-import { ISettingRequisiteDto } from '@core/models'
+import { ICommonResponseDto, ISettingRequisiteDto } from '@core/models'
 
 @Component({
   selector: 'app-settings-requisite-edit',
@@ -17,6 +17,7 @@ export class SettingsRequisiteEditComponent implements OnInit, OnDestroy {
   requisite: ISettingRequisiteDto
   form: FormGroup
   inRequest: boolean
+  errors: { [key: string]: string[] } = {}
 
   private destroy$ = new Subject()
 
@@ -36,6 +37,7 @@ export class SettingsRequisiteEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.inRequest = true
     this.route.paramMap.pipe(
       mergeMap((params: ParamMap) => {
         const id = +params.get('id')
@@ -44,16 +46,16 @@ export class SettingsRequisiteEditComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(
       (requisite) =>  {
-      this.requisite = requisite
+        this.inRequest = false
+        this.requisite = requisite
+
         this.form.patchValue({
           title: requisite.title,
           text: requisite.text,
           status: requisite.status
         })
       },
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.showError(err)
     )
   }
 
@@ -79,21 +81,28 @@ export class SettingsRequisiteEditComponent implements OnInit, OnDestroy {
   }
 
   private updateRequisite(requisite: ISettingRequisiteDto): void {
+    this.inRequest = true
     this.settingApiService.updateRequisite(requisite).subscribe(
       () => this.router.navigateByUrl('/settings/requisites'),
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.showError(err)
     )
   }
 
   private addRequisite(requisite: ISettingRequisiteDto): void {
+    this.inRequest = true
     this.settingApiService.addRequisite(requisite).subscribe(
       () => this.router.navigateByUrl('/settings/requisites'),
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.showError(err)
     )
+  }
+
+  private showError(err: ICommonResponseDto<null>): void {
+    this.inRequest = false
+    this.errors = err?.errors || {}
+    for (const errKey of Object.keys(this.errors)) {
+      this.form.get(errKey)?.setErrors({ valid: false })
+    }
+    this.uiFacade.addErrorNotification(err.message)
   }
 
 }

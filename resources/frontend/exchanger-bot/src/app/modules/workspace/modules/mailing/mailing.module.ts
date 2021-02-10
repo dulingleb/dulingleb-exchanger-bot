@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 
 import { PageContentLayoutModule } from '@ui/page-content-layout'
 import { FormatEditorModule } from '@ui/format-editor'
+import { InputErrorModule } from '@ui/input-error'
 
 import { MailingComponent } from './mailing.component'
 import { MailingRoutingModule } from './mailing-routing.module'
@@ -31,6 +32,7 @@ import { MailingRoutingModule } from './mailing-routing.module'
     PageContentLayoutModule,
     MailingRoutingModule,
     FormatEditorModule,
+    InputErrorModule,
   ],
   exports: [MailingComponent]
 })

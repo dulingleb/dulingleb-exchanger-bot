@@ -9,6 +9,7 @@
         <mat-form-field appearance="fill">
           <mat-label>{{ 'settings.keys.coinbaseKey' | translate }}</mat-label>
           <input formControlName="coinbaseKey" type="text" matInput>
+          <mat-error><app-input-error name='coinbaseKey' [errors]="errors"></app-input-error></mat-error>
         </mat-form-field>
       </div>
 
@@ -16,10 +17,11 @@
         <mat-form-field appearance="fill">
           <mat-label>{{ 'settings.keys.coinbaseSecret' | translate }}</mat-label>
           <input formControlName="coinbaseSecret" type="text" matInput>
+          <mat-error><app-input-error name='coinbaseSecret' [errors]="errors"></app-input-error></mat-error>
         </mat-form-field>
       </div>
 
-      <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'settings.saveBtn' | translate }}</button>
+      <button mat-raised-button color="primary" [disabled]="form.invalid || inRequest">{{ 'settings.saveBtn' | translate }}</button>
 
     </form>
   </ng-container>

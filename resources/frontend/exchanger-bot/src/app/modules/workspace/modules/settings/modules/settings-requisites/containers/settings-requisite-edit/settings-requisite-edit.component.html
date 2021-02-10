@@ -9,6 +9,7 @@
         <mat-form-field appearance="fill">
           <mat-label>{{ 'settings.requisites.edit.input.title' | translate }}</mat-label>
           <input formControlName="title" type="text" matInput>
+          <mat-error><app-input-error name='title' [errors]="errors"></app-input-error></mat-error>
         </mat-form-field>
       </div>
 
@@ -16,6 +17,7 @@
         <mat-form-field appearance="fill">
           <mat-label>{{ 'settings.requisites.edit.input.text' | translate }}</mat-label>
           <textarea formControlName="text" matInput rows="20"></textarea>
+          <mat-error><app-input-error name='text' [errors]="errors"></app-input-error></mat-error>
         </mat-form-field>
       </div>
 
@@ -25,7 +27,7 @@
         </mat-slide-toggle>
       </div>
 
-      <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'settings.requisites.edit.saveBtn' | translate }}</button>
+      <button mat-raised-button color="primary" [disabled]="form.invalid || inRequest">{{ 'settings.requisites.edit.saveBtn' | translate }}</button>
 
     </form>
   </ng-container>

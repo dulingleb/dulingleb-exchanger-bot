@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 
+import { InputErrorModule } from '@ui/input-error'
 import { PageContentLayoutModule } from '@ui/page-content-layout'
 
 import { SettingsCommonKeysComponent, SettingsCommonLimitsComponent, SettingsCommonModeComponent, SettingsCommonRefComponent, SettingsCommonTelegramComponent } from './components'
@@ -34,6 +35,7 @@ import { SettingsCommonComponent } from './containers'
     MatFormFieldModule,
     MatSlideToggleModule,
 
+    InputErrorModule,
     PageContentLayoutModule,
     SettingsCommonRoutingModule
   ]

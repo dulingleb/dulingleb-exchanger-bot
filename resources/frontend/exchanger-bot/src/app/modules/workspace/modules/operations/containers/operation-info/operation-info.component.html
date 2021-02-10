@@ -40,15 +40,14 @@
             <mat-form-field appearance="fill">
               <mat-label>{{ 'operation.info.comment' | translate }}</mat-label>
               <textarea formControlName="comment" matInput></textarea>
+              <mat-error><app-input-error name='comment' [errors]="errors"></app-input-error></mat-error>
             </mat-form-field>
           </div>
         </div>
       </section>
 
-
-
       <div class="form-group btn-group">
-        <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'operation.info.saveBtn' | translate }}</button>
+        <button mat-raised-button color="primary" [disabled]="form.invalid || inRequest">{{ 'operation.info.saveBtn' | translate }}</button>
         <button type="button" mat-raised-button color="basic" *ngIf="operation?.status === EOperationStatus.ON_CHECK" (click)="setSuccess()">{{ 'operation.info.confirmBtn' | translate }}</button>
         <button type="button" mat-raised-button color="basic" *ngIf="operation?.status === EOperationStatus.ON_CHECK" (click)="setCancel()">{{ 'operation.info.operatorBtn' | translate }}</button>
         <button type="button" mat-raised-button color="warn" *ngIf="operation?.status === EOperationStatus.ON_CHECK" (click)="setToOperator()">{{ 'operation.info.cancelBtn' | translate }}</button>

@@ -6,7 +6,7 @@ import { of, Subject } from 'rxjs'
 
 import { SettingApiService } from '@core/api'
 import { IUiFacade, UI_FACADE } from '@core/features'
-import { ISettingCommissionDto } from '@core/models'
+import { ICommonResponseDto, ISettingCommissionDto } from '@core/models'
 
 @Component({
   selector: 'app-settings-commission-edit',
@@ -18,6 +18,7 @@ export class SettingsCommissionEditComponent implements OnInit, OnDestroy {
   commission: ISettingCommissionDto
   form: FormGroup
   inRequest: boolean
+  errors: { [key: string]: string[] } = {}
 
   private destroy$ = new Subject()
 
@@ -44,6 +45,7 @@ export class SettingsCommissionEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.inRequest = true
     this.route.paramMap.pipe(
       mergeMap((params: ParamMap) => {
         const id = +params.get('id')
@@ -52,16 +54,15 @@ export class SettingsCommissionEditComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe(
       (commission) =>  {
-      this.commission = commission
+        this.inRequest = false
+        this.commission = commission
         this.form.patchValue({
           from: commission.from,
           to: commission.to,
           percent: commission.percent
         })
       },
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.showError(err)
     )
   }
 
@@ -87,21 +88,28 @@ export class SettingsCommissionEditComponent implements OnInit, OnDestroy {
   }
 
   private updateRequisite(commission: ISettingCommissionDto): void {
+    this.inRequest = true
     this.settingApiService.updateCommission(commission).subscribe(
       () => this.router.navigateByUrl('/settings/commissions'),
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.showError(err)
     )
   }
 
   private addRequisite(commission: ISettingCommissionDto): void {
+    this.inRequest = true
     this.settingApiService.addCommission(commission).subscribe(
       () => this.router.navigateByUrl('/settings/commissions'),
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.showError(err)
     )
+  }
+
+  private showError(err: ICommonResponseDto<null>): void {
+    this.inRequest = false
+    this.errors = err?.errors || {}
+    for (const errKey of Object.keys(this.errors)) {
+      this.form.get(errKey)?.setErrors({ valid: false })
+    }
+    this.uiFacade.addErrorNotification(err.message)
   }
 
 }

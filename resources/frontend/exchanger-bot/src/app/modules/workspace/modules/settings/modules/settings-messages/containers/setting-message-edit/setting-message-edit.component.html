@@ -10,9 +10,10 @@
 
       <div class="form-group">
         <app-format-editor formControlName="text" [label]="'settings.messages.edit.input.text' | translate" [height]=300></app-format-editor>
+        <mat-error><app-input-error name='text' [errors]="errors"></app-input-error></mat-error>
       </div>
 
-      <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'settings.messages.edit.saveBtn' | translate }}</button>
+      <button mat-raised-button color="primary" [disabled]="form.invalid || inRequest">{{ 'settings.messages.edit.saveBtn' | translate }}</button>
 
     </form>
   </ng-container>

@@ -17,7 +17,6 @@ export class AdminApiService {
 
   login(email: string, password: string): Observable<IAdminLoginInDto> {
     return this.http.post<ICommonResponseDto<IAdminLoginOutDto>>(`${ENV.api}/auth/login`, { email, password }).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: userData }) => ({
         accessToken: userData.access_token,
         tokenType: userData.token_type,
@@ -29,7 +28,6 @@ export class AdminApiService {
 
   getAuthAdmin(): Observable<IAdminInDto> {
     return this.http.get<ICommonResponseDto<IAdminOutDto>>(`${ENV.api}/auth/me`).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: user }) => this.adminOutToInDto(user))
     )
   }
@@ -37,7 +35,6 @@ export class AdminApiService {
   getList(apiQuery: IRequestApiDto): Observable<IResponseApiInDto<IAdminInDto[]> | any> {
     const params = apiQueryToParams(apiQuery, EFilterAdminInOut)
     return this.http.get<ICommonResponseDto<IResponseApiOutDto<IAdminOutDto[]>>>(`${ENV.api}/users`, { params }).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: res }) => ({
         ...operationOutToInDto(res),
         sort: apiQuery.sort,
@@ -48,7 +45,6 @@ export class AdminApiService {
 
   getAdmin(id: number): Observable<IAdminInDto> {
     return this.http.get<ICommonResponseDto<IAdminOutDto>>(`${ENV.api}/users/${id}`).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: user }) => this.adminOutToInDto(user))
     )
   }
@@ -67,7 +63,6 @@ export class AdminApiService {
     }
 
     return this.http.put<ICommonResponseDto<IAdminOutDto>>(`${ENV.api}/users/${user.id}`, userOutDto).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: user }) => this.adminOutToInDto(user))
     )
   }
@@ -81,7 +76,6 @@ export class AdminApiService {
       subscribe: user.subscribe
     }
     return this.http.post<ICommonResponseDto<IAdminOutDto>>(`${ENV.api}/users`, userOutDto).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: user }) => this.adminOutToInDto(user))
     )
   }

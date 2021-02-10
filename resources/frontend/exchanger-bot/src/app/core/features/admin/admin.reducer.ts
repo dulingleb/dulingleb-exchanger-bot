@@ -1,5 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store'
 
+import { ICommonResponseDto } from '@core/models'
+
 import { IAdminOperationsCountInfoInDto, IAdminOperationsSumInfoInDto, IAdminUsersCountInfoInDto } from './admin.info.model'
 import { ADMIN_ACTIONS } from './admin.actions'
 import { IAdminInDto } from './admin.model'
@@ -17,7 +19,7 @@ export interface IAdminState {
     operationsWait?: number;
     subscribeLeft?: number;
     usersCountData?: IAdminUsersCountInfoInDto;
-    error?: Error | null;
+    error?: ICommonResponseDto<null> | null;
   };
 }
 

@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatIconModule } from '@angular/material/icon'
 import { TranslateModule } from '@ngx-translate/core'
 
+import { InputErrorModule } from '@ui/input-error'
 import { PageContentLayoutModule } from '@ui/page-content-layout'
 
 import { ProfileComponent, ProfileEditComponent } from './containers'
@@ -27,6 +28,7 @@ import { ProfileRoutingModule } from './profile-routing.module'
     ReactiveFormsModule,
 
     PageContentLayoutModule,
+    InputErrorModule,
 
     ProfileRoutingModule
   ],

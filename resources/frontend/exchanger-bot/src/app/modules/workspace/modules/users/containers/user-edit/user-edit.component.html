@@ -46,6 +46,7 @@
             <mat-form-field appearance="fill">
               <mat-label>{{ 'user.edit.input.discount' | translate }}</mat-label>
               <input formControlName="discount" type="number" min="0" max="100" step="0.5" matInput>
+              <mat-error><app-input-error name='discount' [errors]="errors"></app-input-error></mat-error>
             </mat-form-field>
           </div>
 
@@ -53,6 +54,7 @@
             <mat-form-field appearance="fill">
               <mat-label>{{ 'user.edit.input.comment' | translate }}</mat-label>
               <textarea formControlName="comment" matInput></textarea>
+              <mat-error><app-input-error name='comment' [errors]="errors"></app-input-error></mat-error>
             </mat-form-field>
           </div>
 
@@ -62,7 +64,7 @@
             </mat-slide-toggle>
           </div>
 
-          <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'user.edit.save' | translate }}</button>
+          <button mat-raised-button color="primary" [disabled]="form.invalid || inRequest">{{ 'user.edit.save' | translate }}</button>
 
         </form>
       </div>

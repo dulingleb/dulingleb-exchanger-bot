@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { map, mergeMap } from 'rxjs/operators'
-import { Observable, of, throwError } from 'rxjs'
+import { map } from 'rxjs/operators'
+import { Observable } from 'rxjs'
 
 import { ENV } from '@env/environment'
 import { apiQueryToParams, operationOutToInDto, telegramUserOutToInDto } from '@utils/index'
@@ -17,7 +17,6 @@ export class OperationApiService {
   getList(apiQuery: IRequestApiDto): Observable<IResponseApiInDto<IOperationInDto[]>> {
     const params = apiQueryToParams(apiQuery, EFilterOperationInOut)
     return this.http.get<ICommonResponseDto<IResponseApiOutDto<IOperationOutDto[]>>>(`${ENV.api}/operations`, { params }).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: res }) => ({
         ...operationOutToInDto(res),
         sort: apiQuery.sort,
@@ -28,35 +27,30 @@ export class OperationApiService {
 
   getOperation(id: number): Observable<IOperationInDto> {
     return this.http.get<ICommonResponseDto<IOperationOutDto>>(`${ENV.api}/operations/${id}`).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: operation }) => this.operationOutToInDto(operation))
     )
   }
 
   addComment(id: number, comment: string): Observable<ICommonResponseDto<IOperationInDto>> {
     return this.http.put<ICommonResponseDto<IOperationOutDto>>(`${ENV.api}/operations/${id}/add-comment`, { comment }).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(res => ({ ...res, data: this.operationOutToInDto(res.data) }))
     )
   }
 
   setSuccess(id: number): Observable<ICommonResponseDto<any>> {
     return this.http.put<ICommonResponseDto<any>>(`${ENV.api}/operations/${id}/success`, {}).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(res => ({ ...res }))
     )
   }
 
   setCancel(id: number): Observable<ICommonResponseDto<any>> {
     return this.http.put<ICommonResponseDto<any>>(`${ENV.api}/operations/${id}/cancel`, {}).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(res => ({ ...res }))
     )
   }
 
   setToOperator(id: number): Observable<ICommonResponseDto<any>> {
     return this.http.post<ICommonResponseDto<any>>(`${ENV.api}/operations/${id}/direct-to-operator`, {}).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(res => ({ ...res }))
     )
   }

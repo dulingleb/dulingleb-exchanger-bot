@@ -26,7 +26,6 @@ export class TelegramUserApiService {
   getList(apiQuery: IRequestApiDto): Observable<IResponseApiInDto<ITelegramUserInDto[]>> {
     const params = apiQueryToParams(apiQuery, EFilterTelegramUserInOut)
     return this.http.get<ICommonResponseDto<IResponseApiOutDto<ITelegramUserOutDto[]>>>(`${ENV.api}/telegram-users`, { params }).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: res }) => ({
         ...operationOutToInDto(res),
         sort: apiQuery.sort,
@@ -37,7 +36,6 @@ export class TelegramUserApiService {
 
   getUser(id: number): Observable<ITelegramUserInDto> {
     return this.http.get<ICommonResponseDto<ITelegramUserOutDto>>(`${ENV.api}/telegram-users/${id}`).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data: user }) => telegramUserOutToInDto(user))
     )
   }

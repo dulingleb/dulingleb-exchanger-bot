@@ -9,6 +9,7 @@
         <mat-form-field appearance="fill">
           <mat-label>{{ 'settings.messages.edit.input.title' | translate }}</mat-label>
           <input formControlName="title" type="text" matInput>
+          <mat-error><app-input-error name='title' [errors]="errors"></app-input-error></mat-error>
         </mat-form-field>
       </div>
 
@@ -16,6 +17,7 @@
         <mat-form-field appearance="fill">
           <mat-label>{{ 'settings.messages.edit.input.slug' | translate }}</mat-label>
           <input formControlName="slug" type="text" matInput>
+          <mat-error><app-input-error name='slug' [errors]="errors"></app-input-error></mat-error>
         </mat-form-field>
       </div>
 
@@ -23,6 +25,7 @@
         <mat-form-field appearance="fill">
           <mat-label>{{ 'settings.messages.edit.input.description' | translate }}</mat-label>
           <textarea formControlName="description" matInput></textarea>
+          <mat-error><app-input-error name='description' [errors]="errors"></app-input-error></mat-error>
         </mat-form-field>
       </div>
 
@@ -30,7 +33,7 @@
         <app-format-editor formControlName="text" [label]="'settings.messages.edit.input.text' | translate" [height]=300></app-format-editor>
       </div>
 
-      <button mat-raised-button color="primary" [disabled]="form.invalid">{{ 'settings.messages.edit.saveBtn' | translate }}</button>
+      <button mat-raised-button color="primary" [disabled]="form.invalid || inRequest">{{ 'settings.messages.edit.saveBtn' | translate }}</button>
 
     </form>
   </ng-container>
