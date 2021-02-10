@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 
-import { ICommonKeysSetting } from '../../constants'
+import { ISettingKeysInDto } from '@core/models'
 
 @Component({
   selector: 'app-settings-common-keys',
@@ -10,10 +10,10 @@ import { ICommonKeysSetting } from '../../constants'
 export class SettingsCommonKeysComponent {
 
   @Input() inRequest: boolean
-  @Input() set keysSetting(settings: ICommonKeysSetting) {
+  @Input() set keysSetting(settings: ISettingKeysInDto) {
     this.initFormFields(settings)
   }
-  @Output() changeValue = new EventEmitter<ICommonKeysSetting>()
+  @Output() changeValue = new EventEmitter<ISettingKeysInDto>()
 
   form: FormGroup
 
@@ -30,7 +30,7 @@ export class SettingsCommonKeysComponent {
     this.changeValue.emit({ coinbaseKey, coinbaseSecret })
   }
 
-  private initFormFields(settings: ICommonKeysSetting): void {
+  private initFormFields(settings: ISettingKeysInDto): void {
     this.form.patchValue({
       coinbaseKey: settings?.coinbaseKey,
       coinbaseSecret: settings?.coinbaseSecret,

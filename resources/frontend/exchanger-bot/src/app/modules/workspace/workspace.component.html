@@ -3,8 +3,9 @@
   <header class="workspace-header">
     <app-status-info-block-statistic
                                     class="status-info-block"
-                                    [status]="123"
-                                    (changeStatus)="adminFacade.changeStatus()"
+                                    [status]="status"
+                                    [inRequest]="inRequest"
+                                    (changeStatus)="changeStatus()"
     ></app-status-info-block-statistic>
     <app-status-info-block-users class="status-info-block" [countUsersInfo]="adminFacade.usersCountData$ | async"></app-status-info-block-users>
     <app-status-info-block-operations-count class="status-info-block" [countOperationsInfo]="adminFacade.operationCountData$ | async"></app-status-info-block-operations-count>

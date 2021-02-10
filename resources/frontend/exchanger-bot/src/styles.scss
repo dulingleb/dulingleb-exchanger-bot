@@ -75,9 +75,11 @@ a, button {
   background: var(--primary-color);
 }
 
-.info-table-block {
-  max-width: 1000px;
+.info-block, .info-table-block {
+  max-width: var(--info-block-width);
+}
 
+.info-table-block {
   .item {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -86,6 +88,11 @@ a, button {
 
     &:first-child {
       border-top: 1px solid var(--border-color);
+    }
+
+    &.item-form-group {
+      display: block;
+      border-bottom: none;
     }
   }
 }

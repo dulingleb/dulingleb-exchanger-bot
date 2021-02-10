@@ -17,6 +17,8 @@ import {
   ISettingLimitOutDto,
   ISettingMessageDto,
   ISettingOutDto,
+  ISettingRefInDto,
+  ISettingRefOutDto,
   ISettingRequisiteDto,
   ISettingTelegramInDto,
   ISettingTelegramOutDto
@@ -45,6 +47,25 @@ export class SettingApiService {
       max_exchange: settingLimitInDto.maxExchange
     }
     return this.http.patch<ICommonResponseDto<ISettingOutDto>>(`${ENV.api}/settings/set/limits`, data).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data }) => this.settingOutToInDto(data))
+    )
+  }
+
+  saveRef(settingRefInDto: ISettingRefInDto): Observable<ISettingInDto> {
+    const data: ISettingRefOutDto = {
+      ref_percent: settingRefInDto.refPercent,
+      ref_users_count: settingRefInDto.refUsersCount
+    }
+    return this.http.patch<ICommonResponseDto<ISettingOutDto>>(`${ENV.api}/settings/set/ref`, data).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data }) => this.settingOutToInDto(data))
+    )
+  }
+
+  saveMode(demo: boolean): Observable<ISettingInDto> {
+    const data = { demo }
+    return this.http.patch<ICommonResponseDto<ISettingOutDto>>(`${ENV.api}/settings/set/demo`, data).pipe(
       mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
       map(({ data }) => this.settingOutToInDto(data))
     )
@@ -193,6 +214,20 @@ export class SettingApiService {
     )
   }
 
+  getStatus(): Observable<boolean> {
+    return this.http.get<ICommonResponseDto<boolean>>(`${ENV.api}/settings/status`).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data: status }) => !!status)
+    )
+  }
+
+  changeStatus(): Observable<boolean> {
+    return this.http.post<ICommonResponseDto<boolean>>(`${ENV.api}/settings/status`, {}).pipe(
+      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message))),
+      map(({ data: status }) => !!status)
+    )
+  }
+
   private settingOutToInDto(setting: ISettingOutDto): ISettingInDto {
     return {
       id: setting.id,
@@ -205,6 +240,9 @@ export class SettingApiService {
       status: setting.status,
       telegramToken: setting.telegram_token,
       userId: setting.user_id,
+      demo: setting.demo,
+      refUsersCount: setting.ref_users_count,
+      refPercent: setting.ref_percent,
       createdAt: new Date(setting.created_at),
       updatedAt: new Date(setting.updated_at),
       deletedAt: new Date(setting.deleted_at)

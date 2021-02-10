@@ -23,7 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
           return next.handle(req).pipe(
             catchError(error => {
               const handleError = this.handleError(error)
-              if (handleError.statusCode === 422) {
+              if (handleError.statusCode === 401) {
                 this.adminFacade.logout()
               }
               return throwError(handleError)

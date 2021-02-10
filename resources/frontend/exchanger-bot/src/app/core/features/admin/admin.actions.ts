@@ -44,10 +44,6 @@ const saveAdmin = createAction(
   props<{ admin: IAdminInDto }>()
 )
 
-const changeStatus = createAction(
-  '[Admin exchanger bot] Change status'
-)
-
 const redirectAfterAuth = createAction(
   '[Admin exchanger bot] Redirect after auth'
 )
@@ -63,6 +59,11 @@ const getOperationsCount = createAction(
 const saveOperationsCount = createAction(
   '[Admin exchanger bot] Save operation count',
   props<{ operationsData: IAdminOperationsCountInfoInDto }>()
+)
+
+const saveSubscribeLeft = createAction(
+  '[Admin exchanger bot] Save subscribe left',
+  props<{ subscribeLeft: number }>()
 )
 
 const getOperationsSum = createAction(
@@ -108,12 +109,12 @@ export const ADMIN_ACTIONS = {
 
   saveToken,
   saveAdmin,
-  changeStatus,
   redirectAfterAuth,
   redirectAfterLogout,
 
   getOperationsCount,
   saveOperationsCount,
+  saveSubscribeLeft,
   getOperationsSum,
   saveOperationsSum,
   getOperationsWait,

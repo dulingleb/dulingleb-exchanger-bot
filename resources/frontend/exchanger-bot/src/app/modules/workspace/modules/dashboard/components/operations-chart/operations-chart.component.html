@@ -1,0 +1,35 @@
+<app-page-content class="page-content">
+  <ng-container header>
+    {{ 'dashboard.operations.title' | translate }}
+  </ng-container>
+  <ng-container actions>
+    <button mat-button class="btn" [color]="type === EChartsType.COUNT ? 'accent' : ''" (click)="changeType.emit(EChartsType.COUNT)" [disabled]="inRequest">
+      {{ 'dashboard.countBtn' | translate }}
+    </button>
+    <button mat-button class="btn" [color]="type === EChartsType.SUM ? 'accent' : ''" (click)="changeType.emit(EChartsType.SUM)" [disabled]="inRequest">
+      {{ 'dashboard.sumBtn' | translate }}
+    </button>
+
+    |
+
+    <button mat-button class="btn" [color]="period === EChartsPeriod.WEEK ? 'accent' : ''" (click)="changePeriod.emit(EChartsPeriod.WEEK)" [disabled]="inRequest">
+      {{ 'dashboard.weekBtn' | translate }}
+    </button>
+    <button mat-button class="btn" [color]="period === EChartsPeriod.MONTH ? 'accent' : ''" (click)="changePeriod.emit(EChartsPeriod.MONTH)" [disabled]="inRequest">
+      {{ 'dashboard.monthBtn' | translate }}
+    </button>
+  </ng-container>
+  <ng-container content>
+    <div class="line-chart" *ngIf="chartData$ | async">
+      <canvas baseChart
+        [datasets]="chartData"
+        [labels]="chartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins">
+    </canvas>
+    </div>
+  </ng-container>
+</app-page-content>

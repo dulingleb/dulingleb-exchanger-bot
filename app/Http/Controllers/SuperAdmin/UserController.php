@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use App\Models\Exchanger;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -28,6 +29,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|min:2|max:198|string',
             'email' => 'required|email|unique:users',
+            'subscribe' => 'nullable|date',
             'password' => 'required|min:4|max:32',
             'c_password' => 'required|same:password'
         ]);
@@ -35,7 +37,8 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'subscribe' => $request->subscribe ? Carbon::make($request->subscribe)->format('Y-m-d H:i:s') : null
         ]);
 
         Exchanger::create([
@@ -43,10 +46,10 @@ class UserController extends Controller
             'status' => \App\Models\Exchanger::STATUS_CLOSED,
             'course' => 40000,
             'min_exchange' => '0.001',
-            'max_exchange' => '0.1',
+            'max_exchange' => '0.1'
         ]);
 
-        return $this->response(null, 'Пользователь успешно добавлен');
+        return $this->response($user, 'Пользователь успешно добавлен');
     }
 
     public function show(User $user): \Illuminate\Http\JsonResponse
@@ -59,6 +62,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|min:2|max:198|string',
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'subscribe' => 'nullable|date',
             'password' => 'nullable|min:4|max:32',
             'c_password' => 'same:password'
         ]);
@@ -68,9 +72,12 @@ class UserController extends Controller
         if ($request->c_password) {
             $user->password = bcrypt($request->c_password);
         }
+        if ($request->subscribe) {
+            $user->subscribe = Carbon::make($request->subscribe)->format('Y-m-d H:i:s');
+        }
         $user->save();
 
-        return $this->response(null, 'Данные успешно сохранены');
+        return $this->response($user, 'Данные успешно сохранены');
     }
 
     public function destroy(User $user): \Illuminate\Http\JsonResponse
@@ -81,6 +88,6 @@ class UserController extends Controller
 
         $user->delete();
 
-        return $this->response(null, 'Пользователь успешно удален');
+        return $this->response($user, 'Пользователь успешно удален');
     }
 }

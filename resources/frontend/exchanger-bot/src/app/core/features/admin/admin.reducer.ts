@@ -15,6 +15,7 @@ export interface IAdminState {
     operationsCountData?: IAdminOperationsCountInfoInDto;
     operationsSumData?: IAdminOperationsSumInfoInDto;
     operationsWait?: number;
+    subscribeLeft?: number;
     usersCountData?: IAdminUsersCountInfoInDto;
     error?: Error | null;
   };
@@ -58,6 +59,7 @@ export const adminState = createReducer(
   on(ADMIN_ACTIONS.saveOperationsSum, (state, { operationsData }) => ({ ...state, inRequest: false, data: { ...state.data, operationsSumData: operationsData } })),
   on(ADMIN_ACTIONS.saveOperationsWait, (state, { operationsWait }) => ({ ...state, inRequest: false, data: { ...state.data, operationsWait } })),
   on(ADMIN_ACTIONS.saveUsersCount, (state, { usersData }) => ({ ...state, inRequest: false, data: { ...state.data, usersCountData: usersData } })),
+  on(ADMIN_ACTIONS.saveSubscribeLeft, (state, { subscribeLeft }) => ({ ...state, data: { ...state.data, subscribeLeft } })),
 
   on(ADMIN_ACTIONS.infoError, (state, { error }) => ({
     ...state,

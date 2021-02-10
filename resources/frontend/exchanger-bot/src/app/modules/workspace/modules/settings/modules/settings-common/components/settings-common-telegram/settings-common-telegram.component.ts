@@ -2,8 +2,7 @@ import { Component, EventEmitter, Inject, Input, Output } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
 
 import { IAdminFacade, ADMIN_FACADE } from '@core/features'
-
-import { ICommonTelegramSetting } from '../../constants'
+import { ISettingTelegramInDto } from '@core/models'
 
 @Component({
   selector: 'app-settings-common-telegram',
@@ -12,10 +11,10 @@ import { ICommonTelegramSetting } from '../../constants'
 export class SettingsCommonTelegramComponent {
 
   @Input() inRequest: boolean
-  @Input() set telegramSettings(settings: ICommonTelegramSetting) {
+  @Input() set telegramSettings(settings: ISettingTelegramInDto) {
     this.initFormFields(settings)
   }
-  @Output() changeValue = new EventEmitter<ICommonTelegramSetting>()
+  @Output() changeValue = new EventEmitter<ISettingTelegramInDto>()
 
   form: FormGroup
 
@@ -32,8 +31,7 @@ export class SettingsCommonTelegramComponent {
     this.changeValue.emit({ telegramToken, username })
   }
 
-
-  private initFormFields(settings: ICommonTelegramSetting): void {
+  private initFormFields(settings: ISettingTelegramInDto): void {
     this.form.patchValue({
       telegramToken: settings?.telegramToken,
       username: settings?.username,

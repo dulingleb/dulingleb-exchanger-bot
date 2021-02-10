@@ -13,3 +13,8 @@ export const selectUiShowSideNav = createSelector(
   [selectUi],
   state => state.showSideNav
 )
+
+export const selectUiLanguage = createSelector(
+  [selectUi],
+  state => state.language
+)

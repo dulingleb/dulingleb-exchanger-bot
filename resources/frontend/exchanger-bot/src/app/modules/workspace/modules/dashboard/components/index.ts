@@ -1,2 +1,2 @@
-export * from './line-chart/line-chart.component'
-export * from './bar-chart/bar-chart.component'
+export * from './operations-chart/operations-chart.component'
+export * from './users-chart/users-chart.component'

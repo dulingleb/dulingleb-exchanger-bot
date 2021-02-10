@@ -53,3 +53,8 @@ export const selectUsersCountData = createSelector(
   [selectAdminData],
   state => state.usersCountData
 )
+
+export const selectSubscribeLeft = createSelector(
+  [selectAdminData],
+  state => state.subscribeLeft
+)
