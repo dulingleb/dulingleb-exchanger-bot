@@ -65,7 +65,7 @@ export class OperationApiService {
       btcAddress: operation.btc_address,
       comment: operation.comment,
       exchangerId: operation.exchanger_id,
-      files: operation.files,
+      files: operation.files || [],
       linkTransaction: operation.link_transaction,
       status: operation.status,
       messageId: operation.message_id,

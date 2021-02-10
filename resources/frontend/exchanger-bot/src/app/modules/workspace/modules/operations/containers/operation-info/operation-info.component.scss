@@ -1,0 +1,24 @@
+.info-wrapper {
+  --info-block-width: auto;
+
+  display: flex;
+
+  .info, .file-wrapper {
+    flex: 1;
+    min-width: 50%;
+    width: 50%;
+  }
+
+  .file-wrapper {
+    padding-left: 1.5rem;
+  }
+
+  .img-wrapper {
+    cursor: pointer;
+
+    .img {
+      max-height: 300px;
+      object-fit: cover;
+    }
+  }
+}

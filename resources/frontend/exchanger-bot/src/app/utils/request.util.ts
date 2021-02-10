@@ -48,6 +48,10 @@ export const telegramUserOutToInDto = (user: ITelegramUserOutDto): ITelegramUser
     telegramUserId: user.telegram_user_id,
     operationsCount: user.operations_count,
     operationsSum: user.operations_sum,
+    refCount: user.ref_count,
+    refActiveCount: user.ref_active_count,
+    refOperationsCount: user.ref_operations_count,
+    refOperationsSum: user.ref_operations_sum,
     discount: +user.discount,
     comment: user.comment,
     ban: !!user.ban

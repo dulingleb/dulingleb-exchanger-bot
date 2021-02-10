@@ -6,45 +6,58 @@
     <form [formGroup]="form" (ngSubmit)="addComment()" class="form">
       <app-loading-spinner *ngIf="inRequest"></app-loading-spinner>
 
-      <section class="info-table-block">
-        <div class="item">
-          <p class="title">{{ 'operation.info.amount' | translate }}</p>
-          <p class="value">{{ operation?.amount }}</p>
-        </div>
-        <div class="item">
-          <p class="title">{{ 'operation.info.price' | translate }}</p>
-          <p class="value">{{ operation?.price }}</p>
-        </div>
-        <div class="item">
-          <p class="title">{{ 'operation.info.user' | translate }}</p>
-          <p class="value"><a [routerLink]="['/operations']" [queryParams]="{ user: operation?.telegramUserId }">{{ operation?.telegramUser | userName }}</a></p>
-        </div>
-        <div class="item">
-          <p class="title">{{ 'operation.info.detail' | translate }}</p>
-          <p class="value"><a [routerLink]="['/settings/requisites', operation?.bankDetailId, 'info']">{{ operation?.bankDetails?.title }}</a></p>
-        </div>
-        <div class="item">
-          <p class="title">{{ 'operation.info.btcAddress' | translate }}</p>
-          <p class="value">{{ operation?.btcAddress }}</p>
-        </div>
-        <div class="item">
-          <p class="title">{{ 'operation.info.date' | translate }}</p>
-          <p class="value">{{ operation?.createdAt | date: 'd.MM.yyyy hh:mm' }}</p>
-        </div>
-        <div class="item">
-          <p class="title">{{ 'operation.info.status' | translate }}</p>
-          <p class="value" [ngClass]="OPERATION_CLASS[operation?.status]">{{ 'operation.status.' + operation?.status | translate }}</p>
-        </div>
-        <div class="item item-form-group">
-          <div class="form-group">
-            <mat-form-field appearance="fill">
-              <mat-label>{{ 'operation.info.comment' | translate }}</mat-label>
-              <textarea formControlName="comment" matInput></textarea>
-              <mat-error><app-input-error name='comment' [errors]="errors"></app-input-error></mat-error>
-            </mat-form-field>
+      <div class="info-wrapper">
+        <section class="info info-table-block">
+          <div class="item">
+            <p class="title">{{ 'operation.info.amount' | translate }}</p>
+            <p class="value">{{ operation?.amount }}</p>
           </div>
-        </div>
-      </section>
+          <div class="item">
+            <p class="title">{{ 'operation.info.price' | translate }}</p>
+            <p class="value">{{ operation?.price }}</p>
+          </div>
+          <div class="item">
+            <p class="title">{{ 'operation.info.user' | translate }}</p>
+            <p class="value"><a [routerLink]="['/operations']" [queryParams]="{ user: operation?.telegramUserId }">{{ operation?.telegramUser | userName }}</a></p>
+          </div>
+          <div class="item">
+            <p class="title">{{ 'operation.info.detail' | translate }}</p>
+            <p class="value"><a [routerLink]="['/settings/requisites', operation?.bankDetailId, 'info']">{{ operation?.bankDetails?.title }}</a></p>
+          </div>
+          <div class="item">
+            <p class="title">{{ 'operation.info.btcAddress' | translate }}</p>
+            <p class="value">{{ operation?.btcAddress }}</p>
+          </div>
+          <div class="item">
+            <p class="title">{{ 'operation.info.date' | translate }}</p>
+            <p class="value">{{ operation?.createdAt | date: 'd.MM.yyyy hh:mm' }}</p>
+          </div>
+          <div class="item">
+            <p class="title">{{ 'operation.info.status' | translate }}</p>
+            <p class="value" [ngClass]="OPERATION_CLASS[operation?.status]">{{ 'operation.status.' + operation?.status | translate }}</p>
+          </div>
+          <div class="item item-form-group">
+            <div class="form-group">
+              <mat-form-field appearance="fill">
+                <mat-label>{{ 'operation.info.comment' | translate }}</mat-label>
+                <textarea formControlName="comment" matInput></textarea>
+                <mat-error><app-input-error name='comment' [errors]="errors"></app-input-error></mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </section>
+
+        <section class="file-wrapper">
+          <owl-carousel-o [options]="customOptions">
+            <ng-template carouselSlide *ngFor="let img of operation?.files">
+              <div class="img-wrapper" (click)="imageModalService.openDialog(img)">
+                <img class="img" [src]="img">
+              </div>
+            </ng-template>
+          </owl-carousel-o>
+        </section>
+
+      </div>
 
       <div class="form-group btn-group">
         <button mat-raised-button color="primary" [disabled]="form.invalid || inRequest">{{ 'operation.info.saveBtn' | translate }}</button>

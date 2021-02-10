@@ -7072,6 +7072,13 @@ ng2-charts@^2.4.2:
     lodash-es "^4.17.15"
     tslib "^2.0.0"
 
+ngx-owl-carousel-o@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-owl-carousel-o/-/ngx-owl-carousel-o-5.0.0.tgz#6419f997c261840089b73c456872ebe5b81e37cc"
+  integrity sha512-wMfGEMu/cI61jAJQfSS82fMxGfmvSgCdoQ2bZfHZlHwdD1poOpzYkzPu/yTPzdw84gG2kK+sXSawm0X4Mproxg==
+  dependencies:
+    tslib "^2.0.0"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
