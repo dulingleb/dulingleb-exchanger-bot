@@ -210,9 +210,10 @@
       "name": "Имя Фамилия",
       "operationsCount": "Подтвержденных сделок",
       "operationsSum": "Сделок на сумму",
-      "ref": "Рефералов",
-      "operationsRef": "Сделок рефов",
-      "operationsREfSum": "Сделок рефов на сумму"
+      "refCount": "Рефералов",
+      "refActiveCount": "Активных рефералов",
+      "refOperationsCount": "Сделок рефов",
+      "refOperationsSum": "Сделок рефов на сумму"
     }
   },
   "operations": {
