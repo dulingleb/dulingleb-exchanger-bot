@@ -6,7 +6,7 @@ import { Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
 import { ICommonResponseDto } from '@core/models'
-import { IUiFacade, IAdminFacade, IAdminInDto, UI_FACADE, ADMIN_FACADE, EAdminRoleDto } from '@core/features'
+import { IUiFacade, IAdminFacade, IAdminInDto, UI_FACADE, ADMIN_FACADE, EAdminRoleDto, IAdminOutDto } from '@core/features'
 
 @Component({
   selector: 'app-profile-edit',
@@ -96,9 +96,14 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      () => this.router.navigateByUrl('/profile'),
+      (res) => this.showSuccess(res),
       (err) => this.showError(err)
     )
+  }
+
+  private showSuccess(res: ICommonResponseDto<IAdminOutDto>): void {
+    this.uiFacade.addInfoNotification(res.message)
+    this.router.navigateByUrl('/profile')
   }
 
   private showError(err: ICommonResponseDto<null>): void {

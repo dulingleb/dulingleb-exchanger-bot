@@ -5,6 +5,7 @@
                         [initFilterValues]="initFilterValues"
                         [paginator]="paginator"
                         (getList)="getOperationsList($event)"
+                        (eventRow)="eventOperation($event)"
 >
   <ng-container table-title>
     {{ 'operations.tableHeader.title' | translate }}

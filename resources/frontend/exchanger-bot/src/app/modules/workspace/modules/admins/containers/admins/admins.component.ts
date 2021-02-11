@@ -1,5 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { filter, finalize, mergeMap, takeUntil, tap } from 'rxjs/operators'
+import { Router } from '@angular/router'
 import { Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
@@ -28,6 +29,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
   private requestApiQuery: IRequestApiDto
 
   constructor(
+    private router: Router,
     @Inject(ADMIN_FACADE) public adminFacade: IAdminFacade,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
     private confirmModalService: ConfirmModalService,
@@ -53,15 +55,16 @@ export class AdminsComponent implements OnInit, OnDestroy {
           pageSize: res.pageSize
         }
       },
-      (err) => {
-        // this.adminFacade.logout()
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.uiFacade.addErrorNotification(err.message)
     )
   }
 
   setEventData(eventData: ITableActionEvent): void {
     if (eventData.event === ETableColumnActionEventType.DELETE) { this.deleteUser(eventData.data) }
+  }
+
+  eventAdmin(admin: IAdminInDto): void {
+    this.router.navigate(['admins', admin.id, 'edit'])
   }
 
   ngOnDestroy(): void {
@@ -89,9 +92,7 @@ export class AdminsComponent implements OnInit, OnDestroy {
         this.users = this.users.filter(u => u.id !== user.id)
         this.getAdminList()
       },
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.uiFacade.addErrorNotification(err.message)
     )
   }
 

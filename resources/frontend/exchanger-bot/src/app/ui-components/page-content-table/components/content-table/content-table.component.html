@@ -40,7 +40,7 @@
           </ng-container>
         </button>
 
-        <button mat-icon-button *ngIf="tableColumn.actionData.actionType === ETableColumnActionType.EVENT" (click)="setEvent(tableColumn.actionData.eventType, row)" class="table-action">
+        <button mat-icon-button *ngIf="tableColumn.actionData.actionType === ETableColumnActionType.EVENT" (click)="setEvent($event, tableColumn.actionData.eventType, row)" class="table-action">
           <ng-container *ngIf="tableColumn.actionData.icon">
             <mat-icon>{{ tableColumn.actionData.icon }}</mat-icon>
           </ng-container>
@@ -57,7 +57,7 @@
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="columnNames"></mat-header-row>
-  <mat-row *matRowDef="let row; let even = even; columns: columnNames" [class.accent]="even">
+  <mat-row *matRowDef="let row; let even = even; columns: columnNames" [class.accent]="even" (click)="eventRow.emit(row)">
   </mat-row>
 </mat-table>
 

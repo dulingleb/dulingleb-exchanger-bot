@@ -5,6 +5,7 @@
                         [paginator]="paginator"
                         (getList)="getAdminList($event)"
                         (eventData)="setEventData($event)"
+                        (eventRow)="eventAdmin($event)"
 >
   <ng-container table-title>
     {{ 'admins.tableHeader.title' | translate }}

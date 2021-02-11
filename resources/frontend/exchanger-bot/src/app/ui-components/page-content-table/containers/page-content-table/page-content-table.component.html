@@ -28,6 +28,7 @@
             [currentUserRole]="(adminFacade.admin$ | async)?.role"
             [currentUserId]="(adminFacade.admin$ | async)?.id"
             (eventData)="eventData.emit($event)"
+            (eventRow)="eventRow.emit($event)"
             (sortData)="sortData($event)"
       ></app-content-table>
     </ng-container>

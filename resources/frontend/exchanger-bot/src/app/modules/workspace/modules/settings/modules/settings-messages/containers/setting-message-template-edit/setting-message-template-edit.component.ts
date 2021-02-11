@@ -85,10 +85,7 @@ export class SettingMessageTemplateEditComponent implements OnInit, OnDestroy {
   private addMessageTemplate(message: ISettingMessageDto): void {
     this.inRequest = true
     this.settingApiService.addMessageTemplate(message).subscribe(
-      (res) => {
-        this.router.navigateByUrl('/settings/messages')
-        this.uiFacade.addInfoNotification(res.message)
-      },
+      (res) => this.showSuccess(res),
       (err) => this.showError(err)
     )
   }
@@ -96,12 +93,14 @@ export class SettingMessageTemplateEditComponent implements OnInit, OnDestroy {
   private updateMessageTemplate(message: ISettingMessageDto): void {
     this.inRequest = true
     this.settingApiService.updateMessageTemplate(message).subscribe(
-      (res) => {
-        this.router.navigateByUrl('/settings/messages')
-        this.uiFacade.addInfoNotification(res.message)
-      },
+      (res) => this.showSuccess(res),
       (err) => this.showError(err)
     )
+  }
+
+  private showSuccess(res: ICommonResponseDto<ISettingMessageDto>): void {
+    this.router.navigateByUrl('/settings/messages')
+    this.uiFacade.addInfoNotification(res.message)
   }
 
   private showError(err: ICommonResponseDto<null>): void {

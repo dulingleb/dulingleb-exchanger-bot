@@ -5,6 +5,7 @@ export interface ITelegramUserInDto {
   lastName: string;
   exchangerId: number;
   telegramUserId: number;
+  role: ETelegramUserRole;
   operationsCount: number;
   operationsSum: number;
   refCount: number;
@@ -23,6 +24,7 @@ export interface ITelegramUserOutDto {
   last_name: string;
   exchanger_id: number;
   telegram_user_id: number;
+  role: ETelegramUserRole;
   operations_count: number;
   operations_sum: number;
   ref_count: number;
@@ -39,6 +41,11 @@ export interface ITelegramUserDataDto {
   discount?: number;
   comment?: string;
   ban?: boolean;
+}
+
+export enum ETelegramUserRole {
+  USER = 'user',
+  ADMIN = 'admin'
 }
 
 /* eslint-disable @typescript-eslint/naming-convention */

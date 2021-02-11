@@ -2,6 +2,9 @@
   <ng-container header>
     {{ 'user.edit.pageTitle' | translate }} <i>{{ user?.username }}</i>
   </ng-container>
+  <ng-container actions>
+    <button mat-raised-button color="warn" *ngIf="!existAdmin || isAdmin" [disabled]="inRequest" (click)="appointAdmin()">{{ (isAdmin ? 'user.edit.fireAdminBtn' : 'user.edit.appointAdminBtn') | translate }}</button>
+  </ng-container>
   <ng-container content>
 
     <div class="wrapper">
@@ -68,7 +71,7 @@
             </mat-slide-toggle>
           </div>
 
-          <button mat-raised-button color="primary" [disabled]="form.invalid || inRequest">{{ 'user.edit.save' | translate }}</button>
+          <button mat-raised-button color="primary" [disabled]="form.invalid || inRequest">{{ 'user.edit.saveBtn' | translate }}</button>
 
         </form>
       </div>

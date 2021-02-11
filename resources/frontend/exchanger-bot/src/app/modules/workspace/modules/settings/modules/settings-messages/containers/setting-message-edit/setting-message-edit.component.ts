@@ -57,10 +57,7 @@ export class SettingMessageEditComponent implements OnInit, OnDestroy {
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      (res) => {
-        this.router.navigateByUrl('/settings/messages')
-        this.uiFacade.addInfoNotification(res.message)
-      },
+      (res) => this.showSuccess(res),
       (err) => this.showError(err)
     )
   }
@@ -68,6 +65,11 @@ export class SettingMessageEditComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next()
     this.destroy$.complete()
+  }
+
+  private showSuccess(res: ICommonResponseDto<ISettingMessageDto>): void {
+    this.router.navigateByUrl('/settings/messages')
+    this.uiFacade.addInfoNotification(res.message)
   }
 
   private showError(err: ICommonResponseDto<null>): void {

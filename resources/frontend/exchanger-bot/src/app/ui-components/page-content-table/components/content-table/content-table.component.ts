@@ -22,6 +22,7 @@ import { getTableColumnNames } from '@utils/index'
 export class ContentTableComponent implements OnChanges {
 
   @Output() eventData = new EventEmitter<ITableActionEvent>()
+  @Output() eventRow = new EventEmitter<any>()
   @Output() sortData = new EventEmitter<ISortEvent>()
 
   @Input() items: []
@@ -43,8 +44,9 @@ export class ContentTableComponent implements OnChanges {
     }
   }
 
-  setEvent(event: ETableColumnActionEventType, data: any): void {
+  setEvent(e: Event, event: ETableColumnActionEventType, data: any): void {
     this.eventData.emit({ event, data })
+    e.stopPropagation()
   }
 
 }

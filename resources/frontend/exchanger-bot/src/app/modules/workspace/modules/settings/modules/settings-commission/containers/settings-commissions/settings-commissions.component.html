@@ -5,6 +5,7 @@
                         [paginator]="paginator"
                         (getList)="getSettingCommissionList($event)"
                         (eventData)="setEventData($event)"
+                        (eventRow)="eventCommission($event)"
 >
   <ng-container table-title>
     {{ 'settings.commissions.tableHeader.title' | translate }}

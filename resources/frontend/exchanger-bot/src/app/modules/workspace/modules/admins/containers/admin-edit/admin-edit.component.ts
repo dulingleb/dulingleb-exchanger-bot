@@ -5,7 +5,7 @@ import { finalize, mergeMap, takeUntil, withLatestFrom } from 'rxjs/operators'
 import { of, Subject } from 'rxjs'
 
 import { AdminApiService } from '@core/api'
-import { IUiFacade, IAdminInDto, UI_FACADE, EAdminRoleDto, ADMIN_FACADE, IAdminFacade } from '@core/features'
+import { IUiFacade, IAdminInDto, UI_FACADE, EAdminRoleDto, ADMIN_FACADE, IAdminFacade, IAdminOutDto } from '@core/features'
 import { ICommonResponseDto } from '@core/models'
 
 @Component({
@@ -70,9 +70,7 @@ export class AdminEditComponent implements OnInit, OnDestroy {
           this.form.get('email').enable()
         }
       },
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.showError(err),
     )
   }
 
@@ -103,7 +101,7 @@ export class AdminEditComponent implements OnInit, OnDestroy {
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      () => this.router.navigateByUrl('/admins'),
+      (res) => this.showSuccess(res),
       (err) => this.showError(err),
     )
   }
@@ -114,9 +112,14 @@ export class AdminEditComponent implements OnInit, OnDestroy {
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      () => this.router.navigateByUrl('/admins'),
+      (res) => this.showSuccess(res),
       (err) => this.showError(err),
     )
+  }
+
+  private showSuccess(res: ICommonResponseDto<IAdminOutDto>): void {
+    this.uiFacade.addInfoNotification(res.message)
+    this.router.navigateByUrl('/admins')
   }
 
   private showError(err: ICommonResponseDto<null>): void {

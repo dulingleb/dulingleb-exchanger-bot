@@ -49,7 +49,7 @@ export class AdminApiService {
     )
   }
 
-  updateAdmin(user: IAdminInDto): Observable<IAdminInDto> {
+  updateAdmin(user: IAdminInDto): Observable<ICommonResponseDto<IAdminOutDto>> {
     const userOutDto: IAdminOutDto = {
       id: user.id,
       name: user.name,
@@ -62,12 +62,10 @@ export class AdminApiService {
       userOutDto.c_password = user.cPassword
     }
 
-    return this.http.put<ICommonResponseDto<IAdminOutDto>>(`${ENV.api}/users/${user.id}`, userOutDto).pipe(
-      map(({ data: user }) => this.adminOutToInDto(user))
-    )
+    return this.http.put<ICommonResponseDto<IAdminOutDto>>(`${ENV.api}/users/${user.id}`, userOutDto)
   }
 
-  addAdmin(user: IAdminInDto): Observable<any> {
+  addAdmin(user: IAdminInDto): Observable<ICommonResponseDto<IAdminOutDto>> {
     const userOutDto: IAdminOutDto = {
       name: user.name,
       email: user.email,
@@ -75,15 +73,11 @@ export class AdminApiService {
       c_password: user.cPassword,
       subscribe: user.subscribe
     }
-    return this.http.post<ICommonResponseDto<IAdminOutDto>>(`${ENV.api}/users`, userOutDto).pipe(
-      map(({ data: user }) => this.adminOutToInDto(user))
-    )
+    return this.http.post<ICommonResponseDto<IAdminOutDto>>(`${ENV.api}/users`, userOutDto)
   }
 
-  deleteAdmin(id: number): Observable<any> {
-    return this.http.delete<ICommonResponseDto<null>>(`${ENV.api}/users/${id}`).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
-    )
+  deleteAdmin(id: number): Observable<ICommonResponseDto<null>> {
+    return this.http.delete<ICommonResponseDto<null>>(`${ENV.api}/users/${id}`)
   }
 
   private adminOutToInDto(user: IAdminOutDto): IAdminInDto {

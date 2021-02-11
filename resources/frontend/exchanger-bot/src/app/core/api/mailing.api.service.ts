@@ -12,8 +12,8 @@ export class MailingApiService {
 
   constructor(private http: HttpClient) {}
 
-  addMessage(message: string): Observable<ICommonResponseDto<any>> {
-    return this.http.post<ICommonResponseDto<any>>(`${ENV.api}/mailing`, { message })
+  addMessage(message: string): Observable<ICommonResponseDto<string>> {
+    return this.http.post<ICommonResponseDto<string>>(`${ENV.api}/mailing`, { message })
   }
 
 }

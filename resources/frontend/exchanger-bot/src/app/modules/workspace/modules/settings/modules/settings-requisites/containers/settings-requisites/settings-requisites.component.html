@@ -5,6 +5,7 @@
                         [paginator]="paginator"
                         (getList)="getSettingRequisiteList($event)"
                         (eventData)="setEventData($event)"
+                        (eventRow)="eventRequisite($event)"
 >
   <ng-container table-title>
     {{ 'settings.requisites.tableHeader.title' | translate }}

@@ -36,9 +36,7 @@ export class MailingComponent implements OnDestroy {
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      (res) => {
-        this.uiFacade.addInfoNotification(res.message)
-      },
+      (res) => this.showSuccess(res),
       (err) => this.showError(err)
     )
   }
@@ -46,6 +44,10 @@ export class MailingComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next()
     this.destroy$.complete()
+  }
+
+  private showSuccess(res: ICommonResponseDto<string>): void {
+    this.uiFacade.addInfoNotification(res.message)
   }
 
   private showError(err: ICommonResponseDto<null>): void {

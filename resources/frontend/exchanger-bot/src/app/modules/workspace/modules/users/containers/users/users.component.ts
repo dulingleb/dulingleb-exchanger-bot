@@ -1,5 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { finalize, takeUntil, withLatestFrom } from 'rxjs/operators'
+import { Router } from '@angular/router'
 import { Subject } from 'rxjs'
 
 import { IUiFacade, IAdminFacade, UI_FACADE, ADMIN_FACADE } from '@core/features'
@@ -26,9 +27,10 @@ export class UsersComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject()
 
   constructor(
+    private router: Router,
     @Inject(ADMIN_FACADE) public adminFacade: IAdminFacade,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
-    private adminApiService: TelegramUserApiService
+    private adminApiService: TelegramUserApiService,
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +54,10 @@ export class UsersComponent implements OnInit, OnDestroy {
       },
       (err) => this.uiFacade.addErrorNotification(err.message),
     )
+  }
+
+  eventUser(user: ITelegramUserInDto): void {
+    this.router.navigate(['users', user.id, 'edit'])
   }
 
   ngOnDestroy(): void {

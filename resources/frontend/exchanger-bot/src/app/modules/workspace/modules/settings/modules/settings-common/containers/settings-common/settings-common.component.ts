@@ -47,7 +47,7 @@ export class SettingsCommonComponent implements OnInit, OnDestroy {
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      (settings) => this.initFormFields(settings),
+      (res) => this.showSuccess(res),
       (err) => this.showError(err)
     )
   }
@@ -58,7 +58,7 @@ export class SettingsCommonComponent implements OnInit, OnDestroy {
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      (settings) => this.initFormFields(settings),
+      (res) => this.showSuccess(res),
       (err) => this.showError(err)
     )
   }
@@ -69,7 +69,7 @@ export class SettingsCommonComponent implements OnInit, OnDestroy {
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      (settings) => this.initFormFields(settings),
+      (res) => this.showSuccess(res),
       (err) => this.showError(err)
     )
   }
@@ -80,7 +80,7 @@ export class SettingsCommonComponent implements OnInit, OnDestroy {
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      (settings) => this.initFormFields(settings),
+      (res) => this.showSuccess(res),
       (err) => this.showError(err)
     )
   }
@@ -91,7 +91,7 @@ export class SettingsCommonComponent implements OnInit, OnDestroy {
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      (settings) => this.initFormFields(settings),
+      (res) => this.showSuccess(res),
       (err) => this.showError(err)
     )
   }
@@ -99,6 +99,17 @@ export class SettingsCommonComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next()
     this.destroy$.complete()
+  }
+
+  private showSuccess(res: ICommonResponseDto<ISettingInDto>): void {
+    this.uiFacade.addInfoNotification(res.message)
+    this.initFormFields(res.data)
+  }
+
+  private showError(err: ICommonResponseDto<null>): void {
+    this.inRequest = false
+    this.errors = err?.errors || {}
+    this.uiFacade.addErrorNotification(err.message)
   }
 
   private initFormFields(settings: ISettingInDto): void {
@@ -120,12 +131,6 @@ export class SettingsCommonComponent implements OnInit, OnDestroy {
       coinbaseKey: settings.coinbaseKey,
       coinbaseSecret: settings.coinbaseSecret,
     }
-  }
-
-  private showError(err: ICommonResponseDto<null>): void {
-    this.inRequest = false
-    this.errors = err?.errors || {}
-    this.uiFacade.addErrorNotification(err.message)
   }
 
 }

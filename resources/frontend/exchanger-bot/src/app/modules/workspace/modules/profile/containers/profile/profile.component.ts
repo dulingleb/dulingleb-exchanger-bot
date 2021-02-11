@@ -30,12 +30,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      (user) =>  {
-        this.user = user
-      },
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (user) =>  this.user = user,
+      (err) => this.uiFacade.addErrorNotification(err.message)
     )
   }
 

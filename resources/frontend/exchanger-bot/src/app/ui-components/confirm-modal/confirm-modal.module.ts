@@ -7,8 +7,6 @@ import { TranslateModule } from '@ngx-translate/core'
 import { ConfirmModalComponent } from './confirm-modal.component'
 import { ConfirmModalService } from './confirm-modal.service'
 
-
-
 @NgModule({
   declarations: [ConfirmModalComponent],
   imports: [
