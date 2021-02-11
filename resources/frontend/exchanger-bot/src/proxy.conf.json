@@ -1,6 +1,6 @@
 {
   "/api-dul": {
-    "target": "https://dul.bot",
+    "target": "http://dulingleb-bot.ru",
     "secure": false,
     "pathRewrite": {
       "^/api-dul": ""

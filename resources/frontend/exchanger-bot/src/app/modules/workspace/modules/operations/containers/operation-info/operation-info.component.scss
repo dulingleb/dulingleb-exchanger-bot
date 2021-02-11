@@ -14,11 +14,12 @@
   }
 
   .img-wrapper {
+    padding: 0 0.5rem;
     cursor: pointer;
 
     .img {
-      max-height: 300px;
-      object-fit: cover;
+      max-height: 450px;
+      object-fit: contain;
     }
   }
 }

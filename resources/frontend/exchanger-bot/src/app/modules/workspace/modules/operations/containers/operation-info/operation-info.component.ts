@@ -39,8 +39,11 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
       0: {
         items: 1
       },
-      1440: {
+      480: {
         items: 2
+      },
+      780: {
+        items: 3
       }
     },
     nav: true
