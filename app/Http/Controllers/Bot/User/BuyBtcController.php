@@ -18,11 +18,6 @@ class BuyBtcController extends BaseController
 {
     public function callbackMessage($update)
     {
-        if ($this->work() === false) {
-            return "ok";
-        }
-
-
         $task = $update->getMessage()->getText();
 
         switch ($task) {
@@ -81,6 +76,10 @@ class BuyBtcController extends BaseController
 
     public function buyBtc()
     {
+        if ($this->work() === false) {
+            return "ok";
+        }
+
         // Если есть открытая сделка
         if (Operation::where('exchanger_id', $this->chatData['exchanger']->id)->where('telegram_user_id', $this->chatData['chat_id'])
             ->whereIn('status', [Operation::STATUS_WAIT, Operation::STATUS_SENDING_IMAGE])->exists()) {
@@ -378,6 +377,16 @@ class BuyBtcController extends BaseController
     private function checkingOperation()
     {
         $operation = Operation::where('exchanger_id', $this->chatData['exchanger']->id)->where('telegram_user_id', $this->chatData['chat_id'])->where('status', Operation::STATUS_WAIT)->latest()->first();
+
+        if (!file_exists(public_path() . '/storage/images/' . $operation->id . '_0.jpg')) {
+            $this->telegram->sendMessage([
+                'chat_id' => $this->chatData['chat_id'],
+                'text' => 'Вы не отправили ниодного чека. Отправьте, поажулйста фото чека.',
+                'parse_mode' => 'html'
+            ]);
+            return;
+        }
+
         $operation->status = Operation::STATUS_CHECKING;
         $operation->save();
 
@@ -402,7 +411,6 @@ class BuyBtcController extends BaseController
 
         (new OperationController($this->telegram, $this->chatData))->infoOperation($operation);
     }
-
 
 
     private function cancel($operation = false)

@@ -21,6 +21,10 @@ use App\Http\Controllers\AngularController;
 // Route::any('/{any}', function () {
 //     return File::get(public_path() . '/exchanger-bot/index.html');
 // })->where('any', '^(?!api).*$');
+
+Route::get('change-names', [\App\Http\Controllers\OperationController::class, 'changeFilesName']);
+
+
 Route::post('telegram_callback/{token}', function () {
     app('App\Http\Controllers\TelegramController')->webhook();
 });

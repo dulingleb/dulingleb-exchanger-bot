@@ -7,6 +7,7 @@ use App\Models\TelegramUserSetting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Storage;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -140,6 +141,21 @@ class OperationController extends Controller
         $data = array_reverse($data);
 
         return $this->response($data);
+    }
+
+    public function changeFilesName()
+    {
+        $files = array_diff(scandir(public_path('storage/images')), array('.', '..'));
+        foreach ($files as $file) {
+            if (strpos($file, '_')) {
+                continue;
+            }
+            $vFile = explode('.', $file);
+            rename(public_path('storage/images') . '/' . $file, public_path('storage/images') . '/' . $vFile[0] . '_0' . '.jpg');
+        }
+
+        $files = array_diff(scandir(public_path('storage/images')), array('.', '..'));
+        dd($files);
     }
 
     private function checkStatusOperation(Operation $operation)

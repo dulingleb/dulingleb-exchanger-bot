@@ -16,4 +16,9 @@ class Exchanger extends Model
     {
         $query->addSelect(DB::raw('(SELECT COUNT(*) FROM operations WHERE operations.exchanger_id=exchangers.id AND operations.status=' . Operation::STATUS_WAIT . ') AS operations_wait'));
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
