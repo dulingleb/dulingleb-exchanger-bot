@@ -55,6 +55,7 @@ Route::group([
     Route::get('telegram-users/{userSetting}', ['as' => 'telegramUser.show', 'uses' => 'TelegramUserController@show']);
     Route::put('telegram-users/{userSetting}/update', ['as' => 'telegramUser.update', 'uses' => 'TelegramUserController@update']);
     Route::put('telegram-users/{userSetting}/set-as-admin', ['as' => 'telegramUser.setAsAdmin', 'uses' => 'TelegramUserController@setAdmin']);
+    Route::get('telegram-users/exists-admin', ['uses' => 'TelegramUserController@existsAdmin']);
 
     //рассылка
     Route::get('mailing', ['as' => 'mailing.index', 'uses' => 'MailingController@index']);

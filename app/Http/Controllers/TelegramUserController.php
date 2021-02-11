@@ -119,6 +119,16 @@ class TelegramUserController extends Controller
         return $this->response($userSetting, 'Пользователь успешно назначен админом');
     }
 
+    public function existsAdmin()
+    {
+        $status = false;
+        if (TelegramUserSetting::where('exchanger_id', auth()->user()->exchanger->id)->where('role', 'admin')->exists()) {
+            $status = true;
+        }
+
+        return $this->response($status);
+    }
+
     public function getUsersCount(): \Illuminate\Http\JsonResponse
     {
         $users = TelegramUserSetting::where('exchanger_id', \auth()->user()->exchanger->id);
