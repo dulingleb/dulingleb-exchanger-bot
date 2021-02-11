@@ -116,7 +116,7 @@ class TelegramUserController extends Controller
         $userSetting->role = $request->role == 'admin' ? 'admin' : 'user';
         $userSetting->save();
 
-        return $this->response($userSetting, 'Пользователь успешно назначен админом');
+        return $this->response($userSetting, 'Пользователь успешно изменен');
     }
 
     public function existsAdmin()

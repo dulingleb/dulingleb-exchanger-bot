@@ -169,11 +169,7 @@ class BuyBtcController extends BaseController
 
             $price = $amount / $this->chatData['exchanger']->course;
 
-            $commission = ExchangerCommission::where('exchanger_id', $this->chatData['exchanger']->id)->where('from', '<=', $price)->where('to', '>', $price)->first();
-
-            if ($commission) {
-                $price *= 1 - ($commission->percent / 100);
-            }
+            $price = $this->calculateBtcCommission($price);
 
             if ($discount = TelegramUserSetting::where('exchanger_id', $this->chatData['exchanger']->id)->where('telegram_user_id', $this->chatData['chat_id'])->first()->discount) {
                 $price += ($discount / 100) * $price;
@@ -196,14 +192,11 @@ class BuyBtcController extends BaseController
         } else {  // Считаем что пользователь ввел сумму в биткоинах
 
             $price = $amount * $this->chatData['exchanger']->course;
-            $commission = ExchangerCommission::where('exchanger_id', $this->chatData['exchanger']->id)->where('from', '<=', $amount)->where('to', '>', $amount)->first();
 
-            if ($commission) {
-                $price *= 1 + ($commission->percent / 100);
-            }
+            $price = $this->calculateRubCommission($price, $amount);
 
             if ($discount = TelegramUserSetting::where('exchanger_id', $this->chatData['exchanger']->id)->where('telegram_user_id', $this->chatData['chat_id'])->first()->discount) {
-                $price += ($discount / 100) * $price;
+                $price -= ($discount / 100) * $price;
             }
 
             $price = $this->mod5($price);
@@ -479,8 +472,9 @@ class BuyBtcController extends BaseController
         $data['minBtc'] = floatval($this->chatData['exchanger']->min_exchange);
         $data['maxBtc'] = floatval($this->chatData['exchanger']->max_exchange);
 
-        $minRub = $data['minBtc'] * $this->chatData['exchanger']->course;
-        $data['minRub'] = $this->mod5($minRub);
+        $data['minRub'] = $data['minBtc'] * $this->chatData['exchanger']->course;
+        $data['minRub'] = $this->calculateRubCommission($data['minRub'], $data['minBtc']);
+        $data['minRub'] = $this->mod5($data['minRub']);
 
         $maxRub = $data['maxBtc'] * $this->chatData['exchanger']->course;
         $data['maxRub'] = $this->mod5($maxRub);
@@ -495,5 +489,27 @@ class BuyBtcController extends BaseController
         } else {
             return $price - $mod5;
         }
+    }
+
+    private function calculateRubCommission($price, $btc)
+    {
+        $commission = ExchangerCommission::where('exchanger_id', $this->chatData['exchanger']->id)->where('from', '<=', $btc)->where('to', '>', $btc)->first();
+
+        if ($commission) {
+            $price *= 1 + $commission->percent / 100;
+        }
+
+        return $price;
+    }
+
+    private function calculateBtcCommission($price)
+    {
+        $commission = ExchangerCommission::where('exchanger_id', $this->chatData['exchanger']->id)->where('from', '<=', $price)->where('to', '>', $price)->first();
+
+        if ($commission) {
+            $price *= 1 - $commission->percent / 100;
+        }
+
+        return $price;
     }
 }
