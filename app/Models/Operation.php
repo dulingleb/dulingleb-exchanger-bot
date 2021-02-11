@@ -88,12 +88,12 @@ class Operation extends Model
 
         $this->sendMessage($this->telegram_user_id, $message);
 
-        $refId = TelegramUserSetting::where('exchanger_id', $this->exchanger_id)->where('telegram_user_id', $this->telegram_user_id)->first()->ref;
-        if ($refId) {
-            $ref = TelegramUserSetting::where('id', $refId)->withCountRef()->first();
-            if ($ref->ref_count % $this->exchanger->ref_users_count == 0) {
-                $ref->discount += $this->exchanger->ref_percent;
-                $ref->save();
+        $ref = TelegramUserSetting::select('referer_id')->where('exchanger_id', $this->exchanger_id)->where('telegram_user_id', $this->telegram_user_id)->withCountOperations()->first();
+        if ($ref && $ref->operations_count == 1) {
+            $referer = TelegramUserSetting::select(['id', 'discount'])->where('id', $ref->referer_id)->withCountActiveRef()->first();
+            if ($referer->ref_active_count % $this->exchanger->ref_users_count == 0) {
+                $referer->discount += floatval($this->exchanger->ref_percent);
+                $referer->save();
             }
         }
 

@@ -43,12 +43,16 @@ class SendTelegramMessage implements ShouldQueue
         Telegram::setAccessToken($exchanger->telegram_token);
 
         foreach ($users as $key => $user) {
-            Telegram::sendMessage([
-                'chat_id' => $user,
-                'text' => $this->message,
-                'parse_mode' => 'html',
-                'reply_markup' => \App\Models\Telegram::mainMenu()
-            ]);
+            try {
+                Telegram::sendMessage([
+                    'chat_id' => $user,
+                    'text' => $this->message,
+                    'parse_mode' => 'html',
+                    'reply_markup' => \App\Models\Telegram::mainMenu()
+                ]);
+            } catch (\Exception $exception) {
+
+            }
 
             if ($key % 25 == 0) {
                 sleep(1);
