@@ -202,7 +202,9 @@
       "error": {
         "discount": "Incorrect discount"
       },
-      "save": "Save"
+      "saveBtn": "Save",
+      "appointAdminBtn": "Appoint admin",
+      "fireAdminBtn": "Fire admin"
     },
     "info": {
       "id": "id",
@@ -248,10 +250,22 @@
       "date": "Date:",
       "status": "Status:",
       "comment": "Comment",
-      "saveBtn": "Send",
+      "addCommentBtn": "Add comment",
       "confirmBtn": "Confirm",
       "cancelBtn": "Cancel",
       "operatorBtn": "Send to operator"
+    },
+    "confirmModal": {
+      "title": "Removing {{titleKey}}",
+      "message": "Do you really want to remove {{messageKey}}"
+    },
+    "operatorModal": {
+      "title": "Отправка к оператору {{titleKey}}",
+      "message": "Вы действительно хотите отправить к оператору {{messageKey}}"
+    },
+    "cancelModal": {
+      "title": "Отмена {{titleKey}}",
+      "message": "Вы действительно хотите отменить {{messageKey}}"
     }
   },
   "mailing": {
