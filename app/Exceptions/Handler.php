@@ -69,7 +69,13 @@ class Handler extends ExceptionHandler
             return response()->json(['status' => false, 'message' => $exception->getMessage(), 'errors' => $exception->validator->errors()]);
         }
 
-        return response()->json(['status' => false, 'message' => $exception->getMessage(), 'file' => $exception->getFile(), 'line' => $exception->getLine(), 'trace' => $exception->getTrace()], $code);
+        return response()->json([
+            'status' => false,
+            'message' => $exception->getMessage(),
+            'file' => $exception->getFile(),
+            'line' => $exception->getLine(),
+            'trace' => $exception->getTrace()],
+            $code);
         //return parent::prepareJsonResponse($request, $exception);
     }
 }
