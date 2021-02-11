@@ -8,7 +8,7 @@ use Lcobucci\JWT\Builder;
 
 class TelegramUserSetting extends Model
 {
-    protected $guarded = ['id'];
+    protected $guarded = [];
 
     public static function getTransaction(int $exchangerId, int $userId)
     {
@@ -91,6 +91,6 @@ class TelegramUserSetting extends Model
 
     public function scopeWithSumOperationsRef($query)
     {
-        return $query->addSelect(DB::raw('(SELECT SUM(price) FROM operations WHERE operations.exchanger_id=telegram_user_settings.exchanger_id AND operations.status=' . Operation::STATUS_SUCCESS . ' AND  operations.telegram_user_id IN (SELECT telegram_user_settings.telegram_user_id FROM telegram_user_settings tus WHERE tus.referer_id = telegram_user_settings.id)) AS ref_operations_sum'));
+        return $query->addSelect(DB::raw('(IFNULL((SELECT SUM(price) FROM operations WHERE operations.exchanger_id=telegram_user_settings.exchanger_id AND operations.status=' . Operation::STATUS_SUCCESS . ' AND  operations.telegram_user_id IN (SELECT telegram_user_settings.telegram_user_id FROM telegram_user_settings tus WHERE tus.referer_id = telegram_user_settings.id)), 0)) AS ref_operations_sum'));
     }
 }

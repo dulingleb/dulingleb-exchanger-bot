@@ -397,13 +397,15 @@ class BuyBtcController extends BaseController
             'reply_markup' => Telegram::mainMenu()
         ]);
 
-        $adminChatId = TelegramUserSetting::where('exchanger_id', $operation->exchanger->id)->where('role', 'admin')->first()->telegram_user_id;
+        $adminChatId = TelegramUserSetting::where('exchanger_id', $operation->exchanger->id)->where('role', 'admin')->first()->telegram_user_id ?? null;
 
-        $this->telegram->sendMessage([
-            'chat_id' => $adminChatId,
-            'text' => '<strong>#' . $operation->id . '</strong> New contact',
-            'parse_mode' => 'html'
-        ]);
+        if ($adminChatId) {
+            $this->telegram->sendMessage([
+                'chat_id' => $adminChatId,
+                'text' => '<strong>#' . $operation->id . '</strong> New contact',
+                'parse_mode' => 'html'
+            ]);
+        }
 
         (new OperationController($this->telegram, $this->chatData))->infoOperation($operation);
     }

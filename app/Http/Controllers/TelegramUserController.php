@@ -42,15 +42,15 @@ class TelegramUserController extends Controller
 
     public function show($id): \Illuminate\Http\JsonResponse
     {
-        $userSetting = TelegramUserSetting::select('telegram_user_settings.*')
-            ->with('telegram_user')
+        $userSetting = TelegramUserSetting::select(['telegram_user_settings.*', 'telegram_users.username', 'telegram_users.first_name', 'telegram_users.last_name'])
+            ->join('telegram_users', 'telegram_users.id', 'telegram_user_settings.telegram_user_id')
             ->withCountOperations()
             ->withSumOperations()
             ->withCountRef()
             ->withCountActiveRef()
             ->withCountOperationsRef()
             ->withSumOperationsRef()
-            ->where('id', $id)
+            ->where('telegram_user_settings.id', $id)
             ->where('exchanger_id', auth()->user()->exchanger->id)
             ->firstOrFail();
 
