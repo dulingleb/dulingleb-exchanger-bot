@@ -65,17 +65,37 @@ class Handler extends ExceptionHandler
             $code = 401;
         }
 
+        $message = $this->convert_from_latin1_to_utf8_recursively($exception->getMessage());
+
         if ($exception instanceof ValidationException) {
-            return response()->json(['status' => false, 'message' => $exception->getMessage(), 'errors' => $exception->validator->errors()]);
+            return response()->json(['status' => false, 'message' => $message, 'errors' => $exception->validator->errors()]);
         }
 
         return response()->json([
             'status' => false,
-            'message' => $exception->getMessage(),
+            'message' => $message,
             'file' => $exception->getFile(),
             'line' => $exception->getLine(),
             'trace' => $exception->getTrace()],
             $code);
         //return parent::prepareJsonResponse($request, $exception);
+    }
+
+    public static function convert_from_latin1_to_utf8_recursively($dat)
+    {
+        if (is_string($dat)) {
+            return utf8_encode($dat);
+        } elseif (is_array($dat)) {
+            $ret = [];
+            foreach ($dat as $i => $d) $ret[ $i ] = self::convert_from_latin1_to_utf8_recursively($d);
+
+            return $ret;
+        } elseif (is_object($dat)) {
+            foreach ($dat as $i => $d) $dat->$i = self::convert_from_latin1_to_utf8_recursively($d);
+
+            return $dat;
+        } else {
+            return $dat;
+        }
     }
 }
