@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { map, mergeMap } from 'rxjs/operators'
-import { Observable, of, throwError } from 'rxjs'
+import { map } from 'rxjs/operators'
+import { Observable } from 'rxjs'
 
 import { ENV } from '@env/environment'
 import { apiQueryToParams, operationOutToInDto, telegramUserOutToInDto } from '@utils/index'
@@ -14,6 +14,7 @@ import {
   IResponseApiOutDto,
   IResponseApiInDto,
   IRequestApiDto,
+  ETelegramUserRole,
 } from '@core/models'
 
 @Injectable({
@@ -40,9 +41,18 @@ export class TelegramUserApiService {
     )
   }
 
-  updateUser(userData: ITelegramUserDataDto): Observable<any> {
-    return this.http.put<ICommonResponseDto<ITelegramUserDataDto>>(`${ENV.api}/telegram-users/${userData.id}/update`, userData).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
+  updateUser(userData: ITelegramUserDataDto): Observable<ICommonResponseDto<ITelegramUserDataDto>> {
+    return this.http.put<ICommonResponseDto<ITelegramUserDataDto>>(`${ENV.api}/telegram-users/${userData.id}/update`, userData)
+  }
+
+  appointAdmin(userId: number, role: ETelegramUserRole): Observable<ICommonResponseDto<{ role: ETelegramUserRole }>> {
+    const data = { role }
+    return this.http.put<ICommonResponseDto<{ role: ETelegramUserRole }>>(`${ENV.api}/telegram-users/${userId}/set-as-admin`, data)
+  }
+
+  existsAdmin(): Observable<boolean> {
+    return this.http.get<ICommonResponseDto<boolean>>(`${ENV.api}/telegram-users/exists-admin`).pipe(
+      map(({ data }) => !!data)
     )
   }
 

@@ -5,9 +5,13 @@
   <ng-container content>
 
     <form [formGroup]="form" (ngSubmit)="addMessage()" class="form">
-      <app-format-editor formControlName="message" [label]="'mailing.message' | translate" [height]=300></app-format-editor>
-      <mat-error><app-input-error name='message' [errors]="form.invalid && errors"></app-input-error></mat-error>
-      <button mat-raised-button color="primary" [disabled]="form.invalid || inRequest">{{ 'mailing.send' | translate }}</button>
+      <div class="form-control">
+        <app-format-editor formControlName="message" [label]="'mailing.message' | translate" [height]=300></app-format-editor>
+        <mat-error><app-input-error name='message' [errors]="form.invalid && errors"></app-input-error></mat-error>
+      </div>
+      <div class="form-control">
+        <button mat-raised-button color="primary" [disabled]="form.invalid || inRequest">{{ 'mailing.send' | translate }}</button>
+      </div>
     </form>
 
   </ng-container>

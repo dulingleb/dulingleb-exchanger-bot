@@ -37,21 +37,21 @@ export class OperationApiService {
     )
   }
 
-  setSuccess(id: number): Observable<ICommonResponseDto<any>> {
-    return this.http.put<ICommonResponseDto<any>>(`${ENV.api}/operations/${id}/success`, {}).pipe(
-      map(res => ({ ...res }))
+  setSuccess(id: number): Observable<ICommonResponseDto<IOperationInDto>> {
+    return this.http.put<ICommonResponseDto<IOperationOutDto>>(`${ENV.api}/operations/${id}/success`, {}).pipe(
+      map(res => ({ ...res, data: this.operationOutToInDto(res.data) }))
     )
   }
 
-  setCancel(id: number): Observable<ICommonResponseDto<any>> {
-    return this.http.put<ICommonResponseDto<any>>(`${ENV.api}/operations/${id}/cancel`, {}).pipe(
-      map(res => ({ ...res }))
+  setCancel(id: number): Observable<ICommonResponseDto<IOperationInDto>> {
+    return this.http.put<ICommonResponseDto<IOperationOutDto>>(`${ENV.api}/operations/${id}/cancel`, {}).pipe(
+      map(res => ({ ...res, data: this.operationOutToInDto(res.data) }))
     )
   }
 
-  setToOperator(id: number): Observable<ICommonResponseDto<any>> {
-    return this.http.post<ICommonResponseDto<any>>(`${ENV.api}/operations/${id}/direct-to-operator`, {}).pipe(
-      map(res => ({ ...res }))
+  setToOperator(id: number): Observable<ICommonResponseDto<IOperationInDto>> {
+    return this.http.post<ICommonResponseDto<IOperationOutDto>>(`${ENV.api}/operations/${id}/direct-to-operator`, {}).pipe(
+      map(res => ({ ...res, data: this.operationOutToInDto(res.data) }))
     )
   }
 

@@ -83,7 +83,7 @@ export class SettingsRequisiteEditComponent implements OnInit, OnDestroy {
   private updateRequisite(requisite: ISettingRequisiteDto): void {
     this.inRequest = true
     this.settingApiService.updateRequisite(requisite).subscribe(
-      () => this.router.navigateByUrl('/settings/requisites'),
+      (res) => this.showSuccess(res),
       (err) => this.showError(err)
     )
   }
@@ -91,9 +91,14 @@ export class SettingsRequisiteEditComponent implements OnInit, OnDestroy {
   private addRequisite(requisite: ISettingRequisiteDto): void {
     this.inRequest = true
     this.settingApiService.addRequisite(requisite).subscribe(
-      () => this.router.navigateByUrl('/settings/requisites'),
+      (res) => this.showSuccess(res),
       (err) => this.showError(err)
     )
+  }
+
+  private showSuccess(res: ICommonResponseDto<ISettingRequisiteDto>): void {
+    this.router.navigateByUrl('/settings/requisites')
+    this.uiFacade.addInfoNotification(res.message)
   }
 
   private showError(err: ICommonResponseDto<null>): void {

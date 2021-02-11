@@ -13,6 +13,7 @@ import { IRequestApiDto, ISortEvent, ITableActionEvent, ITableColumn } from '@co
 export class PageContentTableComponent implements AfterViewInit, OnDestroy {
 
   @Output() getList = new EventEmitter<IRequestApiDto>()
+  @Output() eventRow = new EventEmitter<any>()
   @Output() eventData = new EventEmitter<ITableActionEvent>()
 
   @Input() items: []

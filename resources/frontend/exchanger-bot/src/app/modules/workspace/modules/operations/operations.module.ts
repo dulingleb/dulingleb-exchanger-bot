@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router'
 import { PageContentLayoutModule } from '@ui/page-content-layout'
 import { PageContentTableModule } from '@ui/page-content-table'
 import { LoadingSpinnerModule } from '@ui/loading-spinner'
+import { ConfirmModalModule } from '@ui/confirm-modal'
 import { ImageModalModule } from '@ui/image-modal'
 import { InputErrorModule } from '@ui/input-error'
 import { SharedModule } from '@shared/index'
@@ -39,6 +40,7 @@ import { OperationsRoutingModule } from './operations-routing.module'
     SharedModule,
     ImageModalModule,
     InputErrorModule,
+    ConfirmModalModule,
     LoadingSpinnerModule,
     PageContentTableModule,
     PageContentLayoutModule

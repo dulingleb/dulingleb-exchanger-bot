@@ -1,12 +1,13 @@
 import { Inject } from '@angular/core'
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { filter, finalize, mergeMap, takeUntil, tap, withLatestFrom } from 'rxjs/operators'
+import { filter, finalize, mergeMap, takeUntil, tap } from 'rxjs/operators'
+import { Router } from '@angular/router'
 import { Subject } from 'rxjs'
 
 import { ETableColumnActionEventType, IRequestApiDto, ISettingRequisiteDto, ITableActionEvent } from '@core/models'
 import { IPaginator, IFilterField, EFilterType } from '@ui/table-filter-paginator'
-import { IUiFacade, IAdminFacade, UI_FACADE, ADMIN_FACADE } from '@core/features'
 import { ConfirmModalService, IConfirmModal } from '@ui/confirm-modal'
+import { IUiFacade,UI_FACADE } from '@core/features'
 import { SettingApiService } from '@core/api'
 
 import { TABLE_COLUMNS } from '../../constants/table-columns'
@@ -29,7 +30,7 @@ export class SettingsRequisitesComponent implements OnInit, OnDestroy {
   private requestApiQuery: IRequestApiDto
 
   constructor(
-    @Inject(ADMIN_FACADE) public adminFacade: IAdminFacade,
+    private router: Router,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
     private confirmModalService: ConfirmModalService,
     private settingApiService: SettingApiService,
@@ -43,11 +44,10 @@ export class SettingsRequisitesComponent implements OnInit, OnDestroy {
     this.requestApiQuery = requestApiQuery
     this.inRequest = true
     this.settingApiService.getRequisiteList(requestApiQuery).pipe(
-      withLatestFrom(this.adminFacade.admin$),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      ([res, user]) => { // TODO: User role
+      (res) => {
         this.requisites = res.data
         this.paginator = {
           length: res.total,
@@ -55,10 +55,7 @@ export class SettingsRequisitesComponent implements OnInit, OnDestroy {
           pageSize: res.pageSize
         }
       },
-      (err) => {
-        // this.adminFacade.logout()
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.uiFacade.addErrorNotification(err.message)
     )
   }
 
@@ -66,6 +63,9 @@ export class SettingsRequisitesComponent implements OnInit, OnDestroy {
     if (eventData.event === ETableColumnActionEventType.DELETE) { this.deleteRequisite(eventData.data) }
   }
 
+  eventRequisite(requisite: ISettingRequisiteDto): void {
+    this.router.navigate(['settings/requisites', requisite.id, 'edit'])
+  }
 
   ngOnDestroy(): void {
     this.destroy$.next()
@@ -92,9 +92,7 @@ export class SettingsRequisitesComponent implements OnInit, OnDestroy {
         this.requisites = this.requisites.filter(m => m.id !== requisite.id)
         this.getSettingRequisiteList()
       },
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.uiFacade.addErrorNotification(err.message)
     )
   }
 

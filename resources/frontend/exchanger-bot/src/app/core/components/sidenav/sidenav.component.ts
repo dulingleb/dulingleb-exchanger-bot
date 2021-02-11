@@ -26,7 +26,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.adminFacade.admin$.pipe(takeUntil(this.destroy$)).subscribe(admin => {
       const subscribe = admin?.subscribe
-      if (!subscribe.getMonth) {
+      if (!subscribe?.getMonth) {
         this.subscribeLeft = null
         return
       }

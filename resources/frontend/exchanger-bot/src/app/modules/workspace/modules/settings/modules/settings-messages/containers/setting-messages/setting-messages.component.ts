@@ -1,5 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
-import { filter, finalize, mergeMap, takeUntil, tap, withLatestFrom } from 'rxjs/operators'
+import { filter, finalize, mergeMap, takeUntil, tap } from 'rxjs/operators'
+import { Router } from '@angular/router'
 import { Subject } from 'rxjs'
 
 import { ETableColumnActionEventType, IRequestApiDto, ISettingMessageDto, ITableActionEvent } from '@core/models'
@@ -29,6 +30,7 @@ export class SettingMessagesComponent implements OnInit, OnDestroy {
   private requestApiQuery: IRequestApiDto
 
   constructor(
+    private router: Router,
     @Inject(ADMIN_FACADE) public adminFacade: IAdminFacade,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
     private confirmModalService: ConfirmModalService,
@@ -43,11 +45,10 @@ export class SettingMessagesComponent implements OnInit, OnDestroy {
     this.requestApiQuery = requestApiQuery
     this.inRequest = true
     this.settingApiService.getMessageList(requestApiQuery).pipe(
-      withLatestFrom(this.adminFacade.admin$),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      ([res, user]) => { // TODO: User role
+      (res) => {
         this.messages = res.data
         this.paginator = {
           length: res.total,
@@ -55,15 +56,16 @@ export class SettingMessagesComponent implements OnInit, OnDestroy {
           pageSize: res.pageSize
         }
       },
-      (err) => {
-        // this.adminFacade.logout()
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.uiFacade.addErrorNotification(err.message)
     )
   }
 
   setEventData(eventData: ITableActionEvent): void {
     if (eventData.event === ETableColumnActionEventType.DELETE) { this.deleteMessage(eventData.data) }
+  }
+
+  eventMessage(message: ISettingMessageDto): void {
+    this.router.navigate(['settings/messages', message.slug, 'edit'])
   }
 
   ngOnDestroy(): void {
@@ -91,9 +93,7 @@ export class SettingMessagesComponent implements OnInit, OnDestroy {
         this.messages = this.messages.filter(m => m.id !== message.id)
         this.getSettingMessageList()
       },
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.uiFacade.addErrorNotification(err.message)
     )
   }
 

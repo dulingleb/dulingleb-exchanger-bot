@@ -90,7 +90,7 @@ export class SettingsCommissionEditComponent implements OnInit, OnDestroy {
   private updateRequisite(commission: ISettingCommissionDto): void {
     this.inRequest = true
     this.settingApiService.updateCommission(commission).subscribe(
-      () => this.router.navigateByUrl('/settings/commissions'),
+      (res) => this.showSuccess(res),
       (err) => this.showError(err)
     )
   }
@@ -98,9 +98,14 @@ export class SettingsCommissionEditComponent implements OnInit, OnDestroy {
   private addRequisite(commission: ISettingCommissionDto): void {
     this.inRequest = true
     this.settingApiService.addCommission(commission).subscribe(
-      () => this.router.navigateByUrl('/settings/commissions'),
+      (res) => this.showSuccess(res),
       (err) => this.showError(err)
     )
+  }
+
+  private showSuccess(res: ICommonResponseDto<ISettingCommissionDto>): void {
+    this.router.navigateByUrl('/settings/commissions')
+    this.uiFacade.addInfoNotification(res.message)
   }
 
   private showError(err: ICommonResponseDto<null>): void {

@@ -67,8 +67,10 @@ export class FormatEditorComponent implements ControlValueAccessor {
       toolbar: 'undo redo | styleselect | bold italic underline strikethrough | emoticons | removeformat | code',
 
       init_instance_callback: (): void => {
-        const freeTiny = document.querySelector('.tox .tox-notification--in') as HTMLElement
-        freeTiny.style.display = 'none'
+        setTimeout(() => {
+          const freeTiny = document.querySelector('.tox .tox-notification--in') as HTMLElement
+          if (freeTiny) { freeTiny.style.display = 'none' }
+        }, 1)
       },
     }
   }

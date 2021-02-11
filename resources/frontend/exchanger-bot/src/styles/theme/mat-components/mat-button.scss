@@ -17,3 +17,12 @@
     }
   }
 }
+
+.btn-group {
+  display: flex;
+  margin: 0 -0.5rem;
+
+  .mat-button-base {
+    margin: 0 0.5rem;
+  }
+}

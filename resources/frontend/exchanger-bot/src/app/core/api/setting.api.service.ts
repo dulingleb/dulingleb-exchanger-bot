@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { map, mergeMap } from 'rxjs/operators'
-import { Observable, of, throwError } from 'rxjs'
+import { map } from 'rxjs/operators'
+import { Observable } from 'rxjs'
 
 import { ENV } from '@env/environment'
 import {
@@ -39,51 +39,51 @@ export class SettingApiService {
     )
   }
 
-  saveLimits(settingLimitInDto: ISettingLimitInDto): Observable<ISettingInDto> {
+  saveLimits(settingLimitInDto: ISettingLimitInDto): Observable<ICommonResponseDto<ISettingInDto>> {
     const data: ISettingLimitOutDto = {
       course: settingLimitInDto.course,
       min_exchange: settingLimitInDto.minExchange,
       max_exchange: settingLimitInDto.maxExchange
     }
     return this.http.patch<ICommonResponseDto<ISettingOutDto>>(`${ENV.api}/settings/set/limits`, data).pipe(
-      map(({ data }) => this.settingOutToInDto(data))
+      map((res) => ({ ...res, data: this.settingOutToInDto(res.data) }))
     )
   }
 
-  saveRef(settingRefInDto: ISettingRefInDto): Observable<ISettingInDto> {
+  saveRef(settingRefInDto: ISettingRefInDto): Observable<ICommonResponseDto<ISettingInDto>> {
     const data: ISettingRefOutDto = {
       ref_percent: settingRefInDto.refPercent,
       ref_users_count: settingRefInDto.refUsersCount
     }
     return this.http.patch<ICommonResponseDto<ISettingOutDto>>(`${ENV.api}/settings/set/ref`, data).pipe(
-      map(({ data }) => this.settingOutToInDto(data))
+      map((res) => ({ ...res, data: this.settingOutToInDto(res.data) }))
     )
   }
 
-  saveMode(demo: boolean): Observable<ISettingInDto> {
+  saveMode(demo: boolean): Observable<ICommonResponseDto<ISettingInDto>> {
     const data = { demo }
     return this.http.patch<ICommonResponseDto<ISettingOutDto>>(`${ENV.api}/settings/set/demo`, data).pipe(
-      map(({ data }) => this.settingOutToInDto(data))
+      map((res) => ({ ...res, data: this.settingOutToInDto(res.data) }))
     )
   }
 
-  saveTelegram(settingTelegramInDto: ISettingTelegramInDto): Observable<ISettingInDto> {
+  saveTelegram(settingTelegramInDto: ISettingTelegramInDto): Observable<ICommonResponseDto<ISettingInDto>> {
     const data: ISettingTelegramOutDto = {
       username: settingTelegramInDto.username,
       telegram_token: settingTelegramInDto.telegramToken
     }
     return this.http.patch<ICommonResponseDto<ISettingOutDto>>(`${ENV.api}/settings/set/telegram-token`, data).pipe(
-      map(({ data }) => this.settingOutToInDto(data))
+      map((res) => ({ ...res, data: this.settingOutToInDto(res.data) }))
     )
   }
 
-  saveKeys(settingKeysInDto: ISettingKeysInDto): Observable<ISettingInDto> {
+  saveKeys(settingKeysInDto: ISettingKeysInDto): Observable<ICommonResponseDto<ISettingInDto>> {
     const data: ISettingKeysOutDto = {
       coinbase_key: settingKeysInDto.coinbaseKey,
       coinbase_secret: settingKeysInDto.coinbaseSecret
     }
     return this.http.patch<ICommonResponseDto<ISettingOutDto>>(`${ENV.api}/settings/set/coinbase-key`, data).pipe(
-      map(({ data }) => this.settingOutToInDto(data))
+      map((res) => ({ ...res, data: this.settingOutToInDto(res.data) }))
     )
   }
 
@@ -103,10 +103,8 @@ export class SettingApiService {
     )
   }
 
-  updateMessage(id: number, text: string): Observable<ICommonResponseDto<null>> {
-    return this.http.patch<ICommonResponseDto<null>>(`${ENV.api}/settings/messages/${id}/update`, { text }).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
-    )
+  updateMessage(id: number, text: string): Observable<ICommonResponseDto<ISettingMessageDto>> {
+    return this.http.patch<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/${id}/update`, { text })
   }
 
   getMessageTemplate(id: number): Observable<ISettingMessageDto> {
@@ -116,21 +114,15 @@ export class SettingApiService {
   }
 
   addMessageTemplate(message: ISettingMessageDto): Observable<ICommonResponseDto<ISettingMessageDto>> {
-    return this.http.post<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/template/store`, message).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
-    )
+    return this.http.post<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/template/store`, message)
   }
 
   updateMessageTemplate(message: ISettingMessageDto): Observable<ICommonResponseDto<ISettingMessageDto>> {
-    return this.http.patch<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/template/${message.id}/update`, message).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
-    )
+    return this.http.patch<ICommonResponseDto<ISettingMessageDto>>(`${ENV.api}/settings/messages/template/${message.id}/update`, message)
   }
 
   deleteMessageTemplate(id: number): Observable<ICommonResponseDto<null>> {
-    return this.http.delete<ICommonResponseDto<null>>(`${ENV.api}/settings/messages/template/${id}`).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
-    )
+    return this.http.delete<ICommonResponseDto<null>>(`${ENV.api}/settings/messages/template/${id}`)
   }
 
   getCommissionList(apiQuery: IRequestApiDto): Observable<IResponseApiInDto<ISettingCommissionDto[]>> {
@@ -150,21 +142,15 @@ export class SettingApiService {
   }
 
   addCommission(commission: ISettingCommissionDto): Observable<ICommonResponseDto<ISettingCommissionDto>> {
-    return this.http.post<ICommonResponseDto<ISettingCommissionDto>>(`${ENV.api}/settings/commissions`, commission).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
-    )
+    return this.http.post<ICommonResponseDto<ISettingCommissionDto>>(`${ENV.api}/settings/commissions`, commission)
   }
 
-  updateCommission(commission: ISettingCommissionDto): Observable<ICommonResponseDto<null>> {
-    return this.http.put<ICommonResponseDto<null>>(`${ENV.api}/settings/commissions/${commission.id}`, commission).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
-    )
+  updateCommission(commission: ISettingCommissionDto): Observable<ICommonResponseDto<ISettingCommissionDto>> {
+    return this.http.put<ICommonResponseDto<ISettingCommissionDto>>(`${ENV.api}/settings/commissions/${commission.id}`, commission)
   }
 
   deleteCommission(id: number): Observable<ICommonResponseDto<null>> {
-    return this.http.delete<ICommonResponseDto<null>>(`${ENV.api}/settings/commissions/${id}`).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
-    )
+    return this.http.delete<ICommonResponseDto<null>>(`${ENV.api}/settings/commissions/${id}`)
   }
 
   getRequisiteList(apiQuery: IRequestApiDto): Observable<IResponseApiInDto<ISettingRequisiteDto[]>> {
@@ -184,21 +170,15 @@ export class SettingApiService {
   }
 
   addRequisite(requisite: ISettingRequisiteDto): Observable<ICommonResponseDto<ISettingRequisiteDto>> {
-    return this.http.post<ICommonResponseDto<ISettingRequisiteDto>>(`${ENV.api}/settings/bank-details`, requisite).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
-    )
+    return this.http.post<ICommonResponseDto<ISettingRequisiteDto>>(`${ENV.api}/settings/bank-details`, requisite)
   }
 
-  updateRequisite(requisite: ISettingRequisiteDto): Observable<ICommonResponseDto<null>> {
-    return this.http.put<ICommonResponseDto<null>>(`${ENV.api}/settings/bank-details/${requisite.id}`, requisite).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
-    )
+  updateRequisite(requisite: ISettingRequisiteDto): Observable<ICommonResponseDto<ISettingRequisiteDto>> {
+    return this.http.put<ICommonResponseDto<ISettingRequisiteDto>>(`${ENV.api}/settings/bank-details/${requisite.id}`, requisite)
   }
 
   deleteRequisite(id: number): Observable<ICommonResponseDto<null>> {
-    return this.http.delete<ICommonResponseDto<null>>(`${ENV.api}/settings/bank-details/${id}`).pipe(
-      mergeMap(res => res.status ? of(res) : throwError(new Error(res.message)))
-    )
+    return this.http.delete<ICommonResponseDto<null>>(`${ENV.api}/settings/bank-details/${id}`)
   }
 
   getStatus(): Observable<boolean> {

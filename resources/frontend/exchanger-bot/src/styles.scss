@@ -34,6 +34,10 @@ a, a:focus, a:active, a:visited, a:hover {
   color: var(--accent-color);
 }
 
+.text-pre-line {
+  white-space: pre-line;
+}
+
 .text-center {
   text-align: center;
 }

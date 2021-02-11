@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { finalize, takeUntil, withLatestFrom } from 'rxjs/operators'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Subject } from 'rxjs'
 
 import { IUiFacade, IAdminFacade, UI_FACADE, ADMIN_FACADE } from '@core/features'
@@ -30,10 +30,11 @@ export class OperationsComponent implements OnInit, OnDestroy {
   private requestApiQuery: IRequestApiDto
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     @Inject(ADMIN_FACADE) public adminFacade: IAdminFacade,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
-    private operationApiService: OperationApiService
+    private operationApiService: OperationApiService,
   ) {}
 
   ngOnInit(): void {
@@ -65,11 +66,12 @@ export class OperationsComponent implements OnInit, OnDestroy {
           pageSize: res.pageSize
         }
       },
-      (err) => {
-        // this.adminFacade.logout()
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.uiFacade.addErrorNotification(err.message)
     )
+  }
+
+  eventOperation(operation: IOperationInDto): void {
+    this.router.navigate(['operations', operation.id, 'info'])
   }
 
   ngOnDestroy(): void {

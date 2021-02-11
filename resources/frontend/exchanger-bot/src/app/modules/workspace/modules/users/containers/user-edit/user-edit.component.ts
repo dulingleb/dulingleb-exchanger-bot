@@ -1,12 +1,12 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
-import { finalize, mergeMap, takeUntil } from 'rxjs/operators'
+import { finalize, mergeMap, takeUntil, withLatestFrom } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
 import { TelegramUserApiService } from '@core/api'
 import { IUiFacade, UI_FACADE } from '@core/features'
-import { ICommonResponseDto, ITelegramUserDataDto, ITelegramUserInDto } from '@core/models'
+import { ETelegramUserRole, ICommonResponseDto, ITelegramUserDataDto, ITelegramUserInDto } from '@core/models'
 
 @Component({
   selector: 'app-user-edit',
@@ -18,6 +18,8 @@ export class UserEditComponent implements OnInit, OnDestroy {
   user: ITelegramUserInDto
   form: FormGroup
   showPassword: boolean
+  existAdmin = true
+  isAdmin = false
   inRequest: boolean
   errors: { [key: string]: string[] } = {}
 
@@ -39,19 +41,23 @@ export class UserEditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.paramMap.pipe(
       mergeMap((params: ParamMap) => this.telegramUserApiService.getUser(+params.get('id'))),
-      finalize(() => this.inRequest = false),
+      withLatestFrom(this.telegramUserApiService.existsAdmin()),
       takeUntil(this.destroy$)
     ).subscribe(
-      (user) => {
+      ([user, existAdmin]) => {
+        this.inRequest = false
         this.user = user
+        this.isAdmin = this.user.role === ETelegramUserRole.ADMIN
+        this.existAdmin = existAdmin
         this.form.patchValue({
           discount: user.discount,
           comment: user.comment,
           ban: user.ban,
         })
       },
-      (err) => this.uiFacade.addErrorNotification(err.message)
+      (err) => this.showError(err),
     )
+
   }
 
   save(): void {
@@ -70,7 +76,24 @@ export class UserEditComponent implements OnInit, OnDestroy {
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      (res) => this.router.navigateByUrl('/users'),
+      (res) => this.showSuccess(res),
+      (err) => this.showError(err),
+    )
+  }
+
+  appointAdmin(): void {
+    this.inRequest = true
+    const appointRole = this.user.role === ETelegramUserRole.ADMIN ? ETelegramUserRole.USER : ETelegramUserRole.ADMIN
+    this.telegramUserApiService.appointAdmin(this.user.id, appointRole).pipe(
+      finalize(() => this.inRequest = false),
+      takeUntil(this.destroy$)
+    ).subscribe(
+      (res) => {
+        this.user.role = res.data.role
+        this.existAdmin = this.user.role === ETelegramUserRole.ADMIN
+        this.isAdmin = this.user.role === ETelegramUserRole.ADMIN
+        this.uiFacade.addInfoNotification(res.message)
+      },
       (err) => this.showError(err),
     )
   }
@@ -78,6 +101,11 @@ export class UserEditComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next()
     this.destroy$.complete()
+  }
+
+  private showSuccess(res: ICommonResponseDto<ITelegramUserDataDto>): void {
+    this.uiFacade.addInfoNotification(res.message)
+    this.router.navigateByUrl('/users')
   }
 
   private showError(err: ICommonResponseDto<null>): void {

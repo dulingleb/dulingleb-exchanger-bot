@@ -1,10 +1,11 @@
 import { FormControl, FormGroup } from '@angular/forms'
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
-import { finalize, mergeMap, takeUntil } from 'rxjs/operators'
+import { filter, finalize, mergeMap, takeUntil, tap } from 'rxjs/operators'
 import { OwlOptions } from 'ngx-owl-carousel-o'
 import { Subject } from 'rxjs'
 
+import { ConfirmModalService, IConfirmModal } from '@ui/confirm-modal'
 import { ICommonResponseDto, IOperationInDto } from '@core/models'
 import { IUiFacade, UI_FACADE } from '@core/features'
 import { ImageModalService } from '@ui/image-modal'
@@ -51,7 +52,8 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public imageModalService: ImageModalService,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
-    private operationApiService: OperationApiService
+    private operationApiService: OperationApiService,
+    private confirmModalService: ConfirmModalService,
   ) {
     this.form = new FormGroup({
       comment: new FormControl(''),
@@ -81,42 +83,72 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
       (res) => {
         this.operation = res.data
         this.initFormData()
-        this.uiFacade.addInfoNotification(res.message)
+        this.showSuccess(res)
       },
       (err) => this.showError(err)
     )
   }
 
   setSuccess(): void {
-    this.inRequest = true
-    this.operationApiService.setSuccess(this.operation.id).pipe(
+    const data: IConfirmModal = {
+      titleI18n: 'operation.confirmModal.title',
+      titleKeyI18n: `# ${this.operation.id}`,
+      messageI18n: 'operation.confirmModal.message',
+      messageKeyI18n: '',
+      confirmBtn: true,
+      cancelBtn: true
+    }
+    this.confirmModalService.openDialog(data).pipe(
+      filter(res => res),
+      tap(() => this.inRequest = true),
+      mergeMap(() => this.operationApiService.setSuccess(this.operation.id)),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      (res) => this.uiFacade.addInfoNotification(res.message),
-      (err) => this.uiFacade.addErrorNotification(err.message)
+      (res) => this.showSuccess(res),
+      (err) => this.showError(err)
     )
   }
 
   setCancel(): void {
-    this.inRequest = true
-    this.operationApiService.setCancel(this.operation.id).pipe(
+    const data: IConfirmModal = {
+      titleI18n: 'operation.cancelModal.title',
+      titleKeyI18n: `# ${this.operation.id}`,
+      messageI18n: 'operation.cancelModal.message',
+      messageKeyI18n: '',
+      confirmBtn: true,
+      cancelBtn: true
+    }
+    this.confirmModalService.openDialog(data).pipe(
+      filter(res => res),
+      tap(() => this.inRequest = true),
+      mergeMap(() => this.operationApiService.setCancel(this.operation.id)),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      (res) => this.uiFacade.addInfoNotification(res.message),
-      (err) => this.uiFacade.addErrorNotification(err.message)
+      (res) => this.showSuccess(res),
+      (err) => this.showError(err)
     )
   }
 
   setToOperator(): void {
-    this.inRequest = true
-    this.operationApiService.setToOperator(this.operation.id).pipe(
+    const data: IConfirmModal = {
+      titleI18n: 'operation.operatorModal.title',
+      titleKeyI18n: `# ${this.operation.id}`,
+      messageI18n: 'operation.operatorModal.message',
+      messageKeyI18n: '',
+      confirmBtn: true,
+      cancelBtn: true
+    }
+    this.confirmModalService.openDialog(data).pipe(
+      filter(res => res),
+      tap(() => this.inRequest = true),
+      mergeMap(() => this.operationApiService.setToOperator(this.operation.id)),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      (res) => this.uiFacade.addInfoNotification(res.message),
-      (err) => this.uiFacade.addErrorNotification(err.message)
+      (res) => this.showSuccess(res),
+      (err) => this.showError(err)
     )
   }
 
@@ -129,6 +161,10 @@ export class OperationInfoComponent implements OnInit, OnDestroy {
     this.form.patchValue({
       comment: this.operation.comment,
     })
+  }
+
+  private showSuccess(res: ICommonResponseDto<IOperationInDto>): void {
+    this.uiFacade.addInfoNotification(res.message)
   }
 
   private showError(err: ICommonResponseDto<null>): void {

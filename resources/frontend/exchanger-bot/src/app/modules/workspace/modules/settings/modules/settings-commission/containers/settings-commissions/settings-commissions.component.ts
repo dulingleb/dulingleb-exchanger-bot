@@ -1,10 +1,11 @@
 import { Inject } from '@angular/core'
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { filter, finalize, mergeMap, takeUntil, tap, withLatestFrom } from 'rxjs/operators'
+import { filter, finalize, mergeMap, takeUntil, tap } from 'rxjs/operators'
+import { Router } from '@angular/router'
 import { Subject } from 'rxjs'
 
 import { ETableColumnActionEventType, IRequestApiDto, ISettingCommissionDto, ITableActionEvent } from '@core/models'
-import { IUiFacade, IAdminFacade, UI_FACADE, ADMIN_FACADE } from '@core/features'
+import { IUiFacade, UI_FACADE } from '@core/features'
 import { ConfirmModalService, IConfirmModal } from '@ui/confirm-modal'
 import { IPaginator, IFilterField } from '@ui/table-filter-paginator'
 import { SettingApiService } from '@core/api'
@@ -29,7 +30,7 @@ export class SettingsCommissionComponent implements OnInit, OnDestroy {
   private requestApiQuery: IRequestApiDto
 
   constructor(
-    @Inject(ADMIN_FACADE) public adminFacade: IAdminFacade,
+    private router: Router,
     @Inject(UI_FACADE) private uiFacade: IUiFacade,
     private confirmModalService: ConfirmModalService,
     private settingApiService: SettingApiService,
@@ -43,11 +44,10 @@ export class SettingsCommissionComponent implements OnInit, OnDestroy {
     this.requestApiQuery = requestApiQuery
     this.inRequest = true
     this.settingApiService.getCommissionList(requestApiQuery).pipe(
-      withLatestFrom(this.adminFacade.admin$),
       finalize(() => this.inRequest = false),
       takeUntil(this.destroy$)
     ).subscribe(
-      ([res, user]) => { // TODO: User role
+      (res) => {
         this.commissions = res.data
         this.paginator = {
           length: res.total,
@@ -55,15 +55,16 @@ export class SettingsCommissionComponent implements OnInit, OnDestroy {
           pageSize: res.pageSize
         }
       },
-      (err) => {
-        // this.adminFacade.logout()
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.uiFacade.addErrorNotification(err.message)
     )
   }
 
   setEventData(eventData: ITableActionEvent): void {
     if (eventData.event === ETableColumnActionEventType.DELETE) { this.deleteCommission(eventData.data) }
+  }
+
+  eventCommission(commission: ISettingCommissionDto): void {
+    this.router.navigate(['settings/commissions', commission.id, 'edit'])
   }
 
   ngOnDestroy(): void {
@@ -91,9 +92,7 @@ export class SettingsCommissionComponent implements OnInit, OnDestroy {
         this.commissions = this.commissions.filter(m => m.id !== commission.id)
         this.getSettingCommissionList()
       },
-      (err) => {
-        this.uiFacade.addErrorNotification(err.message)
-      }
+      (err) => this.uiFacade.addErrorNotification(err.message)
     )
   }
 

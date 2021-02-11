@@ -6,7 +6,7 @@
 >
   <ng-container actions>
     <div class="change-status-btn-wrapper">
-      <button class="change-status-btn" mat-button color="primary" [disabled]="inRequest" (click)="changeStatus.emit()">{{ 'statusInfoBlock.status.stopBtn' | translate }}</button>
+      <button class="change-status-btn" mat-button color="primary" [disabled]="inRequest" (click)="changeStatus.emit()">{{ (status ? 'statusInfoBlock.status.stopBtn' : 'statusInfoBlock.status.startBtn') | translate }}</button>
     </div>
   </ng-container>
 </app-status-info-block>

@@ -5,6 +5,7 @@
                         [paginator]="paginator"
                         (getList)="getSettingMessageList($event)"
                         (eventData)="setEventData($event)"
+                        (eventRow)="eventMessage($event)"
 >
   <ng-container table-title>
     {{ 'settings.messages.tableHeader.title' | translate }}

@@ -4,6 +4,7 @@
                         [filterFields]="filterFields"
                         [paginator]="paginator"
                         (getList)="getAdminList($event)"
+                        (eventRow)="eventUser($event)"
 >
   <ng-container table-title>
     {{ 'users.tableHeader.title' | translate }}
