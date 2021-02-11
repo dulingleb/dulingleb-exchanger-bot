@@ -81,7 +81,7 @@ class Handler extends ExceptionHandler
         //return parent::prepareJsonResponse($request, $exception);
     }
 
-    public static function convert_from_latin1_to_utf8_recursively($dat)
+    public function convert_from_latin1_to_utf8_recursively($dat)
     {
         if (is_string($dat)) {
             return utf8_encode($dat);
