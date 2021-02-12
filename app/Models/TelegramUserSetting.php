@@ -32,7 +32,12 @@ class TelegramUserSetting extends Model
             $transaction = array_merge(self::getTransaction($exchangerId, $userId) ?? [], $transaction);
         }
 
-        self::where('telegram_user_id', $userId)->where('exchanger_id', $exchangerId)->first()->update(['transaction' => $transaction ? json_encode($transaction) : null]);
+        $settings = self::where('telegram_user_id', $userId)->where('exchanger_id', $exchangerId)->first();
+
+        if (!$settings) return ;
+
+        $settings->transaction = $transaction ? json_encode($transaction) : null;
+        $settings->save();
     }
 
     public function telegram_user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
