@@ -16,8 +16,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   inRequest: boolean
 
   typeOperations = EChartsType.COUNT
-  periodOperations = EChartsPeriod.MONTH
-  periodUsers = EChartsPeriod.MONTH
+  periodOperations = EChartsPeriod.WEEK
+  periodUsers = EChartsPeriod.WEEK
 
   operationsCharts: IDashboardChart[]
   usersCharts: IDashboardChart[]

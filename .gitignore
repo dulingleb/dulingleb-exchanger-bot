@@ -15,3 +15,7 @@ yarn-error.log
 .idea/
 
 .idea/
+
+resources/views/angular.blade.php
+
+public/build/

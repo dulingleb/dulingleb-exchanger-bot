@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { map, mergeMap } from 'rxjs/operators'
-import { Observable, of, throwError } from 'rxjs'
+import { map } from 'rxjs/operators'
+import { Observable } from 'rxjs'
 
 import { ENV } from '@env/environment'
 import { apiQueryToParams, operationOutToInDto } from '@utils/index'
@@ -85,7 +85,7 @@ export class AdminApiService {
       id: user.id,
       name: user.name,
       email: user.email,
-      role: user.role_id,
+      role: +user.role_id,
       operationsCountToday: user.operations_count_today,
       operationsSumToday: user.operations_sum_today,
       usersCountToday: user.users_count_today,
