@@ -75,6 +75,9 @@
               ]
             },
             "local": {
+              "deployUrl": "/",
+              "baseHref": "/",
+              "outputPath": "/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -88,14 +91,14 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "exchanger-bot:build",
-            "proxyConfig": "src/proxy.conf.json",
-            "baseHref": "/build/"
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "exchanger-bot:build:local"
+              "browserTarget": "exchanger-bot:build"
             },
             "local": {
+              "browserTarget": "exchanger-bot:build:local",
               "proxyConfig": "src/proxy.conf.json"
             }
           }
