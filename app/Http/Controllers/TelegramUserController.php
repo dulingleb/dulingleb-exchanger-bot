@@ -31,7 +31,9 @@ class TelegramUserController extends Controller
                 'telegram_user_settings.exchanger_id',
                 'telegram_user_settings.ban',
                 'telegram_user_settings.discount',
-                'telegram_users.username'])
+                'telegram_users.username',
+                'telegram_users.first_name',
+                'telegram_users.last_name'])
             ->withCountOperations()
             ->withSumOperations()
             ->where('telegram_user_settings.exchanger_id', auth()->user()->exchanger->id)
@@ -133,7 +135,7 @@ class TelegramUserController extends Controller
     {
         $users = TelegramUserSetting::where('exchanger_id', \auth()->user()->exchanger->id);
         $data['users_count'] = $users->count();
-        $data['users_count_today'] = $users->where('created_at', Carbon::now()->format('Y-m-d'))->count();
+        $data['users_count_today'] = $users->where('created_at', '>', Carbon::now()->format('Y-m-d 00:00:00'))->count();
 
         return $this->response($data);
     }
@@ -162,9 +164,9 @@ class TelegramUserController extends Controller
             for ($i = 0; $i < 7; $i++) {
 
                 $counts = TelegramUserSetting::where('exchanger_id', auth()->user()->exchanger->id)
-                    ->whereBetween('created_at', [Carbon::now()->subDay($i)->format('Y-m-d 00:00:00'), Carbon::now()->subDay($i)->format('Y-m-d 23:59:59')])->count();
+                    ->whereBetween('created_at', [Carbon::now()->subDay($i+1)->format('Y-m-d 00:00:00'), Carbon::now()->subDay($i+1)->format('Y-m-d 23:59:59')])->count();
 
-                $data[] = ['period' => Carbon::now()->subDay($i)->dayOfWeek, 'value' => $counts];
+                $data[] = ['period' => Carbon::now()->subDay($i+1)->dayOfWeek, 'value' => $counts];
             }
         }
 

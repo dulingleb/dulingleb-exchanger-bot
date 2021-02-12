@@ -78,7 +78,7 @@ class OperationController extends Controller
     {
         $operations = Operation::where('exchanger_id', auth()->user()->exchanger->id)->where('status', Operation::STATUS_SUCCESS);
         $data['operations_count'] = $operations->count();
-        $data['operations_count_today'] = $operations->where('updated_at', Carbon::now()->format('Y-m-d'))->count();
+        $data['operations_count_today'] = $operations->where('updated_at', '>', Carbon::now()->format('Y-m-d 00:00:00'))->count();
 
         return $this->response($data);
     }
@@ -87,7 +87,7 @@ class OperationController extends Controller
     {
         $operations = Operation::where('exchanger_id', auth()->user()->exchanger->id)->where('status', Operation::STATUS_SUCCESS);
         $data['operations_sum'] = $operations->sum('price');
-        $data['operations_sum_today'] = $operations->where('updated_at', Carbon::now()->format('Y-m-d'))->sum('price');
+        $data['operations_sum_today'] = $operations->where('updated_at', '>', Carbon::now()->format('Y-m-d 00:00:00'))->sum('price');
 
         return $this->response($data);
     }
@@ -127,14 +127,14 @@ class OperationController extends Controller
             for ($i = 0; $i < 7; $i++) {
 
                 $counts = Operation::where('exchanger_id', auth()->user()->exchanger->id)->where('status', Operation::STATUS_SUCCESS)
-                    ->whereBetween('updated_at', [Carbon::now()->subDay($i)->format('Y-m-d 00:00:00'), Carbon::now()->subDay($i)->format('Y-m-d 23:59:59')]);
+                    ->whereBetween('updated_at', [Carbon::now()->subDay($i+1)->format('Y-m-d 00:00:00'), Carbon::now()->subDay($i+1)->format('Y-m-d 23:59:59')]);
                 if ($request->type == 'sum') {
                     $counts = $counts->sum('price');
                 } else {
                     $counts = $counts->count();
                 }
 
-                $data[] = ['period' => Carbon::now()->subDay($i)->dayOfWeek, 'value' => $counts];
+                $data[] = ['period' => Carbon::now()->subDay($i+1)->dayOfWeek, 'value' => $counts];
             }
         }
 
