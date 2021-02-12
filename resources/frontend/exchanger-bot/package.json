@@ -3,14 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --c=local",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint && yarn lint:styles",
     "lint:styles": "stylelint \"src/app/**/*.scss\"",
     "prettier": "prettier --write src/**/*.{js,ts,css}",
     "e2e": "ng e2e",
-    "postbuild": "cp-cli ../../../public/build/index.html ../../views/angular.blade.php && rimraf ../../../public/assets && move ../../../public/build/assets ../../../public"
+    "postbuild": "cp-cli ../../../public/build/index.html ../../views/angular.blade.php && rimraf ../../../public/assets && mv ../../../public/build/assets ../../../public"
   },
   "private": true,
   "dependencies": {

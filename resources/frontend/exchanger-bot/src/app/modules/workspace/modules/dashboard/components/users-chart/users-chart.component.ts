@@ -5,7 +5,9 @@ import { TranslateService } from '@ngx-translate/core'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { Label } from 'ng2-charts'
 
-import { EChartsPeriod, EChartsType, IDashboardChart } from '@core/models'
+import { EChartsPeriod, IDashboardChart } from '@core/models'
+
+import { CHART_OPTIONS } from '../../constants'
 
 @Component({
   selector: 'app-users-chart',
@@ -22,15 +24,11 @@ export class UsersChartComponent implements OnInit, OnChanges, OnDestroy {
 
   EChartsPeriod = EChartsPeriod
 
-  barChartOptions: ChartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    legend: { display: false }
-  }
+  chartOptions: ChartOptions = CHART_OPTIONS
   chartLabels: Label[] = []
-  barChartType: ChartType = 'bar'
-  barChartLegend = true
-  barChartPlugins = []
+  chartType: ChartType = 'bar'
+  chartLegend = true
+  chartPlugins = []
 
   chartData: ChartDataSets[] = []
 

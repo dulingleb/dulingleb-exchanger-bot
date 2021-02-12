@@ -33,7 +33,6 @@
   <a mat-icon-button disableRipple="true" class="nav-link" routerLink="/users">
      <mat-icon>people</mat-icon>
      <span>{{ 'sideNav.users' | translate }}</span>
-     <span class="count">{{ (adminFacade.usersCountData$ | async)?.usersCountToday || '' }}</span>
   </a>
 </mat-list-item>
  <mat-list-item class="nav-item">

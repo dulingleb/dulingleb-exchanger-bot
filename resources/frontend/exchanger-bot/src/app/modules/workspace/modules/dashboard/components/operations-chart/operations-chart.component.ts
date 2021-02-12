@@ -7,6 +7,8 @@ import { Color, Label } from 'ng2-charts'
 
 import { EChartsPeriod, EChartsType, IDashboardChart } from '@core/models'
 
+import { CHART_OPTIONS } from '../../constants'
+
 @Component({
   selector: 'app-operations-chart',
   templateUrl: './operations-chart.component.html',
@@ -28,22 +30,16 @@ export class OperationsChartComponent implements OnInit, OnChanges, OnDestroy {
 
   chartLabels: Label[] = []
 
-  lineChartOptions: ChartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    legend: { display: false }
-  }
-
-  lineChartColors: Color[] = [
+  chartOptions: ChartOptions = CHART_OPTIONS
+  chartColors: Color[] = [
     {
       borderColor: '#464646',
       backgroundColor: 'rgba(103, 58, 183, 0.8)',
     },
   ]
 
-  lineChartLegend = true
-  lineChartPlugins = []
-  lineChartType = 'line'
+  chartPlugins = []
+  chartType = 'line'
 
   chartData$ = new BehaviorSubject<IDashboardChart[]>(null)
   private destroy$ = new Subject()

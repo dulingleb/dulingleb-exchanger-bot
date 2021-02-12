@@ -27,8 +27,8 @@ export class FormatEditorComponent implements ControlValueAccessor {
   private onChangeCallback: any
 
   writeValue(value: any): void {
-    if (value !== this.innerValue) {
-        this.innerValue = value
+    if (value !== this.text) {
+        this.text = value
     }
   }
 
