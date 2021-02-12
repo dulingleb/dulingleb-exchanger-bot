@@ -100,7 +100,7 @@ class Operation extends Model
         $ref = TelegramUserSetting::select('referer_id')->where('exchanger_id', $this->exchanger_id)->where('telegram_user_id', $this->telegram_user_id)->withCountOperations()->first();
         if ($ref && $ref->operations_count == 1) {
             $referer = TelegramUserSetting::select(['id', 'discount'])->where('id', $ref->referer_id)->withCountActiveRef()->first();
-            if ($referer->ref_active_count % $this->exchanger->ref_users_count == 0) {
+            if (isset($referer->ref_active_count) && $referer->ref_active_count % $this->exchanger->ref_users_count == 0) {
                 $referer->discount += floatval($this->exchanger->ref_percent);
                 $referer->save();
             }
