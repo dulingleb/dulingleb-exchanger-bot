@@ -14,6 +14,15 @@ class Operation extends Model
 
     protected $appends = ['files'];
 
+    protected $casts = [
+        'exchanger_id' => 'int',
+        'telegram_user_id' => 'int',
+        'bank_detail_id' => 'int',
+        'amount' => 'float',
+        'price' => 'float',
+        'status' => 'int',
+    ];
+
     const STATUS_WAIT = 1;
     const STATUS_SUCCESS = 2;
     const STATUS_ERROR = 3;

@@ -10,6 +10,11 @@ class ExchangerMessage extends Model
 {
     protected $guarded = [];
 
+    protected $casts = [
+        'exchanger_id' => 'int',
+        'exchanger_default_message' => 'int',
+    ];
+
     public function default_message(): BelongsTo
     {
         return $this->belongsTo(ExchangerDefaultMessage::class, 'exchanger_default_message_id', 'id');

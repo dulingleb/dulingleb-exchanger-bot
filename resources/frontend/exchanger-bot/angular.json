@@ -150,6 +150,7 @@
   },
   "defaultProject": "exchanger-bot",
   "cli": {
+    "analytics": "7473eacf-8f5b-4eaf-a035-b38d1d9fd93c",
     "defaultCollection": "@ngrx/schematics"
   }
 }
