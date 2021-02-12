@@ -77,7 +77,7 @@ class TelegramController extends Controller
 
             $telegramUser = TelegramUserSetting::where('exchanger_id', $this->exchanger->id)->where('telegram_user_id', $this->chat_id)->first();
 
-            if ($telegramUser->role == 'admin') {
+            if ($telegramUser && $telegramUser->role == 'admin') {
                 $this->adminsMessageCommands($update, $chatData);
             } else {
                 $this->usersMessageCommands($update, $chatData);
