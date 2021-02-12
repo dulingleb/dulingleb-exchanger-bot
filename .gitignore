@@ -19,3 +19,4 @@ yarn-error.log
 resources/views/angular.blade.php
 
 public/build/
+public/assets/

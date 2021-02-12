@@ -85,7 +85,7 @@ export class AdminApiService {
       id: user.id,
       name: user.name,
       email: user.email,
-      role: +user.role_id,
+      role: user.role_id,
       operationsCountToday: user.operations_count_today,
       operationsSumToday: user.operations_sum_today,
       usersCountToday: user.users_count_today,
