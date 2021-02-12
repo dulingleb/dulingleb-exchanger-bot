@@ -4,12 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod && copy ../../../public/index.html ../../views/angular.blade.php",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint && yarn lint:styles",
     "lint:styles": "stylelint \"src/app/**/*.scss\"",
     "prettier": "prettier --write src/**/*.{js,ts,css}",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postbuild": "cp-cli ../../../public/build/index.html ../../views/angular.blade.php"
   },
   "private": true,
   "dependencies": {
@@ -55,6 +56,7 @@
     "@typescript-eslint/eslint-plugin": "4.14.2",
     "@typescript-eslint/parser": "4.14.2",
     "codelyzer": "^6.0.0",
+    "cp-cli": "^2.0.0",
     "eslint": "^7.6.0",
     "eslint-config-airbnb-typescript": "^12.0.0",
     "eslint-plugin-import": "2.22.1",
