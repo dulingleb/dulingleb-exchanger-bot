@@ -10,6 +10,14 @@ class TelegramUserSetting extends Model
 {
     protected $guarded = [];
 
+    protected $casts = [
+        'exchanger_id' => 'int',
+        'telegram_user_id' => 'int',
+        'referer_id' => 'int',
+        'discount' => 'float',
+        'ban' => 'boolean',
+    ];
+
     public static function getTransaction(int $exchangerId, int $userId)
     {
         $setting = self::where('telegram_user_id', $userId)->where('exchanger_id', $exchangerId)->first();

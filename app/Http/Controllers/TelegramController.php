@@ -77,7 +77,7 @@ class TelegramController extends Controller
 
             $telegramUser = TelegramUserSetting::where('exchanger_id', $this->exchanger->id)->where('telegram_user_id', $this->chat_id)->first();
 
-            if ($telegramUser->role == 'admin') {
+            if ($telegramUser && $telegramUser->role == 'admin') {
                 $this->adminsMessageCommands($update, $chatData);
             } else {
                 $this->usersMessageCommands($update, $chatData);
@@ -152,6 +152,9 @@ class TelegramController extends Controller
                 break;
             case '🧾️ Просмотр сделки':
                 (new BuyBtcController($this->telegram, $chatData))->waitOperation();
+                break;
+            case 'Баланс':
+                (new \App\Http\Controllers\Bot\Admin\SettingController($this->telegram, $chatData))->getBalance();
                 break;
             case 'Курс':
                 (new \App\Http\Controllers\Bot\Admin\SettingController($this->telegram, $chatData))->getCourse();

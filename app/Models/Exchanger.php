@@ -9,6 +9,17 @@ class Exchanger extends Model
 {
     protected $guarded = [];
 
+    protected $casts = [
+        'user_id' => 'int',
+        'status' => 'boolean',
+        'course' => 'float',
+        'min_exchange' => 'float',
+        'max_exchange' => 'float',
+        'ref_users_count' => 'int',
+        'ref_percent' => 'float',
+        'demo' => 'boolean',
+    ];
+
     const STATUS_ACTIVE = 1;
     const STATUS_CLOSED = 0;
 

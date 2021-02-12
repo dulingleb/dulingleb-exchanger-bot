@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Bot\Admin;
 
+use App\Func\Coinbase;
 use App\Http\Controllers\Controller;
 use App\Models\Exchanger;
 use App\Models\ExchangerMessage;
@@ -63,6 +64,16 @@ class SettingController extends BaseController
         $this->chatData['exchanger']->status = Exchanger::STATUS_CLOSED;
         $this->chatData['exchanger']->save();
         $this->simpleMessage('Бот успешно остановлен');
+    }
+
+    public function getBalance()
+    {
+        $coinbase = new Coinbase($this->chatData['exchanger']->coinbase_key, $this->chatData['exchanger']->coinbase_secret);
+
+        $this->telegram->sendMessage([
+            'chat_id' => $this->chatData['chat_id'],
+            'text' => $coinbase->getBalance()
+        ]);
     }
 
     public function getCourse()
