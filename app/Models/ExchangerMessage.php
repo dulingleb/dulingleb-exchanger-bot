@@ -32,4 +32,11 @@ class ExchangerMessage extends Model
 
         return $message ? str_replace('<br>', PHP_EOL, $message->text) : str_replace('<br>', PHP_EOL, $defaultMessage->text);
     }
+
+    public function setTextAttribute($value)
+    {
+        $value = str_replace(['&nbsp;', '<br>', '<br />'], [' ', PHP_EOL, PHP_EOL], $value);
+        $value = strip_tags($value, '<strong><b><i><del><u><pre><code>');
+        $this->attributes['text'] = $value;
+    }
 }
