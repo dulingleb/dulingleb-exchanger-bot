@@ -153,6 +153,9 @@ class TelegramController extends Controller
             case '🧾️ Просмотр сделки':
                 (new BuyBtcController($this->telegram, $chatData))->waitOperation();
                 break;
+            case 'Баланс':
+                (new \App\Http\Controllers\Bot\Admin\SettingController($this->telegram, $chatData))->getBalance();
+                break;
             case 'Курс':
                 (new \App\Http\Controllers\Bot\Admin\SettingController($this->telegram, $chatData))->getCourse();
                 break;
