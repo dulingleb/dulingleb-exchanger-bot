@@ -53,8 +53,8 @@ export const telegramUserOutToInDto = (user: ITelegramUserOutDto): ITelegramUser
     refActiveCount: user.ref_active_count,
     refOperationsCount: user.ref_operations_count,
     refOperationsSum: user.ref_operations_sum,
-    discount: +user.discount,
+    discount: user.discount,
     comment: user.comment,
-    ban: !!user.ban
+    ban: user.ban
   }
 }
