@@ -43,7 +43,7 @@ class Controller extends BaseController
         if ($message) {
             $json['message'] = $message;
         }
-        return response()->json($json, $code);
+        return response()->json($json, $code, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function responseError($message, $errors = null, $code = 422): \Illuminate\Http\JsonResponse
@@ -52,6 +52,6 @@ class Controller extends BaseController
         if ($errors) {
             $json['errors'] = $errors;
         }
-        return response()->json($json, $code);
+        return response()->json($json, $code, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 }
