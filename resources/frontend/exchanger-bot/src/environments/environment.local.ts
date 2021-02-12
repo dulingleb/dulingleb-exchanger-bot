@@ -2,7 +2,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 export const ENV = {
   production: false,
-  api: 'http://dulingleb-bot.ru/api'
+  api: '/api-dul/api'
 }
 
 export const ROOT_MODULES = [
