@@ -1,10 +1,13 @@
 import { EAdminRoleDto } from '@core/features'
+
 import { ETableColumnActionEventType, ETableColumnActionType, ETableColumnType, ITableColumn, ITelegramUserInDto } from '@core/models'
+import { getTelegramUserName } from '@utils/index'
 
 export const TABLE_COLUMNS: ITableColumn[] = [
   {
     name: 'username',
     nameI18n: 'users.table.username',
+    value: (item: ITelegramUserInDto): string => getTelegramUserName(item),
     type: ETableColumnType.STRING,
     sort: true,
     allowedForRoles: [EAdminRoleDto.SUPER_ADMIN, EAdminRoleDto.ADMIN],

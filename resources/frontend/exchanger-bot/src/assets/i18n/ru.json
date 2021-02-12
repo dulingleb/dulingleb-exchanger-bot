@@ -224,7 +224,7 @@
     },
     "table": {
       "id": "#",
-      "telegramUserId": "Id полюзователя",
+      "telegramUserId": "Id пользователя",
       "username": "Имя",
       "amount": "BTC",
       "price": "Руб.",
