@@ -19,7 +19,7 @@ class MailingController extends Controller
         ]);
 
         $message = str_replace(['&nbsp;', '<br>', '<br />'], [' ', PHP_EOL, PHP_EOL], $request->message);
-        $message = strip_tags($message, '<strong><b><i><del><u><pre><code>');
+        $message = strip_tags($message, '<strong><b><i><em><del><u><pre><code>');
 
         SendTelegramMessage::dispatch(auth()->user()->exchanger->id, $message);
 
