@@ -79,7 +79,7 @@ class TelegramUserSetting extends Model
 
     public function scopeWithSumOperations($query)
     {
-        return $query->addSelect(DB::raw('(IFNULL((SELECT SUM(price) FROM operations WHERE operations.status=' . Operation::STATUS_SUCCESS . ' AND operations.telegram_user_id = telegram_user_settings.telegram_user_id), 0)) AS operations_sum'));
+        return $query->addSelect(DB::raw('(IFNULL((SELECT SUM(price) FROM operations WHERE operations.status=' . Operation::STATUS_SUCCESS . ' AND operations.telegram_user_id = telegram_user_settings.telegram_user_id AND (operations.exchanger_id = telegram_user_settings.exchanger_id)), 0)) AS operations_sum'));
     }
 
     public function scopeWithCountOperations($query)
