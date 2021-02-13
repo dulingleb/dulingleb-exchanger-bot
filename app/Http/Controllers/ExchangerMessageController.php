@@ -58,8 +58,7 @@ class ExchangerMessageController extends Controller
             'text' => 'required|string|max:4000'
         ]);
 
-        $text = strip_tags($request->text, '<br><strong><b><i><u><pre><code>');
-        $message->text = str_replace('&nbsp;', ' ', $text);
+        $message->text = $request->text;
         $message->save();
 
         return $this->response(null, 'Сообщение успешно сохранено');
