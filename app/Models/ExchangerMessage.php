@@ -39,9 +39,4 @@ class ExchangerMessage extends Model
         $value = strip_tags($value, '<strong><b><i><em><del><u><pre><code>');
         $this->attributes['text'] = $value;
     }
-
-    public function getTextAttribute()
-    {
-        return str_replace(PHP_EOL, '<br />', $this->text);
-    }
 }

@@ -40,8 +40,10 @@ class ExchangerMessageController extends Controller
             ->select('exchanger_messages.*', 'exchanger_default_messages.title', 'exchanger_default_messages.description', 'exchanger_default_messages.slug')
             ->where('exchanger_default_message_id', $default->id)
             ->where('exchanger_id', auth()->user()->exchanger->id)
-            ->first();
+            ->first()->toArray();
         //$message->load(['default_message:title']);
+
+        $message['text'] = str_replace(PHP_EOL, '<br />', $message['text']);
 
         return $this->response($message);
     }
