@@ -12,7 +12,17 @@ class ProfileController extends BaseController
     {
         $userSet = TelegramUserSetting::select('discount')->where('exchanger_id', $this->chatData['exchanger']->id)->where('telegram_user_id', $this->chatData['chat_id'])->withCountRef()->withCountActiveRef()->first();
 
-        $message = '<strong>Ваша скидка: </strong>' . $userSet->discount . ' %'
+        if (!$userSet) {
+            $this->telegram->sendMessage([
+                'chat_id' => $this->chatData['chat_id'],
+                'text' => 'Данные не найдены...',
+                'parse_mode' => 'html',
+                'disable_web_page_preview' => true
+            ]);
+            return;
+        }
+
+        $message = '<strong>Ваша скидка: </strong>' . ($userSet->discount ?? 0) . ' %'
             . PHP_EOL . PHP_EOL .'<strong>Рефералов:</strong> ' . $userSet->ref_count
             . PHP_EOL .'<strong>Активных:</strong> ' . $userSet->ref_active_count
             . PHP_EOL . '<strong>Реф ссылка:</strong> https://t.me/' . $this->chatData['exchanger']->username . '?start=' . $this->chatData['chat_id'];
