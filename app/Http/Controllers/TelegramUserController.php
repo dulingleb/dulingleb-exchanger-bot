@@ -164,7 +164,7 @@ class TelegramUserController extends Controller
             for ($i = 0; $i < 7; $i++) {
 
                 $counts = TelegramUserSetting::where('exchanger_id', auth()->user()->exchanger->id)
-                    ->whereBetween('created_at', [Carbon::now()->subDay($i+1)->format('Y-m-d 00:00:00'), Carbon::now()->subDay($i+1)->format('Y-m-d 23:59:59')])->count();
+                    ->whereBetween('created_at', [Carbon::now()->subDay($i)->format('Y-m-d 00:00:00'), Carbon::now()->subDay($i)->format('Y-m-d 23:59:59')])->count();
 
                 $data[] = ['period' => Carbon::now()->subDay($i+1)->dayOfWeek, 'value' => $counts];
             }

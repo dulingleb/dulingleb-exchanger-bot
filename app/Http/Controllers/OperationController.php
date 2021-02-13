@@ -127,7 +127,7 @@ class OperationController extends Controller
             for ($i = 0; $i < 7; $i++) {
 
                 $counts = Operation::where('exchanger_id', auth()->user()->exchanger->id)->where('status', Operation::STATUS_SUCCESS)
-                    ->whereBetween('updated_at', [Carbon::now()->subDay($i+1)->format('Y-m-d 00:00:00'), Carbon::now()->subDay($i+1)->format('Y-m-d 23:59:59')]);
+                    ->whereBetween('updated_at', [Carbon::now()->subDay($i)->format('Y-m-d 00:00:00'), Carbon::now()->subDay($i)->format('Y-m-d 23:59:59')]);
                 if ($request->type == 'sum') {
                     $counts = $counts->sum('price');
                 } else {
