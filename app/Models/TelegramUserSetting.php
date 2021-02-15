@@ -89,7 +89,7 @@ class TelegramUserSetting extends Model
 
     public function scopeWithCountRef($query)
     {
-        return $query->addSelect(DB::raw('(SELECT COUNT(*) FROM telegram_user_settings tus WHERE (tus.referer_id=telegram_user_settings.id) AND operations.exchanger_id=tus.exchanger_id) AS ref_count'));
+        return $query->addSelect(DB::raw('(SELECT COUNT(*) FROM telegram_user_settings tus WHERE (tus.referer_id=telegram_user_settings.id) AND telegram_user_settings.exchanger_id=tus.exchanger_id) AS ref_count'));
     }
 
     public function scopeWithCountActiveRef($query)
