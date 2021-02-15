@@ -128,7 +128,8 @@ class OperationController extends BaseController
     {
         $user = $operation->telegram_user->username ? '@' . $operation->telegram_user->username : $operation->telegram_user->first_name;
         $message = '<strong>#' . $operation->id . '</strong>: ' . $user . ' ' . floatval($operation->amount) . ' btc за ' . $operation->price . ' руб.' . PHP_EOL
-            . 'адрес: ' . $operation->btc_address . PHP_EOL;
+            . '<strong>адрес:</strong> ' . $operation->btc_address . PHP_EOL
+            . '<strong>Подтвержденных сделок:</strong> ' . Operation::where('exchanger_id', $operation->exchanger_id)->where('telegram_user_id', $operation->telegram_user_id)->where('status', Operation::STATUS_SUCCESS)->count() . PHP_EOL;
 
         $links = Operation::getCheckLinks($operation->id);
         $message .= implode(PHP_EOL, $links);
