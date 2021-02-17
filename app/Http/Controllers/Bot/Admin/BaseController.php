@@ -23,7 +23,7 @@ class BaseController extends Controller
         $keyboard = Keyboard::make([
             'keyboard' => [['✅️ Да', '❌ Нет']],
             'resize_keyboard' => true,
-            'one_time_keyboard' => true
+            'one_time_keyboard' => false
         ]);
 
         $this->telegram->editMessageText([

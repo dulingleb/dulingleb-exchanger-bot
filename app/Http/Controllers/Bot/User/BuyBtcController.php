@@ -314,7 +314,7 @@ class BuyBtcController extends BaseController
         $keyboard = Keyboard::make([
             'keyboard' => [['✅ Отправить на проверку', '❌ Отменить']],
             'resize_keyboard' => true,
-            'one_time_keyboard' => false
+            'one_time_keyboard' => true
         ]);
 
         $this->telegram->sendMessage([
@@ -368,9 +368,16 @@ class BuyBtcController extends BaseController
             }
         }
 
+        $keyboard = Keyboard::make([
+            'keyboard' => [['✅ Отправить на проверку', '❌ Отменить']],
+            'resize_keyboard' => true,
+            'one_time_keyboard' => true
+        ]);
+
         $this->telegram->sendMessage([
             'chat_id' => $this->chatData['chat_id'],
             'text' =>  'Файл успешно загружен',
+            'reply_markup' => $keyboard
         ]);
     }
 

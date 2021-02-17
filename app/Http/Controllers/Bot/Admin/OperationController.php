@@ -115,7 +115,8 @@ class OperationController extends BaseController
         if ($status !== true) {
             $this->telegram->sendMessage([
                 'chat_id' => $this->chatData['chat_id'],
-                'text' => 'Произошла ошибка: ' . $status[0]->message
+                'text' => 'Произошла ошибка: ' . $status[0]->message,
+                'reply_markup' => Telegram::adminMainKeyboard()
             ]);
 
             return  false;
