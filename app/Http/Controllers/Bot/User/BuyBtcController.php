@@ -136,7 +136,7 @@ class BuyBtcController extends BaseController
 
     private function enterSum($amount)
     {
-        $amount = (float)str_replace(',', '.', $amount);
+        $amount = floatval(str_replace(',', '.', $amount));
 
         // Проверка правильности сумму (ни больше, ни меньше)
         if (($amount > 1 && ($amount / $this->chatData['exchanger']->course) < $this->chatData['exchanger']->min_exchange)
