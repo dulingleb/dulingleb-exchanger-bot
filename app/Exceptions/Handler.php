@@ -68,7 +68,7 @@ class Handler extends ExceptionHandler
         $message = $this->convert_from_latin1_to_utf8_recursively($exception->getMessage());
 
         if ($exception instanceof ValidationException) {
-            return response()->json(['status' => false, 'message' => $message, 'errors' => $exception->validator->errors()], ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+            return response()->json(['status' => false, 'message' => $message, 'errors' => $exception->validator->errors()],422, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
         }
 
         return response()->json([
